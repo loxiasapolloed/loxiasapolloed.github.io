@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Loxias Apollo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@200&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --preto: #000000;
+      --amarelo: #FFD700;
+      --branco: #FFFFFF;
+      --verde-terroso: #5A6B4F;
+      --marrom-claro: #A68A64;
+      --cinza-fundo: #f9f9f9;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'League Spartan', sans-serif;
+      font-weight: 200;
+      color: var(--preto);
+      background-color: var(--branco);
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 2rem 5%;
+      text-align: center;
+      border-bottom: 1px solid var(--preto);
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      letter-spacing: 1px;
+    }
+
+    nav {
+      padding: 1rem 5%;
+      text-align: center;
+      background-color: var(--preto);
+    }
+
+    nav a {
+      color: var(--amarelo);
+      text-decoration: none;
+      margin: 0 1.2rem;
+      font-size: 1.1rem;
+      transition: opacity 0.3s;
+    }
+
+    nav a:hover {
+      opacity: 0.7;
+    }
+
+    section {
+      padding: 3rem 5%;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--verde-terroso);
+      border-bottom: 2px solid var(--marrom-claro);
+      padding-bottom: 0.4rem;
+      display: inline-block;
+    }
+
+    .livros-lista {
+      display: grid;
+      gap: 1.8rem;
+      margin-top: 1.5rem;
+    }
+
+    .livro {
+      padding: 1.2rem;
+      border-left: 4px solid var(--amarelo);
+      background-color: var(--cinza-fundo);
+    }
+
+    .livro h3 {
+      margin-bottom: 0.5rem;
+      color: var(--preto);
+    }
+
+    footer {
+      padding: 2rem 5%;
+      text-align: center;
+      background-color: var(--preto);
+      color: var(--branco);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.8rem; }
+      nav a { display: block; margin: 0.6rem 0; }
+      section { padding: 2rem 5%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>LOXIAS APOLLO</h1>
+    <p>Editora independente de literatura mundial</p>
+  </header>
+
+  <nav>
+    <a href="#sobre">Sobre</a>
+    <a href="#livros">Livros</a>
+    <a href="#contato">Contato</a>
+  </nav>
+
+  <main>
+    <section id="sobre">
+      <h2>Sobre</h2>
+      <p>
+        A Loxias Apollo nasce do encontro entre história, tradução e crítica. 
+        Nosso catálogo reúne obras esquecidas, vozes marginais e clássicos 
+        reinterpretados, com foco em textos que desafiam narrativas oficiais. 
+        Publicamos com rigor, paixão e respeito ao leitor.
+      </p>
+    </section>
+
+    <section id="livros">
+      <h2>Livros</h2>
+      <div class="livros-lista">
+        <div class="livro">
+          <h3>Enzo chega ao poder: Brasil Colônia</h3>
+          <p>Volume inaugural da série histórica que acompanha Enzo através dos tempos. 
+             Neste livro, ele atravessa missões jesuíticas, engenhos e o sertão colonial.</p>
+        </div>
+        <div class="livro">
+          <h3>A Floresta dos Deuses — Balys Sruoga</h3>
+          <p>Tradução inédita no Brasil da obra-prima lituana sobre a resistência humana 
+             diante do absurdo totalitário.</p>
+        </div>
+        <!-- Adicione mais livros aqui -->
+      </div>
+    </section>
+
+    <section id="contato">
+      <h2>Contato</h2>
+      <p>
+        Para propostas de tradução, parcerias ou contato editorial:<br>
+        <a href="mailto:contato@loxiasapollo.com.br" style="color: var(--preto); text-decoration: underline;">
+          contato@loxiasapollo.com.br
+        </a>
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Loxias Apollo. Todos os direitos reservados.</p>
+  </footer>
+
+</body>
+</html>
