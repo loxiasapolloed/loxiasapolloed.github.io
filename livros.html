@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sobre – Loxias Apollo</title>
+  <title>Livros – Loxias Apollo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@200&display=swap" rel="stylesheet">
@@ -66,14 +66,45 @@
       margin: 0 auto;
     }
 
-    .perfil {
-      margin: 2.8rem 0;
+    .categoria {
+      margin: 3.2rem 0;
     }
 
-    .perfil h2 {
-      font-size: 1.5rem;
+    .categoria h2 {
+      font-size: 1.6rem;
       color: var(--verde-terroso);
-      margin-bottom: 0.8rem;
+      margin-bottom: 1.4rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid var(--marrom-claro);
+      display: inline-block;
+    }
+
+    .autor-nome {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: var(--preto);
+      margin: 1.6rem 0 0.8rem;
+      display: block;
+    }
+
+    .livro-item {
+      margin: 0.7rem 0;
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .livro-item:before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--amarelo);
+    }
+
+    .comprar-link {
+      display: inline-block;
+      margin-top: 0.8rem;
+      color: var(--preto);
+      text-decoration: underline;
     }
 
     footer {
@@ -95,8 +126,8 @@
 <body>
 
   <header>
-    <h1>SOBRE</h1>
-    <p>Loxias Apollo – editora independente</p>
+    <h1>LIVROS</h1>
+    <p>Catálogo da Loxias Apollo</p>
   </header>
 
   <nav>
@@ -107,26 +138,37 @@
   </nav>
 
   <section>
-    <p style="margin-bottom: 2.5rem; font-size: 1.05rem;">
-      A Loxias Apollo é conduzida por um casal de intelectuais independentes, 
-      comprometidos com a publicação de vozes marginais, clássicos esquecidos 
-      e narrativas que desafiam a história oficial.
-    </p>
 
-    <div class="perfil">
-      <h2>Gustavo Tovo</h2>
-      <p>Historiador, autor da série infantil <em>Enzo chega ao poder</em> e coeditor da Loxias Apollo.</p>
+    <div class="categoria">
+      <h2>Infantil</h2>
+      <p><strong>Tanto Mar - Enzo chega ao poder: primeiro livro da Série Brasil Colônia</strong> — Enzo chega ao poder: Brasil Colônia — Em 1500, um adolescente do Rio vira capitão de caravela. Ele acredita em diálogo. O século XVI acredita em pragmatismo. Quem vai vencer?.</p>
+      <a href="https://loja.uiclap.com/titulo/ua145907" target="_blank" rel="noopener" class="comprar-link">
+        Comprar este livro
+      </a>
     </div>
 
-    <div class="perfil">
-      <h2>Samantha Fernandes Tovo</h2>
-      <p>Filósofa, tradutora e escritora. Responsável pelas traduções de literatura asiática e autora de obras sob seu nome próprio.</p>
+    <div class="categoria">
+      <h2>Obras Autorais</h2>
+      
+      <span class="autor-nome">Samantha Tovo</span>
+      <div class="livro-item">Diário de Cassandra: caso Melinoe</div>
+      <div class="livro-item">À Musa Negra</div>
+
+      <span class="autor-nome">Mira Andor</span>
+      <div class="livro-item">Crônicas de uma Lavanderia</div>
+      <div class="livro-item">Afelandra – Volume I</div>
+      <div class="livro-item">Afelandra – Volume II</div>
+      <div class="livro-item">Afelandra – Volume III</div>
     </div>
 
-    <div class="perfil">
-      <h2>Mira Andor</h2>
-      <p>Pseudônimo literário utilizado na trilogia <em>Afelandra</em> e em textos de ficção lírica.</p>
+    <div class="categoria">
+      <h2>Traduções</h2>
+      
+      <span class="autor-nome">Tradução e ensaios por Samantha Tovo</span>
+      <div class="livro-item"><strong>A Peônia</strong> — Três cenas de <em>O Pavilhão das Peônias</em> de Tang Xianzu</div>
+      <div class="livro-item"><strong>O Poeta e o Tigre</strong> — Sete contos de Nakajima Atsushi</div>
     </div>
+
   </section>
 
   <footer>
