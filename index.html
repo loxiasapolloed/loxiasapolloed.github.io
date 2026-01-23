@@ -43,16 +43,16 @@
     }
 
     nav {
-      padding: 1.4rem 5%;
-      text-align: center;
+      padding: 1.3rem 5%;
       background-color: var(--preto);
+      text-align: center;
       line-height: 1.8;
     }
 
     nav a {
       color: var(--amarelo);
       text-decoration: none;
-      margin: 0 1rem;
+      margin: 0 1.1rem;
       font-size: 1.15rem;
       transition: opacity 0.3s;
       white-space: nowrap;
@@ -77,24 +77,6 @@
       display: inline-block;
     }
 
-    section h3 {
-      font-size: 1.4rem;
-      margin: 2.5rem 0 1.2rem 0;
-      color: var(--verde-terroso);
-    }
-
-    .pessoa, .livro {
-      padding: 1.2rem;
-      border-left: 4px solid var(--amarelo);
-      background-color: var(--cinza-fundo);
-      margin-bottom: 1.5rem;
-    }
-
-    .livro h4 {
-      margin-bottom: 0.6rem;
-      color: var(--preto);
-    }
-
     footer {
       padding: 2rem 5%;
       text-align: center;
@@ -105,14 +87,8 @@
 
     @media (max-width: 600px) {
       header h1 { font-size: 1.8rem; }
-      nav {
-        padding: 1.2rem 2%;
-      }
-      nav a {
-        display: block;
-        margin: 0.7rem 0;
-        font-size: 1.1rem;
-      }
+      nav { padding: 1.1rem 3%; }
+      nav a { display: block; margin: 0.7rem 0; font-size: 1.1rem; }
       section { padding: 2rem 5%; }
     }
   </style>
@@ -121,14 +97,13 @@
 
   <header>
     <h1>LOXIAS APOLLO</h1>
-    <p>Editora Independente de Literatura Local e Mundial</p>
+    <p>Editora independente de literatura mundial</p>
   </header>
 
   <nav>
-    <a href="#sobre">Sobre</a>
-    <a href="#obras-autorais">Obras Autorais</a>
-    <a href="#traducoes">Traduções</a>
-    <a href="#infantil">Infantil</a>
+    <a href="index.html">Início</a>
+    <a href="sobre.html">Sobre</a>
+    <a href="#livros">Livros</a>
     <a href="#contato">Contato</a>
   </nav>
 
@@ -136,64 +111,54 @@
     <section id="sobre">
       <h2>Sobre</h2>
       <p>
-        A Loxias Apollo é conduzida por um casal de historiadores e editores independentes, 
-        comprometidos com a publicação de vozes marginais, clássicos esquecidos e narrativas 
-        que desafiam a história oficial.
+        A Loxias Apollo nasce do encontro entre história, filosofia e tradução. 
+        Publicamos obras autorais, traduções cuidadosas e literatura infantil 
+        com rigor crítico e sensibilidade estética.
       </p>
-
-      <div style="margin-top: 2rem;">
-        <div class="pessoa">
-          <h3>Gustavo Tovo</h3>
-          <p>Historiador, tradutor e autor da série <em>Enzo chega ao poder</em>.</p>
-        </div>
-        <div class="pessoa">
-          <h3>Samantha Fernandes Tovo</h3>
-          <p>Historiadora, pesquisadora e revisora de projetos editoriais e acadêmicos.</p>
-        </div>
-        <div class="pessoa">
-          <h3>Mira Andor</h3>
-          <p>Pseudônimo literário utilizado em obras de ficção histórica e juvenil.</p>
-        </div>
-      </div>
     </section>
 
-    <section id="obras-autorais">
-      <h2>Obras Autorais</h2>
-      <div class="livro">
-        <h4>Enzo chega ao poder: Brasil Colônia – Tanto Mar (Descobrimento)</h4>
-        <p>Um torcedor em 1500. Sua nova missão: comandar uma caravela de Cabral. 
-           Confundido com o capitão desaparecido da frota, Enzo precisa assumir o comando 
-           com seu conhecimento do século XXI. Mais do que uma viagem no tempo, 
-           é um convite para ver o “Descobrimento do Brasil” com novos olhos.</p>
-        <p style="margin-top: 0.8rem;">
-          <a href="https://loja.uiclap.com/titulo/ua145907" target="_blank" rel="noopener" style="color: var(--preto); text-decoration: underline; font-weight: normal;">
-            Comprar este livro
-          </a>
-        </p>
-      </div>
-      <!-- Adicione mais obras autorais aqui -->
-    </section>
-
-    <section id="traducoes">
-      <h2>Traduções</h2>
-      <div class="livro">
-        <h4>A Floresta dos Deuses — Balys Sruoga</h4>
-        <p>Tradução inédita no Brasil da obra-prima lituana sobre a resistência humana 
-           diante do absurdo totalitário.</p>
-        <!-- Link quando disponível -->
-      </div>
-      <!-- Adicione mais traduções aqui -->
+    <section id="livros">
+      <h2>Livros</h2>
+      <p>Nossos títulos estão organizados em três vertentes:</p>
+      <ul style="margin-top: 1.4rem; list-style: none; padding-left: 0;">
+        <li style="margin: 0.9rem 0;"><a href="#infantil" style="color: var(--preto); text-decoration: underline;">• Infantil</a></li>
+        <li style="margin: 0.9rem 0;"><a href="#obras-autorais" style="color: var(--preto); text-decoration: underline;">• Obras Autorais</a></li>
+        <li style="margin: 0.9rem 0;"><a href="#traducoes" style="color: var(--preto); text-decoration: underline;">• Traduções</a></li>
+      </ul>
     </section>
 
     <section id="infantil">
-      <h2>Infantil</h2>
-      <div class="livro">
-        <h4>[Título do livro infantil]</h4>
-        <p>Breve descrição do projeto voltado ao público jovem, com linguagem acessível 
-           e abordagem crítica da história.</p>
-        <!-- Link quando disponível -->
-      </div>
-      <!-- Adicione mais livros infantis aqui -->
+      <h3 style="font-size: 1.5rem; color: var(--verde-terroso); margin: 2.5rem 0 1.2rem;">Infantil</h3>
+      <p><strong>Enzo chega ao poder: Brasil Colônia</strong> — Uma jornada histórica para jovens leitores atravessar o sertão colonial, missões jesuíticas e engenhos com olhar crítico e imaginativo.</p>
+      <p style="margin-top: 0.8rem;">
+        <a href="https://loja.uiclap.com/titulo/ua145907" target="_blank" rel="noopener" style="color: var(--preto); text-decoration: underline;">
+          Comprar este livro
+        </a>
+      </p>
+    </section>
+
+    <section id="obras-autorais">
+      <h3 style="font-size: 1.5rem; color: var(--verde-terroso); margin: 2.5rem 0 1.2rem;">Obras Autorais</h3>
+      <p><strong>Como Samantha Tovo:</strong></p>
+      <ul style="padding-left: 1.2rem; margin: 0.8rem 0;">
+        <li>Diário de Cassandra: caso Melinoe</li>
+        <li>À Musa Negra</li>
+      </ul>
+      <p><strong>Como Mira Andor:</strong></p>
+      <ul style="padding-left: 1.2rem; margin: 0.8rem 0;">
+        <li>Crônicas de uma Lavanderia</li>
+        <li>Afelandra – Volume I</li>
+        <li>Afelandra – Volume II</li>
+        <li>Afelandra – Volume III</li>
+      </ul>
+    </section>
+
+    <section id="traducoes">
+      <h3 style="font-size: 1.5rem; color: var(--verde-terroso); margin: 2.5rem 0 1.2rem;">Traduções</h3>
+      <ul style="padding-left: 1.2rem; margin: 0.8rem 0;">
+        <li><strong>A Peônia</strong> — Três cenas de <em>O Pavilhão das Peônias</em> de Tang Xianzu<br><small>Tradução e ensaios por Samantha Tovo</small></li>
+        <li><strong>O Poeta e o Tigre</strong> — Sete contos de Nakajima Atsushi<br><small>Tradução e ensaios por Samantha Tovo</small></li>
+      </ul>
     </section>
 
     <section id="contato">
