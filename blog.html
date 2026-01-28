@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - Loxias Apollo</title>
     
-    <!-- Bootstrap 5 CDN (mantido para grid responsivo) -->
+    <!-- Bootstrap 5 CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Font Awesome -->
@@ -25,13 +25,12 @@
             --verde-terroso: #5A6B4F;
             --marrom-claro: #A68A64;
             
-            /* Variáveis derivadas para uso específico no blog */
+            /* Variáveis derivadas */
             --cor-destaque-suave: rgba(255, 215, 0, 0.1);
             --sombra-suave: 0 2px 8px rgba(90, 107, 79, 0.08);
-            --sombra-media: 0 4px 12px rgba(90, 107, 79, 0.12);
         }
 
-        /* ===== RESET E BASE - COPIADO DO SITE PRINCIPAL ===== */
+        /* ===== RESET E BASE ===== */
         * {
             margin: 0;
             padding: 0;
@@ -46,7 +45,7 @@
             line-height: 1.6;
         }
 
-        /* ===== CABEÇALHO DO BLOG - ESTILO COERENTE ===== */
+        /* ===== CABEÇALHO DO BLOG ===== */
         .blog-header {
             padding: 2.5rem 5%;
             text-align: center;
@@ -61,13 +60,7 @@
             margin-bottom: 0.5rem;
         }
 
-        .blog-header p {
-            font-size: 1.1rem;
-            color: var(--verde-terroso);
-            margin-bottom: 1.5rem;
-        }
-
-        /* ===== NAVEGAÇÃO - IGUAL AO SITE PRINCIPAL ===== */
+        /* ===== NAVEGAÇÃO ===== */
         .blog-nav {
             padding: 1.3rem 5%;
             background-color: var(--preto);
@@ -105,12 +98,6 @@
             font-size: 1.1rem;
         }
 
-        .info-card h5 {
-            color: var(--verde-terroso);
-            margin-bottom: 0.5rem;
-            font-weight: 400;
-        }
-
         /* ===== CARDS DE POSTS ===== */
         .post-card {
             background: var(--branco);
@@ -119,10 +106,11 @@
             margin-bottom: 2rem;
             transition: all 0.3s ease;
             box-shadow: var(--sombra-suave);
+            cursor: pointer;
         }
 
         .post-card:hover {
-            box-shadow: var(--sombra-media);
+            box-shadow: 0 4px 12px rgba(90, 107, 79, 0.15);
             border-color: var(--amarelo);
             transform: translateY(-2px);
         }
@@ -137,11 +125,6 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .post-card:hover .post-image img {
-            transform: scale(1.03);
         }
 
         .post-content {
@@ -152,10 +135,6 @@
             font-size: 0.9rem;
             color: var(--marrom-claro);
             margin-bottom: 0.75rem;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 0.5rem;
         }
 
         .post-title {
@@ -163,16 +142,6 @@
             font-weight: 400;
             margin-bottom: 1rem;
             line-height: 1.4;
-        }
-
-        .post-title a {
-            color: var(--preto);
-            text-decoration: none;
-        }
-
-        .post-title a:hover {
-            color: var(--verde-terroso);
-            text-decoration: underline;
         }
 
         .post-excerpt {
@@ -192,7 +161,6 @@
             border: 1px solid var(--preto);
             font-size: 1rem;
             transition: all 0.3s ease;
-            cursor: pointer;
         }
 
         .btn-loxias:hover {
@@ -201,45 +169,7 @@
             border-color: var(--verde-terroso);
         }
 
-        .btn-loxias-outline {
-            background-color: transparent;
-            color: var(--preto);
-            border: 1px solid var(--preto);
-        }
-
-        .btn-loxias-outline:hover {
-            background-color: var(--preto);
-            color: var(--amarelo);
-        }
-
-        /* ===== NEWSLETTER SIGNUP ===== */
-        .newsletter-card {
-            background-color: var(--preto);
-            color: var(--branco);
-            padding: 2rem;
-            margin-top: 3rem;
-            border-top: 3px solid var(--amarelo);
-        }
-
-        .newsletter-card h4 {
-            color: var(--amarelo);
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
-            font-weight: 400;
-        }
-
-        .newsletter-card .btn-loxias {
-            background-color: var(--amarelo);
-            color: var(--preto);
-            border-color: var(--amarelo);
-        }
-
-        .newsletter-card .btn-loxias:hover {
-            background-color: var(--branco);
-            color: var(--preto);
-        }
-
-        /* ===== RODAPÉ - IGUAL AO SITE PRINCIPAL ===== */
+        /* ===== RODAPÉ ===== */
         footer {
             padding: 2rem 5%;
             text-align: center;
@@ -250,23 +180,7 @@
             border-top: 1px solid var(--amarelo);
         }
 
-        footer h5 {
-            color: var(--amarelo);
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-            font-weight: 400;
-        }
-
-        footer a {
-            color: var(--amarelo);
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* ===== ESTADOS DE CARREGAMENTO E ERRO ===== */
+        /* ===== ESTADOS DE CARREGAMENTO ===== */
         .loading-spinner {
             text-align: center;
             padding: 3rem;
@@ -280,51 +194,72 @@
             margin-bottom: 1rem;
         }
 
-        .error-message {
-            background-color: rgba(255, 215, 0, 0.1);
-            border-left: 3px solid var(--amarelo);
-            padding: 1.5rem;
-            margin: 2rem 0;
-            color: var(--preto);
+        /* ===== MODAL DE ARTIGO ===== */
+        .article-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem;
         }
 
-        .error-message h4 {
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--branco);
+            padding: 3rem;
+            position: relative;
+            font-family: 'League Spartan', sans-serif;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--preto);
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .article-header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--amarelo);
+            padding-bottom: 1rem;
+        }
+
+        .article-body {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .article-body img {
+            max-width: 100%;
+            height: auto;
+            margin: 1.5rem 0;
+        }
+
+        .article-body p {
+            margin-bottom: 1.5rem;
+        }
+
+        .article-body h2, .article-body h3 {
             color: var(--verde-terroso);
-            margin-bottom: 0.5rem;
+            margin: 2rem 0 1rem 0;
         }
 
         /* ===== RESPONSIVIDADE ===== */
         @media (max-width: 768px) {
             .blog-header h1 { font-size: 1.9rem; }
-            .blog-nav { padding: 1.1rem 3%; }
-            .blog-nav a { 
-                display: block; 
-                margin: 0.7rem 0; 
-                font-size: 1.1rem; 
-            }
-            main { padding: 1.5rem 3% 2rem; }
-            .post-card { margin-bottom: 1.5rem; }
-            .newsletter-card .row { flex-direction: column; text-align: center; }
-            .newsletter-card .col-md-8 { margin-bottom: 1.5rem; }
-        }
-
-        @media (max-width: 600px) {
-            .post-meta { flex-direction: column; }
-            .post-image { height: 150px; }
-        }
-
-        /* ===== ANIMAÇÃO PARA OS CARDS ===== */
-        .post-card {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            .blog-nav a { display: block; margin: 0.7rem 0; }
+            .article-content { padding: 2rem 1rem; }
         }
     </style>
 </head>
@@ -335,17 +270,11 @@
         <p>Newsletter sobre literatura, filosofia e cultura</p>
         <div class="mt-3">
             <a href="https://iotasubscrito.substack.com" class="btn-loxias me-2" target="_blank">
-                <i class="fas fa-external-link-alt me-2"></i>
-                Visitar Newsletter
-            </a>
-            <a href="index.html" class="btn-loxias-outline">
-                <i class="fas fa-home me-2"></i>
-                Voltar ao Site
             </a>
         </div>
     </header>
 
-    <!-- Navegação - Coerente com site principal -->
+    <!-- Navegação -->
     <nav class="blog-nav">
         <a href="index.html">Início</a>
         <a href="sobre.html">Sobre</a>
@@ -356,13 +285,9 @@
 
     <!-- Conteúdo Principal -->
     <main>
-        <!-- Cartão de Informação -->
         <div class="info-card">
-            <h5><i class="fas fa-info-circle me-2"></i>Sobre esta página</h5>
-            <p>
-                Esta seção exibe os artigos mais recentes do <strong>Iota Subscrito</strong>. 
-                Os posts são carregados automaticamente do feed RSS.
-            </p>
+            <h5><i class="fas fa-info-circle me-2"></i>Leia os artigos diretamente no site</h5>
+            <p>Clique em qualquer artigo para ler o conteúdo completo sem sair do Loxias Apollo.</p>
         </div>
 
         <!-- Container dos Posts -->
@@ -372,29 +297,6 @@
                     <span class="visually-hidden">Carregando...</span>
                 </div>
                 <p>Carregando artigos...</p>
-            </div>
-        </div>
-
-        <!-- Newsletter Signup -->
-        <div class="newsletter-card">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <h4>
-                        <i class="fas fa-envelope me-2"></i>
-                        Receba os artigos por email
-                    </h4>
-                    <p>
-                        Inscreva-se no Iota Subscrito para receber novos artigos diretamente no seu email.
-                    </p>
-                </div>
-                <div class="col-md-4 text-md-end">
-                    <a href="https://iotasubscrito.substack.com/subscribe" 
-                       class="btn-loxias" 
-                       target="_blank">
-                        <i class="fas fa-user-plus me-2"></i>
-                        Inscrever-se
-                    </a>
-                </div>
             </div>
         </div>
     </main>
@@ -410,9 +312,6 @@
                 <div class="col-md-6">
                     <h5>Iota Subscrito</h5>
                     <p>Newsletter independente sobre literatura e cultura.</p>
-                    <a href="https://iotasubscrito.substack.com/feed" target="_blank">
-                        <i class="fas fa-rss me-1"></i> Feed RSS
-                    </a>
                 </div>
             </div>
             <hr style="border-color: var(--amarelo); opacity: 0.3; margin: 1.5rem 0;">
@@ -425,16 +324,22 @@
         </div>
     </footer>
 
-    <!-- Bootstrap JS (para componentes que ainda usam) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Script principal -->
+    <!-- Modal para exibir artigos -->
+    <div id="article-modal" class="article-modal">
+        <div class="article-content">
+            <button class="close-modal" onclick="closeArticle()">&times;</button>
+            <div id="article-container"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
     <script>
+        // Dados em cache
+        let articlesCache = [];
+        let currentArticleIndex = 0;
+
         document.addEventListener('DOMContentLoaded', function() {
-            // Ano atual no footer
             document.getElementById('current-year').textContent = new Date().getFullYear();
-            
-            // Carregar posts
             loadSubstackPosts();
         });
 
@@ -442,88 +347,68 @@
             const container = document.getElementById('posts-container');
             
             try {
-                // Usar proxy CORS para acessar o RSS
                 const rssUrl = 'https://iotasubscrito.substack.com/feed';
                 const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(rssUrl);
                 
                 const response = await fetch(proxyUrl);
                 
-                if (!response.ok) {
-                    throw new Error('Erro na requisição: ' + response.status);
-                }
+                if (!response.ok) throw new Error('Erro na requisição');
                 
                 const data = await response.json();
-                
-                // Parse do XML
                 const parser = new DOMParser();
                 const xmlDoc = parser.parseFromString(data.contents, 'text/xml');
                 
-                // Verificar erros de parse
                 if (xmlDoc.querySelector('parsererror')) {
                     throw new Error('Erro ao parsear o feed RSS');
                 }
                 
-                // Extrair posts
                 const items = xmlDoc.querySelectorAll('item');
-                
-                if (items.length === 0) {
-                    container.innerHTML = `
-                        <div class="error-message">
-                            <h4><i class="fas fa-exclamation-triangle me-2"></i>Nenhum post encontrado</h4>
-                            <p>Não foi possível carregar os artigos no momento.</p>
-                        </div>
-                    `;
+                articlesCache = Array.from(items).map((item, index) => ({
+                    id: index,
+                    title: item.querySelector('title')?.textContent || 'Sem título',
+                    link: item.querySelector('link')?.textContent || '#',
+                    description: item.querySelector('description')?.textContent || '',
+                    content: item.querySelector('encoded')?.textContent || item.querySelector('description')?.textContent || '',
+                    pubDate: item.querySelector('pubDate')?.textContent || '',
+                    author: item.querySelector('creator')?.textContent || 'Iota Subscrito'
+                }));
+
+                if (articlesCache.length === 0) {
+                    container.innerHTML = '<div class="info-card"><p>Nenhum artigo disponível no momento.</p></div>';
                     return;
                 }
-                
+
                 // Gerar HTML dos posts
                 let postsHTML = '<div class="row">';
                 
-                items.forEach((item, index) => {
-                    if (index >= 9) return; // Limitar a 9 posts
-                    
-                    const title = item.querySelector('title')?.textContent || 'Sem título';
-                    const link = item.querySelector('link')?.textContent || '#';
-                    const description = item.querySelector('description')?.textContent || '';
-                    const pubDate = item.querySelector('pubDate')?.textContent || '';
-                    const author = item.querySelector('creator')?.textContent || 'Iota Subscrito';
-                    
-                    // Extrair imagem da descrição
-                    const imgMatch = description.match(/<img[^>]+src="([^">]+)"/);
+                articlesCache.forEach((article, index) => {
+                    const excerpt = createExcerpt(article.description || article.content, 150);
+                    const dateFormatted = article.pubDate ? formatDate(article.pubDate) : '';
+                    const imgMatch = article.description.match(/<img[^>]+src="([^">]+)"/);
                     const imageUrl = imgMatch ? imgMatch[1] : '';
-                    
-                    // Criar excerto
-                    const excerpt = createExcerpt(description, 120);
-                    
-                    // Formatar data
-                    const dateFormatted = pubDate ? formatDate(pubDate) : '';
                     
                     postsHTML += `
                         <div class="col-md-6 col-lg-4">
-                            <article class="post-card" style="animation-delay: ${index * 0.1}s">
+                            <article class="post-card" onclick="openArticle(${index})">
                                 ${imageUrl ? `
                                 <div class="post-image">
-                                    <img src="${imageUrl}" alt="${title}" loading="lazy">
+                                    <img src="${imageUrl}" alt="${article.title}" loading="lazy">
                                 </div>
                                 ` : ''}
                                 
                                 <div class="post-content">
                                     <div class="post-meta">
                                         <span class="post-date">${dateFormatted}</span>
-                                        <span class="post-author">${author}</span>
+                                        <span class="post-author">${article.author}</span>
                                     </div>
                                     
-                                    <h3 class="post-title">
-                                        <a href="${link}" target="_blank" rel="noopener">
-                                            ${title}
-                                        </a>
-                                    </h3>
+                                    <h3 class="post-title">${article.title}</h3>
                                     
                                     <p class="post-excerpt">${excerpt}</p>
                                     
-                                    <a href="${link}" class="btn-loxias-outline" target="_blank" rel="noopener">
-                                        Ler artigo <i class="fas fa-arrow-right ms-1"></i>
-                                    </a>
+                                    <div class="btn-loxias" style="display: inline-block;">
+                                        Ler artigo completo <i class="fas fa-arrow-right ms-1"></i>
+                                    </div>
                                 </div>
                             </article>
                         </div>
@@ -534,41 +419,89 @@
                 container.innerHTML = postsHTML;
                 
             } catch (error) {
-                console.error('Erro ao carregar posts:', error);
-                
+                console.error('Erro:', error);
                 container.innerHTML = `
-                    <div class="error-message">
-                        <h4><i class="fas fa-exclamation-triangle me-2"></i>Erro ao carregar posts</h4>
-                        <p>${error.message}</p>
-                        <p class="mt-3">
-                            <a href="https://iotasubscrito.substack.com" class="btn-loxias" target="_blank">
-                                <i class="fas fa-external-link-alt me-2"></i>
-                                Visitar Iota Subscrito
-                            </a>
-                        </p>
+                    <div class="info-card">
+                        <h5><i class="fas fa-exclamation-triangle me-2"></i>Erro ao carregar</h5>
+                        <p>${error.message}. <a href="https://iotasubscrito.substack.com" target="_blank">Visite o Iota Subscrito diretamente</a></p>
                     </div>
                 `;
             }
         }
 
-        function createExcerpt(html, maxLength = 120) {
-            // Remover tags HTML
-            let text = html.replace(/<[^>]*>/g, '');
+        // Funções para o modal de artigo
+        function openArticle(index) {
+            currentArticleIndex = index;
+            const article = articlesCache[index];
             
-            // Decodificar entidades HTML
+            const articleHTML = `
+                <div class="article-header">
+                    <small class="text-muted">${formatDate(article.pubDate)} • Por ${article.author}</small>
+                    <h1>${article.title}</h1>
+                </div>
+                <div class="article-body">
+                    ${cleanArticleContent(article.content || article.description)}
+                </div>
+                <div class="mt-4 pt-3 border-top">
+                    <p><small>Artigo originalmente publicado no <a href="${article.link}" target="_blank">Iota Subscrito</a></small></p>
+                    <div class="d-flex justify-content-between">
+                        <button class="btn-loxias" onclick="openOriginal('${article.link}')">
+                            <i class="fas fa-external-link-alt me-2"></i>
+                            Ver no Substack
+                        </button>
+                        <div>
+                            ${index > 0 ? `<button class="btn-loxias me-2" onclick="openArticle(${index - 1})"><i class="fas fa-chevron-left me-1"></i> Anterior</button>` : ''}
+                            ${index < articlesCache.length - 1 ? `<button class="btn-loxias" onclick="openArticle(${index + 1})">Próximo <i class="fas fa-chevron-right ms-1"></i></button>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('article-container').innerHTML = articleHTML;
+            document.getElementById('article-modal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeArticle() {
+            document.getElementById('article-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function openOriginal(url) {
+            window.open(url, '_blank');
+        }
+
+        // Funções auxiliares
+        function cleanArticleContent(html) {
+            // Remove elementos indesejados do Substack
+            let cleaned = html
+                .replace(/<div class="subscribe-widget[^>]*>[\s\S]*?<\/div>/gi, '')
+                .replace(/<div class="post-cta[^>]*>[\s\S]*?<\/div>/gi, '')
+                .replace(/<a[^>]*class="button[^>]*>[\s\S]*?<\/a>/gi, '')
+                .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
+                .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
+            
+            // Melhora a formatação
+            cleaned = cleaned
+                .replace(/<p>/g, '<p class="article-paragraph">')
+                .replace(/<h2>/g, '<h2 class="article-subtitle">')
+                .replace(/<h3>/g, '<h3 class="article-subtitle">');
+            
+            return cleaned;
+        }
+
+        function createExcerpt(html, maxLength) {
+            let text = html.replace(/<[^>]*>/g, '');
             text = text.replace(/&amp;/g, '&')
                       .replace(/&lt;/g, '<')
                       .replace(/&gt;/g, '>')
                       .replace(/&quot;/g, '"')
                       .replace(/&#39;/g, "'");
             
-            // Truncar
             if (text.length > maxLength) {
                 text = text.substring(0, maxLength);
                 const lastSpace = text.lastIndexOf(' ');
-                if (lastSpace > 0) {
-                    text = text.substring(0, lastSpace);
-                }
+                if (lastSpace > 0) text = text.substring(0, lastSpace);
                 text += '...';
             }
             
@@ -580,13 +513,23 @@
                 const date = new Date(dateString);
                 return date.toLocaleDateString('pt-BR', {
                     day: '2-digit',
-                    month: '2-digit',
+                    month: 'long',
                     year: 'numeric'
                 });
             } catch (e) {
                 return '';
             }
         }
+
+        // Fechar modal com ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeArticle();
+        });
+
+        // Fechar modal clicando fora
+        document.getElementById('article-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeArticle();
+        });
     </script>
 </body>
 </html>
