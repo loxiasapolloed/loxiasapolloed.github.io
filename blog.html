@@ -647,17 +647,18 @@
                 // Gerar HTML dos posts
                 let postsHTML = '';
                 
-            articlesCache.forEach((article, index) => {
-    if (index >= 9) return; // Limitar a 9 posts
-    
-    const excerpt = createExcerpt(article.description || article.content, 120);
-    const dateFormatted = article.pubDate ? formatDate(article.pubDate) : '';
-    
-    // NOVO CÓDIGO AQUI - substitua as 3 linhas antigas por estas 5:
-    const parser = new DOMParser();
+                articlesCache.forEach((article, index) => {
+                    if (index >= 9) return; // Limitar a 9 posts
+                    
+                    const excerpt = createExcerpt(article.description || article.content, 120);
+                    const dateFormatted = article.pubDate ? formatDate(article.pubDate) : '';
+               const parser = new DOMParser();
     const doc = parser.parseFromString(article.description || '', 'text/html');
     const imgElement = doc.querySelector('img');
-    const imageUrl = imgElement ? imgElement.src : 'https://via.placeholder.com/400x200/5A6B4F/FFFFFF?text=Iota+Subscrito';                    
+    const imageUrl = imgElement ? imgElement.src : 'https://via.placeholder.com/400x200/5A6B4F/FFFFFF?text=Iota+Subscrito';
+    
+    postsHTML += `
+        <article class="post-card" onclick="openArticle(${index})">
                     postsHTML += `
                         <article class="post-card" onclick="openArticle(${index})">
                             <div class="post-image">
