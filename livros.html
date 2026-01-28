@@ -595,9 +595,9 @@
 
         <div class="categories">
             <button class="category-btn active" onclick="filterBooks('all')">Todos os Livros</button>
-            <button class="category-btn" onclick="filterBooks('jovem')">Jovem</button>
-            <button class="category-btn" onclick="filterBooks('jovem-adulto')">Jovem Adulto (+18)</button>
             <button class="category-btn" onclick="filterBooks('obras-autorais')">Obras Autorais</button>
+            <button class="category-btn" onclick="filterBooks('jovem')">Jovem</button>
+            <button class="category-btn" onclick="filterBooks('jovem-adulto')">Jovem +18</button>
             <button class="category-btn" onclick="filterBooks('traducoes')">Traduções</button>
         </div>
 
@@ -857,9 +857,25 @@
             }
         ];
 
+        // Função para embaralhar array (Fisher-Yates shuffle)
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        // Variável para armazenar os livros embaralhados
+        let shuffledBooks = [];
+
         document.addEventListener('DOMContentLoaded', function() {
             // Atualizar ano atual no footer
             document.getElementById('current-year').textContent = new Date().getFullYear();
+            
+            // Embaralhar os livros quando a página carregar
+            shuffledBooks = shuffleArray(booksData);
             
             // Renderizar livros inicialmente
             renderBooks('all');
@@ -881,15 +897,15 @@
             
             let filteredBooks;
             if (category === 'all') {
-                filteredBooks = booksData;
+                filteredBooks = shuffledBooks; // Usar a versão embaralhada
             } else if (category === 'jovem') {
                 // Mostrar livros da categoria jovem E o livro "Tanto Mar" (que tem additionalCategories: ["jovem"])
-                filteredBooks = booksData.filter(book => 
+                filteredBooks = shuffledBooks.filter(book => 
                     book.category === 'jovem-adulto' || 
                     (book.additionalCategories && book.additionalCategories.includes('jovem'))
                 );
             } else {
-                filteredBooks = booksData.filter(book => book.category === category);
+                filteredBooks = shuffledBooks.filter(book => book.category === category);
             }
             
             if (filteredBooks.length === 0) {
@@ -959,8 +975,10 @@
             const container = document.getElementById('samples-container');
             let samplesHTML = '';
             
-            // Mostrar até 3 amostras
-            booksData.slice(0, 3).forEach(book => {
+            // Pegar 3 livros aleatórios para as amostras
+            const randomBooks = shuffleArray(booksData).slice(0, 3);
+            
+            randomBooks.forEach(book => {
                 if (book.sample) {
                     samplesHTML += `
                         <div class="sample-card">
