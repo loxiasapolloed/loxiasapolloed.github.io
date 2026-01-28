@@ -30,27 +30,64 @@
       line-height: 1.6;
     }
 
-    header {
+    /* ===== CABEÇALHO COM LOGO ===== */
+    .header-with-logo {
       padding: 2rem 5%;
-      text-align: center;
+      background-color: var(--branco);
       border-bottom: 1px solid var(--preto);
     }
 
-    header h1 {
-      font-size: 2.2rem;
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      max-width: 900px;
+      margin: 0 auto;
     }
 
+    .site-logo {
+      height: 120px;
+      width: auto;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));
+    }
+
+    .site-title-container {
+      text-align: left;
+      border-left: 2px solid var(--amarelo);
+      padding-left: 1.5rem;
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .site-title {
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+      color: var(--preto);
+      margin-bottom: 0.3rem;
+      font-weight: 300;
+    }
+
+    .site-subtitle {
+      color: var(--verde-terroso);
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+    }
+
+    /* ===== NAVEGAÇÃO ===== */
     nav {
       padding: 1.3rem 5%;
       background-color: var(--preto);
       text-align: center;
       line-height: 1.8;
+      margin-bottom: 2rem;
     }
 
     nav a {
       color: var(--amarelo);
       text-decoration: none;
-      margin: 0 1.1rem;
+      margin: 0 1.2rem;
       font-size: 1.15rem;
       transition: opacity 0.3s;
       white-space: nowrap;
@@ -60,22 +97,34 @@
       opacity: 0.7;
     }
 
-    section {
-      padding: 3.5rem 5% 3rem;
-      max-width: 850px;
+    /* ===== CONTEÚDO PRINCIPAL ===== */
+    main {
+      padding: 4rem 5% 3rem;
+      max-width: 800px;
       margin: 0 auto;
+      text-align: center;
     }
 
-    .perfil {
-      margin: 2.8rem 0;
+    main p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
     }
 
-    .perfil h2 {
-      font-size: 1.5rem;
-      color: var(--verde-terroso);
-      margin-bottom: 0.8rem;
+    .links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
     }
 
+    .links a {
+      color: var(--preto);
+      text-decoration: underline;
+      font-size: 1.1rem;
+    }
+
+    /* ===== RODAPÉ ===== */
     footer {
       padding: 2rem 5%;
       text-align: center;
@@ -84,32 +133,57 @@
       font-size: 0.95rem;
     }
 
-    @media (max-width: 600px) {
-      header h1 { font-size: 1.8rem; }
-      nav { padding: 1.1rem 3%; }
-      nav a { display: block; margin: 0.7rem 0; font-size: 1.1rem; }
-      section { padding: 2.5rem 5% 2rem; }
+    /* ===== RESPONSIVIDADE ===== */
+    @media (max-width: 768px) {
+      .logo-container {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .site-title-container {
+        border-left: none;
+        padding-left: 0;
+        border-top: 2px solid var(--amarelo);
+        padding-top: 1rem;
+        margin-top: 1rem;
+        text-align: center;
+      }
+      
+      .site-title {
+        font-size: 2rem;
+      }
+      
+      nav a {
+        display: block;
+        margin: 0.7rem 0;
+        font-size: 1.1rem;
+      }
+      
+      .links {
+        flex-direction: column;
+        gap: 1rem;
+      }
     }
   </style>
 </head>
+
 <body>
-
- <header style="padding: 2rem 5%; background-color: #FFFFFF; border-bottom: 1px solid #000000;">
-    <div style="display: flex; align-items: center; justify-content: center; gap: 1.5rem; flex-wrap: wrap; max-width: 900px; margin: 0 auto;">
-        <img src="logo.png" 
-             style="height: 120px; width: auto; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));">
-        
-        <div style="text-align: left; border-left: 2px solid #FFD700; padding-left: 1.5rem; flex: 1; min-width: 250px;">
-            <h1 style="font-size: 2.5rem; letter-spacing: 1px; color: #000000; margin-bottom: 0.3rem; font-weight: 300;">
-                LOXIAS APOLLO
-            </h1>
-            <p style="color: #5A6B4F; font-size: 1.1rem; letter-spacing: 0.5px;">
-                Editora Independente de Literatura Local e Mundial
-            </p>
-        </div>
+  <!-- CABEÇALHO COM LOGO -->
+  <header class="header-with-logo">
+    <div class="logo-container">
+      <!-- CORREÇÃO: Caminho correto para a logo -->
+      <img src="logo.png" 
+           alt="Logo Loxias Apollo" 
+           class="site-logo">
+      
+      <div class="site-title-container">
+        <h1 class="site-title">LOXIAS APOLLO</h1>
+        <p class="site-subtitle">Editora Independente de Literatura Local e Mundial</p>
+      </div>
     </div>
-</header>
+  </header>
 
+  <!-- NAVEGAÇÃO -->
   <nav>
     <a href="index.html">Início</a>
     <a href="sobre.html">Sobre</a>
@@ -118,17 +192,21 @@
     <a href="mailto:contato@loxiasapollo.com.br">Contato</a>
   </nav>
   
+  <!-- CONTEÚDO PRINCIPAL -->
   <main>
     <p>
-      A Loxias Apollo publica obras que desafiam narrativas oficiais: 
-     Obras autorais em : Mitologia, filosofia, ficção histórica, traduções cuidadosas de verdadeiros achados da literatura mundial e literatura infantil com rigor crítico.
+      A Loxias Apollo publica obras que desafiam narrativas oficiais:<br>
+      Obras autorais em: Mitologia, filosofia, ficção histórica, traduções cuidadosas 
+      de verdadeiros achados da literatura mundial e literatura infantil com rigor crítico.
     </p>
+    
     <div class="links">
       <a href="sobre.html">Conheça quem está por trás</a>
       <a href="livros.html">Explore nosso catálogo</a>
     </div>
   </main>
 
+  <!-- RODAPÉ -->
   <footer>
     <p>© 2026 Loxias Apollo. Todos os direitos reservados.</p>
   </footer>
