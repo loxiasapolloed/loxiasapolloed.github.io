@@ -300,15 +300,6 @@
             background-color: #4a5a40;
         }
 
-        .btn-audiobook {
-            background-color: var(--marrom-claro);
-            color: var(--branco);
-        }
-
-        .btn-audiobook:hover {
-            background-color: #957a54;
-        }
-
         /* Samples Section */
         .samples-section {
             background-color: var(--cinza-claro);
@@ -597,16 +588,17 @@
             <h2>Nosso Catálogo</h2>
             <p>
                 Publicamos obras que desafiam narrativas oficiais: 
-                Ficção Histórica, Traduções de Grandes Obras da Literatur Mundial e Literatura Jovem
+                Ficção Histórica, Traduções de Grandes Obras da Literatura Mundial e Literatura Jovem
                 com profundidade crítica. Cada livro é uma jornada única.
             </p>
         </div>
 
         <div class="categories">
             <button class="category-btn active" onclick="filterBooks('all')">Todos os Livros</button>
-            <button class="category-btn" onclick="filterBooks('Jovem')">Jovem</button>
-            <button class="category-btn" onclick="filterBooks('traducoes')">Traduções</button>
+            <button class="category-btn" onclick="filterBooks('jovem')">Jovem</button>
+            <button class="category-btn" onclick="filterBooks('jovem-adulto')">Jovem Adulto (+18)</button>
             <button class="category-btn" onclick="filterBooks('obras-autorais')">Obras Autorais</button>
+            <button class="category-btn" onclick="filterBooks('traducoes')">Traduções</button>
         </div>
 
         <div id="books-container" class="books-grid">
@@ -653,17 +645,18 @@
     </footer>
 
     <script>
-        // Dados dos livros CORRIGIDOS conforme sua lista
+        // Dados dos livros CORRIGIDOS conforme suas informações
         const booksData = [
-            // Jovem (de Gustavo Tovo)
+            // Obra autoral (Gustavo Tovo) - também categorizada como Jovem
             {
                 id: 1,
                 title: "Tanto Mar - Enzo chega ao poder",
                 author: "Gustavo Tovo",
                 description: "Primeiro livro da Série Brasil Colônia. Em 1500, um adolescente do Rio vira capitão de caravela. Ele acredita em diálogo. O século XVI acredita em pragmatismo. Quem vai vencer?",
-                category: "Jovem",
+                category: "obras-autorais",
+                additionalCategories: ["jovem"],
                 cover: "https://via.placeholder.com/300x450/5A6B4F/FFFFFF?text=Tanto+Mar",
-                tags: ["Jovem", "História", "Brasil Colônia"],
+                tags: ["Ficção Histórica", "Brasil Colônia", "Jovem"],
                 amazonLink: "#",
                 sample: `<div style="padding: 2rem;">
                             <h3 style="color: var(--verde-terroso); margin-bottom: 1.5rem;">Capítulo 1: O Rio de Janeiro, 1500</h3>
@@ -744,9 +737,8 @@
                 pages: 120
             },
             
-                        
             {
-                id: 6,
+                id: 5,
                 title: "Crônicas de uma Lavanderia",
                 author: "Samantha Tovo",
                 description: "Histórias interligadas sobre personagens cujas vidas se cruzam em uma lavanderia de bairro.",
@@ -764,15 +756,15 @@
                 pages: 220
             },
             
-            // Série Afelandra
+            // Trilogia Afelandra - Jovem Adulto (+18) - Pseudônimo: Mira Andor
             {
-                id: 7,
+                id: 6,
                 title: "Afelandra – Volume I",
-                author: "MIRA ANDOR",
-                description: "Primeiro volume da trilogia de fantasia épica que se passa no reino de Afelandra, onde magia e política se entrelaçam.",
-                category: "obras-autorais",
+                author: "Mira Andor",
+                description: "Primeiro volume da trilogia de fantasia épica que se passa no reino de Afelandra, onde magia e política se entrelaçam. Para jovens adultos.",
+                category: "jovem-adulto",
                 cover: "https://via.placeholder.com/300x450/5A6B4F/FFFFFF?text=Afelandra+I",
-                tags: ["Fantasia", "Épico", "Trilogia"],
+                tags: ["Fantasia", "Épico", "Jovem Adulto", "+18"],
                 amazonLink: "#",
                 sample: `<div style="padding: 2rem;">
                             <h3 style="color: var(--verde-terroso); margin-bottom: 1.5rem;">O Despertar</h3>
@@ -786,13 +778,13 @@
             },
             
             {
-                id: 8,
+                id: 7,
                 title: "Afelandra – Volume II",
-                author: "MIRA ANDOR",
-                description: "Segundo volume da trilogia, onde os conflitos se intensificam e alianças são testadas no reino mágico de Afelandra.",
-                category: "obras-autorais",
+                author: "Mira Andor",
+                description: "Segundo volume da trilogia, onde os conflitos se intensificam e alianças são testadas no reino mágico de Afelandra. Para jovens adultos.",
+                category: "jovem-adulto",
                 cover: "https://via.placeholder.com/300x450/000000/FFD700?text=Afelandra+II",
-                tags: ["Fantasia", "Épico", "Trilogia"],
+                tags: ["Fantasia", "Épico", "Jovem Adulto", "+18"],
                 amazonLink: "#",
                 sample: `<div style="padding: 2rem;">
                             <h3 style="color: var(--verde-terroso); margin-bottom: 1.5rem;">O Cerco de Cristalina</h3>
@@ -806,13 +798,13 @@
             },
             
             {
-                id: 9,
+                id: 8,
                 title: "Afelandra – Volume III",
-                author: "MIRA ANDOR",
-                description: "Conclusão épica da trilogia, onde o destino de Afelandra é decidido em uma batalha final entre luz e sombra.",
-                category: "obras-autorais",
+                author: "Mira Andor",
+                description: "Conclusão épica da trilogia, onde o destino de Afelandra é decidido em uma batalha final entre luz e sombra. Para jovens adultos.",
+                category: "jovem-adulto",
                 cover: "https://via.placeholder.com/300x450/5A6B4F/FFFFFF?text=Afelandra+III",
-                tags: ["Fantasia", "Épico", "Trilogia"],
+                tags: ["Fantasia", "Épico", "Jovem Adulto", "+18"],
                 amazonLink: "#",
                 sample: `<div style="padding: 2rem;">
                             <h3 style="color: var(--verde-terroso); margin-bottom: 1.5rem;">O Último Portal</h3>
@@ -827,7 +819,7 @@
             
             // Traduções de Samantha Tovo
             {
-                id: 10,
+                id: 9,
                 title: "A Peônia — Três cenas de O Pavilhão das Peônias",
                 author: "Tang Xianzu (Traduzido por Samantha Tovo)",
                 description: "Tradução e adaptação de três cenas da obra clássica chinesa de Tang Xianzu, com ensaios sobre o teatro oriental.",
@@ -845,7 +837,7 @@
             },
             
             {
-                id: 11,
+                id: 10,
                 title: "O Poeta e o Tigre — Sete contos",
                 author: "Nakajima Atsushi (Traduzido por Samantha Tovo)",
                 description: "Tradução de sete contos do mestre japonês Nakajima Atsushi, acompanhada de ensaios analíticos sobre sua obra.",
@@ -876,153 +868,4 @@
             renderSamples();
             
             // Adicionar evento de clique para os botões de categoria
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                });
-            });
-        });
-
-        function renderBooks(category) {
-            const container = document.getElementById('books-container');
-            const filteredBooks = category === 'all' 
-                ? booksData 
-                : booksData.filter(book => book.category === category);
-            
-            if (filteredBooks.length === 0) {
-                container.innerHTML = `
-                    <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
-                        <p>Nenhum livro encontrado nesta categoria.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            let booksHTML = '';
-            
-            filteredBooks.forEach(book => {
-                booksHTML += `
-                    <div class="book-card" data-category="${book.category}">
-                        ${book.badge ? `<span class="book-badge">${book.badge}</span>` : ''}
-                        
-                        <div class="book-cover">
-                            <img src="${book.cover}" 
-                                 alt="Capa: ${book.title}"
-                                 loading="lazy">
-                        </div>
-                        
-                        <div class="book-info">
-                            <h3 class="book-title">${book.title}</h3>
-                            <p class="book-author">${book.author}</p>
-                            
-                            <div class="book-tags">
-                                ${book.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                                <span class="tag">${book.pages} páginas</span>
-                                <span class="tag">${book.year}</span>
-                            </div>
-                            
-                            <p class="book-description">${book.description}</p>
-                            
-                            <div class="book-actions">
-                                <a href="${book.amazonLink}" 
-                                   class="btn-book btn-amazon" 
-                                   target="_blank"
-                                   onclick="trackAmazonClick(${book.id})">
-                                    <i class="fab fa-amazon"></i>
-                                    Comprar
-                                </a>
-                                
-                                ${book.sample ? `
-                                <button class="btn-book btn-sample" 
-                                        onclick="openSample(${book.id})">
-                                    <i class="fas fa-book-open"></i>
-                                    Amostra
-                                </button>
-                                ` : ''}
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            container.innerHTML = booksHTML;
-        }
-
-        function filterBooks(category) {
-            renderBooks(category);
-        }
-
-        function renderSamples() {
-            const container = document.getElementById('samples-container');
-            let samplesHTML = '';
-            
-            // Mostrar até 3 amostras
-            booksData.slice(0, 3).forEach(book => {
-                if (book.sample) {
-                    samplesHTML += `
-                        <div class="sample-card">
-                            <h4>${book.title}</h4>
-                            <p>${book.author}</p>
-                            <button onclick="openSample(${book.id})" class="btn-sample-card">
-                                Ler Amostra
-                            </button>
-                        </div>
-                    `;
-                }
-            });
-            
-            container.innerHTML = samplesHTML;
-        }
-
-        function openSample(bookId) {
-            const book = booksData.find(b => b.id === bookId);
-            if (!book) return;
-            
-            const modal = document.getElementById('sample-modal');
-            const content = document.getElementById('sample-content');
-            
-            content.innerHTML = `
-                <div style="max-width: 800px; margin: 0 auto;">
-                    <h2 style="color: var(--verde-terroso); margin-bottom: 0.5rem;">${book.title}</h2>
-                    <p style="color: var(--marrom-claro); margin-bottom: 2rem; font-style: italic;">${book.author}</p>
-                    ${book.sample}
-                    <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center;">
-                        <a href="${book.amazonLink}" 
-                           class="btn-book btn-amazon" 
-                           target="_blank"
-                           style="display: inline-flex; text-decoration: none;">
-                            <i class="fab fa-amazon"></i>
-                            Comprar Livro Completo
-                        </a>
-                    </div>
-                </div>
-            `;
-            
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeSample() {
-            document.getElementById('sample-modal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        function trackAmazonClick(bookId) {
-            console.log(`Livro ${bookId} clicado na Amazon`);
-            // Aqui você pode adicionar sua tag de afiliado da Amazon
-            // Exemplo: const affiliateTag = "sua-tag-aqui";
-        }
-
-        // Fechar modal com ESC
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeSample();
-        });
-
-        // Fechar modal clicando fora
-        document.getElementById('sample-modal').addEventListener('click', function(e) {
-            if (e.target === this) closeSample();
-        });
-    </script>
-</body>
-</html>
+            document.querySelectorAll('.
