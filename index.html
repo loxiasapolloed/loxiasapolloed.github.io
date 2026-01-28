@@ -30,7 +30,71 @@
       line-height: 1.6;
     }
 
-   <header style="padding: 2rem 5%; background-color: #FFFFFF; border-bottom: 1px solid #000000;">
+    header {
+      padding: 2rem 5%;
+      text-align: center;
+      border-bottom: 1px solid var(--preto);
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+    }
+
+    nav {
+      padding: 1.3rem 5%;
+      background-color: var(--preto);
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    nav a {
+      color: var(--amarelo);
+      text-decoration: none;
+      margin: 0 1.1rem;
+      font-size: 1.15rem;
+      transition: opacity 0.3s;
+      white-space: nowrap;
+    }
+
+    nav a:hover {
+      opacity: 0.7;
+    }
+
+    section {
+      padding: 3.5rem 5% 3rem;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .perfil {
+      margin: 2.8rem 0;
+    }
+
+    .perfil h2 {
+      font-size: 1.5rem;
+      color: var(--verde-terroso);
+      margin-bottom: 0.8rem;
+    }
+
+    footer {
+      padding: 2rem 5%;
+      text-align: center;
+      background-color: var(--preto);
+      color: var(--branco);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.8rem; }
+      nav { padding: 1.1rem 3%; }
+      nav a { display: block; margin: 0.7rem 0; font-size: 1.1rem; }
+      section { padding: 2.5rem 5% 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+ <header style="padding: 2rem 5%; background-color: #FFFFFF; border-bottom: 1px solid #000000;">
     <div style="display: flex; align-items: center; justify-content: center; gap: 1.5rem; flex-wrap: wrap; max-width: 900px; margin: 0 auto;">
         <img src="logo.png" 
              style="height: 120px; width: auto; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));">
@@ -45,7 +109,15 @@
         </div>
     </div>
 </header>
-    }
+
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="sobre.html">Sobre</a>
+    <a href="livros.html">Livros</a>
+    <a href="blog.html">Blog</a>
+    <a href="mailto:contato@loxiasapollo.com.br">Contato</a>
+  </nav>
+
 
     nav {
       padding: 1.3rem 5%;
