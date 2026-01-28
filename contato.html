@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contato - Loxias Apollo</title>
+    <title>Contato & Mural - Loxias Apollo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@200;300;400;500&display=swap" rel="stylesheet">
@@ -17,6 +17,7 @@
             --marrom-claro: #A68A64;
             --cinza-claro: #f5f5f5;
             --cinza-medio: #e0e0e0;
+            --verde-suave: rgba(90, 107, 79, 0.1);
         }
 
         * {
@@ -137,21 +138,49 @@
             margin: 0 auto;
         }
 
-        /* Contact Container */
-        .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            max-width: 1000px;
-            margin: 0 auto;
+        /* Tabs */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background-color: var(--branco);
+            color: var(--preto);
+            border: 1px solid var(--preto);
+            padding: 1rem 2rem;
+            font-family: 'League Spartan', sans-serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 2px;
+            min-width: 200px;
+        }
+
+        .tab-btn:hover {
+            background-color: var(--cinza-claro);
+        }
+
+        .tab-btn.active {
+            background-color: var(--preto);
+            color: var(--amarelo);
         }
 
         /* Contact Form */
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
         .contact-form {
             background-color: var(--cinza-claro);
             padding: 2.5rem;
             border-radius: 4px;
             border: 1px solid var(--cinza-medio);
+            margin-bottom: 3rem;
         }
 
         .contact-form h3 {
@@ -159,6 +188,9 @@
             margin-bottom: 1.5rem;
             font-size: 1.6rem;
             font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .form-group {
@@ -197,40 +229,264 @@
             resize: vertical;
         }
 
-        .btn-submit {
-            background-color: var(--preto);
-            color: var(--amarelo);
+        /* Message Type */
+        .message-type {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .type-option {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .type-radio {
+            display: none;
+        }
+
+        .type-label {
+            display: block;
+            padding: 1.5rem;
+            border: 2px solid var(--cinza-medio);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .type-label:hover {
+            border-color: var(--verde-terroso);
+        }
+
+        .type-radio:checked + .type-label {
+            border-color: var(--verde-terroso);
+            background-color: var(--verde-suave);
+        }
+
+        .type-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--verde-terroso);
+        }
+
+        /* Form Buttons */
+        .form-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-form {
+            flex: 1;
+            padding: 1rem;
             border: none;
-            padding: 0.8rem 2rem;
             font-family: 'League Spartan', sans-serif;
             font-size: 1.1rem;
             cursor: pointer;
             border-radius: 2px;
-            transition: background-color 0.3s;
-            width: 100%;
-            margin-top: 1rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-submit {
+            background-color: var(--preto);
+            color: var(--amarelo);
         }
 
         .btn-submit:hover {
             background-color: #333;
         }
 
-        /* Contact Info */
-        .contact-info {
-            padding: 1rem;
+        .btn-clear {
+            background-color: var(--cinza-medio);
+            color: var(--preto);
         }
 
-        .contact-info h3 {
+        .btn-clear:hover {
+            background-color: #d0d0d0;
+        }
+
+        /* Mural */
+        .mural-container {
+            margin-top: 3rem;
+        }
+
+        .mural-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .mural-header h3 {
             color: var(--verde-terroso);
-            margin-bottom: 1.5rem;
             font-size: 1.6rem;
             font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .mural-controls {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-refresh {
+            background-color: var(--preto);
+            color: var(--amarelo);
+            border: none;
+            padding: 0.7rem 1.5rem;
+            font-family: 'League Spartan', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-refresh:hover {
+            background-color: #333;
+        }
+
+        /* Messages Grid */
+        .messages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .message-card {
+            background: var(--branco);
+            border: 1px solid var(--cinza-medio);
+            border-radius: 4px;
+            padding: 1.5rem;
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .message-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .message-private {
+            background-color: var(--verde-suave);
+            border-left: 4px solid var(--verde-terroso);
+        }
+
+        .message-public {
+            border-left: 4px solid var(--amarelo);
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .message-author {
+            font-weight: 400;
+            color: var(--verde-terroso);
+        }
+
+        .message-date {
+            font-size: 0.9rem;
+            color: var(--marrom-claro);
+        }
+
+        .message-type-badge {
+            font-size: 0.8rem;
+            padding: 0.3rem 0.7rem;
+            border-radius: 2px;
+            margin-left: 0.5rem;
+        }
+
+        .badge-public {
+            background-color: var(--amarelo);
+            color: var(--preto);
+        }
+
+        .badge-private {
+            background-color: var(--verde-terroso);
+            color: var(--branco);
+        }
+
+        .message-content {
+            color: var(--preto);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .message-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--cinza-claro);
+            font-size: 0.9rem;
+            color: var(--marrom-claro);
+        }
+
+        .message-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-like, .btn-reply {
+            background: none;
+            border: none;
+            color: var(--marrom-claro);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: color 0.3s;
+        }
+
+        .btn-like:hover, .btn-reply:hover {
+            color: var(--verde-terroso);
+        }
+
+        .liked {
+            color: var(--verde-terroso);
+        }
+
+        /* Contact Info */
+        .contact-info {
+            background-color: var(--cinza-claro);
+            padding: 2rem;
+            border-radius: 4px;
+            margin-top: 3rem;
+        }
+
+        .contact-info h4 {
+            color: var(--verde-terroso);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
         }
 
         .info-item {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 2rem;
             gap: 1rem;
         }
 
@@ -246,7 +502,7 @@
             flex-shrink: 0;
         }
 
-        .info-content h4 {
+        .info-content h5 {
             color: var(--preto);
             margin-bottom: 0.3rem;
             font-weight: 400;
@@ -257,39 +513,34 @@
             line-height: 1.5;
         }
 
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .social-link {
-            background-color: var(--preto);
-            color: var(--amarelo);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: transform 0.3s;
-        }
-
-        .social-link:hover {
-            transform: translateY(-3px);
-        }
-
         /* Success Message */
         .success-message {
             display: none;
-            background-color: #d4edda;
-            color: #155724;
+            background-color: var(--verde-suave);
+            border-left: 4px solid var(--verde-terroso);
             padding: 1.5rem;
             border-radius: 4px;
             margin-top: 2rem;
             text-align: center;
-            border: 1px solid #c3e6cb;
+        }
+
+        .success-message h4 {
+            color: var(--verde-terroso);
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--marrom-claro);
+        }
+
+        .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--cinza-medio);
         }
 
         /* Footer */
@@ -343,13 +594,6 @@
         }
 
         /* Responsive */
-        @media (max-width: 900px) {
-            .contact-container {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-        }
-
         @media (max-width: 768px) {
             .header-container {
                 flex-direction: column;
@@ -378,23 +622,25 @@
                 padding: 0.5rem 0;
             }
             
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab-btn {
+                min-width: auto;
+            }
+            
+            .form-buttons {
+                flex-direction: column;
+            }
+            
+            .messages-grid {
+                grid-template-columns: 1fr;
+            }
+            
             .footer-top {
                 flex-direction: column;
                 text-align: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .page-intro h2 {
-                font-size: 1.8rem;
-            }
-            
-            .page-intro p {
-                font-size: 1rem;
-            }
-            
-            .contact-form {
-                padding: 1.5rem;
             }
         }
     </style>
@@ -422,68 +668,142 @@
 
     <main>
         <div class="page-intro">
-            <h2>Entre em Contato</h2>
+            <h2>Contato & Mural de Mensagens</h2>
             <p>
-                Tem dúvidas, sugestões ou quer saber mais sobre nossos livros? 
-                Preencha o formulário abaixo ou utilize nossos outros canais de comunicação.
+                Envie sua mensagem de forma privada ou compartilhe com a comunidade.
+                Todas as mensagens públicas aparecerão no mural abaixo.
             </p>
         </div>
 
-        <div class="contact-container">
-            <!-- Formulário de Contato -->
-            <div class="contact-form">
-                <h3>Envie sua mensagem</h3>
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Nome Completo *</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('form')">
+                <i class="fas fa-envelope"></i> Enviar Mensagem
+            </button>
+            <button class="tab-btn" onclick="showTab('mural')">
+                <i class="fas fa-comments"></i> Mural Público
+            </button>
+        </div>
+
+        <!-- Form Tab -->
+        <div id="form-tab" class="tab-content">
+            <div class="contact-container">
+                <div class="contact-form">
+                    <h3><i class="fas fa-pen"></i> Escreva sua mensagem</h3>
                     
-                    <div class="form-group">
-                        <label for="email">Email *</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
+                    <form id="messageForm">
+                        <div class="form-group">
+                            <label for="name">Seu nome *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Seu email (não será publicado) *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Assunto</label>
+                            <select id="subject" name="subject">
+                                <option value="">Selecione um assunto</option>
+                                <option value="duvida">Dúvida sobre livros</option>
+                                <option value="sugestao">Sugestão</option>
+                                <option value="parceria">Proposta de parceria</option>
+                                <option value="elogio">Elogio</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Message Type -->
+                        <div class="message-type">
+                            <div class="type-option">
+                                <input type="radio" id="type-private" name="messageType" value="private" class="type-radio" checked>
+                                <label for="type-private" class="type-label">
+                                    <div class="type-icon">
+                                        <i class="fas fa-lock"></i>
+                                    </div>
+                                    <strong>Mensagem Privada</strong>
+                                    <p style="font-size: 0.9rem; margin-top: 0.5rem; color: #666;">
+                                        Só a equipe da editora verá
+                                    </p>
+                                </label>
+                            </div>
+                            
+                            <div class="type-option">
+                                <input type="radio" id="type-public" name="messageType" value="public" class="type-radio">
+                                <label for="type-public" class="type-label">
+                                    <div class="type-icon">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <strong>Mensagem Pública</strong>
+                                    <p style="font-size: 0.9rem; margin-top: 0.5rem; color: #666;">
+                                        Aparecerá no mural abaixo
+                                    </p>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Sua mensagem *</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        
+                        <div class="form-buttons">
+                            <button type="button" class="btn-form btn-clear" onclick="clearForm()">
+                                <i class="fas fa-eraser"></i> Limpar
+                            </button>
+                            <button type="submit" class="btn-form btn-submit">
+                                <i class="fas fa-paper-plane"></i> Enviar Mensagem
+                            </button>
+                        </div>
+                    </form>
                     
-                    <div class="form-group">
-                        <label for="subject">Assunto</label>
-                        <select id="subject" name="subject">
-                            <option value="">Selecione um assunto</option>
-                            <option value="dúvida">Dúvida sobre livros</option>
-                            <option value="pedido">Pedido de informação</option>
-                            <option value="parceria">Proposta de parceria</option>
-                            <option value="outro">Outro</option>
-                        </select>
+                    <div id="successMessage" class="success-message">
+                        <i class="fas fa-check-circle"></i>
+                        <h4>Mensagem enviada com sucesso!</h4>
+                        <p id="successText"></p>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="message">Mensagem *</label>
-                        <textarea id="message" name="message" required></textarea>
-                    </div>
-                    
-                    <button type="submit" class="btn-submit">
-                        <i class="fas fa-paper-plane"></i> Enviar Mensagem
-                    </button>
-                </form>
-                
-                <div id="successMessage" class="success-message">
-                    <i class="fas fa-check-circle"></i>
-                    <h4>Mensagem enviada com sucesso!</h4>
-                    <p>Retornaremos em até 48 horas.</p>
                 </div>
             </div>
-            
-            <!-- Informações de Contato -->
-            <div class="contact-info">
-                <h3>Outras formas de contato</h3>
+        </div>
+
+        <!-- Mural Tab -->
+        <div id="mural-tab" class="tab-content" style="display: none;">
+            <div class="mural-container">
+                <div class="mural-header">
+                    <h3><i class="fas fa-comments"></i> Mural de Mensagens</h3>
+                    <div class="mural-controls">
+                        <button class="btn-refresh" onclick="loadMessages()">
+                            <i class="fas fa-sync-alt"></i> Atualizar
+                        </button>
+                    </div>
+                </div>
                 
+                <div id="messages-container" class="messages-grid">
+                    <!-- Mensagens serão carregadas aqui -->
+                    <div class="empty-state">
+                        <div class="empty-icon">
+                            <i class="fas fa-comment-slash"></i>
+                        </div>
+                        <h4>Nenhuma mensagem pública ainda</h4>
+                        <p>Seja o primeiro a compartilhar uma mensagem!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="contact-info">
+            <h4><i class="fas fa-info-circle"></i> Outras formas de contato</h4>
+            <div class="info-grid">
                 <div class="info-item">
                     <div class="info-icon">
                         <i class="fas fa-envelope"></i>
                     </div>
                     <div class="info-content">
-                        <h4>Email</h4>
+                        <h5>Email direto</h5>
                         <p>loxias.apollo.ed@gmail.com</p>
-                        <p>Respondemos em até 48 horas</p>
+                        <p style="font-size: 0.9rem; color: #888;">Respondemos em até 48h</p>
                     </div>
                 </div>
                 
@@ -492,20 +812,9 @@
                         <i class="fas fa-book"></i>
                     </div>
                     <div class="info-content">
-                        <h4>Para Autores</h4>
+                        <h5>Para autores</h5>
                         <p>Recebemos propostas de publicação</p>
-                        <p>Envie seu manuscrito para avaliação</p>
-                    </div>
-                </div>
-                
-                <div class="info-item">
-                    <div class="info-icon">
-                        <i class="fas fa-store"></i>
-                    </div>
-                    <div class="info-content">
-                        <h4>Parcerias</h4>
-                        <p>Livrarias interessadas em nossos livros</p>
-                        <p>Entre em contato para condições especiais</p>
+                        <p style="font-size: 0.9rem; color: #888;">Envie seu manuscrito</p>
                     </div>
                 </div>
                 
@@ -514,25 +823,10 @@
                         <i class="fas fa-clock"></i>
                     </div>
                     <div class="info-content">
-                        <h4>Horário de Atendimento</h4>
+                        <h5>Horário de atendimento</h5>
                         <p>Segunda a sexta: 9h às 18h</p>
-                        <p>Sábado: 9h às 13h</p>
+                        <p style="font-size: 0.9rem; color: #888;">Sábado: 9h às 13h</p>
                     </div>
-                </div>
-                
-                <div class="social-links">
-                    <a href="#" class="social-link" title="Instagram">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="social-link" title="Facebook">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="#" class="social-link" title="Twitter">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="social-link" title="Goodreads">
-                        <i class="fab fa-goodreads-g"></i>
-                    </a>
                 </div>
             </div>
         </div>
@@ -548,7 +842,7 @@
                 <div class="footer-section">
                     <h5>Links Rápidos</h5>
                     <a href="blog.html">Blog Iota Subscrito</a>
-                    <a href="mailto:loxias.apollo.ed@gmail.com?subject=Contato%20Loxias%20Apollo">Contato</a>
+                    <a href="contato.html">Contato & Mural</a>
                 </div>
             </div>
             <hr class="footer-divider">
@@ -559,94 +853,261 @@
     </footer>
 
     <script>
+        // Dados simulados (em produção, use um backend)
+        let publicMessages = JSON.parse(localStorage.getItem('loxiasPublicMessages')) || [];
+        let messageLikes = JSON.parse(localStorage.getItem('loxiasMessageLikes')) || {};
+
         document.addEventListener('DOMContentLoaded', function() {
-            // Atualizar ano atual no footer
+            // Ano atual no footer
             document.getElementById('current-year').textContent = new Date().getFullYear();
             
-            // Formulário de contato
-            const contactForm = document.getElementById('contactForm');
-            const successMessage = document.getElementById('successMessage');
+            // Carregar mensagens públicas
+            loadMessages();
             
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Coletar dados do formulário
-                const formData = {
-                    name: document.getElementById('name').value,
-                    email: document.getElementById('email').value,
-                    subject: document.getElementById('subject').value,
-                    message: document.getElementById('message').value,
-                    timestamp: new Date().toISOString()
-                };
-                
-                // Aqui você pode:
-                // 1. Enviar para um servidor (recomendado)
-                // 2. Usar FormSubmit.co (gratuito)
-                // 3. Usar EmailJS (gratuito até 200 emails/mês)
-                // 4. Enviar via Google Apps Script (gratuito)
-                
-                // Exemplo usando EmailJS (você precisaria criar conta em https://www.emailjs.com/)
-                /*
-                emailjs.send('seu_serviço_id', 'seu_template_id', formData)
-                    .then(function() {
-                        showSuccess();
-                    }, function(error) {
-                        alert('Erro ao enviar mensagem: ' + JSON.stringify(error));
-                    });
-                */
-                
-                // Por enquanto, vamos simular o envio
-                showSuccess();
-                
-                // Salvar no localStorage (apenas para demonstração)
-                saveToLocalStorage(formData);
+            // Formulário
+            const messageForm = document.getElementById('messageForm');
+            messageForm.addEventListener('submit', handleSubmit);
+        });
+
+        function showTab(tabName) {
+            // Atualizar botões
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
             });
             
-            function showSuccess() {
-                // Mostrar mensagem de sucesso
-                successMessage.style.display = 'block';
+            if (tabName === 'form') {
+                document.querySelector('.tab-btn:nth-child(1)').classList.add('active');
+                document.getElementById('form-tab').style.display = 'block';
+                document.getElementById('mural-tab').style.display = 'none';
+            } else {
+                document.querySelector('.tab-btn:nth-child(2)').classList.add('active');
+                document.getElementById('form-tab').style.display = 'none';
+                document.getElementById('mural-tab').style.display = 'block';
+                loadMessages();
+            }
+        }
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            
+            const formData = {
+                id: Date.now(),
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value,
+                type: document.querySelector('input[name="messageType"]:checked').value,
+                date: new Date().toISOString(),
+                likes: 0,
+                likedBy: []
+            };
+            
+            // Salvar no localStorage
+            if (formData.type === 'public') {
+                publicMessages.unshift(formData); // Adicionar no início
+                localStorage.setItem('loxiasPublicMessages', JSON.stringify(publicMessages));
                 
-                // Rolar até a mensagem
-                successMessage.scrollIntoView({ behavior: 'smooth' });
+                // Mostrar sucesso
+                document.getElementById('successText').textContent = 
+                    'Sua mensagem foi publicada no mural!';
+                showSuccess();
                 
-                // Limpar formulário
-                contactForm.reset();
+                // Recarregar mural
+                loadMessages();
                 
-                // Esconder mensagem após 5 segundos
-                setTimeout(() => {
-                    successMessage.style.display = 'none';
-                }, 5000);
+                // Mudar para o mural
+                setTimeout(() => showTab('mural'), 2000);
+            } else {
+                // Para mensagens privadas, só salvar no "inbox" simulado
+                const privateMessages = JSON.parse(localStorage.getItem('loxiasPrivateMessages')) || [];
+                privateMessages.push(formData);
+                localStorage.setItem('loxiasPrivateMessages', JSON.stringify(privateMessages));
+                
+                // Mostrar sucesso
+                document.getElementById('successText').textContent = 
+                    'Sua mensagem privada foi enviada com sucesso!';
+                showSuccess();
             }
             
-            function saveToLocalStorage(formData) {
-                // Salvar no localStorage para referência
-                try {
-                    const savedMessages = JSON.parse(localStorage.getItem('loxiasMessages')) || [];
-                    savedMessages.push(formData);
-                    localStorage.setItem('loxiasMessages', JSON.stringify(savedMessages));
-                    
-                    // Limitar a 50 mensagens salvas
-                    if (savedMessages.length > 50) {
-                        localStorage.setItem('loxiasMessages', 
-                            JSON.stringify(savedMessages.slice(-50)));
-                    }
-                    
-                    console.log('Mensagem salva no localStorage:', formData);
-                } catch (e) {
-                    console.log('Erro ao salvar no localStorage:', e);
+            // Limpar formulário
+            clearForm();
+        }
+
+        function clearForm() {
+            document.getElementById('messageForm').reset();
+            document.getElementById('type-private').checked = true;
+        }
+
+        function showSuccess() {
+            const successMessage = document.getElementById('successMessage');
+            successMessage.style.display = 'block';
+            
+            // Rolar até a mensagem
+            successMessage.scrollIntoView({ behavior: 'smooth' });
+            
+            // Esconder após 5 segundos
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 5000);
+        }
+
+        function loadMessages() {
+            const container = document.getElementById('messages-container');
+            
+            if (publicMessages.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">
+                            <i class="fas fa-comment-slash"></i>
+                        </div>
+                        <h4>Nenhuma mensagem pública ainda</h4>
+                        <p>Seja o primeiro a compartilhar uma mensagem!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let messagesHTML = '';
+            
+            publicMessages.forEach(message => {
+                const dateFormatted = formatDate(message.date);
+                const likes = messageLikes[message.id] || 0;
+                const subjectText = getSubjectText(message.subject);
+                
+                messagesHTML += `
+                    <div class="message-card ${message.type === 'private' ? 'message-private' : 'message-public'}">
+                        <div class="message-header">
+                            <div>
+                                <span class="message-author">${message.name}</span>
+                                <span class="message-type-badge ${message.type === 'public' ? 'badge-public' : 'badge-private'}">
+                                    ${message.type === 'public' ? 'Público' : 'Privado'}
+                                </span>
+                            </div>
+                            <span class="message-date">${dateFormatted}</span>
+                        </div>
+                        
+                        ${subjectText ? `<p style="color: var(--verde-terroso); margin-bottom: 0.5rem; font-size: 0.9rem;"><strong>Assunto:</strong> ${subjectText}</p>` : ''}
+                        
+                        <div class="message-content">
+                            ${escapeHtml(message.message).replace(/\n/g, '<br>')}
+                        </div>
+                        
+                        <div class="message-footer">
+                            <div class="message-actions">
+                                <button class="btn-like ${isMessageLiked(message.id) ? 'liked' : ''}" onclick="likeMessage(${message.id})">
+                                    <i class="fas fa-heart"></i>
+                                    <span class="like-count">${likes}</span>
+                                </button>
+                            </div>
+                            <div>
+                                ${message.subject ? `<span style="color: var(--marrom-claro);">${subjectText}</span>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = messagesHTML;
+        }
+
+        function likeMessage(messageId) {
+            const userLikes = JSON.parse(localStorage.getItem('loxiasUserLikes')) || [];
+            
+            if (userLikes.includes(messageId)) {
+                // Já curtiu, remover like
+                const index = userLikes.indexOf(messageId);
+                userLikes.splice(index, 1);
+                messageLikes[messageId] = (messageLikes[messageId] || 1) - 1;
+            } else {
+                // Dar like
+                userLikes.push(messageId);
+                messageLikes[messageId] = (messageLikes[messageId] || 0) + 1;
+            }
+            
+            localStorage.setItem('loxiasUserLikes', JSON.stringify(userLikes));
+            localStorage.setItem('loxiasMessageLikes', JSON.stringify(messageLikes));
+            
+            loadMessages();
+        }
+
+        function isMessageLiked(messageId) {
+            const userLikes = JSON.parse(localStorage.getItem('loxiasUserLikes')) || [];
+            return userLikes.includes(messageId);
+        }
+
+        function getSubjectText(subject) {
+            const subjects = {
+                'duvida': 'Dúvida sobre livros',
+                'sugestao': 'Sugestão',
+                'parceria': 'Proposta de parceria',
+                'elogio': 'Elogio',
+                'outro': 'Outro'
+            };
+            return subjects[subject] || '';
+        }
+
+        function formatDate(dateString) {
+            try {
+                const date = new Date(dateString);
+                const now = new Date();
+                const diffMs = now - date;
+                const diffHours = diffMs / (1000 * 60 * 60);
+                
+                if (diffHours < 24) {
+                    return 'Hoje às ' + date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+                } else if (diffHours < 48) {
+                    return 'Ontem às ' + date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+                } else {
+                    return date.toLocaleDateString('pt-BR', {
+                        day: '2-digit',
+                        month: 'short',
+                        year: 'numeric'
+                    });
                 }
+            } catch (e) {
+                return '';
             }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Inicializar com algumas mensagens de exemplo
+        if (publicMessages.length === 0) {
+            // Adicionar mensagens de exemplo
+            const exampleMessages = [
+                {
+                    id: 1,
+                    name: 'Ana Silva',
+                    email: 'ana@exemplo.com',
+                    subject: 'elogio',
+                    message: 'Adorei a trilogia Afelandra! Quando sai o próximo livro?',
+                    type: 'public',
+                    date: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), // 2 horas atrás
+                    likes: 5
+                },
+                {
+                    id: 2,
+                    name: 'Carlos Mendes',
+                    email: 'carlos@exemplo.com',
+                    subject: 'sugestao',
+                    message: 'Seria ótimo ver mais traduções de autores lituanos como Balis Sruoga.',
+                    type: 'public',
+                    date: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(), // 1 dia atrás
+                    likes: 3
+                }
+            ];
             
-            // Configuração para usar FormSubmit.co (gratuito e simples)
-            // Substitua o action do formulário por:
-            // <form action="https://formsubmit.co/loxias.apollo.ed@gmail.com" method="POST">
-            // E adicione estes campos ocultos:
-            /*
-            <input type="hidden" name="_subject" value="Novo contato - Loxias Apollo">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_next" value="https://seusite.com/obrigado.html">
-            */
-        });
+            publicMessages = exampleMessages;
+            localStorage.setItem('loxiasPublicMessages', JSON.stringify(publicMessages));
+            
+            // Inicializar likes
+            messageLikes = { 1: 5, 2: 3 };
+            localStorage.setItem('loxiasMessageLikes', JSON.stringify(messageLikes));
+        }
     </script>
 </body>
 </html>
