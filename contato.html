@@ -3,12 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contato - Loxias Apollo</title>
+    <title>Blog - Loxias Apollo</title>
+    
+    <!-- REMOVI Bootstrap -->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@200;300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
+        /* ===== VARIÁVEIS CSS ===== */
         :root {
             --preto: #000000;
             --amarelo: #FFD700;
@@ -19,6 +26,7 @@
             --cinza-medio: #e0e0e0;
         }
 
+        /* ===== RESET E BASE ===== */
         * {
             margin: 0;
             padding: 0;
@@ -36,7 +44,7 @@
             flex-direction: column;
         }
 
-        /* Header */
+        /* ===== CABEÇALHO COM LOGO ===== */
         header {
             padding: 1.5rem 5%;
             background-color: var(--branco);
@@ -81,7 +89,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* Navigation */
+        /* ===== NAVEGAÇÃO ===== */
         nav {
             padding: 1rem 5%;
             background-color: var(--preto);
@@ -108,191 +116,304 @@
             transform: translateY(-2px);
         }
 
-        /* Main Content */
+        /* ===== CONTEÚDO PRINCIPAL ===== */
         main {
             flex: 1;
             padding: 3rem 5%;
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
+            background-color: var(--branco); /* Garantir fundo branco */
         }
 
-        /* Page Intro */
-        .page-intro {
-            text-align: center;
+        /* ===== CARD INFORMATIVO ===== */
+        .info-card {
+            background-color: rgba(255, 215, 0, 0.1);
+            border-left: 3px solid var(--amarelo);
+            padding: 1.5rem;
             margin-bottom: 3rem;
+            border-radius: 4px;
         }
 
-        .page-intro h2 {
-            font-size: 2.2rem;
+        .info-card h3 {
+            color: var(--verde-terroso);
+            margin-bottom: 0.8rem;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-card p {
+            color: var(--preto);
+            font-size: 1.1rem;
+        }
+
+        /* ===== GRID DE POSTS ===== */
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        /* ===== CARD DE POST ===== */
+        .post-card {
+            background: var(--branco);
+            border: 1px solid var(--cinza-medio);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-color: var(--amarelo);
+        }
+
+        .post-image {
+            height: 200px;
+            overflow: hidden;
+            background-color: var(--cinza-claro);
+        }
+
+        .post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .post-card:hover .post-image img {
+            transform: scale(1.05);
+        }
+
+        .post-content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post-meta {
+            font-size: 0.9rem;
+            color: var(--marrom-claro);
+            margin-bottom: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .post-title {
+            font-size: 1.3rem;
             color: var(--preto);
             margin-bottom: 1rem;
             font-weight: 400;
+            line-height: 1.4;
         }
 
-        .page-intro p {
-            font-size: 1.2rem;
-            color: var(--verde-terroso);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* Contact Container */
-        .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        /* Contact Form */
-        .contact-form {
-            background-color: var(--cinza-claro);
-            padding: 2.5rem;
-            border-radius: 4px;
-            border: 1px solid var(--cinza-medio);
-        }
-
-        .contact-form h3 {
-            color: var(--verde-terroso);
-            margin-bottom: 1.5rem;
-            font-size: 1.6rem;
-            font-weight: 400;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
+        .post-excerpt {
             color: var(--preto);
-            font-weight: 400;
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            flex: 1;
         }
 
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid var(--cinza-medio);
-            border-radius: 2px;
-            font-family: 'League Spartan', sans-serif;
-            font-size: 1rem;
-            background-color: var(--branco);
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--verde-terroso);
-        }
-
-        .form-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        .btn-submit {
-            background-color: var(--preto);
+        .btn-read {
+            background: var(--preto);
             color: var(--amarelo);
             border: none;
-            padding: 0.8rem 2rem;
+            padding: 0.7rem 1.5rem;
             font-family: 'League Spartan', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1rem;
             cursor: pointer;
             border-radius: 2px;
-            transition: background-color 0.3s;
+            transition: background 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            margin-top: auto;
+        }
+
+        .btn-read:hover {
+            background: #333;
+        }
+
+        /* ===== MENSAGENS DE ESTADO ===== */
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            grid-column: 1 / -1;
+        }
+
+        .spinner {
+            border: 4px solid rgba(90, 107, 79, 0.2);
+            border-top: 4px solid var(--verde-terroso);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            background-color: rgba(255, 215, 0, 0.1);
+            border-left: 3px solid var(--amarelo);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 4px;
+        }
+
+        .error-message h4 {
+            color: var(--verde-terroso);
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        /* ===== MODAL DE ARTIGO ===== */
+        .article-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            margin-top: 1rem;
-        }
-
-        .btn-submit:hover {
-            background-color: #333;
-        }
-
-        /* Contact Info */
-        .contact-info {
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 1000;
+            overflow-y: auto;
             padding: 1rem;
         }
 
-        .contact-info h3 {
-            color: var(--verde-terroso);
-            margin-bottom: 1.5rem;
-            font-size: 1.6rem;
-            font-weight: 400;
-        }
-
-        .info-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 2rem;
-            gap: 1rem;
-        }
-
-        .info-icon {
-            background-color: var(--verde-terroso);
-            color: var(--branco);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .info-content h4 {
-            color: var(--preto);
-            margin-bottom: 0.3rem;
-            font-weight: 400;
-        }
-
-        .info-content p {
-            color: var(--verde-terroso);
-            line-height: 1.5;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .social-link {
-            background-color: var(--preto);
-            color: var(--amarelo);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: transform 0.3s;
-        }
-
-        .social-link:hover {
-            transform: translateY(-3px);
-        }
-
-        /* Success Message */
-        .success-message {
-            display: none;
-            background-color: #d4edda;
-            color: #155724;
-            padding: 1.5rem;
+        .article-content {
+            background-color: var(--branco);
+            margin: 3rem auto;
+            padding: 2rem;
+            max-width: 900px;
             border-radius: 4px;
-            margin-top: 2rem;
-            text-align: center;
-            border: 1px solid #c3e6cb;
+            position: relative;
         }
 
-        /* Footer */
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--preto);
+            line-height: 1;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .article-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--cinza-medio);
+        }
+
+        .article-header h1 {
+            color: var(--preto);
+            font-size: 2rem;
+            margin-top: 0.5rem;
+            font-weight: 400;
+        }
+
+        .article-header .meta {
+            color: var(--marrom-claro);
+            font-size: 0.9rem;
+        }
+
+        .article-body {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--preto);
+        }
+
+        .article-body img {
+            max-width: 100%;
+            height: auto;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .article-body p {
+            margin-bottom: 1.5rem;
+        }
+
+        .article-footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--cinza-medio);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .btn-original {
+            background: var(--preto);
+            color: var(--amarelo);
+            border: none;
+            padding: 0.7rem 1.5rem;
+            font-family: 'League Spartan', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 2px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-original:hover {
+            background: #333;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .btn-nav {
+            background: var(--verde-terroso);
+            color: var(--branco);
+            border: none;
+            padding: 0.7rem 1.2rem;
+            font-family: 'League Spartan', sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border-radius: 2px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-nav:hover {
+            background: #4a5a40;
+        }
+
+        /* ===== RODAPÉ ===== */
         footer {
             padding: 2.5rem 5%;
             text-align: center;
@@ -342,14 +463,7 @@
             margin: 1.5rem 0;
         }
 
-        /* Responsive */
-        @media (max-width: 900px) {
-            .contact-container {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-        }
-
+        /* ===== RESPONSIVIDADE ===== */
         @media (max-width: 768px) {
             .header-container {
                 flex-direction: column;
@@ -378,38 +492,48 @@
                 padding: 0.5rem 0;
             }
             
+            .posts-grid {
+                grid-template-columns: 1fr;
+            }
+            
             .footer-top {
                 flex-direction: column;
                 text-align: center;
             }
+            
+            .article-footer {
+                flex-direction: column;
+            }
+            
+            .navigation-buttons {
+                justify-content: center;
+            }
         }
 
         @media (max-width: 480px) {
-            .page-intro h2 {
-                font-size: 1.8rem;
-            }
-            
-            .page-intro p {
-                font-size: 1rem;
-            }
-            
-            .contact-form {
+            .article-content {
                 padding: 1.5rem;
+            }
+            
+            .article-header h1 {
+                font-size: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
+    <!-- CABEÇALHO COM LOGO -->
     <header>
         <div class="header-container">
             <img src="logo.png" alt="Logo Loxias Apollo" class="logo-img">
             <div class="header-text">
-                <h1 class="site-title">LOXIAS APOLLO</h1>
-                <p class="site-subtitle">Editora Independente de Literatura Local e Mundial</p>
+                <h1 class="site-title">IOTA SUBSCRITO</h1>
+                <p class="site-subtitle">Newsletter sobre literatura, filosofia e cultura</p>
             </div>
         </div>
     </header>
 
+    <!-- NAVEGAÇÃO -->
     <nav>
         <div class="nav-links">
             <a href="index.html" class="nav-link">Início</a>
@@ -420,232 +544,260 @@
         </div>
     </nav>
 
+    <!-- CONTEÚDO PRINCIPAL -->
     <main>
-        <div class="page-intro">
-            <h2>Entre em Contato</h2>
-            <p>
-                Tem dúvidas, sugestões ou quer saber mais sobre nossos livros? 
-                Preencha o formulário abaixo ou utilize nossos outros canais de comunicação.
-            </p>
+        <div class="info-card">
+            <h3><i class="fas fa-info-circle"></i> Leia os artigos diretamente no site</h3>
+            <p>Clique em qualquer artigo para ler o conteúdo completo!</p>
         </div>
 
-        <div class="contact-container">
-            <!-- Formulário de Contato -->
-            <div class="contact-form">
-                <h3>Envie sua mensagem</h3>
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Nome Completo *</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Email *</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="subject">Assunto</label>
-                        <select id="subject" name="subject">
-                            <option value="">Selecione um assunto</option>
-                            <option value="dúvida">Dúvida sobre livros</option>
-                            <option value="pedido">Pedido de informação</option>
-                            <option value="parceria">Proposta de parceria</option>
-                            <option value="outro">Outro</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message">Mensagem *</label>
-                        <textarea id="message" name="message" required></textarea>
-                    </div>
-                    
-                    <button type="submit" class="btn-submit">
-                        <i class="fas fa-paper-plane"></i> Enviar Mensagem
-                    </button>
-                </form>
-                
-                <div id="successMessage" class="success-message">
-                    <i class="fas fa-check-circle"></i>
-                    <h4>Mensagem enviada com sucesso!</h4>
-                    <p>Retornaremos em até 48 horas.</p>
-                </div>
-            </div>
-            
-            <!-- Informações de Contato -->
-            <div class="contact-info">
-                <h3>Outras formas de contato</h3>
-                
-                <div class="info-item">
-                    <div class="info-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <div class="info-content">
-                        <h4>Email</h4>
-                        <p>loxias.apollo.ed@gmail.com</p>
-                        <p>Respondemos em até 48 horas</p>
-                    </div>
-                </div>
-                
-                <div class="info-item">
-                    <div class="info-icon">
-                        <i class="fas fa-book"></i>
-                    </div>
-                    <div class="info-content">
-                        <h4>Para Autores</h4>
-                        <p>Recebemos propostas de publicação</p>
-                        <p>Envie seu manuscrito para avaliação</p>
-                    </div>
-                </div>
-                
-                <div class="info-item">
-                    <div class="info-icon">
-                        <i class="fas fa-store"></i>
-                    </div>
-                    <div class="info-content">
-                        <h4>Parcerias</h4>
-                        <p>Livrarias interessadas em nossos livros</p>
-                        <p>Entre em contato para condições especiais</p>
-                    </div>
-                </div>
-                
-                <div class="info-item">
-                    <div class="info-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <div class="info-content">
-                        <h4>Horário de Atendimento</h4>
-                        <p>Segunda a sexta: 9h às 18h</p>
-                        <p>Sábado: 9h às 13h</p>
-                    </div>
-                </div>
-                
-                <div class="social-links">
-                    <a href="#" class="social-link" title="Instagram">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="social-link" title="Facebook">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="#" class="social-link" title="Twitter">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="social-link" title="Goodreads">
-                        <i class="fab fa-goodreads-g"></i>
-                    </a>
-                </div>
+        <!-- Container dos Posts -->
+        <div id="posts-container" class="posts-grid">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Carregando artigos...</p>
             </div>
         </div>
     </main>
 
+    <!-- RODAPÉ -->
     <footer>
         <div class="footer-container">
             <div class="footer-top">
                 <div class="footer-section">
                     <h5>Loxias Apollo</h5>
-                    <p>Editora Independente de literatura Local e Mundial</p>
+                    <p>Editora independente de literatura mundial</p>
                 </div>
                 <div class="footer-section">
-                    <h5>Links Rápidos</h5>
-                    <a href="blog.html">Blog Iota Subscrito</a>
-                    <a href="mailto:loxias.apollo.ed@gmail.com?subject=Contato%20Loxias%20Apollo">Contato</a>
+                    <h5>Iota Subscrito</h5>
+                    <p>Newsletter independente sobre literatura e cultura.</p>
                 </div>
             </div>
             <hr class="footer-divider">
             <div>
-                <p>&copy; <span id="current-year"></span> Loxias Apollo. Todos os direitos reservados.</p>
+                <p>&copy; <span id="current-year"></span> Loxias Apollo. Artigos fornecidos por Iota Subscrito.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Modal para exibir artigos -->
+    <div id="article-modal" class="article-modal">
+        <div class="article-content">
+            <button class="close-modal" onclick="closeArticle()">&times;</button>
+            <div id="article-container"></div>
+        </div>
+    </div>
+
+    <!-- Script principal -->
     <script>
+        // Dados em cache
+        let articlesCache = [];
+        let currentArticleIndex = 0;
+
         document.addEventListener('DOMContentLoaded', function() {
-            // Atualizar ano atual no footer
+            // Ano atual no footer
             document.getElementById('current-year').textContent = new Date().getFullYear();
             
-            // Formulário de contato
-            const contactForm = document.getElementById('contactForm');
-            const successMessage = document.getElementById('successMessage');
+            // Carregar posts
+            loadSubstackPosts();
+        });
+
+        async function loadSubstackPosts() {
+            const container = document.getElementById('posts-container');
             
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
+            try {
+                // Usar proxy CORS para acessar o RSS
+                const rssUrl = 'https://iotasubscrito.substack.com/feed';
+                const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(rssUrl);
                 
-                // Coletar dados do formulário
-                const formData = {
-                    name: document.getElementById('name').value,
-                    email: document.getElementById('email').value,
-                    subject: document.getElementById('subject').value,
-                    message: document.getElementById('message').value,
-                    timestamp: new Date().toISOString()
-                };
+                const response = await fetch(proxyUrl);
                 
-                // Aqui você pode:
-                // 1. Enviar para um servidor (recomendado)
-                // 2. Usar FormSubmit.co (gratuito)
-                // 3. Usar EmailJS (gratuito até 200 emails/mês)
-                // 4. Enviar via Google Apps Script (gratuito)
-                
-                // Exemplo usando EmailJS (você precisaria criar conta em https://www.emailjs.com/)
-                /*
-                emailjs.send('seu_serviço_id', 'seu_template_id', formData)
-                    .then(function() {
-                        showSuccess();
-                    }, function(error) {
-                        alert('Erro ao enviar mensagem: ' + JSON.stringify(error));
-                    });
-                */
-                
-                // Por enquanto, vamos simular o envio
-                showSuccess();
-                
-                // Salvar no localStorage (apenas para demonstração)
-                saveToLocalStorage(formData);
-            });
-            
-            function showSuccess() {
-                // Mostrar mensagem de sucesso
-                successMessage.style.display = 'block';
-                
-                // Rolar até a mensagem
-                successMessage.scrollIntoView({ behavior: 'smooth' });
-                
-                // Limpar formulário
-                contactForm.reset();
-                
-                // Esconder mensagem após 5 segundos
-                setTimeout(() => {
-                    successMessage.style.display = 'none';
-                }, 5000);
-            }
-            
-            function saveToLocalStorage(formData) {
-                // Salvar no localStorage para referência
-                try {
-                    const savedMessages = JSON.parse(localStorage.getItem('loxiasMessages')) || [];
-                    savedMessages.push(formData);
-                    localStorage.setItem('loxiasMessages', JSON.stringify(savedMessages));
-                    
-                    // Limitar a 50 mensagens salvas
-                    if (savedMessages.length > 50) {
-                        localStorage.setItem('loxiasMessages', 
-                            JSON.stringify(savedMessages.slice(-50)));
-                    }
-                    
-                    console.log('Mensagem salva no localStorage:', formData);
-                } catch (e) {
-                    console.log('Erro ao salvar no localStorage:', e);
+                if (!response.ok) {
+                    throw new Error('Erro na requisição: ' + response.status);
                 }
+                
+                const data = await response.json();
+                
+                // Parse do XML
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(data.contents, 'text/xml');
+                
+                // Verificar erros de parse
+                if (xmlDoc.querySelector('parsererror')) {
+                    throw new Error('Erro ao parsear o feed RSS');
+                }
+                
+                // Extrair posts
+                const items = xmlDoc.querySelectorAll('item');
+                articlesCache = Array.from(items).map((item, index) => ({
+                    id: index,
+                    title: item.querySelector('title')?.textContent || 'Sem título',
+                    link: item.querySelector('link')?.textContent || '#',
+                    description: item.querySelector('description')?.textContent || '',
+                    content: item.querySelector('encoded')?.textContent || item.querySelector('description')?.textContent || '',
+                    pubDate: item.querySelector('pubDate')?.textContent || '',
+                    author: item.querySelector('creator')?.textContent || 'Iota Subscrito'
+                }));
+
+                if (articlesCache.length === 0) {
+                    container.innerHTML = '<div class="error-message"><h4>Nenhum artigo disponível no momento.</h4><p>Visite o Iota Subscrito para ler os artigos.</p></div>';
+                    return;
+                }
+
+                // Gerar HTML dos posts
+                let postsHTML = '';
+                
+                articlesCache.forEach((article, index) => {
+                    if (index >= 9) return; // Limitar a 9 posts
+                    
+                    const excerpt = createExcerpt(article.description || article.content, 120);
+                    const dateFormatted = article.pubDate ? formatDate(article.pubDate) : '';
+                    const imgMatch = article.description.match(/<img[^>]+src="([^">]+)"/);
+                    const imageUrl = imgMatch ? imgMatch[1] : 'https://via.placeholder.com/400x200/5A6B4F/FFFFFF?text=Iota+Subscrito';
+                    
+                    postsHTML += `
+                        <article class="post-card" onclick="openArticle(${index})">
+                            <div class="post-image">
+                                <img src="${imageUrl}" alt="${article.title}" loading="lazy">
+                            </div>
+                            
+                            <div class="post-content">
+                                <div class="post-meta">
+                                    <span class="post-date">${dateFormatted}</span>
+                                    <span class="post-author">${article.author}</span>
+                                </div>
+                                
+                                <h3 class="post-title">${article.title}</h3>
+                                
+                                <p class="post-excerpt">${excerpt}</p>
+                                
+                                <button class="btn-read">
+                                    Ler artigo completo <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </article>
+                    `;
+                });
+                
+                container.innerHTML = postsHTML;
+                
+            } catch (error) {
+                console.error('Erro ao carregar posts:', error);
+                
+                container.innerHTML = `
+                    <div class="error-message">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Erro ao carregar posts</h4>
+                        <p>${error.message}</p>
+                        <p style="margin-top: 1rem;">
+                            <a href="https://iotasubscrito.substack.com" class="btn-read" target="_blank">
+                                <i class="fas fa-external-link-alt"></i>
+                                Visitar Iota Subscrito
+                            </a>
+                        </p>
+                    </div>
+                `;
+            }
+        }
+
+        // Funções para o modal de artigo
+        function openArticle(index) {
+            currentArticleIndex = index;
+            const article = articlesCache[index];
+            
+            const articleHTML = `
+                <div class="article-header">
+                    <div class="meta">${formatDate(article.pubDate)} • Por ${article.author}</div>
+                    <h1>${article.title}</h1>
+                </div>
+                <div class="article-body">
+                    ${cleanArticleContent(article.content || article.description)}
+                </div>
+                <div class="article-footer">
+                    <a href="${article.link}" class="btn-original" target="_blank">
+                        <i class="fas fa-external-link-alt"></i>
+                        Ver no Substack
+                    </a>
+                    <div class="navigation-buttons">
+                        ${index > 0 ? `<button class="btn-nav" onclick="openArticle(${index - 1})"><i class="fas fa-chevron-left"></i> Anterior</button>` : ''}
+                        ${index < articlesCache.length - 1 ? `<button class="btn-nav" onclick="openArticle(${index + 1})">Próximo <i class="fas fa-chevron-right"></i></button>` : ''}
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('article-container').innerHTML = articleHTML;
+            document.getElementById('article-modal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeArticle() {
+            document.getElementById('article-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Funções auxiliares
+        function cleanArticleContent(html) {
+            // Remove elementos indesejados do Substack
+            let cleaned = html
+                .replace(/<div class="subscribe-widget[^>]*>[\s\S]*?<\/div>/gi, '')
+                .replace(/<div class="post-cta[^>]*>[\s\S]*?<\/div>/gi, '')
+                .replace(/<a[^>]*class="button[^>]*>[\s\S]*?<\/a>/gi, '')
+                .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
+                .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
+            
+            // Melhora a formatação
+            cleaned = cleaned
+                .replace(/<p>/g, '<p>')
+                .replace(/<h2>/g, '<h2>')
+                .replace(/<h3>/g, '<h3>');
+            
+            return cleaned;
+        }
+
+        function createExcerpt(html, maxLength = 120) {
+            // Remover tags HTML
+            let text = html.replace(/<[^>]*>/g, '');
+            
+            // Decodificar entidades HTML
+            text = text.replace(/&amp;/g, '&')
+                      .replace(/&lt;/g, '<')
+                      .replace(/&gt;/g, '>')
+                      .replace(/&quot;/g, '"')
+                      .replace(/&#39;/g, "'");
+            
+            // Truncar
+            if (text.length > maxLength) {
+                text = text.substring(0, maxLength);
+                const lastSpace = text.lastIndexOf(' ');
+                if (lastSpace > 0) {
+                    text = text.substring(0, lastSpace);
+                }
+                text += '...';
             }
             
-            // Configuração para usar FormSubmit.co (gratuito e simples)
-            // Substitua o action do formulário por:
-            // <form action="https://formsubmit.co/loxias.apollo.ed@gmail.com" method="POST">
-            // E adicione estes campos ocultos:
-            /*
-            <input type="hidden" name="_subject" value="Novo contato - Loxias Apollo">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_next" value="https://seusite.com/obrigado.html">
-            */
+            return text;
+        }
+
+        function formatDate(dateString) {
+            try {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('pt-BR', {
+                    day: '2-digit',
+                    month: 'long',
+                    year: 'numeric'
+                });
+            } catch (e) {
+                return '';
+            }
+        }
+
+        // Fechar modal com ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeArticle();
+        });
+
+        // Fechar modal clicando fora
+        document.getElementById('article-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeArticle();
         });
     </script>
 </body>
