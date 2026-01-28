@@ -5,126 +5,367 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - Loxias Apollo</title>
     
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@200&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --preto: #000000;
-      --amarelo: #FFD700;
-      --branco: #FFFFFF;
-      --verde-terroso: #5A6B4F;
-      --marrom-claro: #A68A64;
-    }
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@200&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ===== VARIÁVEIS CSS ===== */
+        :root {
+            --preto: #000000;
+            --amarelo: #FFD700;
+            --branco: #FFFFFF;
+            --verde-terroso: #5A6B4F;
+            --marrom-claro: #A68A64;
+        }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        /* ===== RESET E BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: 'League Spartan', sans-serif;
-      font-weight: 200;
-      color: var(--preto);
-      background-color: var(--branco);
-      line-height: 1.6;
-    }
+        body {
+            font-family: 'League Spartan', sans-serif;
+            font-weight: 200;
+            color: var(--preto);
+            background-color: var(--branco);
+            line-height: 1.6;
+        }
 
-    header {
-      padding: 2rem 5%;
-      text-align: center;
-      border-bottom: 1px solid var(--preto);
-    }
+        /* ===== CABEÇALHO COM LOGO ===== */
+        .header-with-logo {
+            padding: 2rem 5%;
+            background-color: var(--branco);
+            border-bottom: 1px solid var(--preto);
+        }
 
-    header h1 {
-      font-size: 2.2rem;
-    }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: 0 auto;
+        }
 
-    nav {
-      padding: 1.3rem 5%;
-      background-color: var(--preto);
-      text-align: center;
-      line-height: 1.8;
-    }
+        .site-logo {
+            height: 120px;
+            width: auto;
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));
+        }
 
-    nav a {
-      color: var(--amarelo);
-      text-decoration: none;
-      margin: 0 1.1rem;
-      font-size: 1.15rem;
-      transition: opacity 0.3s;
-      white-space: nowrap;
-    }
+        .site-title-container {
+            text-align: left;
+            border-left: 2px solid var(--amarelo);
+            padding-left: 1.5rem;
+            flex: 1;
+            min-width: 250px;
+        }
 
-    nav a:hover {
-      opacity: 0.7;
-    }
+        .site-title {
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+            color: var(--preto);
+            margin-bottom: 0.3rem;
+            font-weight: 300;
+        }
 
-    section {
-      padding: 3.5rem 5% 3rem;
-      max-width: 850px;
-      margin: 0 auto;
-    }
+        .site-subtitle {
+            color: var(--verde-terroso);
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
 
-    .perfil {
-      margin: 2.8rem 0;
-    }
+        /* ===== NAVEGAÇÃO ===== */
+        nav {
+            padding: 1.3rem 5%;
+            background-color: var(--preto);
+            text-align: center;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
 
-    .perfil h2 {
-      font-size: 1.5rem;
-      color: var(--verde-terroso);
-      margin-bottom: 0.8rem;
-    }
+        nav a {
+            color: var(--amarelo);
+            text-decoration: none;
+            margin: 0 1.2rem;
+            font-size: 1.15rem;
+            transition: opacity 0.3s;
+            white-space: nowrap;
+        }
 
-    footer {
-      padding: 2rem 5%;
-      text-align: center;
-      background-color: var(--preto);
-      color: var(--branco);
-      font-size: 0.95rem;
-    }
+        nav a:hover {
+            opacity: 0.7;
+        }
 
-    @media (max-width: 600px) {
-      header h1 { font-size: 1.8rem; }
-      nav { padding: 1.1rem 3%; }
-      nav a { display: block; margin: 0.7rem 0; font-size: 1.1rem; }
-      section { padding: 2.5rem 5% 2rem; }
-    }
-  </style>
+        /* ===== CONTEÚDO PRINCIPAL ===== */
+        main {
+            padding: 2rem 5% 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ===== ESTILOS ESPECÍFICOS DO BLOG ===== */
+        .info-card {
+            background-color: rgba(255, 215, 0, 0.1);
+            border-left: 3px solid var(--amarelo);
+            padding: 1.5rem;
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        .info-card h5 {
+            color: var(--verde-terroso);
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+        }
+
+        /* ===== POSTS ===== */
+        .post-card {
+            background: var(--branco);
+            border: 1px solid #e0e0e0;
+            border-top: 3px solid var(--verde-terroso);
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .post-card:hover {
+            border-color: var(--amarelo);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .post-image {
+            height: 180px;
+            overflow: hidden;
+            background-color: #f5f5f5;
+        }
+
+        .post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .post-card:hover .post-image img {
+            transform: scale(1.03);
+        }
+
+        .post-content {
+            padding: 1.5rem;
+        }
+
+        .post-meta {
+            font-size: 0.9rem;
+            color: var(--marrom-claro);
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .post-title {
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+            color: var(--preto);
+        }
+
+        .post-excerpt {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+            font-size: 1rem;
+        }
+
+        .btn-loxias {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            background-color: var(--preto);
+            color: var(--amarelo);
+            text-decoration: none;
+            border: 1px solid var(--preto);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-loxias:hover {
+            background-color: var(--verde-terroso);
+            color: var(--branco);
+            border-color: var(--verde-terroso);
+        }
+
+        /* ===== MODAL DE ARTIGO ===== */
+        .article-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--branco);
+            padding: 3rem;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--preto);
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .article-header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--amarelo);
+            padding-bottom: 1rem;
+        }
+
+        .article-body {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .article-body img {
+            max-width: 100%;
+            height: auto;
+            margin: 1.5rem 0;
+        }
+
+        .article-body p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* ===== RODAPÉ ===== */
+        footer {
+            padding: 2rem 5%;
+            text-align: center;
+            background-color: var(--preto);
+            color: var(--branco);
+            font-size: 0.95rem;
+            margin-top: 3rem;
+        }
+
+        footer h5 {
+            color: var(--amarelo);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        footer a {
+            color: var(--amarelo);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== ESTADOS ===== */
+        .loading-spinner {
+            text-align: center;
+            padding: 3rem;
+            color: var(--marrom-claro);
+        }
+
+        .loading-spinner .spinner-border {
+            color: var(--verde-terroso);
+            width: 3rem;
+            height: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .error-message {
+            background-color: rgba(255, 215, 0, 0.1);
+            border-left: 3px solid var(--amarelo);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            color: var(--preto);
+        }
+
+        /* ===== RESPONSIVIDADE ===== */
+        @media (max-width: 768px) {
+            .logo-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .site-title-container {
+                border-left: none;
+                padding-left: 0;
+                border-top: 2px solid var(--amarelo);
+                padding-top: 1rem;
+                margin-top: 1rem;
+                text-align: center;
+            }
+            
+            .site-title {
+                font-size: 2rem;
+            }
+            
+            nav a {
+                display: block;
+                margin: 0.7rem 0;
+                font-size: 1.1rem;
+            }
+            
+            .article-content {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
 </head>
+
 <body>
-
- <header style="padding: 2rem 5%; background-color: #FFFFFF; border-bottom: 1px solid #000000;">
-    <div style="display: flex; align-items: center; justify-content: center; gap: 1.5rem; flex-wrap: wrap; max-width: 900px; margin: 0 auto;">
-        <img src="logo.png" 
-             style="height: 120px; width: auto; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));">
-        
-        <div style="text-align: left; border-left: 2px solid #FFD700; padding-left: 1.5rem; flex: 1; min-width: 250px;">
-            <h1 style="font-size: 2.5rem; letter-spacing: 1px; color: #000000; margin-bottom: 0.3rem; font-weight: 300;">
-                LOXIAS APOLLO
-            </h1>
-            <p style="color: #5A6B4F; font-size: 1.1rem; letter-spacing: 0.5px;">
-                Editora Independente de Literatura Local e Mundial
-            </p>
-        </div>
-    </div>
-</header>
-
-  <nav>
-    <a href="index.html">Início</a>
-    <a href="sobre.html">Sobre</a>
-    <a href="livros.html">Livros</a>
-    <a href="blog.html">Blog</a>
-    <a href="mailto:contato@loxiasapollo.com.br">Contato</a>
-  </nav>
-        <h1>IOTA SUBSCRITO</h1>
-        <p>Newsletter sobre literatura, filosofia e cultura</p>
+    <!-- CABEÇALHO COM LOGO -->
+    <header class="header-with-logo">
+        <div class="logo-container">
+            <!-- LOGO na pasta principal -->
+            <img src="logo.png" 
+                 alt="Logo Loxias Apollo" 
+                 class="site-logo">
+            
+            <div class="site-title-container">
+                <h1 class="site-title">IOTA SUBSCRITO</h1>
+                <p class="site-subtitle">Newsletter sobre literatura, filosofia e cultura</p>
+            </div>
         </div>
     </header>
 
-    <!-- Navegação -->
-    <nav class="blog-nav">
+    <!-- NAVEGAÇÃO -->
+    <nav>
         <a href="index.html">Início</a>
         <a href="sobre.html">Sobre</a>
         <a href="livros.html">Livros</a>
@@ -132,10 +373,10 @@
         <a href="mailto:contato@loxiasapollo.com.br">Contato</a>
     </nav>
 
-    <!-- Conteúdo Principal -->
+    <!-- CONTEÚDO PRINCIPAL -->
     <main>
         <div class="info-card">
-            <h5><i class="fas fa-info-circle me-2"></i>Leia os artigos diretamente no site</h5>
+            <h5><i class="fas fa-info-circle"></i> Leia os artigos diretamente no site</h5>
             <p>Clique em qualquer artigo para ler o conteúdo completo sem sair do Loxias Apollo.</p>
         </div>
 
@@ -150,15 +391,15 @@
         </div>
     </main>
 
-    <!-- Rodapé -->
+    <!-- RODAPÉ -->
     <footer>
         <div class="container">
-            <div class="row">
-                <div class="col-md-6 mb-3 mb-md-0">
+            <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem; margin-bottom: 1.5rem;">
+                <div>
                     <h5>Loxias Apollo</h5>
                     <p>Editora independente de literatura mundial</p>
                 </div>
-                <div class="col-md-6">
+                <div>
                     <h5>Iota Subscrito</h5>
                     <p>Newsletter independente sobre literatura e cultura.</p>
                 </div>
@@ -181,14 +422,20 @@
         </div>
     </div>
 
-    <!-- Scripts -->
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Script principal -->
     <script>
         // Dados em cache
         let articlesCache = [];
         let currentArticleIndex = 0;
 
         document.addEventListener('DOMContentLoaded', function() {
+            // Ano atual no footer
             document.getElementById('current-year').textContent = new Date().getFullYear();
+            
+            // Carregar posts
             loadSubstackPosts();
         });
 
@@ -196,21 +443,28 @@
             const container = document.getElementById('posts-container');
             
             try {
+                // Usar proxy CORS para acessar o RSS
                 const rssUrl = 'https://iotasubscrito.substack.com/feed';
                 const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(rssUrl);
                 
                 const response = await fetch(proxyUrl);
                 
-                if (!response.ok) throw new Error('Erro na requisição');
+                if (!response.ok) {
+                    throw new Error('Erro na requisição: ' + response.status);
+                }
                 
                 const data = await response.json();
+                
+                // Parse do XML
                 const parser = new DOMParser();
                 const xmlDoc = parser.parseFromString(data.contents, 'text/xml');
                 
+                // Verificar erros de parse
                 if (xmlDoc.querySelector('parsererror')) {
                     throw new Error('Erro ao parsear o feed RSS');
                 }
                 
+                // Extrair posts
                 const items = xmlDoc.querySelectorAll('item');
                 articlesCache = Array.from(items).map((item, index) => ({
                     id: index,
@@ -231,7 +485,9 @@
                 let postsHTML = '<div class="row">';
                 
                 articlesCache.forEach((article, index) => {
-                    const excerpt = createExcerpt(article.description || article.content, 150);
+                    if (index >= 9) return; // Limitar a 9 posts
+                    
+                    const excerpt = createExcerpt(article.description || article.content, 120);
                     const dateFormatted = article.pubDate ? formatDate(article.pubDate) : '';
                     const imgMatch = article.description.match(/<img[^>]+src="([^">]+)"/);
                     const imageUrl = imgMatch ? imgMatch[1] : '';
@@ -255,7 +511,7 @@
                                     
                                     <p class="post-excerpt">${excerpt}</p>
                                     
-                                    <div class="btn-loxias" style="display: inline-block;">
+                                    <div class="btn-loxias">
                                         Ler artigo completo <i class="fas fa-arrow-right ms-1"></i>
                                     </div>
                                 </div>
@@ -268,11 +524,18 @@
                 container.innerHTML = postsHTML;
                 
             } catch (error) {
-                console.error('Erro:', error);
+                console.error('Erro ao carregar posts:', error);
+                
                 container.innerHTML = `
-                    <div class="info-card">
-                        <h5><i class="fas fa-exclamation-triangle me-2"></i>Erro ao carregar</h5>
-                        <p>${error.message}. <a href="https://iotasubscrito.substack.com" target="_blank">Visite o Iota Subscrito diretamente</a></p>
+                    <div class="error-message">
+                        <h4><i class="fas fa-exclamation-triangle me-2"></i>Erro ao carregar posts</h4>
+                        <p>${error.message}</p>
+                        <p class="mt-3">
+                            <a href="https://iotasubscrito.substack.com" class="btn-loxias" target="_blank">
+                                <i class="fas fa-external-link-alt me-2"></i>
+                                Visitar Iota Subscrito
+                            </a>
+                        </p>
                     </div>
                 `;
             }
@@ -339,18 +602,24 @@
             return cleaned;
         }
 
-        function createExcerpt(html, maxLength) {
+        function createExcerpt(html, maxLength = 120) {
+            // Remover tags HTML
             let text = html.replace(/<[^>]*>/g, '');
+            
+            // Decodificar entidades HTML
             text = text.replace(/&amp;/g, '&')
                       .replace(/&lt;/g, '<')
                       .replace(/&gt;/g, '>')
                       .replace(/&quot;/g, '"')
                       .replace(/&#39;/g, "'");
             
+            // Truncar
             if (text.length > maxLength) {
                 text = text.substring(0, maxLength);
                 const lastSpace = text.lastIndexOf(' ');
-                if (lastSpace > 0) text = text.substring(0, lastSpace);
+                if (lastSpace > 0) {
+                    text = text.substring(0, lastSpace);
+                }
                 text += '...';
             }
             
