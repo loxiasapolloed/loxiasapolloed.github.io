@@ -1,180 +1,1046 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Livros – Loxias Apollo</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@200&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --preto: #000000;
-      --amarelo: #FFD700;
-      --branco: #FFFFFF;
-      --verde-terroso: #5A6B4F;
-      --marrom-claro: #A68A64;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livros - Loxias Apollo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --preto: #000000;
+            --amarelo: #FFD700;
+            --branco: #FFFFFF;
+            --verde-terroso: #5A6B4F;
+            --marrom-claro: #A68A64;
+            --cinza-claro: #f5f5f5;
+            --cinza-medio: #e0e0e0;
+        }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: 'League Spartan', sans-serif;
-      font-weight: 200;
-      color: var(--preto);
-      background-color: var(--branco);
-      line-height: 1.6;
-    }
+        body {
+            font-family: 'League Spartan', sans-serif;
+            font-weight: 300;
+            color: var(--preto);
+            background-color: var(--branco);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-    header {
-      padding: 2rem 5%;
-      text-align: center;
-      border-bottom: 1px solid var(--preto);
-    }
+        /* Header */
+        header {
+            padding: 1.5rem 5%;
+            background-color: var(--branco);
+            border-bottom: 1px solid var(--preto);
+        }
 
-    header h1 {
-      font-size: 2.2rem;
-    }
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: 0 auto;
+        }
 
-    nav {
-      padding: 1.3rem 5%;
-      background-color: var(--preto);
-      text-align: center;
-      line-height: 1.8;
-    }
+        .logo-img {
+            height: 120px;
+            width: auto;
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));
+        }
 
-    nav a {
-      color: var(--amarelo);
-      text-decoration: none;
-      margin: 0 1.1rem;
-      font-size: 1.15rem;
-      transition: opacity 0.3s;
-      white-space: nowrap;
-    }
+        .header-text {
+            text-align: left;
+            border-left: 2px solid var(--amarelo);
+            padding-left: 1.5rem;
+            flex: 1;
+            min-width: 250px;
+        }
 
-    nav a:hover {
-      opacity: 0.7;
-    }
+        .site-title {
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+            color: var(--preto);
+            margin-bottom: 0.3rem;
+            font-weight: 400;
+        }
 
-    section {
-      padding: 3.5rem 5% 3rem;
-      max-width: 850px;
-      margin: 0 auto;
-    }
+        .site-subtitle {
+            color: var(--verde-terroso);
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
 
-    .categoria {
-      margin: 3.2rem 0;
-    }
+        /* Navigation */
+        nav {
+            padding: 1rem 5%;
+            background-color: var(--preto);
+            text-align: center;
+        }
 
-    .categoria h2 {
-      font-size: 1.6rem;
-      color: var(--verde-terroso);
-      margin-bottom: 1.4rem;
-      padding-bottom: 0.4rem;
-      border-bottom: 2px solid var(--marrom-claro);
-      display: inline-block;
-    }
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
 
-    .autor-nome {
-      font-size: 1.25rem;
-      font-weight: bold;
-      color: var(--preto);
-      margin: 1.6rem 0 0.8rem;
-      display: block;
-    }
+        .nav-link {
+            color: var(--amarelo);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: opacity 0.3s, transform 0.2s;
+            white-space: nowrap;
+        }
 
-    .livro-item {
-      margin: 0.7rem 0;
-      padding-left: 1rem;
-      position: relative;
-    }
+        .nav-link:hover {
+            opacity: 0.7;
+            transform: translateY(-2px);
+        }
 
-    .livro-item:before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: var(--amarelo);
-    }
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 3rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
 
-    .comprar-link {
-      display: inline-block;
-      margin-top: 0.8rem;
-      color: var(--preto);
-      text-decoration: underline;
-    }
+        /* Page Intro */
+        .page-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
 
-    footer {
-      padding: 2rem 5%;
-      text-align: center;
-      background-color: var(--preto);
-      color: var(--branco);
-      font-size: 0.95rem;
-    }
+        .page-intro h2 {
+            font-size: 2.2rem;
+            color: var(--preto);
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
 
-    @media (max-width: 600px) {
-      header h1 { font-size: 1.8rem; }
-      nav { padding: 1.1rem 3%; }
-      nav a { display: block; margin: 0.7rem 0; font-size: 1.1rem; }
-      section { padding: 2.5rem 5% 2rem; }
-    }
-  </style>
+        .page-intro p {
+            font-size: 1.2rem;
+            color: var(--verde-terroso);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Categories */
+        .categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-btn {
+            background-color: var(--branco);
+            color: var(--preto);
+            border: 1px solid var(--preto);
+            padding: 0.6rem 1.5rem;
+            font-family: 'League Spartan', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 2px;
+        }
+
+        .category-btn:hover {
+            background-color: var(--preto);
+            color: var(--amarelo);
+        }
+
+        .category-btn.active {
+            background-color: var(--preto);
+            color: var(--amarelo);
+        }
+
+        /* Books Grid */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .book-card {
+            border: 1px solid var(--cinza-medio);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            background-color: var(--branco);
+            position: relative;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .book-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--amarelo);
+            color: var(--preto);
+            padding: 0.3rem 0.8rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            z-index: 10;
+        }
+
+        .book-cover {
+            height: 350px;
+            overflow: hidden;
+            background-color: var(--cinza-claro);
+        }
+
+        .book-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .book-card:hover .book-cover img {
+            transform: scale(1.05);
+        }
+
+        .book-info {
+            padding: 1.5rem;
+        }
+
+        .book-title {
+            font-size: 1.4rem;
+            color: var(--preto);
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .book-author {
+            font-size: 1rem;
+            color: var(--verde-terroso);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .book-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            background-color: var(--cinza-claro);
+            color: var(--preto);
+            padding: 0.3rem 0.7rem;
+            font-size: 0.8rem;
+            border-radius: 2px;
+        }
+
+        .book-description {
+            color: var(--preto);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .book-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .btn-book {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            text-decoration: none;
+            border-radius: 2px;
+            font-weight: 400;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .btn-amazon {
+            background-color: var(--preto);
+            color: var(--amarelo);
+        }
+
+        .btn-amazon:hover {
+            background-color: #333;
+        }
+
+        .btn-sample {
+            background-color: var(--verde-terroso);
+            color: var(--branco);
+        }
+
+        .btn-sample:hover {
+            background-color: #4a5a40;
+        }
+
+        .btn-audiobook {
+            background-color: var(--marrom-claro);
+            color: var(--branco);
+        }
+
+        .btn-audiobook:hover {
+            background-color: #957a54;
+        }
+
+        /* Samples Section */
+        .samples-section {
+            background-color: var(--cinza-claro);
+            padding: 3rem;
+            border-radius: 4px;
+            margin-top: 4rem;
+        }
+
+        .samples-section h3 {
+            text-align: center;
+            color: var(--verde-terroso);
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            font-weight: 400;
+        }
+
+        .samples-section p {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+        }
+
+        .samples-container {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .sample-card {
+            background: var(--branco);
+            padding: 1.5rem;
+            border: 1px solid var(--cinza-medio);
+            max-width: 300px;
+            flex: 1;
+            min-width: 250px;
+            transition: transform 0.3s;
+        }
+
+        .sample-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .sample-card h4 {
+            color: var(--verde-terroso);
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .sample-card p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .btn-sample-card {
+            background: var(--preto);
+            color: var(--amarelo);
+            border: none;
+            padding: 0.7rem 1.5rem;
+            cursor: pointer;
+            width: 100%;
+            font-family: 'League Spartan', sans-serif;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .btn-sample-card:hover {
+            background: #333;
+        }
+
+        /* Modal */
+        .sample-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        .sample-content {
+            background-color: var(--branco);
+            margin: 3rem auto;
+            padding: 2rem;
+            max-width: 900px;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--preto);
+            line-height: 1;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Footer */
+        footer {
+            padding: 2.5rem 5%;
+            text-align: center;
+            background-color: var(--preto);
+            color: var(--branco);
+            font-size: 0.95rem;
+            margin-top: auto;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section h5 {
+            color: var(--amarelo);
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        .footer-section p, .footer-section a {
+            color: var(--branco);
+            opacity: 0.8;
+            margin-bottom: 0.3rem;
+            display: block;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .footer-section a:hover {
+            opacity: 1;
+            color: var(--amarelo);
+        }
+
+        .footer-divider {
+            border-color: var(--amarelo);
+            opacity: 0.3;
+            margin: 1.5rem 0;
+        }
+
+        .loading {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .spinner {
+            border: 4px solid rgba(90, 107, 79, 0.2);
+            border-top: 4px solid var(--verde-terroso);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .header-text {
+                border-left: none;
+                border-top: 2px solid var(--amarelo);
+                padding-left: 0;
+                padding-top: 1rem;
+                min-width: auto;
+            }
+            
+            .site-title {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .nav-link {
+                display: block;
+                padding: 0.5rem 0;
+            }
+            
+            .books-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .footer-top {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .samples-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .sample-card {
+                min-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-intro h2 {
+                font-size: 1.8rem;
+            }
+            
+            .page-intro p {
+                font-size: 1rem;
+            }
+            
+            .categories {
+                gap: 0.5rem;
+            }
+            
+            .category-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .book-actions {
+                flex-direction: column;
+            }
+            
+            .btn-book {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <div class="header-container">
+            <img src="logo.png" alt="Logo Loxias Apollo" class="logo-img">
+            <div class="header-text">
+                <h1 class="site-title">LOXIAS APOLLO</h1>
+                <p class="site-subtitle">Editora Independente de Literatura Local e Mundial</p>
+            </div>
+        </div>
+    </header>
 
-  <header>
-    <h1>LIVROS</h1>
-    <p>Catálogo da Loxias Apollo</p>
-  </header>
+    <nav>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Início</a>
+            <a href="sobre.html" class="nav-link">Sobre</a>
+            <a href="livros.html" class="nav-link">Livros</a>
+            <a href="blog.html" class="nav-link">Blog</a>
+            <a href="mailto:contato@loxiasapollo.com.br" class="nav-link">Contato</a>
+        </div>
+    </nav>
 
-  <nav>
-    <a href="index.html">Início</a>
-    <a href="sobre.html">Sobre</a>
-    <a href="livros.html">Livros</a>
-    <a href="blog.html">Blog</a>
-    <a href="mailto:contato@loxiasapollo.com.br">Contato</a>
-  </nav>
+    <main>
+        <div class="page-intro">
+            <h2>Nosso Catálogo</h2>
+            <p>
+                Publicamos obras que desafiam narrativas oficiais: 
+                ficção histórica rigorosa, traduções cuidadosas e literatura infantil 
+                com profundidade crítica. Cada livro é uma jornada única.
+            </p>
+        </div>
 
-  <section>
+        <div class="categories">
+            <button class="category-btn active" onclick="filterBooks('all')">Todos os Livros</button>
+            <button class="category-btn" onclick="filterBooks('infantil')">Infantil</button>
+            <button class="category-btn" onclick="filterBooks('traducoes')">Traduções</button>
+            <button class="category-btn" onclick="filterBooks('obras-autorais')">Obras Autorais</button>
+        </div>
 
-    <div class="categoria">
-      <h2>Infantil</h2>
-      <p><strong>Tanto Mar - Enzo chega ao poder: primeiro livro da Série Brasil Colônia</strong> — Enzo chega ao poder: Brasil Colônia — Em 1500, um adolescente do Rio vira capitão de caravela. Ele acredita em diálogo. O século XVI acredita em pragmatismo. Quem vai vencer?.</p>
-      <a href="https://loja.uiclap.com/titulo/ua145907" target="_blank" rel="noopener" class="comprar-link">
-        Comprar este livro
-      </a>
+        <div id="books-container" class="books-grid">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Carregando catálogo...</p>
+            </div>
+        </div>
+
+        <div class="samples-section">
+            <h3><i class="fas fa-file-pdf"></i> Leia Amostras Grátis</h3>
+            <p>Experimente nossos livros com amostras gratuitas dos primeiros capítulos.</p>
+            <div id="samples-container" class="samples-container">
+                <!-- Amostras serão carregadas via JS -->
+            </div>
+        </div>
+    </main>
+
+    <div id="sample-modal" class="sample-modal">
+        <div class="sample-content">
+            <button class="close-modal" onclick="closeSample()">&times;</button>
+            <div id="sample-content"></div>
+        </div>
     </div>
 
-    <div class="categoria">
-      <h2>Obras Autorais</h2>
-      
-      <span class="autor-nome">Samantha Tovo</span>
-      <div class="livro-item">Diário de Cassandra: caso Melinoe</div>
-      <div class="livro-item">À Musa Negra</div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-section">
+                    <h5>Loxias Apollo</h5>
+                    <p>Editora independente de literatura mundial</p>
+                </div>
+                <div class="footer-section">
+                    <h5>Links Rápidos</h5>
+                    <a href="blog.html">Blog Iota Subscrito</a>
+                    <a href="mailto:contato@loxiasapollo.com.br">Contato</a>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div>
+                <p>&copy; <span id="current-year"></span> Loxias Apollo. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
 
-      <span class="autor-nome">Mira Andor</span>
-      <div class="livro-item">Crônicas de uma Lavanderia</div>
-      <div class="livro-item">Afelandra – Volume I</div>
-      <div class="livro-item">Afelandra – Volume II</div>
-      <div class="livro-item">Afelandra – Volume III</div>
-    </div>
+    <script>
+        // Dados dos livros CORRIGIDOS conforme sua lista
+        const booksData = [
+            // Infantil (de Gustavo Tovo)
+            {
+                id: 1,
+                title: "Tanto Mar - Enzo chega ao poder",
+                author: "Gustavo Tovo",
+                description: "Primeiro livro da Série Brasil Colônia. Em 1500, um adolescente do Rio vira capitão de caravela. Ele acredita em diálogo. O século XVI acredita em pragmatismo. Quem vai vencer?",
+                category: "infantil",
+                cover: "https://via.placeholder.com/300x450/5A6B4F/FFFFFF?text=Tanto+Mar",
+                tags: ["Infantil", "História", "Brasil Colônia"],
+                amazonLink: "#",
+                sample: `<div style="padding: 2rem;">
+                            <h3 style="color: var(--verde-terroso); margin-bottom: 1.5rem;">Capítulo 1: O Rio de Janeiro, 1500</h3>
+                            <p style="margin-bottom: 1rem;">Enzo olhava para o mar da baía de Guanabara, sem saber que sua vida estava prestes a mudar para sempre. Aos quinze anos, ele já conhecia cada pedra da praia, cada barco que chegava da África.</p>
+                            <p style="margin-bottom: 1rem;">Mas naquele dia de abril, algo era diferente. As naus que se aproximavam não eram como as outras. Eram maiores, mais imponentes, com velas que pareciam tocar o céu.</p>
+                            <p>"Enzo!" gritou seu pai. "Venha rápido! O capitão precisa de um tradutor!"</p>
+                        </div>`,
+                badge: "Série Brasil Colônia",
+                year: 2023,
+                pages: 180
+            },
+            
+            // Traduções
+            {
+                id: 2,
+                title: "A Floresta dos Deuses",
+                author: "Balis Sruoga (Traduzido por Gustavo Tovo)",
+                description: "Tradução da obra clássica de Balis Sruoga, explorando mitologia e natureza em uma narrativa profunda sobre a relação entre humanos e divindades.",
+                category: "traducoes",
+                cover: "https://via.placeholder.com/300x450/A68A64/FFFFFF?text=A+Floresta+dos+Deuses",
+                tags: ["Tradução", "Mitologia", "Clássico"],
+                amazonLink: "#",
+                sample: `<div style="padding: 2rem;">
+                            <h3 style="color: var(--verde-terroso); margin-bottom: 1.5rem;">Prólogo</h3>
+                            <p style="margin-bottom: 1rem;">Na floresta onde as árvores sussurram segredos antigos, os deuses ainda caminham entre os mortais. Suas pegadas são leves como a brisa, suas vozes ecoam no canto dos pássaros.</p>
+                            <p>Esta é a história de um lugar onde o tempo não passa como nos relógios humanos, mas como as estações que dançam em eterno ciclo.</p>
+                        </div>`,
+                year: 2022,
+                pages: 280
+            },
+            
+            // Obras Autorais de Samantha Tovo
+            {
+                id: 3,
+                title: "Diário de Cassandra: caso Melinoe",
+                author: "Samantha Tovo",
+                description: "Um thriller psicológico que mistura mitologia grega com investigação criminal contemporânea.",
+                category: "obras-autorais",
+                cover: "https://via.placeholder.com/300x450/000000/FFD700?text=Diário+de+Cassandra",
+                tags: ["Thriller", "Mitologia", "Psicológico"],
+                amazonLink: "#",
+                sample: `<div style="padding: 2rem;">
+                            <h3 style="color: var(--verde-terroso); margin-bottom: 1.5rem;">Entrada 1: 15 de março</h3>
+                            <p style="margin-bottom: 1rem;">Eles pensam que estou louca. Chamam minhas visões de "delírios", minhas premonições de "coincidências".</p>
+                            <p style="margin-bottom: 1rem;">Mas eu vi. Vi antes de acontecer. A mulher com o vestido branco manchado de terra. O perfume de jasmim misturado ao cheiro da morte.</p>
+                            <p>E agora ele está aqui, o detetive, com seu olhar cético e seu caderno de anotações. Como explicar o inexplicável?</p>
+                        </div>`,
+                badge: "Novo",
+                year: 2023,
+                pages: 320
+            },
+            
+            {
+                id: 4,
+                title: "À Musa Negra",
+                author: "Samantha Tovo",
+                description: "Coletânea de poemas que exploram a criatividade, a inspiração e os processos criativos através de uma perspectiva contemporânea.",
+                category: "obras-autorais",
+                cover: "https://via.placeholder.com/300x450/5A6B4F/FFFFFF?text=À+Musa+Negra",
+                tags: ["Poesia", "Criatividade", "Coletânea"],
+                amazonLink: "#",
+                sample: `<div style="padding: 2rem;">
+                            <h3 style="color: var(--verde-terroso); margin-bottom: 1.5rem;">I. Invocação</h3>
+                            <p style="margin-bottom: 1rem; font-style: italic;">
+                                Musa de tinta escura,<br>
+                                que danças nas sombras da página em branco,<br>
+                                vem com teus sapatos de silêncio,<br>
+                                teu vestido de metáforas não ditas.
+                            </p>
+                            <p style="font-style: italic;">
+                                Traze-me não a luz,<br>
+                                mas a penumbra onde as palavras nascem,<br>
+                                o crepúsculo do pensamento,<br>
+                                a aurora do verso ainda por vir.
+                            </p>
+                        </div>`,
+                year: 2022,
+                pages: 120
+            },
+            
+            {
+                id: 5,
+                title: "Mira Andor",
+                author: "Samantha Tovo",
+                description: "Ficção científica que acompanha a jornada de uma exploradora espacial em busca de um planeta perdido.",
+                category: "obras-autorais",
+                cover: "https://via.placeholder.com/300x450/0000AA/FFFFFF?text=Mira+Andor",
+                tags: ["Ficção Científica", "Espaço", "Aventura"],
+                amazonLink: "#",
+                sample: `<div style="padding: 2rem;">
+                            <h3 style="color: var(--verde-terroso); margin-bottom: 1.5rem;">Capítulo 1: O Sinal de Andor</h3>
+                            <p style="margin-bottom: 1rem;">A nave Phoenix flutuava no vácuo silencioso, a três anos-luz da estação mais próxima. No painel de controle, um sinal piscava, fraco mas persistente.</p>
+                            <p style="margin-bottom: 1rem;">"É ele", sussurrou Mira, seus dedos tremendo levemente sobre os controles. "O sinal de Andor."</p>
+                            <p>Doze anos de busca. Doze anos seguindo pistas em mapas estelares antigos. E agora, finalmente, a confirmação de que o planeta lendário existia.</p>
+                        </div>`,
+                year: 2023,
+                pages: 350
+            },
+            
+            {
+                id: 6,
+                title: "Crônicas de uma Lavanderia",
+                author: "Samantha Tovo",
+                description: "Histórias interligadas sobre personagens cujas vidas se cruzam em uma lavanderia de bairro.",
+                category: "obras-autorais",
+                cover: "https://via.placeholder.com/300x450/A68A64/FFFFFF?text=Crônicas+Lavanderia",
+                tags: ["Crônicas", "Drama", "Cotidiano"],
+                amazonLink: "#",
+                sample: `<div style="padding: 2rem;">
+                            <h3 style="color: var(--verde-terroso); margin-bottom: 1.5rem;">Segunda-feira, 8h da manhã</h3>
+                            <p style="margin-bottom: 1rem;">Dona Marta abria a lavanderia às 8h em ponto, todos os dias, há trinta e dois anos. O cheiro de sabão em pó e amaciante era mais constante em sua vida que qualquer outra coisa.</p>
+                            <p style="margin-bottom: 1rem;">Naquele dia, como em todos, ela organizou as revistas na mesa de espera, ligou as máquinas, preparou o café.</p>
+                            <p>E esperou. Porque numa lavanderia, as histórias chegam enroladas em roupas sujas, e partem limpas, mas nunca completamente resolvidas.</p>
+                        </div>`,
+                year: 2021,
+                pages: 220
+            },
+            
+            // Série Afelandra
+            {
+                id: 7,
+                title: "Afelandra – Volume I",
+                author: "Samantha Tovo",
+                description: "Primeiro volume da trilogia de fantasia épica que se passa no reino de Afelandra, onde magia e política se entrelaçam.",
+                category: "obras-autorais",
+                cover: "https://via.placeholder.com/300x450/5A6B4F/FFFFFF?text=Afelandra+I",
+                tags: ["Fantasia", "Épico", "Trilogia"],
+                amazonLink: "#",
+                sample: `<div style="padding: 2rem;">
+                            <h3 style="color: var(--verde-terroso); margin-bottom: 1.5rem;">O Despertar</h3>
+                            <p style="margin-bottom: 1rem;">A floresta de Afelandra não era como as outras. As árvores sussurravam em línguas antigas, as flores brilhavam com luz própria ao anoitecer, e as criaturas que nela habitavam conheciam segredos perdidos há eras.</p>
+                            <p style="margin-bottom: 1rem;">Elyra caminhava por entre as árvores gigantes, sentindo a energia mágica pulsando sob seus pés. Ela não sabia ainda que era a última herdeira do trono, nem que seu destino estava prestes a se revelar.</p>
+                            <p>O primeiro sinal foi um tremor na terra, seguido por um brilho prateado que emanava de suas próprias mãos.</p>
+                        </div>`,
+                badge: "Volume I",
+                year: 2020,
+                pages: 380
+            },
+            
+            {
+                id: 8,
+                title: "Afelandra – Volume II",
+                author: "Samantha Tovo",
+                description: "Segundo volume da trilogia, onde os conflitos se intensificam e alianças são testadas no reino mágico de Afelandra.",
+                category: "obras-autorais",
+                cover: "https://via.placeholder.com/300x450/000000/FFD700?text=Afelandra+II",
+                tags: ["Fantasia", "Épico", "Trilogia"],
+                amazonLink: "#",
+                sample: `<div style="padding: 2rem;">
+                            <h3 style="color: var(--verde-terroso); margin-bottom: 1.5rem;">O Cerco de Cristalina</h3>
+                            <p style="margin-bottom: 1rem;">As muralhas da cidade de Cristalina brilhavam sob a luz da lua cheia, mas não era apenas reflexo. Era magia, pura e antiga, tecida nas pedras pelos primeiros construtores.</p>
+                            <p style="margin-bottom: 1rem;">Do lado de fora, o exército das Sombras se reunia, suas fileiras negras se estendendo até onde a vista alcançava.</p>
+                            <p>Elyra olhou para seus companheiros - o guerreiro leal, a feiticeira sábia, o bardo que conhecia todas as canções de batalha. Eles estavam prontos. Ou pelo menos, tão prontos quanto poderiam estar para o que estava por vir.</p>
+                        </div>`,
+                badge: "Volume II",
+                year: 2021,
+                pages: 420
+            },
+            
+            {
+                id: 9,
+                title: "Afelandra – Volume III",
+                author: "Samantha Tovo",
+                description: "Conclusão épica da trilogia, onde o destino de Afelandra é decidido em uma batalha final entre luz e sombra.",
+                category: "obras-autorais",
+                cover: "https://via.placeholder.com/300x450/5A6B4F/FFFFFF?text=Afelandra+III",
+                tags: ["Fantasia", "Épico", "Trilogia"],
+                amazonLink: "#",
+                sample: `<div style="padding: 2rem;">
+                            <h3 style="color: var(--verde-terroso); margin-bottom: 1.5rem;">O Último Portal</h3>
+                            <p style="margin-bottom: 1rem;">Tudo havia levado a este momento. Todas as batalhas, todas as perdas, todas as escolhas difíceis.</p>
+                            <p style="margin-bottom: 1rem;">Diante de Elyra, o Portal Ancestral pulsava com energia pura, uma porta entre mundos que só poderia ser aberta uma última vez.</p>
+                            <p>Do outro lado, o Senhor das Sombras esperava, sua forma indistinta mas sua presença esmagadora. Esta não era mais uma batalha por um trono, ou por um reino. Era uma batalha pela própria essência da magia.</p>
+                        </div>`,
+                badge: "Volume III",
+                year: 2022,
+                pages: 450
+            },
+            
+            // Traduções de Samantha Tovo
+            {
+                id: 10,
+                title: "A Peônia — Três cenas de O Pavilhão das Peônias",
+                author: "Tang Xianzu (Traduzido por Samantha Tovo)",
+                description: "Tradução e adaptação de três cenas da obra clássica chinesa de Tang Xianzu, com ensaios sobre o teatro oriental.",
+                category: "traducoes",
+                cover: "https://via.placeholder.com/300x450/A68A64/FFFFFF?text=A+Peônia",
+                tags: ["Tradução", "Teatro Chinês", "Clássico"],
+                amazonLink: "#",
+                sample: `<div style="padding: 2rem;">
+                            <h3 style="color: var(--verde-terroso); margin-bottom: 1.5rem;">Nota da Tradutora</h3>
+                            <p style="margin-bottom: 1rem;">Traduzir Tang Xianzu é como tentar capturar o perfume de uma peônia com as mãos. A beleza está na fugacidade, na sugestão, no que fica entre as palavras.</p>
+                            <p>Estas três cenas de "O Pavilhão das Peônias" representam não apenas um exercício de tradução, mas uma ponte entre duas culturas teatrais separadas por séculos e continentes.</p>
+                        </div>`,
+                year: 2023,
+                pages: 160
+            },
+            
+            {
+                id: 11,
+                title: "O Poeta e o Tigre — Sete contos",
+                author: "Nakajima Atsushi (Traduzido por Samantha Tovo)",
+                description: "Tradução de sete contos do mestre japonês Nakajima Atsushi, acompanhada de ensaios analíticos sobre sua obra.",
+                category: "traducoes",
+                cover: "https://via.placeholder.com/300x450/000000/FFFFFF?text=O+Poeta+e+o+Tigre",
+                tags: ["Tradução", "Contos Japoneses", "Literatura"],
+                amazonLink: "#",
+                sample: `<div style="padding: 2rem;">
+                            <h3 style="color: var(--verde-terroso); margin-bottom: 1.5rem;">O Tigre de Wei</h3>
+                            <p style="margin-bottom: 1rem;">Dizem que o poeta Li Bo encontrou um tigre na montanha de Wei. Não um tigre comum, mas um tigre que falava em versos, cujas listras formavam caracteres de poemas antigos.</p>
+                            <p style="margin-bottom: 1rem;">Li Bo, que sempre buscara a palavra perfeita, descobriu que às vezes a perfeição não está no que se diz, mas no que se omite.</p>
+                            <p>O tigre rugiu, e no rugido, Li Bo ouviu o silêncio entre as sílabas, o vazio que dá forma ao pleno.</p>
+                        </div>`,
+                badge: "Com ensaios",
+                year: 2023,
+                pages: 240
+            }
+        ];
 
-    <div class="categoria">
-      <h2>Traduções</h2>
-      
-      <span class="autor-nome">Tradução e ensaios por Samantha Tovo</span>
-      <div class="livro-item"><strong>A Peônia</strong> — Três cenas de <em>O Pavilhão das Peônias</em> de Tang Xianzu</div>
-      <div class="livro-item"><strong>O Poeta e o Tigre</strong> — Sete contos de Nakajima Atsushi</div>
-    </div>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Atualizar ano atual no footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            
+            // Renderizar livros inicialmente
+            renderBooks('all');
+            
+            // Renderizar amostras
+            renderSamples();
+            
+            // Adicionar evento de clique para os botões de categoria
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
 
-  </section>
+        function renderBooks(category) {
+            const container = document.getElementById('books-container');
+            const filteredBooks = category === 'all' 
+                ? booksData 
+                : booksData.filter(book => book.category === category);
+            
+            if (filteredBooks.length === 0) {
+                container.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+                        <p>Nenhum livro encontrado nesta categoria.</p>
+                    </div>
+                `;
+                return;
+            }
 
-  <footer>
-    <p>© 2026 Loxias Apollo. Todos os direitos reservados.</p>
-  </footer>
+            let booksHTML = '';
+            
+            filteredBooks.forEach(book => {
+                booksHTML += `
+                    <div class="book-card" data-category="${book.category}">
+                        ${book.badge ? `<span class="book-badge">${book.badge}</span>` : ''}
+                        
+                        <div class="book-cover">
+                            <img src="${book.cover}" 
+                                 alt="Capa: ${book.title}"
+                                 loading="lazy">
+                        </div>
+                        
+                        <div class="book-info">
+                            <h3 class="book-title">${book.title}</h3>
+                            <p class="book-author">${book.author}</p>
+                            
+                            <div class="book-tags">
+                                ${book.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                                <span class="tag">${book.pages} páginas</span>
+                                <span class="tag">${book.year}</span>
+                            </div>
+                            
+                            <p class="book-description">${book.description}</p>
+                            
+                            <div class="book-actions">
+                                <a href="${book.amazonLink}" 
+                                   class="btn-book btn-amazon" 
+                                   target="_blank"
+                                   onclick="trackAmazonClick(${book.id})">
+                                    <i class="fab fa-amazon"></i>
+                                    Comprar
+                                </a>
+                                
+                                ${book.sample ? `
+                                <button class="btn-book btn-sample" 
+                                        onclick="openSample(${book.id})">
+                                    <i class="fas fa-book-open"></i>
+                                    Amostra
+                                </button>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = booksHTML;
+        }
 
+        function filterBooks(category) {
+            renderBooks(category);
+        }
+
+        function renderSamples() {
+            const container = document.getElementById('samples-container');
+            let samplesHTML = '';
+            
+            // Mostrar até 3 amostras
+            booksData.slice(0, 3).forEach(book => {
+                if (book.sample) {
+                    samplesHTML += `
+                        <div class="sample-card">
+                            <h4>${book.title}</h4>
+                            <p>${book.author}</p>
+                            <button onclick="openSample(${book.id})" class="btn-sample-card">
+                                Ler Amostra
+                            </button>
+                        </div>
+                    `;
+                }
+            });
+            
+            container.innerHTML = samplesHTML;
+        }
+
+        function openSample(bookId) {
+            const book = booksData.find(b => b.id === bookId);
+            if (!book) return;
+            
+            const modal = document.getElementById('sample-modal');
+            const content = document.getElementById('sample-content');
+            
+            content.innerHTML = `
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <h2 style="color: var(--verde-terroso); margin-bottom: 0.5rem;">${book.title}</h2>
+                    <p style="color: var(--marrom-claro); margin-bottom: 2rem; font-style: italic;">${book.author}</p>
+                    ${book.sample}
+                    <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center;">
+                        <a href="${book.amazonLink}" 
+                           class="btn-book btn-amazon" 
+                           target="_blank"
+                           style="display: inline-flex; text-decoration: none;">
+                            <i class="fab fa-amazon"></i>
+                            Comprar Livro Completo
+                        </a>
+                    </div>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSample() {
+            document.getElementById('sample-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function trackAmazonClick(bookId) {
+            console.log(`Livro ${bookId} clicado na Amazon`);
+            // Aqui você pode adicionar sua tag de afiliado da Amazon
+            // Exemplo: const affiliateTag = "sua-tag-aqui";
+        }
+
+        // Fechar modal com ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeSample();
+        });
+
+        // Fechar modal clicando fora
+        document.getElementById('sample-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeSample();
+        });
+    </script>
 </body>
 </html>
