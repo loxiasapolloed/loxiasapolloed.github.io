@@ -868,4 +868,163 @@
             renderSamples();
             
             // Adicionar evento de clique para os botões de categoria
-            document.querySelectorAll('.
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+
+        function renderBooks(category) {
+            const container = document.getElementById('books-container');
+            
+            let filteredBooks;
+            if (category === 'all') {
+                filteredBooks = booksData;
+            } else if (category === 'jovem') {
+                // Mostrar livros da categoria jovem E o livro "Tanto Mar" (que tem additionalCategories: ["jovem"])
+                filteredBooks = booksData.filter(book => 
+                    book.category === 'jovem-adulto' || 
+                    (book.additionalCategories && book.additionalCategories.includes('jovem'))
+                );
+            } else {
+                filteredBooks = booksData.filter(book => book.category === category);
+            }
+            
+            if (filteredBooks.length === 0) {
+                container.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+                        <p>Nenhum livro encontrado nesta categoria.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let booksHTML = '';
+            
+            filteredBooks.forEach(book => {
+                booksHTML += `
+                    <div class="book-card" data-category="${book.category}">
+                        ${book.badge ? `<span class="book-badge">${book.badge}</span>` : ''}
+                        
+                        <div class="book-cover">
+                            <img src="${book.cover}" 
+                                 alt="Capa: ${book.title}"
+                                 loading="lazy">
+                        </div>
+                        
+                        <div class="book-info">
+                            <h3 class="book-title">${book.title}</h3>
+                            <p class="book-author">${book.author}</p>
+                            
+                            <div class="book-tags">
+                                ${book.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                                <span class="tag">${book.pages} páginas</span>
+                                <span class="tag">${book.year}</span>
+                            </div>
+                            
+                            <p class="book-description">${book.description}</p>
+                            
+                            <div class="book-actions">
+                                <a href="${book.amazonLink}" 
+                                   class="btn-book btn-amazon" 
+                                   target="_blank"
+                                   onclick="trackAmazonClick(${book.id})">
+                                    <i class="fab fa-amazon"></i>
+                                    Comprar
+                                </a>
+                                
+                                ${book.sample ? `
+                                <button class="btn-book btn-sample" 
+                                        onclick="openSample(${book.id})">
+                                    <i class="fas fa-book-open"></i>
+                                    Amostra
+                                </button>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = booksHTML;
+        }
+
+        function filterBooks(category) {
+            renderBooks(category);
+        }
+
+        function renderSamples() {
+            const container = document.getElementById('samples-container');
+            let samplesHTML = '';
+            
+            // Mostrar até 3 amostras
+            booksData.slice(0, 3).forEach(book => {
+                if (book.sample) {
+                    samplesHTML += `
+                        <div class="sample-card">
+                            <h4>${book.title}</h4>
+                            <p>${book.author}</p>
+                            <button onclick="openSample(${book.id})" class="btn-sample-card">
+                                Ler Amostra
+                            </button>
+                        </div>
+                    `;
+                }
+            });
+            
+            container.innerHTML = samplesHTML;
+        }
+
+        function openSample(bookId) {
+            const book = booksData.find(b => b.id === bookId);
+            if (!book) return;
+            
+            const modal = document.getElementById('sample-modal');
+            const content = document.getElementById('sample-content');
+            
+            content.innerHTML = `
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <h2 style="color: var(--verde-terroso); margin-bottom: 0.5rem;">${book.title}</h2>
+                    <p style="color: var(--marrom-claro); margin-bottom: 2rem; font-style: italic;">${book.author}</p>
+                    ${book.sample}
+                    <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center;">
+                        <a href="${book.amazonLink}" 
+                           class="btn-book btn-amazon" 
+                           target="_blank"
+                           style="display: inline-flex; text-decoration: none;">
+                            <i class="fab fa-amazon"></i>
+                            Comprar Livro Completo
+                        </a>
+                    </div>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSample() {
+            document.getElementById('sample-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function trackAmazonClick(bookId) {
+            console.log(`Livro ${bookId} clicado na Amazon`);
+            // Aqui você pode adicionar sua tag de afiliado da Amazon
+            // Exemplo: const affiliateTag = "sua-tag-aqui";
+        }
+
+        // Fechar modal com ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeSample();
+        });
+
+        // Fechar modal clicando fora
+        document.getElementById('sample-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeSample();
+        });
+    </script>
+</body>
+</html>
