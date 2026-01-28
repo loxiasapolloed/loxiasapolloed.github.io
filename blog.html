@@ -611,7 +611,7 @@
                 let postsHTML = '';
                 
                 articlesCache.forEach((article, index) => {
-                    if (index >= 9) return; // Limitar a 9 posts
+                    if (index >= 999) return; // Limitar a 999 posts
                     
                     const excerpt = createExcerpt(article.description || article.content, 120);
                     const dateFormatted = article.pubDate ? formatDate(article.pubDate) : '';
