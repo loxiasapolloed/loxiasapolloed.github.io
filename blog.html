@@ -4,18 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - Loxias Apollo</title>
-    
-    <!-- REMOVI Bootstrap -->
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@200;300;400;500&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ===== VARIÁVEIS CSS ===== */
         :root {
             --preto: #000000;
             --amarelo: #FFD700;
@@ -26,7 +19,6 @@
             --cinza-medio: #e0e0e0;
         }
 
-        /* ===== RESET E BASE ===== */
         * {
             margin: 0;
             padding: 0;
@@ -44,7 +36,7 @@
             flex-direction: column;
         }
 
-        /* ===== CABEÇALHO COM LOGO ===== */
+        /* Header */
         header {
             padding: 1.5rem 5%;
             background-color: var(--branco);
@@ -89,7 +81,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* ===== NAVEGAÇÃO ===== */
+        /* Navigation */
         nav {
             padding: 1rem 5%;
             background-color: var(--preto);
@@ -116,17 +108,17 @@
             transform: translateY(-2px);
         }
 
-        /* ===== CONTEÚDO PRINCIPAL ===== */
+        /* Main Content */
         main {
             flex: 1;
             padding: 3rem 5%;
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
-            background-color: var(--branco); /* Garantir fundo branco */
+            background-color: var(--branco);
         }
 
-        /* ===== CARD INFORMATIVO ===== */
+        /* Card Informativo */
         .info-card {
             background-color: rgba(255, 215, 0, 0.1);
             border-left: 3px solid var(--amarelo);
@@ -149,7 +141,7 @@
             font-size: 1.1rem;
         }
 
-        /* ===== GRID DE POSTS ===== */
+        /* Grid de Posts */
         .posts-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -157,7 +149,7 @@
             margin-bottom: 4rem;
         }
 
-        /* ===== CARD DE POST ===== */
+        /* Card de Post */
         .post-card {
             background: var(--branco);
             border: 1px solid var(--cinza-medio);
@@ -174,23 +166,6 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             border-color: var(--amarelo);
-        }
-
-        .post-image {
-            height: 200px;
-            overflow: hidden;
-            background-color: var(--cinza-claro);
-        }
-
-        .post-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .post-card:hover .post-image img {
-            transform: scale(1.05);
         }
 
         .post-content {
@@ -249,7 +224,7 @@
             background: #333;
         }
 
-        /* ===== MENSAGENS DE ESTADO ===== */
+        /* Mensagens de Estado */
         .loading {
             text-align: center;
             padding: 3rem;
@@ -285,7 +260,7 @@
             font-weight: 400;
         }
 
-        /* ===== MODAL DE ARTIGO ===== */
+        /* Modal de Artigo */
         .article-modal {
             display: none;
             position: fixed;
@@ -350,13 +325,6 @@
             color: var(--preto);
         }
 
-        .article-body img {
-            max-width: 100%;
-            height: auto;
-            margin: 1.5rem 0;
-            border-radius: 4px;
-        }
-
         .article-body p {
             margin-bottom: 1.5rem;
         }
@@ -413,7 +381,7 @@
             background: #4a5a40;
         }
 
-        /* ===== RODAPÉ ===== */
+        /* Footer */
         footer {
             padding: 2.5rem 5%;
             text-align: center;
@@ -463,7 +431,7 @@
             margin: 1.5rem 0;
         }
 
-        /* ===== RESPONSIVIDADE ===== */
+        /* Responsive */
         @media (max-width: 768px) {
             .header-container {
                 flex-direction: column;
@@ -522,7 +490,6 @@
     </style>
 </head>
 <body>
-    <!-- CABEÇALHO COM LOGO -->
     <header>
         <div class="header-container">
             <img src="logo.png" alt="Logo Loxias Apollo" class="logo-img">
@@ -533,7 +500,6 @@
         </div>
     </header>
 
-    <!-- NAVEGAÇÃO -->
     <nav>
         <div class="nav-links">
             <a href="index.html" class="nav-link">Início</a>
@@ -544,7 +510,6 @@
         </div>
     </nav>
 
-    <!-- CONTEÚDO PRINCIPAL -->
     <main>
         <div class="info-card">
             <h3><i class="fas fa-info-circle"></i> Leia os artigos diretamente no site</h3>
@@ -560,7 +525,6 @@
         </div>
     </main>
 
-    <!-- RODAPÉ -->
     <footer>
         <div class="footer-container">
             <div class="footer-top">
@@ -588,7 +552,6 @@
         </div>
     </div>
 
-    <!-- Script principal -->
     <script>
         // Dados em cache
         let articlesCache = [];
@@ -652,19 +615,9 @@
                     
                     const excerpt = createExcerpt(article.description || article.content, 120);
                     const dateFormatted = article.pubDate ? formatDate(article.pubDate) : '';
-               const parser = new DOMParser();
-    const doc = parser.parseFromString(article.description || '', 'text/html');
-    const imgElement = doc.querySelector('img');
-    const imageUrl = imgElement ? imgElement.src : 'https://via.placeholder.com/400x200/5A6B4F/FFFFFF?text=Iota+Subscrito';
-    
-    postsHTML += `
-        <article class="post-card" onclick="openArticle(${index})">
+                    
                     postsHTML += `
                         <article class="post-card" onclick="openArticle(${index})">
-                            <div class="post-image">
-                                <img src="${imageUrl}" alt="${article.title}" loading="lazy">
-                            </div>
-                            
                             <div class="post-content">
                                 <div class="post-meta">
                                     <span class="post-date">${dateFormatted}</span>
@@ -703,7 +656,6 @@
             }
         }
 
-        // Funções para o modal de artigo
         function openArticle(index) {
             currentArticleIndex = index;
             const article = articlesCache[index];
@@ -738,9 +690,7 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Funções auxiliares
         function cleanArticleContent(html) {
-            // Remove elementos indesejados do Substack
             let cleaned = html
                 .replace(/<div class="subscribe-widget[^>]*>[\s\S]*?<\/div>/gi, '')
                 .replace(/<div class="post-cta[^>]*>[\s\S]*?<\/div>/gi, '')
@@ -748,27 +698,18 @@
                 .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
                 .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
             
-            // Melhora a formatação
-            cleaned = cleaned
-                .replace(/<p>/g, '<p>')
-                .replace(/<h2>/g, '<h2>')
-                .replace(/<h3>/g, '<h3>');
-            
             return cleaned;
         }
 
         function createExcerpt(html, maxLength = 120) {
-            // Remover tags HTML
             let text = html.replace(/<[^>]*>/g, '');
             
-            // Decodificar entidades HTML
             text = text.replace(/&amp;/g, '&')
                       .replace(/&lt;/g, '<')
                       .replace(/&gt;/g, '>')
                       .replace(/&quot;/g, '"')
                       .replace(/&#39;/g, "'");
             
-            // Truncar
             if (text.length > maxLength) {
                 text = text.substring(0, maxLength);
                 const lastSpace = text.lastIndexOf(' ');
@@ -794,12 +735,10 @@
             }
         }
 
-        // Fechar modal com ESC
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') closeArticle();
         });
 
-        // Fechar modal clicando fora
         document.getElementById('article-modal').addEventListener('click', function(e) {
             if (e.target === this) closeArticle();
         });
