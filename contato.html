@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - Loxias Apollo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --preto: #000000;
+            --amarelo: #FFD700;
+            --branco: #FFFFFF;
+            --verde-terroso: #5A6B4F;
+            --marrom-claro: #A68A64;
+            --cinza-claro: #f5f5f5;
+            --cinza-medio: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'League Spartan', sans-serif;
+            font-weight: 300;
+            color: var(--preto);
+            background-color: var(--branco);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            padding: 1.5rem 5%;
+            background-color: var(--branco);
+            border-bottom: 1px solid var(--preto);
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .logo-img {
+            height: 120px;
+            width: auto;
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));
+        }
+
+        .header-text {
+            text-align: left;
+            border-left: 2px solid var(--amarelo);
+            padding-left: 1.5rem;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .site-title {
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+            color: var(--preto);
+            margin-bottom: 0.3rem;
+            font-weight: 400;
+        }
+
+        .site-subtitle {
+            color: var(--verde-terroso);
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Navigation */
+        nav {
+            padding: 1rem 5%;
+            background-color: var(--preto);
+            text-align: center;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--amarelo);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: opacity 0.3s, transform 0.2s;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover {
+            opacity: 0.7;
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 3rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Page Intro */
+        .page-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-intro h2 {
+            font-size: 2.2rem;
+            color: var(--preto);
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .page-intro p {
+            font-size: 1.2rem;
+            color: var(--verde-terroso);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Contact Container */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background-color: var(--cinza-claro);
+            padding: 2.5rem;
+            border-radius: 4px;
+            border: 1px solid var(--cinza-medio);
+        }
+
+        .contact-form h3 {
+            color: var(--verde-terroso);
+            margin-bottom: 1.5rem;
+            font-size: 1.6rem;
+            font-weight: 400;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--preto);
+            font-weight: 400;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--cinza-medio);
+            border-radius: 2px;
+            font-family: 'League Spartan', sans-serif;
+            font-size: 1rem;
+            background-color: var(--branco);
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--verde-terroso);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .btn-submit {
+            background-color: var(--preto);
+            color: var(--amarelo);
+            border: none;
+            padding: 0.8rem 2rem;
+            font-family: 'League Spartan', sans-serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border-radius: 2px;
+            transition: background-color 0.3s;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .btn-submit:hover {
+            background-color: #333;
+        }
+
+        /* Contact Info */
+        .contact-info {
+            padding: 1rem;
+        }
+
+        .contact-info h3 {
+            color: var(--verde-terroso);
+            margin-bottom: 1.5rem;
+            font-size: 1.6rem;
+            font-weight: 400;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .info-icon {
+            background-color: var(--verde-terroso);
+            color: var(--branco);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .info-content h4 {
+            color: var(--preto);
+            margin-bottom: 0.3rem;
+            font-weight: 400;
+        }
+
+        .info-content p {
+            color: var(--verde-terroso);
+            line-height: 1.5;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            background-color: var(--preto);
+            color: var(--amarelo);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background-color: #d4edda;
+            color: #155724;
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin-top: 2rem;
+            text-align: center;
+            border: 1px solid #c3e6cb;
+        }
+
+        /* Footer */
+        footer {
+            padding: 2.5rem 5%;
+            text-align: center;
+            background-color: var(--preto);
+            color: var(--branco);
+            font-size: 0.95rem;
+            margin-top: auto;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section h5 {
+            color: var(--amarelo);
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        .footer-section p, .footer-section a {
+            color: var(--branco);
+            opacity: 0.8;
+            margin-bottom: 0.3rem;
+            display: block;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .footer-section a:hover {
+            opacity: 1;
+            color: var(--amarelo);
+        }
+
+        .footer-divider {
+            border-color: var(--amarelo);
+            opacity: 0.3;
+            margin: 1.5rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .header-text {
+                border-left: none;
+                border-top: 2px solid var(--amarelo);
+                padding-left: 0;
+                padding-top: 1rem;
+                min-width: auto;
+            }
+            
+            .site-title {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .nav-link {
+                display: block;
+                padding: 0.5rem 0;
+            }
+            
+            .footer-top {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-intro h2 {
+                font-size: 1.8rem;
+            }
+            
+            .page-intro p {
+                font-size: 1rem;
+            }
+            
+            .contact-form {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <img src="logo.png" alt="Logo Loxias Apollo" class="logo-img">
+            <div class="header-text">
+                <h1 class="site-title">LOXIAS APOLLO</h1>
+                <p class="site-subtitle">Editora Independente de Literatura Local e Mundial</p>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Início</a>
+            <a href="sobre.html" class="nav-link">Sobre</a>
+            <a href="livros.html" class="nav-link">Livros</a>
+            <a href="blog.html" class="nav-link">Blog</a>
+            <a href="contato.html" class="nav-link">Contato</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="page-intro">
+            <h2>Entre em Contato</h2>
+            <p>
+                Tem dúvidas, sugestões ou quer saber mais sobre nossos livros? 
+                Preencha o formulário abaixo ou utilize nossos outros canais de comunicação.
+            </p>
+        </div>
+
+        <div class="contact-container">
+            <!-- Formulário de Contato -->
+            <div class="contact-form">
+                <h3>Envie sua mensagem</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nome Completo *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Assunto</label>
+                        <select id="subject" name="subject">
+                            <option value="">Selecione um assunto</option>
+                            <option value="dúvida">Dúvida sobre livros</option>
+                            <option value="pedido">Pedido de informação</option>
+                            <option value="parceria">Proposta de parceria</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Mensagem *</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-paper-plane"></i> Enviar Mensagem
+                    </button>
+                </form>
+                
+                <div id="successMessage" class="success-message">
+                    <i class="fas fa-check-circle"></i>
+                    <h4>Mensagem enviada com sucesso!</h4>
+                    <p>Retornaremos em até 48 horas.</p>
+                </div>
+            </div>
+            
+            <!-- Informações de Contato -->
+            <div class="contact-info">
+                <h3>Outras formas de contato</h3>
+                
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="info-content">
+                        <h4>Email</h4>
+                        <p>loxias.apollo.ed@gmail.com</p>
+                        <p>Respondemos em até 48 horas</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="info-content">
+                        <h4>Para Autores</h4>
+                        <p>Recebemos propostas de publicação</p>
+                        <p>Envie seu manuscrito para avaliação</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <div class="info-content">
+                        <h4>Parcerias</h4>
+                        <p>Livrarias interessadas em nossos livros</p>
+                        <p>Entre em contato para condições especiais</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="info-content">
+                        <h4>Horário de Atendimento</h4>
+                        <p>Segunda a sexta: 9h às 18h</p>
+                        <p>Sábado: 9h às 13h</p>
+                    </div>
+                </div>
+                
+                <div class="social-links">
+                    <a href="#" class="social-link" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link" title="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-link" title="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link" title="Goodreads">
+                        <i class="fab fa-goodreads-g"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-section">
+                    <h5>Loxias Apollo</h5>
+                    <p>Editora Independente de literatura Local e Mundial</p>
+                </div>
+                <div class="footer-section">
+                    <h5>Links Rápidos</h5>
+                    <a href="blog.html">Blog Iota Subscrito</a>
+                    <a href="mailto:loxias.apollo.ed@gmail.com?subject=Contato%20Loxias%20Apollo">Contato</a>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div>
+                <p>&copy; <span id="current-year"></span> Loxias Apollo. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Atualizar ano atual no footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            
+            // Formulário de contato
+            const contactForm = document.getElementById('contactForm');
+            const successMessage = document.getElementById('successMessage');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Coletar dados do formulário
+                const formData = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    subject: document.getElementById('subject').value,
+                    message: document.getElementById('message').value,
+                    timestamp: new Date().toISOString()
+                };
+                
+                // Aqui você pode:
+                // 1. Enviar para um servidor (recomendado)
+                // 2. Usar FormSubmit.co (gratuito)
+                // 3. Usar EmailJS (gratuito até 200 emails/mês)
+                // 4. Enviar via Google Apps Script (gratuito)
+                
+                // Exemplo usando EmailJS (você precisaria criar conta em https://www.emailjs.com/)
+                /*
+                emailjs.send('seu_serviço_id', 'seu_template_id', formData)
+                    .then(function() {
+                        showSuccess();
+                    }, function(error) {
+                        alert('Erro ao enviar mensagem: ' + JSON.stringify(error));
+                    });
+                */
+                
+                // Por enquanto, vamos simular o envio
+                showSuccess();
+                
+                // Salvar no localStorage (apenas para demonstração)
+                saveToLocalStorage(formData);
+            });
+            
+            function showSuccess() {
+                // Mostrar mensagem de sucesso
+                successMessage.style.display = 'block';
+                
+                // Rolar até a mensagem
+                successMessage.scrollIntoView({ behavior: 'smooth' });
+                
+                // Limpar formulário
+                contactForm.reset();
+                
+                // Esconder mensagem após 5 segundos
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 5000);
+            }
+            
+            function saveToLocalStorage(formData) {
+                // Salvar no localStorage para referência
+                try {
+                    const savedMessages = JSON.parse(localStorage.getItem('loxiasMessages')) || [];
+                    savedMessages.push(formData);
+                    localStorage.setItem('loxiasMessages', JSON.stringify(savedMessages));
+                    
+                    // Limitar a 50 mensagens salvas
+                    if (savedMessages.length > 50) {
+                        localStorage.setItem('loxiasMessages', 
+                            JSON.stringify(savedMessages.slice(-50)));
+                    }
+                    
+                    console.log('Mensagem salva no localStorage:', formData);
+                } catch (e) {
+                    console.log('Erro ao salvar no localStorage:', e);
+                }
+            }
+            
+            // Configuração para usar FormSubmit.co (gratuito e simples)
+            // Substitua o action do formulário por:
+            // <form action="https://formsubmit.co/loxias.apollo.ed@gmail.com" method="POST">
+            // E adicione estes campos ocultos:
+            /*
+            <input type="hidden" name="_subject" value="Novo contato - Loxias Apollo">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://seusite.com/obrigado.html">
+            */
+        });
+    </script>
+</body>
+</html>
