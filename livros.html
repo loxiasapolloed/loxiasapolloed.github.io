@@ -36,14 +36,14 @@
             flex-direction: column;
         }
 
-        /* Header */
-        header {
-            padding: 1.5rem 5%;
+               /* ===== CABEÇALHO COM LOGO ===== */
+        .header-with-logo {
+            padding: 2rem 5%;
             background-color: var(--branco);
             border-bottom: 1px solid var(--preto);
         }
 
-        .header-container {
+        .logo-container {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -53,13 +53,13 @@
             margin: 0 auto;
         }
 
-        .logo-img {
+        .site-logo {
             height: 120px;
             width: auto;
             filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));
         }
 
-        .header-text {
+        .site-title-container {
             text-align: left;
             border-left: 2px solid var(--amarelo);
             padding-left: 1.5rem;
@@ -72,7 +72,7 @@
             letter-spacing: 1px;
             color: var(--preto);
             margin-bottom: 0.3rem;
-            font-weight: 400;
+            font-weight: 300;
         }
 
         .site-subtitle {
@@ -82,30 +82,27 @@
         }
 
         /* Navigation */
+ /* ===== NAVEGAÇÃO ===== */
         nav {
-            padding: 1rem 5%;
+            padding: 1.3rem 5%;
             background-color: var(--preto);
             text-align: center;
+            line-height: 1.8;
+            margin-bottom: 2rem;
         }
 
-        .nav-links {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-        }
-
-        .nav-link {
+        nav a {
             color: var(--amarelo);
             text-decoration: none;
-            font-size: 1.1rem;
-            transition: opacity 0.3s, transform 0.2s;
+            margin: 0 1.2rem;
+            font-size: 1.15rem;
+            transition: opacity 0.3s;
             white-space: nowrap;
+            font-weight: 400;
         }
 
-        .nav-link:hover {
+        nav a:hover {
             opacity: 0.7;
-            transform: translateY(-2px);
         }
 
         /* Main Content */
@@ -563,21 +560,19 @@
     </style>
 </head>
 <body>
-  <header style="padding: 2rem 5%; background-color: #FFFFFF; border-bottom: 1px solid #000000;">
-    <div style="display: flex; align-items: center; justify-content: center; gap: 1.5rem; flex-wrap: wrap; max-width: 900px; margin: 0 auto;">
-        <img src="logo.png" 
-             style="height: 120px; width: auto; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));">
-        
-        <div style="text-align: left; border-left: 2px solid #FFD700; padding-left: 1.5rem; flex: 1; min-width: 250px;">
-            <h1 style="font-size: 2.5rem; letter-spacing: 1px; color: #000000; margin-bottom: 0.3rem; font-weight: 300;">
-                LOXIAS APOLLO
-            </h1>
-            <p style="color: #5A6B4F; font-size: 1.1rem; letter-spacing: 0.5px;">
-                Editora Independente de Literatura Local e Mundial
-            </p>
+      <!-- CABEÇALHO COM LOGO -->
+    <header class="header-with-logo">
+        <div class="logo-container">
+            <img src="logo.png" 
+                alt="Logo Loxias Apollo" 
+                class="site-logo">
+            
+            <div class="site-title-container">
+                <h1 class="site-title">LOXIAS APOLLO</h1>
+                <p class="site-subtitle">Editora Independente de Literatura Local e Mundial</p>
+            </div>
         </div>
-    </div>
-</header>
+    </header>
 
     <nav>
         <div class="nav-links">
