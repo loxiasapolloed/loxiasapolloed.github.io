@@ -1,1 +1,26 @@
+# .htaccess para permitir POST no PHP
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Permitir métodos POST, GET, OPTIONS
+    <Limit POST GET OPTIONS>
+        Require all granted
+    </Limit>
+    
+    # Remover restrições de métodos
+    <LimitExcept POST GET OPTIONS>
+        Require all granted
+    </LimitExcept>
+    
+    # Adicionar cabeçalhos CORS se necessário
+    Header always set Access-Control-Allow-Origin "*"
+    Header always set Access-Control-Allow-Methods "POST, GET, OPTIONS"
+    Header always set Access-Control-Allow-Headers "Content-Type"
+</IfModule>
 
+# Configurações de segurança para o PHP
+<IfModule mod_php.c>
+    php_flag display_errors off
+    php_value upload_max_filesize 10M
+    php_value post_max_size 10M
+</IfModule>

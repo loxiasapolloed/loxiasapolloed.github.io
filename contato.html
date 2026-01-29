@@ -1206,77 +1206,114 @@
             document.getElementById('contact-form').style.display = 'block';
         }
 
-        // Processar envio do formulário
-        function handleSubmit(event) {
-            event.preventDefault();
-            
-            if (!validateForm()) {
-                showError('Por favor, corrija os erros no formulário.');
-                return;
-            }
+        // Processar envio do formulário (versão com PHP)
+function handleSubmit(event) {
+    event.preventDefault();
+    
+    if (!validateForm()) {
+        showError('Por favor, corrija os erros no formulário.');
+        return;
+    }
 
-            const submitBtn = document.getElementById('submit-btn');
-            const originalText = submitBtn.innerHTML;
-            
-            // Mostrar estado de carregamento
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
-            submitBtn.disabled = true;
+    const submitBtn = document.getElementById('submit-btn');
+    const originalText = submitBtn.innerHTML;
+    
+    // Mostrar estado de carregamento
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+    submitBtn.disabled = true;
 
-            // Coletar dados do formulário
-            const formData = {
+    // Coletar dados do formulário
+    const formData = {
+        nome: document.getElementById('nome').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        assunto: document.getElementById('assunto').value,
+        mensagem: document.getElementById('mensagem').value.trim(),
+        visibilidade: document.querySelector('input[name="visibilidade"]:checked').value
+    };
+
+    // Enviar via AJAX para o PHP
+    fetch('enviar_email.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            // Salvar também no localStorage (backup)
+            const localData = {
                 id: generateId(),
-                nome: document.getElementById('nome').value.trim(),
-                email: document.getElementById('email').value.trim(),
-                assunto: document.getElementById('assunto').value,
-                mensagem: document.getElementById('mensagem').value.trim(),
-                visibilidade: document.querySelector('input[name="visibilidade"]:checked').value,
+                ...formData,
                 data: new Date().toISOString(),
                 curtidas: 0,
                 respondida: false,
-                aprovada: true // Em produção, isso seria false inicialmente
+                aprovada: true
             };
-
-            // Salvar mensagem
+            
+            saveMessage(localData);
+            
+            // Mostrar sucesso
+            showSuccess(data.message);
+            
+            // Redirecionar ou mostrar link
             setTimeout(() => {
-                const success = saveMessage(formData);
-                
-                if (success) {
-                    showSuccess(`Mensagem ${formData.visibilidade === 'publico' ? 'publicada no mural!' : 'enviada com sucesso!'}`);
-                    
-                    // Limpar formulário
-                    setTimeout(() => {
-                        clearForm();
-                    }, 1500);
-                    
-                    // Se for mensagem pública, atualizar mural
-                    if (formData.visibilidade === 'publico') {
-                        setTimeout(() => {
-                            showTab('mural');
-                            refreshMural();
-                        }, 1000);
-                    }
+                if (data.redirect) {
+                    window.location.href = data.redirect;
                 } else {
-                    showError('Erro ao salvar mensagem. Tente novamente.');
+                    clearForm();
                 }
-                
-                // Restaurar botão
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            }, 1000);
-        }
-
-        // Salvar mensagem no sistema
-        function saveMessage(messageData) {
-            try {
-                messages.unshift(messageData); // Adicionar no início
-                const saved = saveMessages();
-                return saved;
-            } catch (e) {
-                console.error('Erro ao salvar mensagem:', e);
-                return false;
+            }, 2000);
+            
+        } else {
+            // Tentar salvar apenas localmente se o PHP falhar
+            console.warn('PHP falhou, salvando localmente:', data.message);
+            
+            const localData = {
+                id: generateId(),
+                ...formData,
+                data: new Date().toISOString(),
+                curtidas: 0,
+                respondida: false,
+                aprovada: true
+            };
+            
+            if (saveMessage(localData)) {
+                showSuccess('Mensagem salva localmente (servidor de email temporariamente indisponível).');
+                setTimeout(clearForm, 2000);
+            } else {
+                showError('Erro ao salvar mensagem. Tente novamente.');
             }
         }
-
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+        
+        // Fallback: salvar apenas localmente
+        const localData = {
+            id: generateId(),
+            ...formData,
+            data: new Date().toISOString(),
+            curtidas: 0,
+            respondida: false,
+            aprovada: true
+        };
+        
+        if (saveMessage(localData)) {
+            showSuccess('Mensagem salva localmente (sem conexão com servidor).');
+            setTimeout(clearForm, 2000);
+        } else {
+            showError('Erro ao salvar mensagem. Tente novamente.');
+        }
+    })
+    .finally(() => {
+        // Restaurar botão
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    });
+}
+        
         // ==============================================
         // FUNÇÕES DO MURAL
         // ==============================================
