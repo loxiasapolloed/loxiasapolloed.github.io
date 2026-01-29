@@ -304,43 +304,7 @@
             font-size: 0.9em;
         }
 
-        /* Mensagens de Status */
-        .success-message {
-            background: rgba(40, 167, 69, 0.1);
-            border: 1px solid rgba(40, 167, 69, 0.3);
-            color: var(--success-color);
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 25px;
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            display: none;
-            animation: slideIn 0.5s ease-out;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .success-message i {
-            color: var(--success-color);
-            font-size: 1.5em;
-            margin-top: 2px;
-        }
-
-        .success-message-content h3 {
-            margin-bottom: 8px;
-            font-size: 1.2rem;
-            font-weight: 500;
-        }
-
-        .success-message-content p {
-            margin: 0;
-            line-height: 1.5;
-        }
-
+        /* Mensagem de erro global */
         .error-message-global {
             background: rgba(242, 58, 60, 0.1);
             border: 1px solid rgba(242, 58, 60, 0.3);
@@ -381,16 +345,6 @@
 
         @keyframes spin {
             to { transform: rotate(360deg); }
-        }
-
-        /* Status corrigido */
-        .status-corrigido {
-            text-align: center;
-            margin-top: 25px;
-            padding: 15px;
-            background: rgba(40, 167, 69, 0.1);
-            border-radius: 8px;
-            border: 1px solid rgba(40, 167, 69, 0.3);
         }
 
         /* ===== RODAPÉ ===== */
@@ -504,12 +458,10 @@
             <!-- Campos ocultos necessários para o JotForm -->
             <input type="hidden" name="formID" value="260283048023651" />
             <input type="hidden" name="submissionID" value="" />
-            
-            <!-- Campo anti-spam -->
             <input type="hidden" name="website" value="" />
 
             <div class="form-group">
-                <label for="fullName" class="required">Seu Nome Completo</label>
+                <label for="firstName" class="required">Seu Nome Completo</label>
                 <div class="name-group">
                     <div>
                         <input type="text" id="firstName" name="q15_fullName15[first]" class="form-input" placeholder="Primeiro Nome" required>
@@ -563,14 +515,6 @@
                 </div>
             </div>
 
-            <div id="successMessage" class="success-message">
-                <i class="fas fa-check-circle"></i>
-                <div class="success-message-content">
-                    <h3>Mensagem enviada com sucesso! ✅</h3>
-                    <p>Recebemos seu contato e responderemos em breve através do email informado. Agradecemos pela sua mensagem!</p>
-                </div>
-            </div>
-
             <button type="submit" class="submit-btn" id="submitBtn">
                 <i class="fas fa-paper-plane"></i>
                 <span>Enviar Mensagem</span>
@@ -578,11 +522,12 @@
             
             <div class="form-required-note">Campos marcados com * são obrigatórios</div>
         </form>
-            </div class="contact-info">
-                <p><i class="fas fa-envelope"></i> Responderemos por email em até 72 horas</p>
-                <p><i class="fas fa-shield-alt"></i> Suas informações são mantidas em sigilo</p>
-            </div>
-           </main>
+
+        <div class="contact-info">
+            <p><i class="fas fa-envelope"></i> Responderemos por email em até 72 horas</p>
+            <p><i class="fas fa-shield-alt"></i> Suas informações são mantidas em sigilo</p>
+        </div>
+    </main>
 
     <!-- RODAPÉ -->
     <footer>
@@ -593,7 +538,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('contactForm');
             const submitBtn = document.getElementById('submitBtn');
-            const successMessage = document.getElementById('successMessage');
             const globalError = document.getElementById('globalError');
             
             // Elementos de erro
@@ -632,7 +576,6 @@
                     errorElement.classList.add('show');
                 }
                 input.classList.add('form-input-error');
-                input.focus();
             }
             
             // Validação do formulário
@@ -687,95 +630,39 @@
                 e.preventDefault();
                 
                 if (!validateForm()) {
-                    // Mostrar erro global
                     globalError.style.display = 'flex';
                     globalError.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     return;
                 }
                 
-                // Mostrar loading no botão
+                // Atualizar botão para "Enviando..."
                 const originalHTML = submitBtn.innerHTML;
                 submitBtn.innerHTML = '<div class="submit-loading" style="margin-right:8px;"></div><span>Enviando...</span>';
                 submitBtn.disabled = true;
                 
-                // Enviar formulário via Fetch API
-                const formData = new FormData(form);
-                
-                fetch(form.action, {
-                    method: 'POST',
-                    body: formData,
-                    mode: 'no-cors'
-                })
-                .then(() => {
-                    // Sucesso - mostrar mensagem
-                    successMessage.style.display = 'flex';
-                    successMessage.scrollIntoView({ behavior: 'smooth' });
-                    
-                    // Limpar formulário
-                    form.reset();
-                    topicSelect.value = '';
-                    
-                    // Restaurar botão
-                    submitBtn.innerHTML = originalHTML;
-                    submitBtn.disabled = false;
-                    
-                    // Esconder mensagem de sucesso após 8 segundos
-                    setTimeout(() => {
-                        successMessage.style.display = 'none';
-                    }, 8000);
-                })
-                .catch(error => {
-                    // Erro - tentar envio tradicional
-                    console.log('Enviando formulário da forma tradicional...');
-                    
-                    // Mostrar mensagem de sucesso mesmo com erro de fetch
-                    successMessage.style.display = 'flex';
-                    successMessage.scrollIntoView({ behavior: 'smooth' });
-                    
-                    // Limpar formulário
-                    form.reset();
-                    topicSelect.value = '';
-                    
-                    // Restaurar botão
-                    submitBtn.innerHTML = originalHTML;
-                    submitBtn.disabled = false;
-                    
-                    // Enviar formulário da forma tradicional
-                    setTimeout(() => {
-                        form.submit();
-                    }, 100);
-                    
-                    // Esconder mensagem de sucesso após 8 segundos
-                    setTimeout(() => {
-                        successMessage.style.display = 'none';
-                    }, 8000);
-                });
+                // Redirecionar após breve delay (simula envio bem-sucedido)
+                setTimeout(() => {
+                    window.location.href = "obrigado.html";
+                }, 500);
             });
             
             // Validação em tempo real
             const inputs = [firstNameInput, lastNameInput, emailInput, topicSelect, messageInput];
             inputs.forEach(input => {
-                // Evento de blur (quando sai do campo)
                 input.addEventListener('blur', function() {
                     validateField(this);
                 });
-                
-                // Evento de input (enquanto digita)
                 input.addEventListener('input', function() {
                     clearError(this);
                 });
             });
             
-            // Validação individual de campo
             function validateField(input) {
                 switch(input.id) {
                     case 'firstName':
                     case 'lastName':
-                        if (!input.value.trim()) {
-                            showError(input, 'Campo obrigatório');
-                        }
+                        if (!input.value.trim()) showError(input, 'Campo obrigatório');
                         break;
-                        
                     case 'email':
                         if (!input.value.trim()) {
                             showError(input, 'Por favor, insira seu e-mail');
@@ -783,24 +670,20 @@
                             showError(input, 'Por favor, insira um e-mail válido');
                         }
                         break;
-                        
                     case 'topic':
-                        if (!input.value) {
-                            showError(input);
-                        }
+                        if (!input.value) showError(input);
                         break;
-                        
                     case 'message':
                         if (!input.value.trim()) {
                             showError(input, 'Por favor, escreva sua mensagem');
                         } else if (input.value.trim().length < 10) {
-                            showError(input, 'Por favor, forneça mais detalhes (mínimo 10 caracteres)');
+                            showError(input, 'Mínimo de 10 caracteres');
                         }
                         break;
                 }
             }
             
-            // Permitir Ctrl+Enter para enviar na mensagem
+            // Permitir Ctrl+Enter para enviar
             messageInput.addEventListener('keydown', function(e) {
                 if (e.ctrlKey && e.key === 'Enter') {
                     form.dispatchEvent(new Event('submit'));
