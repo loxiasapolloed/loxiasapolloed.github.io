@@ -18,6 +18,8 @@
             --cinza-claro: #f5f5f5;
             --cinza-medio: #e0e0e0;
             --verde-suave: rgba(90, 107, 79, 0.1);
+            --verde-sucesso: rgba(76, 175, 80, 0.1);
+            --vermelho-erro: rgba(244, 67, 54, 0.1);
         }
 
         * {
@@ -229,6 +231,24 @@
             resize: vertical;
         }
 
+        /* Validação */
+        .error-message {
+            color: #d32f2f;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+
+        .input-error {
+            border-color: #d32f2f !important;
+            background-color: var(--vermelho-erro);
+        }
+
+        .input-success {
+            border-color: #388e3c !important;
+            background-color: var(--verde-sucesso);
+        }
+
         /* Message Type */
         .message-type {
             display: flex;
@@ -302,6 +322,11 @@
             background-color: #333;
         }
 
+        .btn-submit:disabled {
+            background-color: #666;
+            cursor: not-allowed;
+        }
+
         .btn-clear {
             background-color: var(--cinza-medio);
             color: var(--preto);
@@ -311,25 +336,38 @@
             background-color: #d0d0d0;
         }
 
-        /* Success Message */
+        /* Mensagens de Status */
         .success-message {
             display: none;
-            background-color: var(--verde-suave);
-            border-left: 4px solid var(--verde-terroso);
+            background-color: var(--verde-sucesso);
+            border-left: 4px solid #388e3c;
             padding: 1.5rem;
             border-radius: 4px;
             margin-bottom: 2rem;
             text-align: center;
+            animation: slideIn 0.5s ease;
         }
 
-        .success-message h4 {
-            color: var(--verde-terroso);
-            margin-bottom: 0.5rem;
-            font-weight: 400;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
+        .error-message-container {
+            display: none;
+            background-color: var(--vermelho-erro);
+            border-left: 4px solid #d32f2f;
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            text-align: center;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Mural Tab */
@@ -363,6 +401,7 @@
         .mural-controls {
             display: flex;
             gap: 1rem;
+            align-items: center;
         }
 
         .btn-refresh {
@@ -383,6 +422,19 @@
             background-color: #333;
         }
 
+        .btn-refresh:disabled {
+            background-color: #666;
+            cursor: not-allowed;
+        }
+
+        .mural-stats {
+            font-size: 0.9rem;
+            color: var(--marrom-claro);
+            background: var(--cinza-claro);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+
         /* Messages Grid */
         .messages-grid {
             display: grid;
@@ -398,6 +450,18 @@
             padding: 1.5rem;
             position: relative;
             transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .message-card:hover {
@@ -454,6 +518,8 @@
             color: var(--preto);
             line-height: 1.6;
             margin-bottom: 1rem;
+            white-space: pre-wrap;
+            word-wrap: break-word;
         }
 
         .message-footer {
@@ -480,6 +546,8 @@
             align-items: center;
             gap: 0.3rem;
             transition: color 0.3s;
+            font-family: 'League Spartan', sans-serif;
+            font-size: 0.9rem;
         }
 
         .btn-like:hover, .btn-reply:hover {
@@ -550,6 +618,53 @@
             font-size: 3rem;
             margin-bottom: 1rem;
             color: var(--cinza-medio);
+        }
+
+        /* Admin Controls (oculto por padrão) */
+        .admin-controls {
+            background: var(--verde-suave);
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--verde-terroso);
+        }
+
+        .admin-controls h4 {
+            color: var(--verde-terroso);
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .admin-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-admin {
+            background-color: var(--verde-terroso);
+            color: var(--branco);
+            border: none;
+            padding: 0.7rem 1.5rem;
+            font-family: 'League Spartan', sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-admin:hover {
+            background-color: #4a5840;
+        }
+
+        .btn-admin.danger {
+            background-color: #d32f2f;
+        }
+
+        .btn-admin.danger:hover {
+            background-color: #b71c1c;
         }
 
         /* Footer */
@@ -708,29 +823,41 @@
                 <div class="contact-form">
                     <h3><i class="fas fa-pen"></i> Escreva sua mensagem</h3>
                     
-                    <!-- Mensagem de sucesso (inicialmente escondida) -->
+                    <!-- Mensagem de sucesso -->
                     <div id="success-message" class="success-message" style="display: none;">
                         <h4><i class="fas fa-check-circle"></i> Mensagem enviada com sucesso!</h4>
-                        <p>Obrigado pelo seu contato. Responderemos em até 48 horas.</p>
+                        <p id="success-details">Obrigado pelo seu contato.</p>
+                        <p><small>Recarregue a página ou vá para o mural para ver sua mensagem.</small></p>
                     </div>
                     
-                    <!-- Formulário de contato funcional -->
-                    <form id="contact-form" method="POST" action="enviar_email.php">
+                    <!-- Mensagem de erro -->
+                    <div id="error-message" class="error-message-container" style="display: none;">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Erro ao enviar mensagem</h4>
+                        <p id="error-details">Ocorreu um erro. Tente novamente.</p>
+                    </div>
+                    
+                    <!-- Formulário de contato -->
+                    <form id="contact-form" method="POST" action="#">
                         <div class="form-group">
                             <label for="nome">Seu Nome *</label>
                             <input type="text" id="nome" name="nome" required 
-                                   placeholder="Digite seu nome completo">
+                                   placeholder="Digite seu nome completo"
+                                   oninput="validateField(this, 'nome')">
+                            <div class="error-message" id="nome-error"></div>
                         </div>
                         
                         <div class="form-group">
                             <label for="email">Seu E-mail *</label>
                             <input type="email" id="email" name="email" required 
-                                   placeholder="seu.email@exemplo.com">
+                                   placeholder="seu.email@exemplo.com"
+                                   oninput="validateField(this, 'email')">
+                            <div class="error-message" id="email-error"></div>
                         </div>
                         
                         <div class="form-group">
                             <label for="assunto">Assunto *</label>
-                            <select id="assunto" name="assunto" required>
+                            <select id="assunto" name="assunto" required
+                                    onchange="validateField(this, 'assunto')">
                                 <option value="" disabled selected>Selecione um assunto</option>
                                 <option value="Elogio">Elogio</option>
                                 <option value="Sugestão">Sugestão</option>
@@ -739,6 +866,7 @@
                                 <option value="Proposta comercial">Proposta comercial</option>
                                 <option value="Outro">Outro</option>
                             </select>
+                            <div class="error-message" id="assunto-error"></div>
                         </div>
                         
                         <!-- Tipo de Mensagem (Público/Privado) -->
@@ -768,11 +896,13 @@
                         <div class="form-group">
                             <label for="mensagem">Sua Mensagem *</label>
                             <textarea id="mensagem" name="mensagem" required 
-                                      placeholder="Digite sua mensagem aqui..."></textarea>
+                                      placeholder="Digite sua mensagem aqui..."
+                                      oninput="validateField(this, 'mensagem')"></textarea>
+                            <div class="error-message" id="mensagem-error"></div>
                         </div>
                         
                         <div class="form-buttons">
-                            <button type="submit" class="btn-form btn-submit">
+                            <button type="submit" class="btn-form btn-submit" id="submit-btn">
                                 <i class="fas fa-paper-plane"></i> Enviar Mensagem
                             </button>
                             <button type="button" onclick="clearForm()" class="btn-form btn-clear">
@@ -781,7 +911,7 @@
                         </div>
                         
                         <p style="text-align: center; margin-top: 1rem; color: var(--marrom-claro); font-size: 0.9rem;">
-                            * Campos obrigatórios
+                            * Campos obrigatórios | Mensagens salvas localmente no navegador
                         </p>
                     </form>
                 </div>
@@ -828,10 +958,29 @@
         <!-- Mural Tab -->
         <div id="mural-tab" class="tab-content">
             <div class="mural-container">
+                <!-- Controles do Admin (opcional) -->
+                <div class="admin-controls" id="admin-controls" style="display: none;">
+                    <h4><i class="fas fa-user-shield"></i> Controles do Administrador</h4>
+                    <div class="admin-buttons">
+                        <button class="btn-admin" onclick="exportMessages()">
+                            <i class="fas fa-download"></i> Exportar Mensagens
+                        </button>
+                        <button class="btn-admin" onclick="clearAllMessages()">
+                            <i class="fas fa-trash"></i> Limpar Todas as Mensagens
+                        </button>
+                        <button class="btn-admin danger" onclick="resetSystem()">
+                            <i class="fas fa-redo"></i> Resetar Sistema
+                        </button>
+                    </div>
+                </div>
+                
                 <div class="mural-header">
                     <h3><i class="fas fa-comments"></i> Mural de Mensagens Públicas</h3>
                     <div class="mural-controls">
-                        <button class="btn-refresh" onclick="refreshMural()">
+                        <div class="mural-stats" id="mural-stats">
+                            Carregando...
+                        </div>
+                        <button class="btn-refresh" onclick="refreshMural()" id="refresh-btn">
                             <i class="fas fa-sync-alt"></i> Atualizar
                         </button>
                     </div>
@@ -839,57 +988,19 @@
                 
                 <!-- Messages Grid -->
                 <div class="messages-grid" id="messages-grid">
-                    <!-- Mensagens públicas serão carregadas aqui -->
-                    <div class="message-card message-public">
-                        <div class="message-header">
-                            <div>
-                                <span class="message-author">Ana Silva</span>
-                                <span class="message-type-badge badge-public">Público</span>
-                            </div>
-                            <span class="message-date">Hoje às 08:33</span>
-                        </div>
-                        <div class="message-content">
-                            <p>Adorei a trilogia Afelandra! Quando sai o próximo livro?</p>
-                        </div>
-                        <div class="message-footer">
-                            <span>Assunto: Elogio</span>
-                            <div class="message-actions">
-                                <button class="btn-like" onclick="toggleLike(this)">
-                                    <i class="far fa-heart"></i> <span>12</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="message-card message-public">
-                        <div class="message-header">
-                            <div>
-                                <span class="message-author">Carlos Mendes</span>
-                                <span class="message-type-badge badge-public">Público</span>
-                            </div>
-                            <span class="message-date">Ontem às 10:33</span>
-                        </div>
-                        <div class="message-content">
-                            <p>Seria ótimo ver mais traduções de autores lituanos como Balis Sruoga.</p>
-                        </div>
-                        <div class="message-footer">
-                            <span>Assunto: Sugestão</span>
-                            <div class="message-actions">
-                                <button class="btn-like" onclick="toggleLike(this)">
-                                    <i class="far fa-heart"></i> <span>8</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Mensagens serão carregadas dinamicamente aqui -->
                 </div>
                 
-                <!-- Empty State (escondido por padrão) -->
-                <div id="empty-state" class="empty-state" style="display: none;">
+                <!-- Empty State -->
+                <div id="empty-state" class="empty-state">
                     <div class="empty-icon">
                         <i class="far fa-comment-dots"></i>
                     </div>
                     <h4>Nenhuma mensagem pública ainda</h4>
                     <p>Seja o primeiro a compartilhar uma mensagem no mural!</p>
+                    <button class="tab-btn" onclick="showTab('form')" style="margin-top: 1rem;">
+                        <i class="fas fa-envelope"></i> Enviar Primeira Mensagem
+                    </button>
                 </div>
             </div>
         </div>
@@ -919,10 +1030,500 @@
             <hr class="footer-divider">
             
             <p>© 2023 Loxias Apollo. Todos os direitos reservados.</p>
+            <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.5rem;">
+                Sistema de mensagens funcionando com localStorage | Recarregue a página para ver atualizações
+            </p>
         </div>
     </footer>
 
     <script>
+        // ==============================================
+        // SISTEMA DE GERENCIAMENTO DE MENSAGENS
+        // ==============================================
+
+        const STORAGE_KEY = 'loxias_messages';
+        let messages = [];
+
+        // Inicializar o sistema
+        function initSystem() {
+            loadMessages();
+            checkEmptyMural();
+            updateMuralStats();
+            
+            // Verificar se é admin (modo de desenvolvimento)
+            const isAdmin = localStorage.getItem('loxias_admin') === 'true' || 
+                           window.location.hash === '#admin';
+            if (isAdmin) {
+                document.getElementById('admin-controls').style.display = 'block';
+                localStorage.setItem('loxias_admin', 'true');
+            }
+            
+            // Adicionar evento ao formulário
+            document.getElementById('contact-form').addEventListener('submit', handleSubmit);
+            
+            // Carregar mural inicialmente
+            refreshMural();
+        }
+
+        // Carregar mensagens do localStorage
+        function loadMessages() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (stored) {
+                try {
+                    messages = JSON.parse(stored);
+                } catch (e) {
+                    messages = [];
+                    console.error('Erro ao carregar mensagens:', e);
+                }
+            }
+            return messages;
+        }
+
+        // Salvar mensagens no localStorage
+        function saveMessages() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+                return true;
+            } catch (e) {
+                console.error('Erro ao salvar mensagens:', e);
+                return false;
+            }
+        }
+
+        // Gerar ID único
+        function generateId() {
+            return Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        }
+
+        // ==============================================
+        // FUNÇÕES DO FORMULÁRIO
+        // ==============================================
+
+        // Validar campo do formulário
+        function validateField(field, fieldName) {
+            const errorElement = document.getElementById(fieldName + '-error');
+            let isValid = true;
+            let errorMessage = '';
+
+            // Remover classes anteriores
+            field.classList.remove('input-error', 'input-success');
+
+            // Validações específicas
+            if (field.value.trim() === '') {
+                isValid = false;
+                errorMessage = 'Este campo é obrigatório';
+                field.classList.add('input-error');
+            } else {
+                switch(fieldName) {
+                    case 'email':
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!emailRegex.test(field.value)) {
+                            isValid = false;
+                            errorMessage = 'Digite um e-mail válido';
+                            field.classList.add('input-error');
+                        } else {
+                            field.classList.add('input-success');
+                        }
+                        break;
+                    case 'nome':
+                        if (field.value.length < 3) {
+                            isValid = false;
+                            errorMessage = 'Nome deve ter pelo menos 3 caracteres';
+                            field.classList.add('input-error');
+                        } else {
+                            field.classList.add('input-success');
+                        }
+                        break;
+                    case 'mensagem':
+                        if (field.value.length < 10) {
+                            isValid = false;
+                            errorMessage = 'Mensagem muito curta (mínimo 10 caracteres)';
+                            field.classList.add('input-error');
+                        } else if (field.value.length > 1000) {
+                            isValid = false;
+                            errorMessage = 'Mensagem muito longa (máximo 1000 caracteres)';
+                            field.classList.add('input-error');
+                        } else {
+                            field.classList.add('input-success');
+                        }
+                        break;
+                    default:
+                        field.classList.add('input-success');
+                }
+            }
+
+            // Mostrar/ocultar mensagem de erro
+            if (!isValid) {
+                errorElement.textContent = errorMessage;
+                errorElement.style.display = 'block';
+            } else {
+                errorElement.style.display = 'none';
+            }
+
+            return isValid;
+        }
+
+        // Validar formulário completo
+        function validateForm() {
+            const fields = [
+                { id: 'nome', name: 'nome' },
+                { id: 'email', name: 'email' },
+                { id: 'assunto', name: 'assunto' },
+                { id: 'mensagem', name: 'mensagem' }
+            ];
+
+            let isValid = true;
+
+            fields.forEach(field => {
+                const element = document.getElementById(field.id);
+                if (!validateField(element, field.name)) {
+                    isValid = false;
+                }
+            });
+
+            return isValid;
+        }
+
+        // Limpar formulário
+        function clearForm() {
+            document.getElementById('contact-form').reset();
+            
+            // Limpar validações visuais
+            const fields = document.querySelectorAll('.form-group input, .form-group textarea, .form-group select');
+            fields.forEach(field => {
+                field.classList.remove('input-error', 'input-success');
+                const errorElement = document.getElementById(field.id + '-error');
+                if (errorElement) {
+                    errorElement.style.display = 'none';
+                }
+            });
+            
+            // Ocultar mensagens de status
+            document.getElementById('success-message').style.display = 'none';
+            document.getElementById('error-message').style.display = 'none';
+            
+            // Mostrar formulário
+            document.getElementById('contact-form').style.display = 'block';
+        }
+
+        // Processar envio do formulário
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            if (!validateForm()) {
+                showError('Por favor, corrija os erros no formulário.');
+                return;
+            }
+
+            const submitBtn = document.getElementById('submit-btn');
+            const originalText = submitBtn.innerHTML;
+            
+            // Mostrar estado de carregamento
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+            submitBtn.disabled = true;
+
+            // Coletar dados do formulário
+            const formData = {
+                id: generateId(),
+                nome: document.getElementById('nome').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                assunto: document.getElementById('assunto').value,
+                mensagem: document.getElementById('mensagem').value.trim(),
+                visibilidade: document.querySelector('input[name="visibilidade"]:checked').value,
+                data: new Date().toISOString(),
+                curtidas: 0,
+                respondida: false,
+                aprovada: true // Em produção, isso seria false inicialmente
+            };
+
+            // Salvar mensagem
+            setTimeout(() => {
+                const success = saveMessage(formData);
+                
+                if (success) {
+                    showSuccess(`Mensagem ${formData.visibilidade === 'publico' ? 'publicada no mural!' : 'enviada com sucesso!'}`);
+                    
+                    // Limpar formulário
+                    setTimeout(() => {
+                        clearForm();
+                    }, 1500);
+                    
+                    // Se for mensagem pública, atualizar mural
+                    if (formData.visibilidade === 'publico') {
+                        setTimeout(() => {
+                            showTab('mural');
+                            refreshMural();
+                        }, 1000);
+                    }
+                } else {
+                    showError('Erro ao salvar mensagem. Tente novamente.');
+                }
+                
+                // Restaurar botão
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 1000);
+        }
+
+        // Salvar mensagem no sistema
+        function saveMessage(messageData) {
+            try {
+                messages.unshift(messageData); // Adicionar no início
+                const saved = saveMessages();
+                return saved;
+            } catch (e) {
+                console.error('Erro ao salvar mensagem:', e);
+                return false;
+            }
+        }
+
+        // ==============================================
+        // FUNÇÕES DO MURAL
+        // ==============================================
+
+        // Atualizar estatísticas do mural
+        function updateMuralStats() {
+            const publicMessages = messages.filter(m => m.visibilidade === 'publico' && m.aprovada);
+            const totalMessages = publicMessages.length;
+            const todayMessages = publicMessages.filter(m => {
+                const msgDate = new Date(m.data);
+                const today = new Date();
+                return msgDate.toDateString() === today.toDateString();
+            }).length;
+
+            document.getElementById('mural-stats').innerHTML = 
+                `<i class="fas fa-chart-bar"></i> ${totalMessages} mensagens | ${todayMessages} hoje`;
+        }
+
+        // Atualizar mural
+        function refreshMural() {
+            const refreshBtn = document.getElementById('refresh-btn');
+            const originalText = refreshBtn.innerHTML;
+            
+            // Mostrar estado de carregamento
+            refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Atualizando...';
+            refreshBtn.disabled = true;
+
+            // Simular delay de rede
+            setTimeout(() => {
+                loadMessages();
+                renderMessages();
+                updateMuralStats();
+                checkEmptyMural();
+                
+                // Restaurar botão
+                refreshBtn.innerHTML = originalText;
+                refreshBtn.disabled = false;
+            }, 800);
+        }
+
+        // Renderizar mensagens no mural
+        function renderMessages() {
+            const container = document.getElementById('messages-grid');
+            const publicMessages = messages.filter(m => m.visibilidade === 'publico' && m.aprovada);
+            
+            // Ordenar por data (mais recentes primeiro)
+            publicMessages.sort((a, b) => new Date(b.data) - new Date(a.data));
+            
+            // Limitar a 20 mensagens
+            const displayMessages = publicMessages.slice(0, 20);
+            
+            // Gerar HTML das mensagens
+            container.innerHTML = '';
+            
+            displayMessages.forEach(msg => {
+                const messageElement = createMessageElement(msg);
+                container.appendChild(messageElement);
+            });
+        }
+
+        // Criar elemento HTML para uma mensagem
+        function createMessageElement(message) {
+            const div = document.createElement('div');
+            div.className = `message-card message-${message.visibilidade}`;
+            
+            // Formatar data
+            const messageDate = new Date(message.data);
+            const now = new Date();
+            const diffTime = Math.abs(now - messageDate);
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            
+            let dateText;
+            if (diffDays === 0) {
+                // Hoje
+                const diffHours = Math.floor(diffTime / (1000 * 60 * 60));
+                if (diffHours === 0) {
+                    const diffMinutes = Math.floor(diffTime / (1000 * 60));
+                    dateText = `Há ${diffMinutes} min${diffMinutes !== 1 ? 's' : ''}`;
+                } else {
+                    dateText = `Hoje às ${messageDate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}`;
+                }
+            } else if (diffDays === 1) {
+                dateText = 'Ontem';
+            } else if (diffDays < 7) {
+                dateText = `Há ${diffDays} dia${diffDays !== 1 ? 's' : ''}`;
+            } else {
+                dateText = messageDate.toLocaleDateString('pt-BR');
+            }
+            
+            div.innerHTML = `
+                <div class="message-header">
+                    <div>
+                        <span class="message-author">${escapeHtml(message.nome)}</span>
+                        <span class="message-type-badge badge-${message.visibilidade}">
+                            ${message.visibilidade === 'publico' ? 'Público' : 'Privado'}
+                        </span>
+                    </div>
+                    <span class="message-date">${dateText}</span>
+                </div>
+                <div class="message-content">
+                    <p><strong>${escapeHtml(message.assunto)}</strong></p>
+                    <p>${escapeHtml(message.mensagem)}</p>
+                </div>
+                <div class="message-footer">
+                    <span>Assunto: ${escapeHtml(message.assunto)}</span>
+                    <div class="message-actions">
+                        <button class="btn-like" onclick="toggleLike('${message.id}')" data-liked="false">
+                            <i class="${message.liked ? 'fas' : 'far'} fa-heart"></i>
+                            <span>${message.curtidas || 0}</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            return div;
+        }
+
+        // Curtir/Descurtir mensagem
+        function toggleLike(messageId) {
+            const message = messages.find(m => m.id === messageId);
+            if (!message) return;
+            
+            // Verificar se já curtiu
+            const hasLiked = localStorage.getItem(`liked_${messageId}`) === 'true';
+            
+            if (hasLiked) {
+                // Remover curtida
+                message.curtidas = Math.max(0, (message.curtidas || 0) - 1);
+                localStorage.removeItem(`liked_${messageId}`);
+            } else {
+                // Adicionar curtida
+                message.curtidas = (message.curtidas || 0) + 1;
+                localStorage.setItem(`liked_${messageId}`, 'true');
+            }
+            
+            // Salvar alterações
+            saveMessages();
+            
+            // Atualizar visualização
+            refreshMural();
+        }
+
+        // ==============================================
+        // FUNÇÕES AUXILIARES
+        // ==============================================
+
+        // Mostrar mensagem de sucesso
+        function showSuccess(message) {
+            const successDiv = document.getElementById('success-message');
+            const details = document.getElementById('success-details');
+            
+            details.textContent = message;
+            successDiv.style.display = 'block';
+            
+            // Ocultar formulário
+            document.getElementById('contact-form').style.display = 'none';
+            
+            // Rolar até a mensagem
+            successDiv.scrollIntoView({ behavior: 'smooth' });
+            
+            // Auto-esconder após 5 segundos
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+                document.getElementById('contact-form').style.display = 'block';
+            }, 10000);
+        }
+
+        // Mostrar mensagem de erro
+        function showError(message) {
+            const errorDiv = document.getElementById('error-message');
+            const details = document.getElementById('error-details');
+            
+            details.textContent = message;
+            errorDiv.style.display = 'block';
+            
+            // Rolar até a mensagem
+            errorDiv.scrollIntoView({ behavior: 'smooth' });
+            
+            // Auto-esconder após 5 segundos
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        // Verificar se o mural está vazio
+        function checkEmptyMural() {
+            const container = document.getElementById('messages-grid');
+            const emptyState = document.getElementById('empty-state');
+            const publicMessages = messages.filter(m => m.visibilidade === 'publico' && m.aprovada);
+            
+            if (publicMessages.length === 0) {
+                emptyState.style.display = 'block';
+            } else {
+                emptyState.style.display = 'none';
+            }
+        }
+
+        // Escape HTML para segurança
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // ==============================================
+        // FUNÇÕES DE ADMINISTRAÇÃO
+        // ==============================================
+
+        // Exportar mensagens
+        function exportMessages() {
+            const dataStr = JSON.stringify(messages, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = `mensagens_loxias_${new Date().toISOString().split('T')[0]}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+            
+            alert(`Exportadas ${messages.length} mensagens.`);
+        }
+
+        // Limpar todas as mensagens
+        function clearAllMessages() {
+            if (confirm('Tem certeza que deseja limpar TODAS as mensagens?\nEsta ação não pode ser desfeita.')) {
+                messages = [];
+                saveMessages();
+                refreshMural();
+                showSuccess('Todas as mensagens foram removidas.');
+            }
+        }
+
+        // Resetar sistema
+        function resetSystem() {
+            if (confirm('Isso irá resetar TODO o sistema de mensagens.\nTem certeza?')) {
+                localStorage.removeItem(STORAGE_KEY);
+                localStorage.removeItem('loxias_admin');
+                messages = [];
+                window.location.reload();
+            }
+        }
+
+        // ==============================================
+        // FUNÇÕES DE INTERFACE
+        // ==============================================
+
         // Função para alternar entre as abas
         function showTab(tabName) {
             // Esconde todas as abas
@@ -936,98 +1537,55 @@
             // Mostra a aba selecionada e ativa o botão correspondente
             document.getElementById(tabName + '-tab').style.display = 'block';
             event.currentTarget.classList.add('active');
+            
+            // Se for a aba do mural, atualizar
+            if (tabName === 'mural') {
+                refreshMural();
+            }
         }
-        
-        // Mostra a aba do formulário por padrão
+
+        // ==============================================
+        // INICIALIZAÇÃO
+        // ==============================================
+
+        // Inicializar quando a página carregar
         document.addEventListener('DOMContentLoaded', function() {
             showTab('form');
+            initSystem();
             
-            // Verifica se há parâmetro de sucesso na URL
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('enviado') === 'sucesso') {
-                const successMessage = document.getElementById('success-message');
-                const contactForm = document.getElementById('contact-form');
+            // Adicionar exemplo inicial se não houver mensagens
+            if (messages.length === 0) {
+                const exampleMessages = [
+                    {
+                        id: generateId(),
+                        nome: "Ana Silva",
+                        email: "ana@exemplo.com",
+                        assunto: "Elogio",
+                        mensagem: "Adorei a trilogia Afelandra! Quando sai o próximo livro?",
+                        visibilidade: "publico",
+                        data: new Date(Date.now() - 2*60*60*1000).toISOString(), // 2 horas atrás
+                        curtidas: 12,
+                        respondida: false,
+                        aprovada: true
+                    },
+                    {
+                        id: generateId(),
+                        nome: "Carlos Mendes",
+                        email: "carlos@exemplo.com",
+                        assunto: "Sugestão",
+                        mensagem: "Seria ótimo ver mais traduções de autores lituanos como Balis Sruoga.",
+                        visibilidade: "publico",
+                        data: new Date(Date.now() - 26*60*60*1000).toISOString(), // 26 horas atrás
+                        curtidas: 8,
+                        respondida: false,
+                        aprovada: true
+                    }
+                ];
                 
-                successMessage.style.display = 'block';
-                contactForm.style.display = 'none';
-                
-                // Rola até a mensagem de sucesso
-                successMessage.scrollIntoView({ behavior: 'smooth' });
+                exampleMessages.forEach(msg => saveMessage(msg));
+                saveMessages();
             }
-            
-            // Adiciona comportamento de envio ao formulário
-            const form = document.getElementById('contact-form');
-            form.addEventListener('submit', function(e) {
-                const submitBtn = this.querySelector('.btn-submit');
-                const originalText = submitBtn.innerHTML;
-                
-                // Altera o texto do botão durante o envio
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
-                submitBtn.disabled = true;
-                
-                // O envio real acontece via action do formulário (enviar_email.php)
-            });
         });
-        
-        // Função para limpar o formulário
-        function clearForm() {
-            document.getElementById('contact-form').reset();
-        }
-        
-        // Função para atualizar o mural
-        function refreshMural() {
-            const refreshBtn = event.currentTarget;
-            const originalText = refreshBtn.innerHTML;
-            
-            // Mostra estado de carregamento
-            refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Atualizando...';
-            refreshBtn.disabled = true;
-            
-            // Simula uma atualização (em uma implementação real, buscaria dados do servidor)
-            setTimeout(() => {
-                refreshBtn.innerHTML = originalText;
-                refreshBtn.disabled = false;
-                
-                // Aqui você faria uma requisição AJAX para buscar novas mensagens
-                // Exemplo:
-                // fetch('buscar_mensagens.php')
-                //   .then(response => response.json())
-                //   .then(data => atualizarMural(data));
-                
-                alert('Mural atualizado! (Funcionalidade completa requer backend)');
-            }, 1000);
-        }
-        
-        // Função para curtir mensagens
-        function toggleLike(button) {
-            const icon = button.querySelector('i');
-            const countSpan = button.querySelector('span');
-            let count = parseInt(countSpan.textContent);
-            
-            if (button.classList.contains('liked')) {
-                // Remove curtida
-                icon.className = 'far fa-heart';
-                countSpan.textContent = count - 1;
-                button.classList.remove('liked');
-            } else {
-                // Adiciona curtida
-                icon.className = 'fas fa-heart';
-                countSpan.textContent = count + 1;
-                button.classList.add('liked');
-            }
-        }
-        
-        // Verifica se há mensagens no mural (para mostrar estado vazio)
-        function checkEmptyMural() {
-            const messagesGrid = document.getElementById('messages-grid');
-            const emptyState = document.getElementById('empty-state');
-            
-            if (messagesGrid.children.length === 0) {
-                emptyState.style.display = 'block';
-            } else {
-                emptyState.style.display = 'none';
-            }
-        }
     </script>
 </body>
 </html>
