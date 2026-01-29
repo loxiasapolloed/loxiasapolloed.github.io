@@ -1029,5 +1029,40 @@
             }
         }
     </script>
+    // Adicione no final do <script> existente
+function enviarParaGmailDireto() {
+    const nome = document.getElementById('nome').value;
+    const email = document.getElementById('email').value;
+    const assunto = document.getElementById('assunto').value;
+    const mensagem = document.getElementById('mensagem').value;
+    const visibilidade = document.querySelector('input[name="visibilidade"]:checked').value;
+    
+    const mailtoLink = 
+        'mailto:loxias.apollo.ed@gmail.com?' +
+        'subject=' + encodeURIComponent('Site Loxias: ' + assunto) +
+        '&body=' + encodeURIComponent(
+            'Nome: ' + nome + '\n' +
+            'E-mail: ' + email + '\n' +
+            'Assunto: ' + assunto + '\n' +
+            'Visibilidade: ' + visibilidade + '\n\n' +
+            'Mensagem:\n' + mensagem + '\n\n' +
+            '---\nEnviado do site Loxias Apollo'
+        );
+    
+    window.location.href = mailtoLink;
+    return true;
+}
+
+// Modifique o evento submit do formulário
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault(); // Previne envio normal
+    enviarParaGmailDireto();
+    
+    // Mostra mensagem de sucesso após 2 segundos
+    setTimeout(() => {
+        document.getElementById('success-message').style.display = 'block';
+        this.style.display = 'none';
+    }, 2000);
+});
 </body>
 </html>
