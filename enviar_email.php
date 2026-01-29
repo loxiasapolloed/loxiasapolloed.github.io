@@ -5,6 +5,7 @@
 // Configurações
 $para_email = "loxias.apollo.ed@gmail.com"; // Seu email
 $assunto_site = "Loxias Apollo - Mensagem do Site";
+$log_file = "contatos_log.txt";
 
 // Habilitar exibição de erros (apenas para desenvolvimento)
 error_reporting(E_ALL);
@@ -113,7 +114,7 @@ $corpo_email = "
 // Cabeçalhos do email
 $headers = "MIME-Version: 1.0" . "\r\n";
 $headers .= "Content-type: text/html; charset=utf-8" . "\r\n";
-$headers .= "From: $nome <$email>" . "\r\n";
+$headers .= "From: Loxias Apollo <contato@loxiasapollo.com.br>" . "\r\n";
 $headers .= "Reply-To: $email" . "\r\n";
 $headers .= "X-Mailer: PHP/" . phpversion();
 
@@ -122,9 +123,30 @@ try {
     $enviado = mail($para_email, $assunto_email, $corpo_email, $headers);
     
     if ($enviado) {
-        // Salvar também em um arquivo de log (backup)
-        $log_data = date('Y-m-d H:i:s') . " | $nome | $email | $assunto | $visibilidade\n";
-        file_put_contents('contatos_log.txt', $log_data, FILE_APPEND);
+        // Tentar salvar no log (não é crítico se falhar)
+        try {
+            $log_data = date('Y-m-d H:i:s') . " | $nome | $email | $assunto | $visibilidade | ENVIADO\n";
+            
+            // Criar arquivo se não existir
+            if (!file_exists($log_file)) {
+                // Cabeçalho do log
+                $cabecalho = "=================================================================\n";
+                $cabecalho .= "LOG DE CONTATOS - LOXIAS APOLLO\n";
+                $cabecalho .= "Data de criação: " . date('d/m/Y H:i:s') . "\n";
+                $cabecalho .= "=================================================================\n";
+                $cabecalho .= "DATA | NOME | EMAIL | ASSUNTO | VISIBILIDADE | STATUS\n";
+                $cabecalho .= "=================================================================\n";
+                
+                file_put_contents($log_file, $cabecalho);
+            }
+            
+            // Adicionar entrada ao log
+            file_put_contents($log_file, $log_data, FILE_APPEND);
+            
+        } catch (Exception $log_error) {
+            // Ignorar erro de log, não é crítico
+            error_log("Erro ao salvar log: " . $log_error->getMessage());
+        }
         
         // Retornar sucesso
         echo json_encode([
@@ -132,7 +154,28 @@ try {
             "message" => "Mensagem enviada com sucesso!",
             "redirect" => "contato.html?enviado=sucesso"
         ]);
+        
     } else {
+        // Tentar salvar no log mesmo falhando o email
+        try {
+            if (!file_exists($log_file)) {
+                $cabecalho = "=================================================================\n";
+                $cabecalho .= "LOG DE CONTATOS - LOXIAS APOLLO\n";
+                $cabecalho .= "Data de criação: " . date('d/m/Y H:i:s') . "\n";
+                $cabecalho .= "=================================================================\n";
+                $cabecalho .= "DATA | NOME | EMAIL | ASSUNTO | VISIBILIDADE | STATUS\n";
+                $cabecalho .= "=================================================================\n";
+                
+                file_put_contents($log_file, $cabecalho);
+            }
+            
+            $log_data = date('Y-m-d H:i:s') . " | $nome | $email | $assunto | $visibilidade | FALHA_ENVIO\n";
+            file_put_contents($log_file, $log_data, FILE_APPEND);
+            
+        } catch (Exception $log_error) {
+            // Ignorar erro de log
+        }
+        
         throw new Exception("Falha no envio do email. Servidor de email não respondeu.");
     }
     
