@@ -316,53 +316,20 @@
             display: none;
             background-color: var(--verde-suave);
             border-left: 4px solid var(--verde-terroso);
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: 4px;
             margin-bottom: 2rem;
             text-align: center;
-            animation: fadeIn 0.5s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .success-message h4 {
             color: var(--verde-terroso);
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.5rem;
             font-weight: 400;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            font-size: 1.4rem;
-        }
-
-        .success-message p {
-            color: var(--verde-terroso);
-            margin-bottom: 0.5rem;
-        }
-
-        .success-message button {
-            margin-top: 1.5rem;
-            padding: 0.8rem 2rem;
-            background-color: var(--preto);
-            color: var(--amarelo);
-            border: none;
-            border-radius: 2px;
-            cursor: pointer;
-            font-family: 'League Spartan', sans-serif;
-            font-size: 1rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s;
-        }
-
-        .success-message button:hover {
-            background-color: #333;
-            transform: translateY(-2px);
         }
 
         /* Mural Tab */
@@ -745,20 +712,16 @@
                     <div id="success-message" class="success-message" style="display: none;">
                         <h4><i class="fas fa-check-circle"></i> Mensagem enviada com sucesso!</h4>
                         <p>Obrigado pelo seu contato. Responderemos em até 48 horas.</p>
-                        <p><small>Você também receberá uma confirmação por e-mail.</small></p>
-                        <button onclick="window.location.href='contato.html'">
-                            <i class="fas fa-plus"></i> Enviar outra mensagem
-                        </button>
                     </div>
                     
-                    <!-- Formulário de contato com FormSubmit -->
-                    <form id="contact-form" method="POST" action="https://formsubmit.co/el/heraro">
+                    <!-- Formulário de contato com FormSubmit - VERSÃO CORRIGIDA -->
+                    <form id="contact-form" method="POST" action="https://formsubmit.co/el/heraro" target="_blank">
                         <!-- Campos escondidos do FormSubmit -->
                         <input type="hidden" name="_subject" value="📚 Nova mensagem do site Loxias Apollo">
                         <input type="hidden" name="_template" value="table">
-                        <input type="hidden" name="_captcha" value="false"> <!-- CAPTCHA DESLIGADO -->
+                        <input type="hidden" name="_captcha" value="false">
+                        <!-- URL CORRETA para redirecionamento -->
                         <input type="hidden" name="_next" value="https://loxiasapollo.com.br/contato.html?enviado=sucesso">
-                        <input type="hidden" name="_autoresponse" value="Obrigado pelo seu contato! Recebemos sua mensagem e responderemos em até 48 horas. - Equipe Loxias Apollo">
                         <input type="hidden" name="_replyto" value="" id="replyto-email">
                         
                         <div class="form-group">
@@ -813,7 +776,7 @@
                         <div class="form-group">
                             <label for="mensagem">Sua Mensagem *</label>
                             <textarea id="mensagem" name="message" required 
-                                      placeholder="Digite sua mensagem aqui..." rows="6"></textarea>
+                                      placeholder="Digite sua mensagem aqui..."></textarea>
                         </div>
                         
                         <div class="form-buttons">
@@ -829,7 +792,7 @@
                             * Campos obrigatórios
                         </p>
                         
-                        <!-- Proteção contra spam (honeypot) -->
+                        <!-- Campo honeypot para spam -->
                         <input type="text" name="_honey" style="display:none">
                     </form>
                 </div>
@@ -984,11 +947,6 @@
             // Mostra a aba selecionada e ativa o botão correspondente
             document.getElementById(tabName + '-tab').style.display = 'block';
             event.currentTarget.classList.add('active');
-            
-            // Se for a aba do mural, verifica se está vazia
-            if (tabName === 'mural') {
-                checkEmptyMural();
-            }
         }
         
         // Mostra a aba do formulário por padrão
@@ -998,15 +956,17 @@
             // Verifica se há parâmetro de sucesso na URL
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('enviado') === 'sucesso') {
-                showSuccessMessage();
+                const successMessage = document.getElementById('success-message');
+                const contactForm = document.getElementById('contact-form');
+                
+                successMessage.style.display = 'block';
+                contactForm.style.display = 'none';
+                
+                // Rola até a mensagem de sucesso
+                successMessage.scrollIntoView({ behavior: 'smooth' });
             }
             
-            // Configura o formulário
-            setupForm();
-        });
-        
-        // Configura o formulário
-        function setupForm() {
+            // Configura o formulário para FormSubmit
             const form = document.getElementById('contact-form');
             const emailField = document.getElementById('email');
             const replytoField = document.getElementById('replyto-email');
@@ -1031,15 +991,18 @@
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
                 submitBtn.disabled = true;
                 
-                // O FormSubmit cuidará do redirecionamento via _next
-                // Se quiser AJAX, pode descomentar abaixo:
-                // e.preventDefault();
-                // enviarFormulario(form, submitBtn, originalText);
+                // O FormSubmit abrirá em nova aba (target="_blank")
+                // Aguarda 2 segundos e mostra mensagem de sucesso
+                setTimeout(() => {
+                    showSuccessMessage();
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }, 2000);
             });
             
             // Preenche inicialmente o campo _replyto
             replytoField.value = emailField.value;
-        }
+        });
         
         // Função para validar o formulário
         function validarFormulario() {
@@ -1090,9 +1053,6 @@
             
             // Rola até a mensagem de sucesso
             successMessage.scrollIntoView({ behavior: 'smooth' });
-            
-            // Remove o parâmetro da URL sem recarregar a página
-            history.replaceState(null, '', window.location.pathname);
         }
         
         // Função para limpar o formulário
@@ -1114,13 +1074,7 @@
             setTimeout(() => {
                 refreshBtn.innerHTML = originalText;
                 refreshBtn.disabled = false;
-                
-                // Em um sistema real, você faria uma requisição AJAX aqui
-                // fetch('buscar_mensagens.php')
-                //   .then(response => response.json())
-                //   .then(data => atualizarMural(data));
-                
-                console.log('Mural atualizado (simulado)');
+                alert('Mural atualizado! (Funcionalidade completa requer backend)');
             }, 1000);
         }
         
@@ -1150,36 +1104,9 @@
             
             if (messagesGrid.children.length === 0) {
                 emptyState.style.display = 'block';
-                messagesGrid.style.display = 'none';
             } else {
                 emptyState.style.display = 'none';
-                messagesGrid.style.display = 'grid';
             }
-        }
-        
-        // Função alternativa para envio via AJAX (opcional)
-        function enviarFormulario(form, submitBtn, originalText) {
-            const formData = new FormData(form);
-            
-            fetch(form.action, {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Mostra mensagem de sucesso
-                    showSuccessMessage();
-                } else {
-                    alert('Erro ao enviar mensagem. Tente novamente.');
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
-                }
-            })
-            .catch(error => {
-                alert('Erro de conexão. Tente novamente.');
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            });
         }
     </script>
 </body>
