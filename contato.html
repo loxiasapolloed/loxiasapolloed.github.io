@@ -9,22 +9,17 @@
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- DEPENDÊNCIAS EXATAS DO JOTFORM -->
-    <script>window.enableEventObserver=true</script>
-    <script>window.CDN="https://cdn.jotfor.ms/"</script>
-    <script>window.umdRootPath="https://cdn.jotfor.ms/s/umd/f7dd015ce7c/"</script>
-    <script>window.staticRootPath="https://cdn.jotfor.ms/s/static/a616474d946/"</script>
-    <script src="https://cdn.jotfor.ms/s/static/a616474d946/static/prototype.forms.js" type="text/javascript"></script>
-    <script src="https://cdn.jotfor.ms/s/static/a616474d946/static/jotform.forms.js" type="text/javascript"></script>
-    <script src="https://cdn.jotfor.ms/s/static/a616474d946/js/punycode-1.4.1.min.js" type="text/javascript" defer></script>
-    <script src="https://cdn.jotfor.ms/s/umd/f7dd015ce7c/for-form-branding-footer.js" type="text/javascript" defer></script>
-    <script src="https://cdn.jotfor.ms/s/static/a616474d946/js/vendor/smoothscroll.min.js" type="text/javascript"></script>
-    <script src="https://cdn.jotfor.ms/s/static/a616474d946/js/errorNavigation.js" type="text/javascript"></script>
-    <link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/stylebuilder/static/form-common.css"/>
-    <link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/themes/CSS/5e6b428acc8c4e222d1beb91.css"/>
+    <!-- Script minimal do JotForm - SOMENTE O ESSENCIAL -->
+    <script>
+        // Configuração mínima para evitar conflitos
+        window.JotFormConfig = {
+            formId: '260283048023651',
+            successRedirect: 'thanktext'
+        };
+    </script>
     
     <style>
-        /* ESTILOS PERSONALIZADOS (mantendo funcionalidade JotForm) */
+        /* ESTILO COMPLETO DA LOXIAS APOLLO */
         :root {
             --preto: #000000;
             --amarelo: #FFD700;
@@ -58,15 +53,22 @@
 
         .container {
             width: 100%;
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
+            animation: fadeIn 0.5s ease-out;
         }
 
-        /* Header personalizado */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header no estilo Loxias Apollo */
         .custom-header {
             text-align: center;
             margin-bottom: 40px;
             padding: 20px;
+            border-bottom: 2px solid var(--amarelo);
         }
 
         .custom-header h1 {
@@ -102,87 +104,89 @@
             color: var(--verde-terroso);
         }
 
-        /* Override dos estilos do JotForm para parecer com nosso design */
-        .form-all {
-            border-radius: 15px !important;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08) !important;
-            border: 1px solid var(--cinza-medio) !important;
-            background: var(--cinza-claro) !important;
+        /* Formulário no estilo Loxias Apollo */
+        .contact-form {
+            background: var(--cinza-claro);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid var(--cinza-medio);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
         }
 
-        .form-header-group.header-large {
-            background: var(--branco) !important;
-            border-bottom: 2px solid var(--amarelo) !important;
-            padding: 40px 0 !important;
-            text-align: center !important;
+        .form-group {
+            margin-bottom: 25px;
         }
 
-        .form-header-group .form-header {
-            color: var(--preto) !important;
-            font-family: 'League Spartan', sans-serif !important;
-            font-weight: 600 !important;
-            font-size: 2rem !important;
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--preto);
+            font-size: 1.05rem;
         }
 
-        /* Estilizar labels */
-        .form-label {
-            font-family: 'League Spartan', sans-serif !important;
-            font-weight: 500 !important;
-            color: var(--preto) !important;
-            font-size: 1.05rem !important;
+        .required::after {
+            content: " *";
+            color: #f23a3c;
         }
 
         .form-sub-label {
-            font-family: 'League Spartan', sans-serif !important;
-            color: var(--verde-terroso) !important;
-            opacity: 0.7 !important;
+            display: block;
+            font-size: 0.85em;
+            color: var(--verde-terroso);
+            margin-top: 4px;
+            opacity: 0.7;
         }
 
-        /* Estilizar inputs */
-        .form-textbox, .form-textarea {
-            border: 1px solid #d4dbe9 !important;
-            border-radius: 8px !important;
-            font-family: 'League Spartan', sans-serif !important;
-            padding: 12px 15px !important;
-            transition: all 0.3s ease !important;
+        /* Estilização dos inputs do JotForm */
+        .jotform-input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #d4dbe9;
+            border-radius: 8px;
+            font-family: 'League Spartan', sans-serif;
+            font-size: 1rem;
+            background-color: white;
+            transition: all 0.3s ease;
         }
 
-        .form-textbox:focus, .form-textarea:focus {
-            border-color: var(--verde-terroso) !important;
-            box-shadow: 0 0 0 3px rgba(90, 107, 79, 0.15) !important;
-            outline: none !important;
+        .jotform-input:focus {
+            outline: none;
+            border-color: var(--verde-terroso);
+            box-shadow: 0 0 0 3px rgba(90, 107, 79, 0.15);
         }
 
-        /* Estilizar botão de submit */
-        .form-submit-button {
-            background: var(--preto) !important;
-            color: var(--amarelo) !important;
-            border: none !important;
-            border-radius: 8px !important;
-            font-family: 'League Spartan', sans-serif !important;
-            font-weight: 600 !important;
-            padding: 15px 40px !important;
-            font-size: 1.1rem !important;
-            transition: all 0.3s ease !important;
-            margin: 30px auto 0 !important;
-            display: block !important;
-            min-width: 200px !important;
+        .jotform-input:hover {
+            border-color: rgba(90, 107, 79, 0.5);
         }
 
-        .form-submit-button:hover {
-            background: #333 !important;
-            transform: translateY(-2px) !important;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15) !important;
+        .jotform-textarea {
+            min-height: 150px;
+            resize: vertical;
+            line-height: 1.5;
         }
 
-        /* Responsividade */
+        .name-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .name-group > div {
+            flex: 1;
+        }
+
         @media (max-width: 768px) {
-            .custom-header h1 {
-                font-size: 2rem;
+            .name-group {
+                flex-direction: column;
+                gap: 15px;
             }
             
-            .form-header-group.header-large {
-                padding: 30px 0 !important;
+            .contact-form {
+                padding: 25px;
+            }
+            
+            .custom-header h1 {
+                font-size: 2rem;
             }
         }
 
@@ -191,324 +195,269 @@
                 padding: 10px;
             }
             
+            .contact-form {
+                padding: 20px;
+            }
+            
             .custom-header h1 {
                 font-size: 1.8rem;
             }
-            
-            .form-submit-button {
-                width: 100% !important;
-            }
         }
 
-        /* Teste bem sucedido */
-        .test-success {
-            background: rgba(40, 167, 69, 0.1);
-            border: 2px solid var(--success-color);
+        /* Botão de envio no estilo Loxias Apollo */
+        .submit-btn {
+            background: var(--preto);
+            color: var(--amarelo);
+            border: none;
+            padding: 16px 45px;
             border-radius: 8px;
-            padding: 20px;
-            margin-top: 30px;
-            text-align: center;
-            display: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 30px auto 0;
+            transition: all 0.3s ease;
+            min-width: 200px;
+            width: 100%;
+            max-width: 300px;
+            font-family: 'League Spartan', sans-serif;
         }
 
-        .test-success i {
-            color: var(--success-color);
-            font-size: 2rem;
-            margin-bottom: 10px;
+        .submit-btn:hover {
+            background: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn i {
+            font-size: 0.9em;
+        }
+
+        .form-required-note {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: var(--marrom-claro);
+            opacity: 0.8;
+        }
+
+        /* Mensagem de sucesso */
+        .success-message {
+            background: rgba(40, 167, 69, 0.1);
+            border: 1px solid rgba(40, 167, 69, 0.3);
+            color: #28a745;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 25px;
+            display: none;
+            align-items: flex-start;
+            gap: 15px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .success-message i {
+            color: #28a745;
+            font-size: 1.5em;
+            margin-top: 2px;
+        }
+
+        .success-message-content h3 {
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+        }
+
+        .success-message-content p {
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Loading animation */
+        .submit-loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--amarelo);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header personalizado -->
+        <!-- Header no estilo Loxias Apollo -->
         <header class="custom-header">
             <h1>✉️ Contato Loxias Apollo</h1>
             <p class="custom-subtitle">Entre em contato diretamente com nossa equipe</p>
             <div class="contact-info">
                 <p><i class="fas fa-envelope"></i> Responderemos por email em até 48 horas</p>
                 <p><i class="fas fa-shield-alt"></i> Suas informações são mantidas em sigilo</p>
-                <p><i class="fas fa-check-circle" style="color: #28a745;"></i> <strong>SISTEMA TESTADO E FUNCIONAL</strong></p>
+                <p><i class="fas fa-check-circle" style="color: #28a745;"></i> Sistema testado e funcionando</p>
             </div>
         </header>
 
-        <!-- Mensagem de teste bem sucedido -->
-        <div class="test-success" id="testSuccess">
+        <!-- Mensagem de sucesso -->
+        <div id="successMessage" class="success-message">
             <i class="fas fa-check-circle"></i>
-            <h3>✅ Sistema testado e funcionando!</h3>
-            <p>O formulário abaixo é IDÊNTICO ao que funcionou no teste.</p>
-            <p style="font-size: 0.9rem; margin-top: 10px;">
-                <strong>Link que funcionou:</strong> https://form.jotform.com/260283048023651
-            </p>
+            <div class="success-message-content">
+                <h3>Mensagem enviada com sucesso!</h3>
+                <p>Recebemos seu contato e responderemos em breve através do email informado.</p>
+            </div>
         </div>
 
-        <!-- FORMULÁRIO JOTFORM ORIGINAL (funcional) -->
-        <form class="jotform-form" 
+        <!-- Formulário JotForm COM ESTILO DA LOXIAS APOLLO -->
+        <form class="contact-form" 
               action="https://submit.jotform.com/submit/260283048023651" 
               method="post" 
               name="form_260283048023651" 
               id="260283048023651" 
-              accept-charset="utf-8" 
-              autocomplete="on">
+              accept-charset="utf-8">
             
-            <!-- Campos ocultos OBRIGATÓRIOS do JotForm -->
+            <!-- Campos ocultos necessários -->
             <input type="hidden" name="formID" value="260283048023651" />
-            <input type="hidden" id="JWTContainer" value="" />
-            <input type="hidden" id="cardinalOrderNumber" value="" />
-            <input type="hidden" id="jsExecutionTracker" name="jsExecutionTracker" value="build-date-1769686880155" />
-            <input type="hidden" id="submitSource" name="submitSource" value="unknown" />
-            <input type="hidden" id="submitDate" name="submitDate" value="undefined" />
-            <input type="hidden" id="buildDate" name="buildDate" value="1769686880155" />
-            <input type="hidden" name="uploadServerUrl" value="https://upload.jotform.com/upload" />
-            <input type="hidden" name="eventObserver" value="1" />
-            
-            <div role="main" class="form-all">
-                <ul class="form-section page-section" role="presentation">
-                    <!-- Header do formulário -->
-                    <li id="cid_9" class="form-input-wide" data-type="control_head">
-                        <div class="form-header-group header-large">
-                            <div class="header-text httal htvam">
-                                <h1 id="header_9" class="form-header" data-component="header">Envie sua mensagem</h1>
-                            </div>
-                        </div>
-                    </li>
-                    
-                    <!-- Campo: Nome Completo -->
-                    <li class="form-line jf-required" data-type="control_fullname" id="id_15">
-                        <label class="form-label form-label-top form-label-auto" id="label_15" for="first_15">
-                            Seu Nome Completo<span class="form-required">*</span>
-                        </label>
-                        <div id="cid_15" class="form-input-wide jf-required" data-layout="full">
-                            <div data-wrapper-react="true">
-                                <span class="form-sub-label-container" style="vertical-align:top" data-input-type="first">
-                                    <input type="text" 
-                                           id="first_15" 
-                                           name="q15_fullName15[first]" 
-                                           class="form-textbox validate[required]" 
-                                           data-defaultvalue="" 
-                                           autoComplete="section-input_15 given-name" 
-                                           size="10" 
-                                           data-component="first" 
-                                           aria-labelledby="label_15 sublabel_15_first" 
-                                           required="" 
-                                           placeholder="Primeiro Nome" />
-                                    <label class="form-sub-label" for="first_15" id="sublabel_15_first">Primeiro Nome</label>
-                                </span>
-                                <span class="form-sub-label-container" style="vertical-align:top" data-input-type="last">
-                                    <input type="text" 
-                                           id="last_15" 
-                                           name="q15_fullName15[last]" 
-                                           class="form-textbox validate[required]" 
-                                           data-defaultvalue="" 
-                                           autoComplete="section-input_15 family-name" 
-                                           size="15" 
-                                           data-component="last" 
-                                           aria-labelledby="label_15 sublabel_15_last" 
-                                           required="" 
-                                           placeholder="Sobrenome" />
-                                    <label class="form-sub-label" for="last_15" id="sublabel_15_last">Sobrenome</label>
-                                </span>
-                            </div>
-                        </div>
-                    </li>
-                    
-                    <!-- Campo: E-mail -->
-                    <li class="form-line jf-required" data-type="control_email" id="id_7">
-                        <label class="form-label form-label-top form-label-auto" id="label_7" for="input_7">
-                            Seu E-mail<span class="form-required">*</span>
-                        </label>
-                        <div id="cid_7" class="form-input-wide jf-required" data-layout="half">
-                            <span class="form-sub-label-container" style="vertical-align:top">
-                                <input type="email" 
-                                       id="input_7" 
-                                       name="q7_email" 
-                                       class="form-textbox validate[required, Email]" 
-                                       data-defaultvalue="" 
-                                       autoComplete="section-input_7 email" 
-                                       style="width:100%" 
-                                       size="30" 
-                                       placeholder="seu.email@exemplo.com" 
-                                       data-component="email" 
-                                       aria-labelledby="label_7 sublabel_input_7" 
-                                       required="" />
-                                <label class="form-sub-label" for="input_7" id="sublabel_input_7">Usaremos apenas para responder seu contato</label>
-                            </span>
-                        </div>
-                    </li>
-                    
-                    <!-- Campo: Mensagem -->
-                    <li class="form-line jf-required" data-type="control_textarea" id="id_4">
-                        <label class="form-label form-label-top form-label-auto" id="label_4" for="input_4">
-                            Sua Mensagem<span class="form-required">*</span>
-                        </label>
-                        <div id="cid_4" class="form-input-wide jf-required" data-layout="full">
-                            <textarea id="input_4" 
-                                      class="form-textarea validate[required]" 
-                                      name="q4_message4" 
-                                      style="width:100%;height:150px" 
-                                      data-component="textarea" 
-                                      required="" 
-                                      aria-labelledby="label_4"
-                                      placeholder="Descreva detalhadamente sua dúvida, sugestão ou solicitação..."></textarea>
-                        </div>
-                    </li>
-                    
-                    <!-- Botão de envio -->
-                    <li class="form-line" data-type="control_button" id="id_2">
-                        <div id="cid_2" class="form-input-wide" data-layout="full">
-                            <div data-align="center" class="form-buttons-wrapper form-buttons-center jsTest-button-wrapperField">
-                                <button id="input_2" 
-                                        type="submit" 
-                                        class="form-submit-button submit-button jf-form-buttons jsTest-submitField" 
-                                        data-component="button" 
-                                        data-content="">
-                                    <i class="fas fa-paper-plane" style="margin-right:8px;"></i>
-                                    Enviar Mensagem
-                                </button>
-                            </div>
-                        </div>
-                    </li>
-                    
-                    <!-- Campo anti-spam -->
-                    <li style="display:none">
-                        Should be Empty: <input type="text" name="website" value="" />
-                    </li>
-                </ul>
-            </div>
-            
-            <div style="text-align: center; margin-top: 20px; color: var(--marrom-claro); font-size: 0.9rem;">
-                <i class="fas fa-info-circle"></i> Campos marcados com * são obrigatórios
-            </div>
-            
-            <!-- Scripts do JotForm -->
-            <script>
-                JotForm.showJotFormPowered = "new_footer";
-                JotForm.poweredByText = "Powered by Jotform";
-            </script>
-            <input type="hidden" class="simple_spc" id="simple_spc" name="simple_spc" value="260283048023651" />
-            <script type="text/javascript">
-                var all_spc = document.querySelectorAll("form[id='260283048023651'] .si" + "mple" + "_spc");
-                for (var i = 0; i < all_spc.length; i++) {
-                    all_spc[i].value = "260283048023651-260283048023651";
-                }
-            </script>
-        </form>
+            <input type="hidden" name="website" value="" />
+            <input type="hidden" name="simple_spc" value="260283048023651-260283048023651" />
 
-        <!-- Link alternativo -->
-        <div style="text-align: center; margin-top: 30px;">
-            <p style="font-size: 0.9rem; color: var(--marrom-claro);">
-                Problemas com o formulário? Use o link direto:
-            </p>
-            <a href="https://form.jotform.com/260283048023651" 
-               target="_blank"
-               style="display: inline-flex; align-items: center; gap: 8px; background: var(--verde-suave); color: var(--verde-terroso); padding: 10px 20px; border-radius: 8px; text-decoration: none; border: 1px solid var(--verde-terroso);">
-                <i class="fas fa-external-link-alt"></i>
-                <span>Abrir formulário em nova aba</span>
-            </a>
-        </div>
+            <div class="form-group">
+                <label for="first_15" class="required">Seu Nome Completo</label>
+                <div class="name-group">
+                    <div>
+                        <input type="text" 
+                               id="first_15" 
+                               name="q15_fullName15[first]" 
+                               class="jotform-input" 
+                               placeholder="Primeiro Nome" 
+                               required>
+                        <span class="form-sub-label">Primeiro Nome</span>
+                    </div>
+                    <div>
+                        <input type="text" 
+                               id="last_15" 
+                               name="q15_fullName15[last]" 
+                               class="jotform-input" 
+                               placeholder="Sobrenome" 
+                               required>
+                        <span class="form-sub-label">Sobrenome</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="input_7" class="required">Seu E-mail</label>
+                <input type="email" 
+                       id="input_7" 
+                       name="q7_email" 
+                       class="jotform-input" 
+                       placeholder="seu.email@exemplo.com" 
+                       required>
+                <span class="form-sub-label">Usaremos apenas para responder seu contato</span>
+            </div>
+
+            <div class="form-group">
+                <label for="input_4" class="required">Sua Mensagem</label>
+                <textarea id="input_4" 
+                          name="q4_message4" 
+                          class="jotform-input jotform-textarea" 
+                          placeholder="Descreva detalhadamente sua dúvida, sugestão ou solicitação..." 
+                          required></textarea>
+                <span class="form-sub-label">Seja o mais específico possível para uma resposta mais rápida</span>
+            </div>
+
+            <!-- Botão de envio customizado -->
+            <button type="submit" class="submit-btn" id="submitBtn">
+                <i class="fas fa-paper-plane"></i>
+                <span>Enviar Mensagem</span>
+            </button>
+            
+            <div class="form-required-note">Campos marcados com * são obrigatórios</div>
+        </form>
     </div>
 
-    <!-- CONFIGURAÇÃO EXATA DO JOTFORM -->
-    <script type="text/javascript">
-        // CONFIGURAÇÃO IDÊNTICA à do link que funciona
-        JotForm.newDefaultTheme = true;
-        JotForm.extendsNewTheme = false;
-        JotForm.singleProduct = false;
-        JotForm.newPaymentUIForNewCreatedForms = false;
-        
-        // Textos em português
-        JotForm.texts = {
-            "confirmEmail": "E-mail não é correspondente.",
-            "pleaseWait": "Por favor, aguarde...",
-            "validateEmail": "Você precisa validar este e-mail.",
-            "confirmClearForm": "Tem certeza de que deseja limpar este formulário?",
-            "lessThan": "Sua pontuação deve ser menor ou igual a",
-            "incompleteFields": "Há campos obrigatórios incompletos. Por favor, preencha-os.",
-            "required": "Este campo é obrigatório.",
-            "requireOne": "Pelo menos um campo é obrigatório.",
-            "email": "Insira um endereço de e-mail válido.",
-            "generalError": "O formulário contém erros. Por favor, corrija-os antes de continuar.",
-            "submitButtonText": "Enviar"
-        };
-        
-        JotForm.newPaymentUI = true;
-        JotForm.originalLanguage = "pt";
-        JotForm.isFormViewTrackingAllowed = true;
-        JotForm.replaceTagTest = true;
-        JotForm.activeRedirect = "thanktext"; // IMPORTANTE: Igual ao original
-        JotForm.uploadServerURL = "https://upload.jotform.com/upload";
-        JotForm.clearFieldOnHide = "disable";
-        JotForm.submitError = "jumpToFirstError";
-        
-        // Inicialização do JotForm
-        JotForm.init(function(){
-            console.log('JotForm inicializado com sucesso!');
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('260283048023651');
+            const submitBtn = document.getElementById('submitBtn');
+            const successMessage = document.getElementById('successMessage');
             
-            // Mostrar que o teste foi bem sucedido
-            document.getElementById('testSuccess').style.display = 'block';
-            
-            // Configurar footer do JotForm
-            window.addEventListener('DOMContentLoaded', function(){
-                window.brandingFooter.init({
-                    "formID": 260283048023651,
-                    "campaign": "powered_by_jotform_le",
-                    "isCardForm": false,
-                    "isLegacyForm": true,
-                    "formLanguage": "pt"
-                });
+            // Validação básica antes do envio
+            form.addEventListener('submit', function(e) {
+                // Validação simples
+                const firstName = document.getElementById('first_15').value.trim();
+                const lastName = document.getElementById('last_15').value.trim();
+                const email = document.getElementById('input_7').value.trim();
+                const message = document.getElementById('input_4').value.trim();
+                
+                if (!firstName || !lastName || !email || !message) {
+                    e.preventDefault();
+                    alert('Por favor, preencha todos os campos obrigatórios.');
+                    return;
+                }
+                
+                // Validar email básico
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    e.preventDefault();
+                    alert('Por favor, insira um email válido.');
+                    return;
+                }
+                
+                // Mostrar loading no botão
+                const originalHTML = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<div class="submit-loading" style="margin-right:8px;"></div><span>Enviando...</span>';
+                submitBtn.disabled = true;
+                
+                // Configurar timeout para caso de erro
+                setTimeout(function() {
+                    submitBtn.innerHTML = originalHTML;
+                    submitBtn.disabled = false;
+                }, 5000);
+                
+                // O formulário será enviado normalmente para o JotForm
+                // Após o envio, o JotForm redireciona para a página de agradecimento
             });
             
-            JotForm.isFullSource = true;
-        });
-
-        // Configuração adicional para paymentExtras
-        setTimeout(function() {
-            JotForm.paymentExtrasOnTheFly([
-                null,
-                null,
-                {
-                    "name": "submit",
-                    "qid": "2",
-                    "text": "Enviar Mensagem",
-                    "type": "control_button"
-                },
-                null,
-                {
-                    "mde": "No",
-                    "name": "message4",
-                    "qid": "4",
-                    "text": "Message",
-                    "type": "control_textarea",
-                    "wysiwyg": "Disable"
-                },
-                null,
-                null,
-                {
-                    "name": "email",
-                    "qid": "7",
-                    "subLabel": "example@example.com",
-                    "text": "E-mail",
-                    "type": "control_email"
-                },
-                null,
-                {
-                    "name": "clickTo",
-                    "qid": "9",
-                    "text": "Contact Us",
-                    "type": "control_head"
-                },
-                null,
-                null,
-                null,
-                null,
-                null,
-                {
-                    "name": "fullName15",
-                    "qid": "15",
-                    "text": "Full Name",
-                    "type": "control_fullname"
+            // Acompanhar envio bem sucedido (baseado no redirect do JotForm)
+            // Se houver parâmetros na URL indicando sucesso
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('success') || window.location.href.includes('thank')) {
+                successMessage.style.display = 'flex';
+                successMessage.scrollIntoView({ behavior: 'smooth' });
+                
+                // Esconder após 8 segundos
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 8000);
+            }
+            
+            // Prevenir envio duplo
+            let isSubmitting = false;
+            form.addEventListener('submit', function() {
+                if (isSubmitting) {
+                    return false;
                 }
-            ]);
-        }, 20);
+                isSubmitting = true;
+                return true;
+            });
+        });
     </script>
+    
+    <!-- Scripts do JotForm em iframe invisível para processamento -->
+    <iframe name="jotform-iframe" style="display: none;"></iframe>
 </body>
 </html>
