@@ -1,463 +1,618 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contato - Loxias Apollo</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Script minimal do JotForm - SOMENTE O ESSENCIAL -->
-    <script>
-        // Configuração mínima para evitar conflitos
-        window.JotFormConfig = {
-            formId: '260283048023651',
-            successRedirect: 'thanktext'
-        };
-    </script>
-    
-    <style>
-        /* ESTILO COMPLETO DA LOXIAS APOLLO */
-        :root {
-            --preto: #000000;
-            --amarelo: #FFD700;
-            --branco: #FFFFFF;
-            --verde-terroso: #5A6B4F;
-            --marrom-claro: #A68A64;
-            --cinza-claro: #f5f5f5;
-            --cinza-medio: #e0e0e0;
-            --verde-suave: rgba(90, 107, 79, 0.1);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contato - Loxias Apollo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@200;300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --preto: #000000;
+      --amarelo: #FFD700;
+      --branco: #FFFFFF;
+      --verde-terroso: #5A6B4F;
+      --marrom-claro: #A68A64;
+      --cinza-claro: #f5f5f5;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'League Spartan', sans-serif;
-            background: var(--branco);
-            color: var(--preto);
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            background-image: radial-gradient(circle at 10% 20%, rgba(239, 232, 212, 0.1) 0%, transparent 20%),
-                              radial-gradient(circle at 90% 80%, rgba(239, 232, 212, 0.1) 0%, transparent 20%);
-        }
+    body {
+      font-family: 'League Spartan', sans-serif;
+      font-weight: 200;
+      color: var(--preto);
+      background-color: var(--branco);
+      line-height: 1.6;
+    }
 
-        .container {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            animation: fadeIn 0.5s ease-out;
-        }
+    /* ===== CABEÇALHO COM LOGO ===== */
+    .header-with-logo {
+      padding: 2rem 5%;
+      background-color: var(--branco);
+      border-bottom: 1px solid var(--preto);
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      max-width: 900px;
+      margin: 0 auto;
+    }
 
-        /* Header no estilo Loxias Apollo */
-        .custom-header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 20px;
-            border-bottom: 2px solid var(--amarelo);
-        }
+    .site-logo {
+      height: 120px;
+      width: auto;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));
+    }
 
-        .custom-header h1 {
-            color: var(--preto);
-            margin-bottom: 10px;
-            font-size: 2.5rem;
-            font-weight: 600;
-        }
+    .site-title-container {
+      text-align: left;
+      border-left: 2px solid var(--amarelo);
+      padding-left: 1.5rem;
+      flex: 1;
+      min-width: 250px;
+    }
 
-        .custom-subtitle {
-            color: var(--verde-terroso);
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
+    .site-title {
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+      color: var(--preto);
+      margin-bottom: 0.3rem;
+      font-weight: 300;
+    }
 
-        .contact-info {
-            text-align: center;
-            margin-top: 20px;
-            padding: 15px;
-            background: var(--verde-suave);
-            border-radius: 8px;
-            border-left: 4px solid var(--verde-terroso);
-        }
+    .site-subtitle {
+      color: var(--verde-terroso);
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+    }
 
-        .contact-info p {
-            margin: 5px 0;
-            color: var(--verde-terroso);
-            font-size: 0.95rem;
-        }
+    /* ===== NAVEGAÇÃO ===== */
+    nav {
+      padding: 1.3rem 5%;
+      background-color: var(--preto);
+      text-align: center;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
 
-        .contact-info i {
-            margin-right: 8px;
-            color: var(--verde-terroso);
-        }
+    nav a {
+      color: var(--amarelo);
+      text-decoration: none;
+      margin: 0 1.2rem;
+      font-size: 1.15rem;
+      font-weight: 400;
+      transition: opacity 0.3s;
+      white-space: nowrap;
+    }
 
-        /* Formulário no estilo Loxias Apollo */
-        .contact-form {
-            background: var(--cinza-claro);
-            padding: 40px;
-            border-radius: 15px;
-            border: 1px solid var(--cinza-medio);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-        }
+    nav a:hover {
+      opacity: 0.7;
+    }
 
-        .form-group {
-            margin-bottom: 25px;
-        }
+    /* ===== CONTEÚDO PRINCIPAL ===== */
+    main {
+      padding: 3rem 5% 4rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--preto);
-            font-size: 1.05rem;
-        }
+    .page-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
 
-        .required::after {
-            content: " *";
-            color: #f23a3c;
-        }
+    .page-title {
+      font-size: 2.2rem;
+      color: var(--preto);
+      margin-bottom: 1rem;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
 
-        .form-sub-label {
-            display: block;
-            font-size: 0.85em;
-            color: var(--verde-terroso);
-            margin-top: 4px;
-            opacity: 0.7;
-        }
+    .page-subtitle {
+      color: var(--verde-terroso);
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
 
-        /* Estilização dos inputs do JotForm */
-        .jotform-input {
-            width: 100%;
-            padding: 14px;
-            border: 1px solid #d4dbe9;
-            border-radius: 8px;
-            font-family: 'League Spartan', sans-serif;
-            font-size: 1rem;
-            background-color: white;
-            transition: all 0.3s ease;
-        }
+    .contact-info {
+      background: rgba(90, 107, 79, 0.05);
+      border-left: 4px solid var(--verde-terroso);
+      padding: 1.5rem;
+      border-radius: 4px;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
 
-        .jotform-input:focus {
-            outline: none;
-            border-color: var(--verde-terroso);
-            box-shadow: 0 0 0 3px rgba(90, 107, 79, 0.15);
-        }
+    .contact-info p {
+      margin: 0.5rem 0;
+      color: var(--verde-terroso);
+      font-size: 1rem;
+    }
 
-        .jotform-input:hover {
-            border-color: rgba(90, 107, 79, 0.5);
-        }
+    .contact-info i {
+      margin-right: 8px;
+      color: var(--verde-terroso);
+    }
 
-        .jotform-textarea {
-            min-height: 150px;
-            resize: vertical;
-            line-height: 1.5;
-        }
+    /* ===== FORMULÁRIO DE CONTATO ===== */
+    .contact-form-container {
+      background: var(--cinza-claro);
+      padding: 2.5rem;
+      border-radius: 4px;
+      border-left: 4px solid var(--amarelo);
+      margin-bottom: 3rem;
+    }
 
-        .name-group {
-            display: flex;
-            gap: 15px;
-        }
+    .form-group {
+      margin-bottom: 1.8rem;
+    }
 
-        .name-group > div {
-            flex: 1;
-        }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 400;
+      color: var(--preto);
+      font-size: 1.1rem;
+    }
 
-        @media (max-width: 768px) {
-            .name-group {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .contact-form {
-                padding: 25px;
-            }
-            
-            .custom-header h1 {
-                font-size: 2rem;
-            }
-        }
+    .required::after {
+      content: " *";
+      color: #d32f2f;
+    }
 
-        @media (max-width: 480px) {
-            body {
-                padding: 10px;
-            }
-            
-            .contact-form {
-                padding: 20px;
-            }
-            
-            .custom-header h1 {
-                font-size: 1.8rem;
-            }
-        }
+    .form-sub-label {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--marrom-claro);
+      margin-top: 0.3rem;
+      opacity: 0.8;
+    }
 
-        /* Botão de envio no estilo Loxias Apollo */
-        .submit-btn {
-            background: var(--preto);
-            color: var(--amarelo);
-            border: none;
-            padding: 16px 45px;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin: 30px auto 0;
-            transition: all 0.3s ease;
-            min-width: 200px;
-            width: 100%;
-            max-width: 300px;
-            font-family: 'League Spartan', sans-serif;
-        }
+    input, textarea, select {
+      width: 100%;
+      padding: 0.9rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-family: 'League Spartan', sans-serif;
+      font-size: 1rem;
+      background-color: white;
+      transition: all 0.3s ease;
+    }
 
-        .submit-btn:hover {
-            background: #333;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-        }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--verde-terroso);
+      box-shadow: 0 0 0 2px rgba(90, 107, 79, 0.1);
+    }
 
-        .submit-btn:active {
-            transform: translateY(0);
-        }
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+      line-height: 1.5;
+    }
 
-        .submit-btn i {
-            font-size: 0.9em;
-        }
+    .name-group {
+      display: flex;
+      gap: 1.5rem;
+    }
 
-        .form-required-note {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 0.9em;
-            color: var(--marrom-claro);
-            opacity: 0.8;
-        }
+    .name-group > div {
+      flex: 1;
+    }
 
-        /* Mensagem de sucesso */
-        .success-message {
-            background: rgba(40, 167, 69, 0.1);
-            border: 1px solid rgba(40, 167, 69, 0.3);
-            color: #28a745;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 25px;
-            display: none;
-            align-items: flex-start;
-            gap: 15px;
-            animation: slideIn 0.5s ease-out;
-        }
+    /* ===== BOTÃO DE ENVIO ===== */
+    .submit-btn {
+      background: var(--preto);
+      color: var(--amarelo);
+      border: none;
+      padding: 1rem 2.5rem;
+      border-radius: 4px;
+      font-size: 1.1rem;
+      font-weight: 400;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      margin: 2rem auto 1rem;
+      transition: all 0.3s ease;
+      min-width: 200px;
+      font-family: 'League Spartan', sans-serif;
+    }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    .submit-btn:hover {
+      background: #333;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
 
-        .success-message i {
-            color: #28a745;
-            font-size: 1.5em;
-            margin-top: 2px;
-        }
+    .submit-btn:disabled {
+      background: #666;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
 
-        .success-message-content h3 {
-            margin-bottom: 8px;
-            font-size: 1.2rem;
-        }
+    .form-required-note {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: var(--marrom-claro);
+      opacity: 0.8;
+    }
 
-        .success-message-content p {
-            margin: 0;
-            line-height: 1.5;
-        }
+    /* ===== MENSAGEM DE SUCESSO ===== */
+    .success-message {
+      background: rgba(76, 175, 80, 0.1);
+      border: 1px solid rgba(76, 175, 80, 0.3);
+      color: #2e7d32;
+      padding: 1.5rem;
+      border-radius: 4px;
+      margin-top: 1.5rem;
+      display: none;
+      align-items: flex-start;
+      gap: 1rem;
+      animation: fadeIn 0.5s ease-out;
+    }
 
-        /* Loading animation */
-        .submit-loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            border-radius: 50%;
-            border-top-color: var(--amarelo);
-            animation: spin 1s ease-in-out infinite;
-        }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-    </style>
+    .success-message i {
+      color: #2e7d32;
+      font-size: 1.3rem;
+      margin-top: 0.2rem;
+    }
+
+    .success-message h4 {
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .success-message p {
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* ===== LOADING ===== */
+    .submit-loading {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255, 215, 0, 0.3);
+      border-radius: 50%;
+      border-top-color: var(--amarelo);
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ===== LINK ALTERNATIVO ===== */
+    .alternative-link {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--cinza-claro);
+    }
+
+    .alternative-link p {
+      margin-bottom: 1rem;
+      color: var(--marrom-claro);
+      font-size: 0.95rem;
+    }
+
+    .alt-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: rgba(90, 107, 79, 0.1);
+      color: var(--verde-terroso);
+      padding: 0.8rem 1.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      border: 1px solid var(--verde-terroso);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .alt-link-btn:hover {
+      background: rgba(90, 107, 79, 0.2);
+    }
+
+    /* ===== RESPONSIVIDADE ===== */
+    @media (max-width: 768px) {
+      .logo-container {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .site-title-container {
+        border-left: none;
+        padding-left: 0;
+        border-top: 2px solid var(--amarelo);
+        padding-top: 1rem;
+        margin-top: 1rem;
+        text-align: center;
+      }
+      
+      .site-title {
+        font-size: 2rem;
+      }
+      
+      nav a {
+        display: block;
+        margin: 0.7rem 0;
+        font-size: 1.1rem;
+      }
+      
+      .contact-form-container {
+        padding: 1.5rem;
+      }
+      
+      .page-title {
+        font-size: 1.8rem;
+      }
+      
+      .name-group {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      
+      .submit-btn {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+
+    /* ===== RODAPÉ ===== */
+    footer {
+      padding: 2rem 5%;
+      text-align: center;
+      background-color: var(--preto);
+      color: var(--branco);
+      font-size: 0.95rem;
+    }
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        <!-- Header no estilo Loxias Apollo -->
-        <header class="custom-header">
-            <h1>✉️ Contato Loxias Apollo</h1>
-            <p class="custom-subtitle">Entre em contato diretamente com nossa equipe</p>
-            <div class="contact-info">
-                <p><i class="fas fa-envelope"></i> Responderemos por email em até 48 horas</p>
-                <p><i class="fas fa-shield-alt"></i> Suas informações são mantidas em sigilo</p>
-                <p><i class="fas fa-check-circle" style="color: #28a745;"></i> Sistema testado e funcionando</p>
-            </div>
-        </header>
+  <!-- CABEÇALHO COM LOGO -->
+  <header class="header-with-logo">
+    <div class="logo-container">
+      <img src="logo.png" 
+           alt="Logo Loxias Apollo" 
+           class="site-logo">
+      
+      <div class="site-title-container">
+        <h1 class="site-title">LOXIAS APOLLO</h1>
+        <p class="site-subtitle">Editora Independente de Literatura Local e Mundial</p>
+      </div>
+    </div>
+  </header>
 
-        <!-- Mensagem de sucesso -->
-        <div id="successMessage" class="success-message">
-            <i class="fas fa-check-circle"></i>
-            <div class="success-message-content">
-                <h3>Mensagem enviada com sucesso!</h3>
-                <p>Recebemos seu contato e responderemos em breve através do email informado.</p>
-            </div>
-        </div>
-
-        <!-- Formulário JotForm COM ESTILO DA LOXIAS APOLLO -->
-        <form class="contact-form" 
-              action="https://submit.jotform.com/submit/260283048023651" 
-              method="post" 
-              name="form_260283048023651" 
-              id="260283048023651" 
-              accept-charset="utf-8">
-            
-            <!-- Campos ocultos necessários -->
-            <input type="hidden" name="formID" value="260283048023651" />
-            <input type="hidden" name="website" value="" />
-            <input type="hidden" name="simple_spc" value="260283048023651-260283048023651" />
-
-            <div class="form-group">
-                <label for="first_15" class="required">Seu Nome Completo</label>
-                <div class="name-group">
-                    <div>
-                        <input type="text" 
-                               id="first_15" 
-                               name="q15_fullName15[first]" 
-                               class="jotform-input" 
-                               placeholder="Primeiro Nome" 
-                               required>
-                        <span class="form-sub-label">Primeiro Nome</span>
-                    </div>
-                    <div>
-                        <input type="text" 
-                               id="last_15" 
-                               name="q15_fullName15[last]" 
-                               class="jotform-input" 
-                               placeholder="Sobrenome" 
-                               required>
-                        <span class="form-sub-label">Sobrenome</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="input_7" class="required">Seu E-mail</label>
-                <input type="email" 
-                       id="input_7" 
-                       name="q7_email" 
-                       class="jotform-input" 
-                       placeholder="seu.email@exemplo.com" 
-                       required>
-                <span class="form-sub-label">Usaremos apenas para responder seu contato</span>
-            </div>
-
-            <div class="form-group">
-                <label for="input_4" class="required">Sua Mensagem</label>
-                <textarea id="input_4" 
-                          name="q4_message4" 
-                          class="jotform-input jotform-textarea" 
-                          placeholder="Descreva detalhadamente sua dúvida, sugestão ou solicitação..." 
-                          required></textarea>
-                <span class="form-sub-label">Seja o mais específico possível para uma resposta mais rápida</span>
-            </div>
-
-            <!-- Botão de envio customizado -->
-            <button type="submit" class="submit-btn" id="submitBtn">
-                <i class="fas fa-paper-plane"></i>
-                <span>Enviar Mensagem</span>
-            </button>
-            
-            <div class="form-required-note">Campos marcados com * são obrigatórios</div>
-        </form>
+  <!-- NAVEGAÇÃO -->
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="livros.html">Livros</a>
+    <a href="sobre.html">Sobre</a>     
+    <a href="blog.html">Blog</a>
+    <a href="contato.html">Contato</a>
+  </nav>
+  
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main>
+    <div class="page-header">
+      <h2 class="page-title">✉️ Contato Loxias Apollo</h2>
+      <p class="page-subtitle">Entre em contato diretamente com nossa equipe</p>
+      
+      <div class="contact-info">
+        <p><i class="fas fa-envelope"></i> Responderemos por email em até 48 horas</p>
+        <p><i class="fas fa-shield-alt"></i> Suas informações são mantidas em sigilo</p>
+        <p><i class="fas fa-check-circle"></i> Sistema testado e funcionando</p>
+      </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('260283048023651');
-            const submitBtn = document.getElementById('submitBtn');
-            const successMessage = document.getElementById('successMessage');
-            
-            // Validação básica antes do envio
-            form.addEventListener('submit', function(e) {
-                // Validação simples
-                const firstName = document.getElementById('first_15').value.trim();
-                const lastName = document.getElementById('last_15').value.trim();
-                const email = document.getElementById('input_7').value.trim();
-                const message = document.getElementById('input_4').value.trim();
-                
-                if (!firstName || !lastName || !email || !message) {
-                    e.preventDefault();
-                    alert('Por favor, preencha todos os campos obrigatórios.');
-                    return;
-                }
-                
-                // Validar email básico
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(email)) {
-                    e.preventDefault();
-                    alert('Por favor, insira um email válido.');
-                    return;
-                }
-                
-                // Mostrar loading no botão
-                const originalHTML = submitBtn.innerHTML;
-                submitBtn.innerHTML = '<div class="submit-loading" style="margin-right:8px;"></div><span>Enviando...</span>';
-                submitBtn.disabled = true;
-                
-                // Configurar timeout para caso de erro
-                setTimeout(function() {
-                    submitBtn.innerHTML = originalHTML;
-                    submitBtn.disabled = false;
-                }, 5000);
-                
-                // O formulário será enviado normalmente para o JotForm
-                // Após o envio, o JotForm redireciona para a página de agradecimento
-            });
-            
-            // Acompanhar envio bem sucedido (baseado no redirect do JotForm)
-            // Se houver parâmetros na URL indicando sucesso
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.has('success') || window.location.href.includes('thank')) {
-                successMessage.style.display = 'flex';
-                successMessage.scrollIntoView({ behavior: 'smooth' });
-                
-                // Esconder após 8 segundos
-                setTimeout(() => {
-                    successMessage.style.display = 'none';
-                }, 8000);
-            }
-            
-            // Prevenir envio duplo
-            let isSubmitting = false;
-            form.addEventListener('submit', function() {
-                if (isSubmitting) {
-                    return false;
-                }
-                isSubmitting = true;
-                return true;
-            });
-        });
-    </script>
-    
-    <!-- Scripts do JotForm em iframe invisível para processamento -->
-    <iframe name="jotform-iframe" style="display: none;"></iframe>
+    <!-- Formulário de Contato -->
+    <div class="contact-form-container">
+      <!-- Mensagem de Sucesso -->
+      <div id="successMessage" class="success-message">
+        <i class="fas fa-check-circle"></i>
+        <div>
+          <h4>Mensagem enviada com sucesso!</h4>
+          <p>Recebemos seu contato e responderemos em breve através do email informado.</p>
+        </div>
+      </div>
+
+      <!-- Formulário JotForm Estilizado -->
+      <form id="contactForm" 
+            action="https://submit.jotform.com/submit/260283048023651" 
+            method="post" 
+            name="form_260283048023651">
+        
+        <!-- Campos ocultos necessários -->
+        <input type="hidden" name="formID" value="260283048023651" />
+        <input type="hidden" name="website" value="" />
+        <input type="hidden" name="simple_spc" value="260283048023651-260283048023651" />
+
+        <div class="form-group">
+          <label class="required">Seu Nome Completo</label>
+          <div class="name-group">
+            <div>
+              <input type="text" 
+                     name="q15_fullName15[first]" 
+                     placeholder="Primeiro Nome" 
+                     required>
+              <span class="form-sub-label">Primeiro Nome</span>
+            </div>
+            <div>
+              <input type="text" 
+                     name="q15_fullName15[last]" 
+                     placeholder="Sobrenome" 
+                     required>
+              <span class="form-sub-label">Sobrenome</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="required">Seu E-mail</label>
+          <input type="email" 
+                 name="q7_email" 
+                 placeholder="seu.email@exemplo.com" 
+                 required>
+          <span class="form-sub-label">Usaremos apenas para responder seu contato</span>
+        </div>
+
+        <div class="form-group">
+          <label class="required">Assunto</label>
+          <select name="q16_assunto16" required>
+            <option value="" disabled selected>Escolha um assunto...</option>
+            <option value="Dúvida">Dúvida sobre produtos/serviços</option>
+            <option value="Sugestão">Sugestão ou feedback</option>
+            <option value="Parceria">Proposta de parceria</option>
+            <option value="Suporte">Suporte técnico</option>
+            <option value="Outro">Outro assunto</option>
+          </select>
+          <span class="form-sub-label">Escolha o assunto da sua mensagem</span>
+        </div>
+
+        <div class="form-group">
+          <label class="required">Sua Mensagem</label>
+          <textarea name="q4_message4" 
+                    placeholder="Descreva detalhadamente sua dúvida, sugestão ou solicitação..." 
+                    required></textarea>
+          <span class="form-sub-label">Seja o mais específico possível para uma resposta mais rápida</span>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">
+          <i class="fas fa-paper-plane"></i>
+          <span>Enviar Mensagem</span>
+        </button>
+        
+        <div class="form-required-note">Campos marcados com * são obrigatórios</div>
+      </form>
+    </div>
+
+    <!-- Link Alternativo -->
+    <div class="alternative-link">
+      <p>Problemas com o formulário? Use o link direto:</p>
+      <a href="https://form.jotform.com/260283048023651" 
+         target="_blank"
+         class="alt-link-btn">
+        <i class="fas fa-external-link-alt"></i>
+        <span>Abrir formulário em nova aba</span>
+      </a>
+    </div>
+  </main>
+
+  <!-- RODAPÉ -->
+  <footer>
+    <p>© 2026 Loxias Apollo. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('contactForm');
+      const submitBtn = document.getElementById('submitBtn');
+      const successMessage = document.getElementById('successMessage');
+      
+      // Verificar se houve envio bem sucedido (redirecionamento do JotForm)
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.has('success') || window.location.href.includes('thank')) {
+        showSuccessMessage();
+      }
+      
+      // Validação antes do envio
+      form.addEventListener('submit', function(e) {
+        // Validar campos obrigatórios
+        const inputs = form.querySelectorAll('[required]');
+        let isValid = true;
+        
+        for (let input of inputs) {
+          if (!input.value.trim()) {
+            isValid = false;
+            input.style.borderColor = '#d32f2f';
+            input.addEventListener('input', function() {
+              this.style.borderColor = '#ddd';
+            }, { once: true });
+          }
+        }
+        
+        // Validar email
+        const emailInput = form.querySelector('input[type="email"]');
+        if (emailInput && emailInput.value.trim()) {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(emailInput.value)) {
+            isValid = false;
+            emailInput.style.borderColor = '#d32f2f';
+            alert('Por favor, insira um email válido.');
+            return false;
+          }
+        }
+        
+        if (!isValid) {
+          e.preventDefault();
+          alert('Por favor, preencha todos os campos obrigatórios.');
+          return false;
+        }
+        
+        // Mostrar loading
+        submitBtn.innerHTML = '<div class="submit-loading" style="margin-right:8px;"></div><span>Enviando...</span>';
+        submitBtn.disabled = true;
+        
+        // Configurar timeout para caso de erro
+        setTimeout(function() {
+          submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i><span>Enviar Mensagem</span>';
+          submitBtn.disabled = false;
+        }, 5000);
+        
+        // O formulário será enviado para o JotForm
+        // Após o envio, o JotForm redireciona para a página de agradecimento
+      });
+      
+      function showSuccessMessage() {
+        successMessage.style.display = 'flex';
+        successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Esconder após 8 segundos
+        setTimeout(() => {
+          successMessage.style.display = 'none';
+        }, 8000);
+      }
+      
+      // Prevenir envio duplo
+      let isSubmitting = false;
+      form.addEventListener('submit', function(e) {
+        if (isSubmitting) {
+          e.preventDefault();
+          return false;
+        }
+        isSubmitting = true;
+        return true;
+      });
+      
+      // Resetar estado de submissão após 5 segundos
+      form.addEventListener('submit', function() {
+        setTimeout(() => {
+          isSubmitting = false;
+        }, 5000);
+      });
+    });
+  </script>
 </body>
 </html>
