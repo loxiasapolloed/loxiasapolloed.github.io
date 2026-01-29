@@ -140,52 +140,31 @@
             margin: 0 auto;
         }
 
-        /* Tabs */
-        .tabs {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .tab-btn {
-            background-color: var(--branco);
-            color: var(--preto);
-            border: 1px solid var(--preto);
-            padding: 1rem 2rem;
-            font-family: 'League Spartan', sans-serif;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            border-radius: 2px;
-            min-width: 200px;
-        }
-
-        .tab-btn:hover {
-            background-color: var(--cinza-claro);
-        }
-
-        .tab-btn.active {
-            background-color: var(--preto);
-            color: var(--amarelo);
-        }
-
-        /* Contact Form */
+        /* Contact Container */
         .contact-container {
-            max-width: 800px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
-        .contact-form {
-            background-color: var(--cinza-claro);
-            padding: 2.5rem;
-            border-radius: 4px;
-            border: 1px solid var(--cinza-medio);
-            margin-bottom: 3rem;
+        @media (max-width: 1024px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
         }
 
-        .contact-form h3 {
+        /* Left Column - Form */
+        .form-column {
+            background-color: var(--cinza-claro);
+            padding: 2.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--cinza-medio);
+        }
+
+        .form-column h3 {
             color: var(--verde-terroso);
             margin-bottom: 1.5rem;
             font-size: 1.6rem;
@@ -195,6 +174,27 @@
             gap: 0.5rem;
         }
 
+        /* Right Column - Mural */
+        .mural-column {
+            background-color: var(--branco);
+            padding: 2.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--cinza-medio);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mural-column h3 {
+            color: var(--verde-terroso);
+            margin-bottom: 1.5rem;
+            font-size: 1.6rem;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Form Groups */
         .form-group {
             margin-bottom: 1.5rem;
         }
@@ -227,7 +227,7 @@
         }
 
         .form-group textarea {
-            min-height: 150px;
+            min-height: 120px;
             resize: vertical;
         }
 
@@ -252,14 +252,12 @@
         /* Message Type */
         .message-type {
             display: flex;
-            gap: 2rem;
+            gap: 1rem;
             margin-bottom: 1.5rem;
-            flex-wrap: wrap;
         }
 
         .type-option {
             flex: 1;
-            min-width: 200px;
         }
 
         .type-radio {
@@ -268,7 +266,7 @@
 
         .type-label {
             display: block;
-            padding: 1.5rem;
+            padding: 1rem;
             border: 2px solid var(--cinza-medio);
             border-radius: 4px;
             cursor: pointer;
@@ -286,9 +284,16 @@
         }
 
         .type-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+            margin-bottom: 0.3rem;
             color: var(--verde-terroso);
+        }
+
+        .type-text small {
+            font-size: 0.8rem;
+            color: var(--marrom-claro);
+            display: block;
+            margin-top: 0.2rem;
         }
 
         /* Form Buttons */
@@ -370,193 +375,231 @@
             }
         }
 
-        /* Mural Tab */
-        #mural-tab {
-            display: none;
-        }
-
-        /* Estilos do Fórum */
-        .forum-intro {
-            background: linear-gradient(135deg, #f9f9f9 0%, #f5f5f5 100%);
-            padding: 25px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            border-left: 5px solid var(--verde-terroso);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-
-        .forum-intro h3 {
-            color: var(--verde-terroso);
-            margin-bottom: 15px;
-            font-size: 1.8rem;
-        }
-
-        .forum-intro p {
-            color: var(--preto);
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-        }
-
-        .hashtags-guide {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
-            border: 1px solid var(--cinza-medio);
-        }
-
-        .hashtags-guide p {
-            margin-bottom: 10px !important;
-            font-size: 1rem !important;
-        }
-
-        .hashtags {
+        /* Mural Controls */
+        .mural-controls {
             display: flex;
-            gap: 10px;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
             flex-wrap: wrap;
-            justify-content: center;
+            gap: 1rem;
         }
 
-        .hashtag {
-            background: var(--verde-suave);
-            color: var(--verde-terroso);
-            padding: 8px 16px;
-            border-radius: 20px;
+        .mural-stats {
             font-size: 0.9rem;
-            border: 1px solid var(--verde-terroso);
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 500;
+            color: var(--marrom-claro);
+            background: var(--cinza-claro);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
         }
 
-        .hashtag:hover {
-            background: var(--verde-terroso);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .forum-actions {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin: 25px 0 15px;
-            flex-wrap: wrap;
-        }
-
-        .btn-forum {
-            background: var(--preto);
+        .btn-refresh {
+            background-color: var(--preto);
             color: var(--amarelo);
             border: none;
-            padding: 12px 25px;
-            border-radius: 5px;
+            padding: 0.7rem 1.5rem;
             font-family: 'League Spartan', sans-serif;
             font-size: 1rem;
             cursor: pointer;
+            border-radius: 2px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            transition: all 0.3s;
-            min-width: 200px;
-            justify-content: center;
+            gap: 0.5rem;
         }
 
-        .btn-forum:hover {
-            background: #333;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        .btn-refresh:hover {
+            background-color: #333;
         }
 
-        .btn-forum.primary {
-            background: var(--verde-terroso);
-            color: var(--branco);
+        .btn-refresh:disabled {
+            background-color: #666;
+            cursor: not-allowed;
         }
 
-        .btn-forum.primary:hover {
-            background: #4a5840;
+        /* Messages Container */
+        .messages-container {
+            flex: 1;
+            overflow-y: auto;
+            max-height: 600px;
+            padding-right: 10px;
         }
 
-        .forum-info {
-            background: rgba(90, 107, 79, 0.05);
-            padding: 12px;
-            border-radius: 6px;
-            margin-top: 15px;
-            border-left: 3px solid var(--amarelo);
+        .messages-container::-webkit-scrollbar {
+            width: 8px;
         }
 
-        .forum-info small {
-            color: var(--marrom-claro);
-            font-size: 0.9rem;
+        .messages-container::-webkit-scrollbar-track {
+            background: var(--cinza-claro);
+            border-radius: 4px;
         }
 
-        /* Container do Giscus */
-        .giscus-container {
+        .messages-container::-webkit-scrollbar-thumb {
+            background: var(--marrom-claro);
+            border-radius: 4px;
+        }
+
+        /* Message Card */
+        .message-card {
             background: var(--branco);
-            border-radius: 10px;
-            padding: 20px;
             border: 1px solid var(--cinza-medio);
-            margin-top: 20px;
-            min-height: 400px;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
             position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeIn 0.5s ease;
         }
 
-        .giscus-loading {
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--marrom-claro);
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .message-card.public {
+            border-left: 4px solid var(--amarelo);
+        }
+
+        .message-card.private {
+            border-left: 4px solid var(--verde-terroso);
+            background-color: var(--verde-suave);
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .message-author {
+            font-weight: 400;
+            color: var(--verde-terroso);
             font-size: 1.1rem;
         }
 
-        .giscus-loading i {
-            font-size: 2rem;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        /* Fallback do Giscus */
-        .giscus-fallback {
-            background: #fff9e6;
-            border: 2px dashed #FFD700;
-            border-radius: 10px;
-            padding: 40px 20px;
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .fallback-content i {
-            font-size: 3rem;
-            color: #FFD700;
-            margin-bottom: 20px;
-        }
-
-        .fallback-content h4 {
-            color: var(--verde-terroso);
-            margin-bottom: 15px;
-        }
-
-        .fallback-content p {
+        .message-date {
+            font-size: 0.85rem;
             color: var(--marrom-claro);
-            margin-bottom: 25px;
         }
 
-        .fallback-actions {
+        .message-type-badge {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 2px;
+            margin-left: 0.5rem;
+        }
+
+        .badge-public {
+            background-color: var(--amarelo);
+            color: var(--preto);
+        }
+
+        .badge-private {
+            background-color: var(--verde-terroso);
+            color: var(--branco);
+        }
+
+        .message-content {
+            color: var(--preto);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .message-footer {
             display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--cinza-claro);
+            font-size: 0.85rem;
+            color: var(--marrom-claro);
+        }
+
+        .message-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-like {
+            background: none;
+            border: none;
+            color: var(--marrom-claro);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: color 0.3s;
+            font-family: 'League Spartan', sans-serif;
+            font-size: 0.85rem;
+            padding: 0.3rem 0.6rem;
+            border-radius: 3px;
+        }
+
+        .btn-like:hover {
+            background-color: var(--cinza-claro);
+        }
+
+        .btn-like.liked {
+            color: #d32f2f;
+        }
+
+        .btn-like.liked i {
+            color: #d32f2f;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--marrom-claro);
+            background: var(--cinza-claro);
+            border-radius: 8px;
+            border: 2px dashed var(--cinza-medio);
+        }
+
+        .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--cinza-medio);
+        }
+
+        .empty-state h4 {
+            margin-bottom: 0.5rem;
+            color: var(--marrom-claro);
+            font-weight: 400;
         }
 
         /* Contact Info */
         .contact-info {
             background-color: var(--cinza-claro);
             padding: 2rem;
-            border-radius: 4px;
+            border-radius: 8px;
             margin-top: 3rem;
+            grid-column: 1 / -1;
         }
 
         .contact-info h4 {
             color: var(--verde-terroso);
             margin-bottom: 1.5rem;
             font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .info-grid {
@@ -594,53 +637,6 @@
             line-height: 1.5;
         }
 
-        /* Admin Controls (oculto por padrão) */
-        .admin-controls {
-            background: var(--verde-suave);
-            padding: 1.5rem;
-            border-radius: 4px;
-            margin-bottom: 2rem;
-            border-left: 4px solid var(--verde-terroso);
-        }
-
-        .admin-controls h4 {
-            color: var(--verde-terroso);
-            margin-bottom: 1rem;
-            font-weight: 400;
-        }
-
-        .admin-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .btn-admin {
-            background-color: var(--verde-terroso);
-            color: var(--branco);
-            border: none;
-            padding: 0.7rem 1.5rem;
-            font-family: 'League Spartan', sans-serif;
-            font-size: 0.9rem;
-            cursor: pointer;
-            border-radius: 2px;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-admin:hover {
-            background-color: #4a5840;
-        }
-
-        .btn-admin.danger {
-            background-color: #d32f2f;
-        }
-
-        .btn-admin.danger:hover {
-            background-color: #b71c1c;
-        }
-
         /* Footer */
         footer {
             padding: 2.5rem 5%;
@@ -648,7 +644,7 @@
             background-color: var(--preto);
             color: var(--branco);
             font-size: 0.95rem;
-            margin-top: auto;
+            margin-top: 3rem;
         }
 
         .footer-container {
@@ -720,48 +716,44 @@
                 padding: 0.5rem 0;
             }
             
-            .tabs {
-                flex-direction: column;
+            .contact-container {
+                padding: 0 1rem;
             }
             
-            .tab-btn {
-                min-width: auto;
+            .form-column, .mural-column {
+                padding: 1.5rem;
             }
             
             .message-type {
                 flex-direction: column;
             }
             
-            .type-option {
-                min-width: auto;
-            }
-            
             .form-buttons {
                 flex-direction: column;
             }
             
-            .forum-actions {
+            .mural-controls {
                 flex-direction: column;
-                align-items: center;
-            }
-            
-            .btn-forum {
-                width: 100%;
-                max-width: 300px;
-            }
-            
-            .hashtags {
-                gap: 8px;
-            }
-            
-            .hashtag {
-                padding: 6px 12px;
-                font-size: 0.85rem;
+                align-items: stretch;
             }
             
             .footer-top {
                 flex-direction: column;
                 text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-intro h2 {
+                font-size: 1.8rem;
+            }
+            
+            .page-intro p {
+                font-size: 1rem;
+            }
+            
+            .form-column h3, .mural-column h3 {
+                font-size: 1.4rem;
             }
         }
     </style>
@@ -789,234 +781,169 @@
 
     <main>
         <div class="page-intro">
-            <h2>Contato & Mural de Mensagens</h2>
+            <h2>Canal Direto com a Loxias Apollo</h2>
             <p>
-                Envie sua mensagem de forma privada ou participe das discussões públicas.
-                Todas as discussões são sincronizadas com nossa comunidade no GitHub.
+                Envie sua mensagem e veja as conversas da comunidade. Todas as mensagens públicas aparecem no mural ao lado.
             </p>
         </div>
 
-        <!-- Tabs -->
-        <div class="tabs">
-            <button class="tab-btn active" onclick="showTab('form')">
-                <i class="fas fa-envelope"></i> Enviar Mensagem
-            </button>
-            <button class="tab-btn" onclick="showTab('mural')">
-                <i class="fas fa-comments"></i> Fórum da Comunidade
-            </button>
-        </div>
-
-        <!-- Form Tab -->
-        <div id="form-tab" class="tab-content">
-            <div class="contact-container">
-                <div class="contact-form">
-                    <h3><i class="fas fa-pen"></i> Escreva sua mensagem</h3>
-                    
-                    <!-- Mensagem de sucesso -->
-                    <div id="success-message" class="success-message" style="display: none;">
-                        <h4><i class="fas fa-check-circle"></i> Mensagem enviada com sucesso!</h4>
-                        <p id="success-details">Obrigado pelo seu contato.</p>
-                        <p><small>Recarregue a página ou vá para o mural para ver sua mensagem.</small></p>
-                    </div>
-                    
-                    <!-- Mensagem de erro -->
-                    <div id="error-message" class="error-message-container" style="display: none;">
-                        <h4><i class="fas fa-exclamation-triangle"></i> Erro ao enviar mensagem</h4>
-                        <p id="error-details">Ocorreu um erro. Tente novamente.</p>
-                    </div>
-                    
-                    <!-- Formulário de contato CORRIGIDO -->
-                    <form id="contact-form" method="POST" action="#" onsubmit="return handleSubmit(event)">
-                        <div class="form-group">
-                            <label for="nome">Seu Nome *</label>
-                            <input type="text" id="nome" name="nome" required 
-                                   placeholder="Digite seu nome completo"
-                                   oninput="validateField(this, 'nome')">
-                            <div class="error-message" id="nome-error"></div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email">Seu E-mail *</label>
-                            <input type="email" id="email" name="email" required 
-                                   placeholder="seu.email@exemplo.com"
-                                   oninput="validateField(this, 'email')">
-                            <div class="error-message" id="email-error"></div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="assunto">Assunto *</label>
-                            <select id="assunto" name="assunto" required
-                                    onchange="validateField(this, 'assunto')">
-                                <option value="" disabled selected>Selecione um assunto</option>
-                                <option value="Elogio">Elogio</option>
-                                <option value="Sugestão">Sugestão</option>
-                                <option value="Dúvida">Dúvida</option>
-                                <option value="Problema técnico">Problema técnico</option>
-                                <option value="Proposta comercial">Proposta comercial</option>
-                                <option value="Outro">Outro</option>
-                            </select>
-                            <div class="error-message" id="assunto-error"></div>
-                        </div>
-                        
-                        <!-- Tipo de Mensagem (Público/Privado) -->
-                        <div class="message-type">
-                            <div class="type-option">
-                                <input type="radio" id="publico" name="visibilidade" value="publico" checked class="type-radio">
-                                <label for="publico" class="type-label">
-                                    <div class="type-icon"><i class="fas fa-users"></i></div>
-                                    <div class="type-text">
-                                        <strong>Público</strong>
-                                        <small>Sua mensagem aparecerá no fórum</small>
-                                    </div>
-                                </label>
-                            </div>
-                            <div class="type-option">
-                                <input type="radio" id="privado" name="visibilidade" value="privado" class="type-radio">
-                                <label for="privado" class="type-label">
-                                    <div class="type-icon"><i class="fas fa-lock"></i></div>
-                                    <div class="type-text">
-                                        <strong>Privado</strong>
-                                        <small>Apenas administradores verão</small>
-                                    </div>
-                                </label>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="mensagem">Sua Mensagem *</label>
-                            <textarea id="mensagem" name="mensagem" required 
-                                      placeholder="Digite sua mensagem aqui..."
-                                      oninput="validateField(this, 'mensagem')"></textarea>
-                            <div class="error-message" id="mensagem-error"></div>
-                        </div>
-                        
-                        <div class="form-buttons">
-                            <button type="submit" class="btn-form btn-submit" id="submit-btn">
-                                <i class="fas fa-paper-plane"></i> Enviar Mensagem
-                            </button>
-                            <button type="button" onclick="clearForm()" class="btn-form btn-clear">
-                                <i class="fas fa-eraser"></i> Limpar
-                            </button>
-                        </div>
-                        
-                        <p style="text-align: center; margin-top: 1rem; color: var(--marrom-claro); font-size: 0.9rem;">
-                            * Campos obrigatórios | Mensagens privadas respondidas por email
-                        </p>
-                    </form>
+        <div class="contact-container">
+            <!-- Coluna da Esquerda: Formulário -->
+            <div class="form-column">
+                <h3><i class="fas fa-pen"></i> Envie sua mensagem</h3>
+                
+                <!-- Mensagem de sucesso -->
+                <div id="success-message" class="success-message" style="display: none;">
+                    <h4><i class="fas fa-check-circle"></i> Mensagem enviada com sucesso!</h4>
+                    <p id="success-details">Obrigado pelo seu contato.</p>
+                    <p><small>Atualize o mural para ver sua mensagem.</small></p>
                 </div>
                 
-                <!-- Contact Information -->
-                <div class="contact-info">
-                    <h4><i class="fas fa-info-circle"></i> Outras formas de contato</h4>
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <div class="info-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="info-content">
-                                <h5>Email direto</h5>
-                                <p>loxias.apollo.ed@gmail.com</p>
-                                <p><small>Respondemos em até 48h</small></p>
-                            </div>
+                <!-- Mensagem de erro -->
+                <div id="error-message" class="error-message-container" style="display: none;">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Erro ao enviar mensagem</h4>
+                    <p id="error-details">Ocorreu um erro. Tente novamente.</p>
+                </div>
+                
+                <!-- Formulário -->
+                <form id="contact-form" method="POST" action="#" onsubmit="return handleSubmit(event)">
+                    <div class="form-group">
+                        <label for="nome">Seu Nome *</label>
+                        <input type="text" id="nome" name="nome" required 
+                               placeholder="Digite seu nome"
+                               oninput="validateField(this, 'nome')">
+                        <div class="error-message" id="nome-error"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Seu E-mail *</label>
+                        <input type="email" id="email" name="email" required 
+                               placeholder="seu.email@exemplo.com"
+                               oninput="validateField(this, 'email')">
+                        <div class="error-message" id="email-error"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="assunto">Assunto *</label>
+                        <select id="assunto" name="assunto" required
+                                onchange="validateField(this, 'assunto')">
+                            <option value="" disabled selected>Selecione um assunto</option>
+                            <option value="Elogio">Elogio</option>
+                            <option value="Sugestão">Sugestão</option>
+                            <option value="Dúvida">Dúvida</option>
+                            <option value="Problema técnico">Problema técnico</option>
+                            <option value="Proposta comercial">Proposta comercial</option>
+                            <option value="Outro">Outro</option>
+                        </select>
+                        <div class="error-message" id="assunto-error"></div>
+                    </div>
+                    
+                    <!-- Tipo de Mensagem -->
+                    <div class="message-type">
+                        <div class="type-option">
+                            <input type="radio" id="publico" name="visibilidade" value="publico" checked class="type-radio">
+                            <label for="publico" class="type-label">
+                                <div class="type-icon"><i class="fas fa-users"></i></div>
+                                <div class="type-text">
+                                    <strong>Público</strong>
+                                    <small>Aparece no mural</small>
+                                </div>
+                            </label>
                         </div>
-                        <div class="info-item">
-                            <div class="info-icon">
-                                <i class="fas fa-user-edit"></i>
-                            </div>
-                            <div class="info-content">
-                                <h5>Para autores</h5>
-                                <p>Recebemos propostas de publicação</p>
-                                <p><small>Envie seu manuscrito</small></p>
-                            </div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-icon">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <div class="info-content">
-                                <h5>Horário de atendimento</h5>
-                                <p>Segunda a sexta: 9h às 18h</p>
-                                <p>Sábado: 9h às 13h</p>
-                            </div>
+                        <div class="type-option">
+                            <input type="radio" id="privado" name="visibilidade" value="privado" class="type-radio">
+                            <label for="privado" class="type-label">
+                                <div class="type-icon"><i class="fas fa-lock"></i></div>
+                                <div class="type-text">
+                                    <strong>Privado</strong>
+                                    <small>Apenas nós vemos</small>
+                                </div>
+                            </label>
                         </div>
                     </div>
+                    
+                    <div class="form-group">
+                        <label for="mensagem">Sua Mensagem *</label>
+                        <textarea id="mensagem" name="mensagem" required 
+                                  placeholder="Digite sua mensagem aqui..."
+                                  oninput="validateField(this, 'mensagem')"></textarea>
+                        <div class="error-message" id="mensagem-error"></div>
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="submit" class="btn-form btn-submit" id="submit-btn">
+                            <i class="fas fa-paper-plane"></i> Enviar Mensagem
+                        </button>
+                        <button type="button" onclick="clearForm()" class="btn-form btn-clear">
+                            <i class="fas fa-eraser"></i> Limpar
+                        </button>
+                    </div>
+                    
+                    <p style="text-align: center; margin-top: 1rem; color: var(--marrom-claro); font-size: 0.9rem;">
+                        * Campos obrigatórios | Mensagens públicas aparecem instantaneamente
+                    </p>
+                </form>
+            </div>
+            
+            <!-- Coluna da Direita: Mural -->
+            <div class="mural-column">
+                <div class="mural-controls">
+                    <h3><i class="fas fa-comments"></i> Mural da Comunidade</h3>
+                    <div class="mural-stats" id="mural-stats">
+                        Carregando...
+                    </div>
+                    <button class="btn-refresh" onclick="refreshMural()" id="refresh-btn">
+                        <i class="fas fa-sync-alt"></i> Atualizar
+                    </button>
+                </div>
+                
+                <!-- Container das Mensagens -->
+                <div class="messages-container" id="messages-container">
+                    <!-- Mensagens serão carregadas aqui -->
+                </div>
+                
+                <!-- Estado Vazio -->
+                <div id="empty-state" class="empty-state" style="display: none;">
+                    <div class="empty-icon">
+                        <i class="far fa-comment-dots"></i>
+                    </div>
+                    <h4>Nenhuma mensagem pública ainda</h4>
+                    <p>Seja o primeiro a compartilhar uma mensagem no mural!</p>
                 </div>
             </div>
-        </div>
-
-        <!-- Mural Tab -->
-        <div id="mural-tab" class="tab-content">
-            <div class="mural-container">
-                <!-- Introdução do Fórum -->
-                <div class="forum-intro">
-                    <h3><i class="fas fa-comments"></i> 💬 Comunidade Loxias Apollo</h3>
-                    <p>Este é seu espaço para conversar diretamente com a editora. Participe das discussões com leitores, autores e nossa equipe.</p>
-                    
-                    <div class="hashtags-guide">
-                        <p><strong>Use hashtags para organizar:</strong></p>
-                        <div class="hashtags">
-                            <span class="hashtag" onclick="copyHashtag('#leitor')">#leitor</span>
-                            <span class="hashtag" onclick="copyHashtag('#escritor')">#escritor</span>
-                            <span class="hashtag" onclick="copyHashtag('#sugestão')">#sugestão</span>
-                            <span class="hashtag" onclick="copyHashtag('#dúvida')">#dúvida</span>
-                            <span class="hashtag" onclick="copyHashtag('#elogio')">#elogio</span>
-                            <span class="hashtag" onclick="copyHashtag('#crítica')">#crítica</span>
+            
+            <!-- Informações de Contato -->
+            <div class="contact-info">
+                <h4><i class="fas fa-info-circle"></i> Outras formas de contato</h4>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="info-content">
+                            <h5>Email direto</h5>
+                            <p>loxias.apollo.ed@gmail.com</p>
+                            <p><small>Respondemos em até 48h</small></p>
                         </div>
                     </div>
-                    
-                    <div class="forum-actions">
-                        <button onclick="window.open('https://github.com/loxiasapolloed/loxiasapolloed.github.io/discussions', '_blank')" 
-                                class="btn-forum">
-                            <i class="fab fa-github"></i> Ver todas as discussões
-                        </button>
-                        <button onclick="window.open('https://github.com/loxiasapolloed/loxiasapolloed.github.io/discussions/new', '_blank')" 
-                                class="btn-forum primary">
-                            <i class="fas fa-plus"></i> Criar nova discussão
-                        </button>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-user-edit"></i>
+                        </div>
+                        <div class="info-content">
+                            <h5>Para autores</h5>
+                            <p>Recebemos propostas de publicação</p>
+                            <p><small>Envie seu manuscrito</small></p>
+                        </div>
                     </div>
-                    
-                    <div class="forum-info">
-                        <p><small><i class="fas fa-info-circle"></i> Necessário conta no GitHub para comentar. As discussões são públicas e permanentes.</small></p>
-                    </div>
-                </div>
-                
-                <!-- Container do Giscus -->
-                <div class="giscus-container">
-                    <div class="giscus-loading" id="giscus-loading">
-                        <i class="fas fa-spinner fa-spin"></i> Carregando discussões...
-                    </div>
-                    <script src="https://giscus.app/client.js"
-                            data-repo="loxiasapolloed/loxiasapolloed.github.io"
-                            data-repo-id="R_kgDOQ97bQg"
-                            data-category="General"
-                            data-category-id="DIC_kwDOQ97bQs4C1lRA"
-                            data-mapping="pathname"
-                            data-strict="0"
-                            data-reactions-enabled="1"
-                            data-emit-metadata="0"
-                            data-input-position="top"
-                            data-theme="gruvbox_light"
-                            data-lang="pt"
-                            data-loading="lazy"
-                            crossorigin="anonymous"
-                            async>
-                    </script>
-                </div>
-                
-                <!-- Fallback se Giscus não carregar -->
-                <div id="giscus-fallback" class="giscus-fallback" style="display: none;">
-                    <div class="fallback-content">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <h4>Discussões temporariamente indisponíveis</h4>
-                        <p>As discussões não puderam ser carregadas. Você pode:</p>
-                        <div class="fallback-actions">
-                            <button onclick="window.open('https://github.com/loxiasapolloed/loxiasapolloed.github.io/discussions', '_blank')" 
-                                    class="btn-forum">
-                                <i class="fab fa-github"></i> Acessar no GitHub
-                            </button>
-                            <button onclick="loadGiscus()" class="btn-forum primary">
-                                <i class="fas fa-redo"></i> Tentar novamente
-                            </button>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="info-content">
+                            <h5>Horário de atendimento</h5>
+                            <p>Segunda a sexta: 9h às 18h</p>
+                            <p>Sábado: 9h às 13h</p>
                         </div>
                     </div>
                 </div>
@@ -1041,7 +968,7 @@
                     <h5>Links Rápidos</h5>
                     <a href="index.html">Início</a>
                     <a href="livros.html">Livros</a>
-                    <a href="contato.html">Contato & Fórum</a>
+                    <a href="contato.html">Contato</a>
                 </div>
             </div>
             
@@ -1049,7 +976,7 @@
             
             <p>© 2023 Loxias Apollo. Todos os direitos reservados.</p>
             <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.5rem;">
-                Fórum integrado com GitHub Discussions | Participe da nossa comunidade
+                Sistema integrado de contato e mural | Atualize a página para ver novas mensagens
             </p>
         </div>
     </footer>
@@ -1065,15 +992,9 @@
         // Inicializar o sistema
         function initSystem() {
             loadMessages();
-            
-            // Verificar se é admin (modo de desenvolvimento)
-            const isAdmin = localStorage.getItem('loxias_admin') === 'true' || 
-                           window.location.hash === '#admin';
-            if (isAdmin) {
-                // Se quiser manter controles admin, descomente:
-                // document.getElementById('admin-controls').style.display = 'block';
-                localStorage.setItem('loxias_admin', 'true');
-            }
+            updateMuralStats();
+            renderMessages();
+            checkEmptyMural();
         }
 
         // Carregar mensagens do localStorage
@@ -1137,22 +1058,22 @@
                         }
                         break;
                     case 'nome':
-                        if (field.value.length < 3) {
+                        if (field.value.length < 2) {
                             isValid = false;
-                            errorMessage = 'Nome deve ter pelo menos 3 caracteres';
+                            errorMessage = 'Nome deve ter pelo menos 2 caracteres';
                             field.classList.add('input-error');
                         } else {
                             field.classList.add('input-success');
                         }
                         break;
                     case 'mensagem':
-                        if (field.value.length < 10) {
+                        if (field.value.length < 5) {
                             isValid = false;
-                            errorMessage = 'Mensagem muito curta (mínimo 10 caracteres)';
+                            errorMessage = 'Mensagem muito curta';
                             field.classList.add('input-error');
-                        } else if (field.value.length > 1000) {
+                        } else if (field.value.length > 2000) {
                             isValid = false;
-                            errorMessage = 'Mensagem muito longa (máximo 1000 caracteres)';
+                            errorMessage = 'Mensagem muito longa (máximo 2000 caracteres)';
                             field.classList.add('input-error');
                         } else {
                             field.classList.add('input-success');
@@ -1217,72 +1138,8 @@
             document.getElementById('contact-form').style.display = 'block';
         }
 
-        // Função para enviar mensagem via PHP
-        async function enviarMensagemComEmail(formData) {
-            try {
-                console.log('📤 Enviando mensagem...', formData);
-                
-                const response = await fetch('enviar_email.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: new URLSearchParams(formData)
-                });
-                
-                const resultado = await response.json();
-                console.log('📨 Resposta:', resultado);
-                
-                return resultado;
-                
-            } catch (erro) {
-                console.error('❌ Erro:', erro);
-                return {
-                    status: 'error',
-                    message: 'Erro de conexão'
-                };
-            }
-        }
-
-        // Função para salvar mensagem localmente
-        function salvarMensagemLocalmente(dados) {
-            try {
-                const mensagem = {
-                    id: generateId(),
-                    ...dados,
-                    data: new Date().toISOString(),
-                    curtidas: 0,
-                    aprovada: true
-                };
-                
-                // Carregar mensagens existentes
-                let todasMensagens = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-                
-                // Adicionar nova mensagem no início
-                todasMensagens.unshift(mensagem);
-                
-                // Limitar a 50 mensagens
-                if (todasMensagens.length > 50) {
-                    todasMensagens = todasMensagens.slice(0, 50);
-                }
-                
-                // Salvar de volta
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(todasMensagens));
-                
-                // Atualizar array global
-                messages = todasMensagens;
-                
-                console.log('💾 Mensagem salva localmente:', mensagem);
-                return true;
-                
-            } catch (erro) {
-                console.error('❌ Erro ao salvar localmente:', erro);
-                return false;
-            }
-        }
-
-        // Função principal de envio
-        async function handleSubmit(event) {
+        // Processar envio do formulário
+        function handleSubmit(event) {
             event.preventDefault();
             
             if (!validateForm()) {
@@ -1290,136 +1147,240 @@
                 return false;
             }
 
-            // Coletar dados
+            const submitBtn = document.getElementById('submit-btn');
+            const originalText = submitBtn.innerHTML;
+            
+            // Mostrar estado de carregamento
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+            submitBtn.disabled = true;
+
+            // Coletar dados do formulário
             const formData = {
+                id: generateId(),
                 nome: document.getElementById('nome').value.trim(),
                 email: document.getElementById('email').value.trim(),
                 assunto: document.getElementById('assunto').value,
                 mensagem: document.getElementById('mensagem').value.trim(),
-                visibilidade: document.querySelector('input[name="visibilidade"]:checked').value
+                visibilidade: document.querySelector('input[name="visibilidade"]:checked').value,
+                data: new Date().toISOString(),
+                curtidas: 0,
+                aprovada: true
             };
 
-            // Desabilitar botão
-            const btn = document.getElementById('submit-btn');
-            const originalText = btn.innerHTML;
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+            console.log('📤 Dados coletados:', formData);
 
-            // 1. TENTAR ENVIAR EMAIL VIA PHP
-            const resultado = await enviarMensagemComEmail(formData);
-            
-            // 2. SALVAR LOCALMENTE (backup)
-            salvarMensagemLocalmente(formData);
-            
-            // 3. PROCESSAR RESULTADO
-            if (resultado.status === 'success') {
-                // SUCESSO TOTAL
-                showSuccess('✅ ' + resultado.message);
-                
-                // Se for mensagem pública, sugerir fórum
-                if (formData.visibilidade === 'publico') {
-                    setTimeout(() => {
-                        showTab('mural');
-                    }, 1500);
+            // Simular processamento
+            setTimeout(() => {
+                try {
+                    // Salvar mensagem
+                    messages.unshift(formData);
+                    const saved = saveMessages();
+                    
+                    if (saved) {
+                        // Mostrar sucesso
+                        const tipo = formData.visibilidade === 'publico' ? 'no mural da comunidade' : 'como privada';
+                        showSuccess(`✅ Mensagem enviada com sucesso! Ela foi salva ${tipo}.`);
+                        
+                        // Atualizar mural se for público
+                        if (formData.visibilidade === 'publico') {
+                            setTimeout(() => {
+                                renderMessages();
+                                updateMuralStats();
+                                checkEmptyMural();
+                                scrollToLatestMessage();
+                            }, 500);
+                        }
+                        
+                        // Limpar formulário após 2 segundos
+                        setTimeout(() => {
+                            clearForm();
+                        }, 2000);
+                        
+                    } else {
+                        showError('❌ Erro ao salvar mensagem. Tente novamente.');
+                    }
+                    
+                } catch (error) {
+                    console.error('❌ Erro no processamento:', error);
+                    showError('Ocorreu um erro ao processar sua mensagem. Tente novamente.');
+                } finally {
+                    // Restaurar botão
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
                 }
-                
-                // Limpar formulário
-                setTimeout(() => {
-                    clearForm();
-                    btn.disabled = false;
-                    btn.innerHTML = originalText;
-                }, 2000);
-                
-            } else {
-                // EMAIL FALHOU, MAS SALVOU LOCALMENTE
-                showSuccess('💾 Mensagem salva localmente. Para discussões públicas, use nosso fórum.');
-                
-                btn.disabled = false;
-                btn.innerHTML = originalText;
-            }
+            }, 1000);
             
             return false;
         }
 
         // ==============================================
-        // FUNÇÕES PARA O FÓRUM/GISCUS
+        // FUNÇÕES DO MURAL
         // ==============================================
 
-        // Copiar hashtag ao clicar
-        function copyHashtag(hashtag) {
-            navigator.clipboard.writeText(hashtag + ' ').then(() => {
-                const original = event.target.innerHTML;
-                event.target.innerHTML = '✓ Copiado!';
-                event.target.style.background = '#388e3c';
-                event.target.style.color = 'white';
+        // Atualizar estatísticas do mural
+        function updateMuralStats() {
+            const publicMessages = messages.filter(m => m.visibilidade === 'publico' && m.aprovada);
+            const totalMessages = publicMessages.length;
+            
+            // Contar mensagens de hoje
+            const today = new Date().toDateString();
+            const todayMessages = publicMessages.filter(m => {
+                const msgDate = new Date(m.data);
+                return msgDate.toDateString() === today;
+            }).length;
+
+            document.getElementById('mural-stats').innerHTML = 
+                `<i class="fas fa-chart-bar"></i> ${totalMessages} mensagens | ${todayMessages} hoje`;
+        }
+
+        // Atualizar mural
+        function refreshMural() {
+            const refreshBtn = document.getElementById('refresh-btn');
+            const originalText = refreshBtn.innerHTML;
+            
+            // Mostrar estado de carregamento
+            refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Atualizando...';
+            refreshBtn.disabled = true;
+
+            // Simular delay de rede
+            setTimeout(() => {
+                loadMessages();
+                renderMessages();
+                updateMuralStats();
+                checkEmptyMural();
                 
-                setTimeout(() => {
-                    event.target.innerHTML = original;
-                    event.target.style.background = '';
-                    event.target.style.color = '';
-                }, 1500);
-            }).catch(err => {
-                console.log('Erro ao copiar:', err);
+                // Restaurar botão
+                refreshBtn.innerHTML = originalText;
+                refreshBtn.disabled = false;
+            }, 800);
+        }
+
+        // Renderizar mensagens no mural
+        function renderMessages() {
+            const container = document.getElementById('messages-container');
+            const publicMessages = messages.filter(m => m.visibilidade === 'publico' && m.aprovada);
+            
+            // Ordenar por data (mais recentes primeiro)
+            publicMessages.sort((a, b) => new Date(b.data) - new Date(a.data));
+            
+            // Limitar a 30 mensagens
+            const displayMessages = publicMessages.slice(0, 30);
+            
+            // Gerar HTML das mensagens
+            container.innerHTML = '';
+            
+            displayMessages.forEach(msg => {
+                const messageElement = createMessageElement(msg);
+                container.appendChild(messageElement);
             });
         }
 
-        // Verificar se Giscus carregou
-        function checkGiscusLoaded() {
-            setTimeout(() => {
-                const giscusFrame = document.querySelector('iframe.giscus-frame');
-                const loading = document.getElementById('giscus-loading');
-                const fallback = document.getElementById('giscus-fallback');
-                
-                if (giscusFrame && giscusFrame.style.display !== 'none') {
-                    // Giscus carregou com sucesso
-                    if (loading) loading.style.display = 'none';
-                    if (fallback) fallback.style.display = 'none';
-                } else {
-                    // Giscus não carregou
-                    if (loading) loading.style.display = 'none';
-                    if (fallback) fallback.style.display = 'block';
-                }
-            }, 5000); // Espera 5 segundos
-        }
-
-        // Recarregar Giscus
-        function loadGiscus() {
-            const container = document.querySelector('.giscus-container');
-            const fallback = document.getElementById('giscus-fallback');
-            const loading = document.getElementById('giscus-loading');
+        // Criar elemento HTML para uma mensagem
+        function createMessageElement(message) {
+            const div = document.createElement('div');
+            div.className = `message-card ${message.visibilidade}`;
             
-            if (fallback) fallback.style.display = 'none';
-            if (loading) {
-                loading.style.display = 'block';
-                loading.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Recarregando discussões...';
+            // Formatar data
+            const messageDate = new Date(message.data);
+            const now = new Date();
+            const diffTime = Math.abs(now - messageDate);
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            
+            let dateText;
+            if (diffDays === 0) {
+                // Hoje
+                const diffHours = Math.floor(diffTime / (1000 * 60 * 60));
+                if (diffHours === 0) {
+                    const diffMinutes = Math.floor(diffTime / (1000 * 60));
+                    dateText = `Há ${diffMinutes} min${diffMinutes !== 1 ? 's' : ''}`;
+                } else {
+                    dateText = `Hoje às ${messageDate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}`;
+                }
+            } else if (diffDays === 1) {
+                dateText = 'Ontem';
+            } else if (diffDays < 7) {
+                dateText = `Há ${diffDays} dia${diffDays !== 1 ? 's' : ''}`;
+            } else {
+                dateText = messageDate.toLocaleDateString('pt-BR');
             }
             
-            // Remover script antigo
-            const oldScript = document.querySelector('script[src="https://giscus.app/client.js"]');
-            if (oldScript) oldScript.remove();
+            // Verificar se já curtiu
+            const hasLiked = localStorage.getItem(`liked_${message.id}`) === 'true';
             
-            // Recriar script
-            const script = document.createElement('script');
-            script.src = 'https://giscus.app/client.js';
-            script.setAttribute('data-repo', 'loxiasapolloed/loxiasapolloed.github.io');
-            script.setAttribute('data-repo-id', 'R_kgDOQ97bQg');
-            script.setAttribute('data-category', 'General');
-            script.setAttribute('data-category-id', 'DIC_kwDOQ97bQs4C1lRA');
-            script.setAttribute('data-mapping', 'pathname');
-            script.setAttribute('data-strict', '0');
-            script.setAttribute('data-reactions-enabled', '1');
-            script.setAttribute('data-emit-metadata', '0');
-            script.setAttribute('data-input-position', 'top');
-            script.setAttribute('data-theme', 'gruvbox_light');
-            script.setAttribute('data-lang', 'pt');
-            script.setAttribute('data-loading', 'lazy');
-            script.setAttribute('crossorigin', 'anonymous');
-            script.async = true;
+            div.innerHTML = `
+                <div class="message-header">
+                    <div>
+                        <span class="message-author">${escapeHtml(message.nome)}</span>
+                        <span class="message-type-badge badge-${message.visibilidade}">
+                            ${message.visibilidade === 'publico' ? 'Público' : 'Privado'}
+                        </span>
+                    </div>
+                    <span class="message-date">${dateText}</span>
+                </div>
+                <div class="message-content">
+                    <p><strong>${escapeHtml(message.assunto)}</strong></p>
+                    <p>${escapeHtml(message.mensagem)}</p>
+                </div>
+                <div class="message-footer">
+                    <span>${escapeHtml(message.assunto)}</span>
+                    <div class="message-actions">
+                        <button class="btn-like ${hasLiked ? 'liked' : ''}" onclick="toggleLike('${message.id}')">
+                            <i class="${hasLiked ? 'fas' : 'far'} fa-heart"></i>
+                            <span>${message.curtidas || 0}</span>
+                        </button>
+                    </div>
+                </div>
+            `;
             
-            container.appendChild(script);
+            return div;
+        }
+
+        // Curtir/Descurtir mensagem
+        function toggleLike(messageId) {
+            const message = messages.find(m => m.id === messageId);
+            if (!message) return;
             
-            // Verificar novamente após recarregar
-            setTimeout(checkGiscusLoaded, 5000);
+            // Verificar se já curtiu
+            const hasLiked = localStorage.getItem(`liked_${messageId}`) === 'true';
+            
+            if (hasLiked) {
+                // Remover curtida
+                message.curtidas = Math.max(0, (message.curtidas || 0) - 1);
+                localStorage.removeItem(`liked_${messageId}`);
+            } else {
+                // Adicionar curtida
+                message.curtidas = (message.curtidas || 0) + 1;
+                localStorage.setItem(`liked_${messageId}`, 'true');
+            }
+            
+            // Salvar alterações
+            saveMessages();
+            
+            // Atualizar visualização
+            renderMessages();
+        }
+
+        // Verificar se o mural está vazio
+        function checkEmptyMural() {
+            const container = document.getElementById('messages-container');
+            const emptyState = document.getElementById('empty-state');
+            const publicMessages = messages.filter(m => m.visibilidade === 'publico' && m.aprovada);
+            
+            if (publicMessages.length === 0) {
+                emptyState.style.display = 'block';
+                container.style.display = 'none';
+            } else {
+                emptyState.style.display = 'none';
+                container.style.display = 'block';
+            }
+        }
+
+        // Rolar para a mensagem mais recente
+        function scrollToLatestMessage() {
+            const container = document.getElementById('messages-container');
+            if (container.firstChild) {
+                container.scrollTop = 0;
+            }
         }
 
         // ==============================================
@@ -1440,11 +1401,11 @@
             // Rolar até a mensagem
             successDiv.scrollIntoView({ behavior: 'smooth' });
             
-            // Auto-esconder após 10 segundos
+            // Auto-esconder após 8 segundos
             setTimeout(() => {
                 successDiv.style.display = 'none';
                 document.getElementById('contact-form').style.display = 'block';
-            }, 10000);
+            }, 8000);
         }
 
         // Mostrar mensagem de erro
@@ -1464,66 +1425,11 @@
             }, 5000);
         }
 
-        // ==============================================
-        // FUNÇÕES DE ADMINISTRAÇÃO
-        // ==============================================
-
-        // Exportar mensagens
-        function exportMessages() {
-            const dataStr = JSON.stringify(messages, null, 2);
-            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-            
-            const exportFileDefaultName = `mensagens_loxias_${new Date().toISOString().split('T')[0]}.json`;
-            
-            const linkElement = document.createElement('a');
-            linkElement.setAttribute('href', dataUri);
-            linkElement.setAttribute('download', exportFileDefaultName);
-            linkElement.click();
-            
-            alert(`Exportadas ${messages.length} mensagens.`);
-        }
-
-        // Limpar todas as mensagens
-        function clearAllMessages() {
-            if (confirm('Tem certeza que deseja limpar TODAS as mensagens?\nEsta ação não pode ser desfeita.')) {
-                messages = [];
-                saveMessages();
-                showSuccess('Todas as mensagens foram removidas.');
-            }
-        }
-
-        // Resetar sistema
-        function resetSystem() {
-            if (confirm('Isso irá resetar TODO o sistema de mensagens.\nTem certeza?')) {
-                localStorage.removeItem(STORAGE_KEY);
-                localStorage.removeItem('loxias_admin');
-                messages = [];
-                window.location.reload();
-            }
-        }
-
-        // ==============================================
-        // FUNÇÕES DE INTERFACE
-        // ==============================================
-
-        // Função para alternar entre as abas
-        function showTab(tabName) {
-            // Esconde todas as abas
-            document.getElementById('form-tab').style.display = 'none';
-            document.getElementById('mural-tab').style.display = 'none';
-            
-            // Remove a classe active de todos os botões
-            const tabButtons = document.querySelectorAll('.tab-btn');
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            
-            // Mostra a aba selecionada e ativa o botão correspondente
-            document.getElementById(tabName + '-tab').style.display = 'block';
-            event.currentTarget.classList.add('active');
-            
-            // Se for a aba do mural, verificar Giscus
-            if (tabName === 'mural') {
-                setTimeout(checkGiscusLoaded, 1000);
-            }
+        // Escape HTML para segurança
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
         }
 
         // ==============================================
@@ -1532,10 +1438,12 @@
 
         // Inicializar quando a página carregar
         document.addEventListener('DOMContentLoaded', function() {
-            showTab('form');
             initSystem();
             
-            // Adicionar exemplo inicial se não houver mensagens
+            // Adicionar evento de submit
+            document.getElementById('contact-form').addEventListener('submit', handleSubmit);
+            
+            // Adicionar exemplos iniciais se não houver mensagens
             if (messages.length === 0) {
                 const exampleMessages = [
                     {
@@ -1543,10 +1451,21 @@
                         nome: "Ana Silva",
                         email: "ana@exemplo.com",
                         assunto: "Elogio",
-                        mensagem: "Adorei a trilogia Afelandra! Quando sai o próximo livro?",
+                        mensagem: "Adorei a trilogia Afelandra! A narrativa é envolvente e os personagens são muito bem construídos. Quando sai o próximo livro?",
                         visibilidade: "publico",
                         data: new Date(Date.now() - 2*60*60*1000).toISOString(),
                         curtidas: 12,
+                        aprovada: true
+                    },
+                    {
+                        id: generateId(),
+                        nome: "Carlos Mendes",
+                        email: "carlos@exemplo.com",
+                        assunto: "Sugestão",
+                        mensagem: "Seria ótimo ver mais traduções de autores lituanos como Balis Sruoga. A literatura do Leste Europeu tem muito a oferecer!",
+                        visibilidade: "publico",
+                        data: new Date(Date.now() - 26*60*60*1000).toISOString(),
+                        curtidas: 8,
                         aprovada: true
                     }
                 ];
@@ -1555,10 +1474,10 @@
                     messages.push(msg);
                 });
                 saveMessages();
+                renderMessages();
+                updateMuralStats();
+                checkEmptyMural();
             }
-            
-            // Adicionar evento de submit
-            document.getElementById('contact-form').addEventListener('submit', handleSubmit);
         });
     </script>
 </body>
