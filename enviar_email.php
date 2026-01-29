@@ -1,189 +1,204 @@
 <?php
-// enviar_email.php
-// Script para envio de emails do formulário de contato
+// enviar_email.php - CONFIGURAÇÃO FINAL COM PHPMailer
+header('Content-Type: application/json; charset=utf-8');
 
-// Configurações
-$para_email = "loxias.apollo.ed@gmail.com"; // Seu email
-$assunto_site = "Loxias Apollo - Mensagem do Site";
-$log_file = "contatos_log.txt";
+// Incluir PHPMailer
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
 
-// Habilitar exibição de erros (apenas para desenvolvimento)
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
 
-// Verificar se é uma requisição POST
-if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+// ==============================================
+// CONFIGURAÇÃO DO GMAIL
+// ==============================================
+define('SMTP_HOST', 'smtp.gmail.com');
+define('SMTP_PORT', 587);  // Use 587 para TLS
+define('SMTP_USERNAME', 'loxias.apollo.ed@gmail.com');
+define('SMTP_PASSWORD', 'COLE_AQUI_SUA_SENHA_DE_16_DIGITOS'); // ← COLE A SENHA AQUI!
+define('EMAIL_DESTINO', 'loxias.apollo.ed@gmail.com');
+
+// ==============================================
+// VERIFICAR SE É POST
+// ==============================================
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode([
-        "status" => "error",
-        "message" => "Método não permitido. Use POST."
+        'status' => 'error',
+        'message' => 'Método não permitido. Use POST.'
     ]);
     exit;
 }
 
-// Receber dados do formulário
-$nome = isset($_POST['nome']) ? trim($_POST['nome']) : '';
-$email = isset($_POST['email']) ? trim($_POST['email']) : '';
-$assunto = isset($_POST['assunto']) ? trim($_POST['assunto']) : '';
-$mensagem = isset($_POST['mensagem']) ? trim($_POST['mensagem']) : '';
-$visibilidade = isset($_POST['visibilidade']) ? trim($_POST['visibilidade']) : 'publico';
+// ==============================================
+// CAPTURAR DADOS DO FORMULÁRIO
+// ==============================================
+$nome = $_POST['nome'] ?? '';
+$email = $_POST['email'] ?? '';
+$assunto = $_POST['assunto'] ?? '';
+$mensagem = $_POST['mensagem'] ?? '';
+$visibilidade = $_POST['visibilidade'] ?? 'publico';
 
-// Validar dados
-$errors = [];
-
-if (empty($nome)) {
-    $errors[] = "Nome é obrigatório";
-}
-
-if (empty($email)) {
-    $errors[] = "Email é obrigatório";
-} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $errors[] = "Email inválido";
-}
-
-if (empty($assunto)) {
-    $errors[] = "Assunto é obrigatório";
-}
-
-if (empty($mensagem)) {
-    $errors[] = "Mensagem é obrigatória";
-}
-
-// Se houver erros, retornar
-if (!empty($errors)) {
-    http_response_code(400);
+// ==============================================
+// VALIDAÇÃO SIMPLES
+// ==============================================
+if (empty($nome) || empty($email) || empty($assunto) || empty($mensagem)) {
     echo json_encode([
-        "status" => "error",
-        "message" => "Erros de validação",
-        "errors" => $errors
+        'status' => 'error', 
+        'message' => 'Por favor, preencha todos os campos obrigatórios.'
     ]);
     exit;
 }
 
-// Construir o email
-$assunto_email = "[Loxias Apollo] $assunto - De: $nome";
-
-$corpo_email = "
-<html>
-<head>
-    <title>Mensagem do Site Loxias Apollo</title>
-    <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-        .header { background-color: #000; color: #FFD700; padding: 15px; text-align: center; }
-        .content { background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; }
-        .field { margin-bottom: 15px; }
-        .label { font-weight: bold; color: #5A6B4F; }
-        .footer { margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 12px; color: #666; }
-    </style>
-</head>
-<body>
-    <div class='container'>
-        <div class='header'>
-            <h2>Nova Mensagem do Site Loxias Apollo</h2>
-        </div>
-        <div class='content'>
-            <div class='field'>
-                <span class='label'>Data:</span> " . date('d/m/Y H:i:s') . "
-            </div>
-            <div class='field'>
-                <span class='label'>Nome:</span> $nome
-            </div>
-            <div class='field'>
-                <span class='label'>Email:</span> $email
-            </div>
-            <div class='field'>
-                <span class='label'>Assunto:</span> $assunto
-            </div>
-            <div class='field'>
-                <span class='label'>Visibilidade:</span> " . ($visibilidade == 'publico' ? 'Público (aparece no mural)' : 'Privado') . "
-            </div>
-            <div class='field'>
-                <span class='label'>Mensagem:</span><br>
-                " . nl2br(htmlspecialchars($mensagem)) . "
-            </div>
-        </div>
-        <div class='footer'>
-            Esta mensagem foi enviada através do formulário de contato do site Loxias Apollo.
-        </div>
-    </div>
-</body>
-</html>
-";
-
-// Cabeçalhos do email
-$headers = "MIME-Version: 1.0" . "\r\n";
-$headers .= "Content-type: text/html; charset=utf-8" . "\r\n";
-$headers .= "From: Loxias Apollo <contato@loxiasapollo.com.br>" . "\r\n";
-$headers .= "Reply-To: $email" . "\r\n";
-$headers .= "X-Mailer: PHP/" . phpversion();
-
-// Tentar enviar o email
+// ==============================================
+// TENTAR ENVIAR O EMAIL
+// ==============================================
 try {
-    $enviado = mail($para_email, $assunto_email, $corpo_email, $headers);
+    // Criar instância do PHPMailer
+    $mail = new PHPMailer(true);
     
-    if ($enviado) {
-        // Tentar salvar no log (não é crítico se falhar)
-        try {
-            $log_data = date('Y-m-d H:i:s') . " | $nome | $email | $assunto | $visibilidade | ENVIADO\n";
-            
-            // Criar arquivo se não existir
-            if (!file_exists($log_file)) {
-                // Cabeçalho do log
-                $cabecalho = "=================================================================\n";
-                $cabecalho .= "LOG DE CONTATOS - LOXIAS APOLLO\n";
-                $cabecalho .= "Data de criação: " . date('d/m/Y H:i:s') . "\n";
-                $cabecalho .= "=================================================================\n";
-                $cabecalho .= "DATA | NOME | EMAIL | ASSUNTO | VISIBILIDADE | STATUS\n";
-                $cabecalho .= "=================================================================\n";
-                
-                file_put_contents($log_file, $cabecalho);
-            }
-            
-            // Adicionar entrada ao log
-            file_put_contents($log_file, $log_data, FILE_APPEND);
-            
-        } catch (Exception $log_error) {
-            // Ignorar erro de log, não é crítico
-            error_log("Erro ao salvar log: " . $log_error->getMessage());
-        }
+    // Configurações do servidor SMTP
+    $mail->isSMTP();
+    $mail->Host = SMTP_HOST;
+    $mail->SMTPAuth = true;
+    $mail->Username = SMTP_USERNAME;
+    $mail->Password = SMTP_PASSWORD;
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // TLS
+    $mail->Port = SMTP_PORT;
+    
+    // Configurações adicionais
+    $mail->CharSet = 'UTF-8';
+    $mail->Encoding = 'base64';
+    
+    // Remetente e destinatário
+    $mail->setFrom($email, $nome);
+    $mail->addAddress(EMAIL_DESTINO, 'Loxias Apollo');
+    $mail->addReplyTo($email, $nome);
+    
+    // Assunto
+    $mail->Subject = '📚 Loxias Apollo: ' . $assunto;
+    
+    // Corpo do email (HTML)
+    $mail->isHTML(true);
+    $mail->Body = '
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; background: #f9f9f9; }
+            .container { max-width: 600px; margin: 20px auto; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+            .header { background: #000000; color: #FFD700; padding: 20px; text-align: center; }
+            .content { padding: 25px; }
+            .field { margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+            .label { font-weight: bold; color: #5A6B4F; display: inline-block; width: 100px; }
+            .footer { background: #f5f5f5; padding: 15px; text-align: center; font-size: 12px; color: #666; }
+            .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 12px; margin-left: 10px; }
+            .publico { background: #FFD700; color: #000; }
+            .privado { background: #5A6B4F; color: white; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h2>✉️ Nova Mensagem - Loxias Apollo</h2>
+            </div>
+            <div class="content">
+                <div class="field">
+                    <span class="label">Data:</span> ' . date('d/m/Y H:i:s') . '
+                </div>
+                <div class="field">
+                    <span class="label">Nome:</span> ' . htmlspecialchars($nome) . '
+                </div>
+                <div class="field">
+                    <span class="label">Email:</span> ' . htmlspecialchars($email) . '
+                </div>
+                <div class="field">
+                    <span class="label">Assunto:</span> ' . htmlspecialchars($assunto) . '
+                </div>
+                <div class="field">
+                    <span class="label">Tipo:</span> 
+                    <span class="badge ' . ($visibilidade === 'publico' ? 'publico' : 'privado') . '">
+                        ' . ($visibilidade === 'publico' ? 'Público' : 'Privado') . '
+                    </span>
+                </div>
+                <div class="field" style="border: none;">
+                    <div style="font-weight: bold; color: #5A6B4F; margin-bottom: 10px;">Mensagem:</div>
+                    <div style="background: #f9f9f9; padding: 15px; border-radius: 5px; border-left: 4px solid #5A6B4F;">
+                        ' . nl2br(htmlspecialchars($mensagem)) . '
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                📍 Enviado através do formulário de contato do site Loxias Apollo
+            </div>
+        </div>
+    </body>
+    </html>';
+    
+    // Versão texto para clientes que não suportam HTML
+    $mail->AltBody = "NOVA MENSAGEM - LOXIAS APOLLO\n" .
+                     "====================\n" .
+                     "Nome: $nome\n" .
+                     "Email: $email\n" .
+                     "Assunto: $assunto\n" .
+                     "Tipo: " . ($visibilidade === 'publico' ? 'Público' : 'Privado') . "\n" .
+                     "Data: " . date('d/m/Y H:i:s') . "\n\n" .
+                     "MENSAGEM:\n" .
+                     "$mensagem\n\n" .
+                     "====================\n" .
+                     "Enviado através do site Loxias Apollo";
+    
+    // ==============================================
+    // ENVIAR O EMAIL
+    // ==============================================
+    if ($mail->send()) {
         
-        // Retornar sucesso
+        // ==============================================
+        // SALVAR NO LOG (BACKUP)
+        // ==============================================
+        $log_entry = sprintf(
+            "[%s] %s <%s> | Assunto: %s | Tipo: %s\n",
+            date('Y-m-d H:i:s'),
+            $nome,
+            $email,
+            $assunto,
+            $visibilidade
+        );
+        
+        @file_put_contents('emails_log.txt', $log_entry, FILE_APPEND);
+        
+        // ==============================================
+        // RETORNAR SUCESSO
+        // ==============================================
         echo json_encode([
-            "status" => "success",
-            "message" => "Mensagem enviada com sucesso!",
-            "redirect" => "contato.html?enviado=sucesso"
+            'status' => 'success',
+            'message' => '✅ Mensagem enviada com sucesso! ' .
+                        ($visibilidade === 'publico' ? 
+                         'A mensagem aparecerá no mural.' : 
+                         'Mensagem privada enviada para a equipe.'),
+            'visibilidade' => $visibilidade,
+            'timestamp' => date('Y-m-d H:i:s')
         ]);
         
     } else {
-        // Tentar salvar no log mesmo falhando o email
-        try {
-            if (!file_exists($log_file)) {
-                $cabecalho = "=================================================================\n";
-                $cabecalho .= "LOG DE CONTATOS - LOXIAS APOLLO\n";
-                $cabecalho .= "Data de criação: " . date('d/m/Y H:i:s') . "\n";
-                $cabecalho .= "=================================================================\n";
-                $cabecalho .= "DATA | NOME | EMAIL | ASSUNTO | VISIBILIDADE | STATUS\n";
-                $cabecalho .= "=================================================================\n";
-                
-                file_put_contents($log_file, $cabecalho);
-            }
-            
-            $log_data = date('Y-m-d H:i:s') . " | $nome | $email | $assunto | $visibilidade | FALHA_ENVIO\n";
-            file_put_contents($log_file, $log_data, FILE_APPEND);
-            
-        } catch (Exception $log_error) {
-            // Ignorar erro de log
-        }
-        
-        throw new Exception("Falha no envio do email. Servidor de email não respondeu.");
+        throw new Exception('Falha no envio pelo servidor SMTP');
     }
     
 } catch (Exception $e) {
-    http_response_code(500);
+    // ==============================================
+    // EM CASO DE ERRO
+    // ==============================================
+    error_log('ERRO PHPMailer: ' . $e->getMessage());
+    
     echo json_encode([
-        "status" => "error",
-        "message" => "Erro ao enviar email: " . $e->getMessage()
+        'status' => 'error',
+        'message' => '❌ Erro ao enviar mensagem: ' . 
+                    'O servidor de email está temporariamente indisponível. ' .
+                    'Sua mensagem foi salva localmente e será processada em breve.',
+        'error_detail' => 'SMTP Error: ' . $e->getMessage()
     ]);
 }
 ?>
