@@ -271,6 +271,54 @@
             color: var(--verde-terroso);
         }
 
+        /* CAPTCHA Styles */
+        .captcha-container {
+            background-color: var(--branco);
+            border: 1px solid var(--cinza-medio);
+            border-radius: 4px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        .captcha-checkbox {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .captcha-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .captcha-checkbox label {
+            font-size: 1rem;
+            color: var(--preto);
+            cursor: pointer;
+            margin: 0;
+        }
+
+        .captcha-note {
+            font-size: 0.85rem;
+            color: var(--marrom-claro);
+            font-style: italic;
+        }
+
+        /* Honeypot field (hidden trap for bots) */
+        .hp-field {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            height: 0 !important;
+            width: 0 !important;
+            position: absolute !important;
+            left: -9999px !important;
+        }
+
         /* Form Buttons */
         .form-buttons {
             display: flex;
@@ -302,6 +350,12 @@
             background-color: #333;
         }
 
+        .btn-submit:disabled {
+            background-color: var(--cinza-medio);
+            color: var(--marrom-claro);
+            cursor: not-allowed;
+        }
+
         .btn-clear {
             background-color: var(--cinza-medio);
             color: var(--preto);
@@ -316,20 +370,65 @@
             display: none;
             background-color: var(--verde-suave);
             border-left: 4px solid var(--verde-terroso);
-            padding: 1.5rem;
+            padding: 2rem;
             border-radius: 4px;
             margin-bottom: 2rem;
             text-align: center;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .success-message h4 {
             color: var(--verde-terroso);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
             font-weight: 400;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
+            font-size: 1.4rem;
+        }
+
+        .success-message p {
+            color: var(--verde-terroso);
+            margin-bottom: 0.5rem;
+        }
+
+        .success-message button {
+            margin-top: 1.5rem;
+            padding: 0.8rem 2rem;
+            background-color: var(--preto);
+            color: var(--amarelo);
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            font-family: 'League Spartan', sans-serif;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .success-message button:hover {
+            background-color: #333;
+            transform: translateY(-2px);
+        }
+
+        /* Error Message */
+        .error-message {
+            display: none;
+            background-color: #ffe6e6;
+            border-left: 4px solid #ff3333;
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: #cc0000;
         }
 
         /* Mural Tab */
@@ -708,21 +807,34 @@
                 <div class="contact-form">
                     <h3><i class="fas fa-pen"></i> Escreva sua mensagem</h3>
                     
-                    <!-- Mensagem de sucesso (inicialmente escondida) -->
+                    <!-- Mensagem de sucesso -->
                     <div id="success-message" class="success-message" style="display: none;">
                         <h4><i class="fas fa-check-circle"></i> Mensagem enviada com sucesso!</h4>
                         <p>Obrigado pelo seu contato. Responderemos em até 48 horas.</p>
+                        <p><small>Você receberá uma cópia desta mensagem em seu e-mail.</small></p>
+                        <button onclick="window.location.href='contato.html'">
+                            <i class="fas fa-plus"></i> Enviar outra mensagem
+                        </button>
+                    </div>
+
+                    <!-- Mensagem de erro -->
+                    <div id="error-message" class="error-message" style="display: none;">
+                        <h4><i class="fas fa-exclamation-circle"></i> Erro ao enviar mensagem</h4>
+                        <p id="error-text">Por favor, tente novamente mais tarde.</p>
                     </div>
                     
-                    <!-- Formulário de contato com FormSubmit - VERSÃO CORRIGIDA -->
+                    <!-- Formulário de contato com CAPTCHA simples -->
                     <form id="contact-form" method="POST" action="https://formsubmit.co/el/heraro" target="_blank">
                         <!-- Campos escondidos do FormSubmit -->
                         <input type="hidden" name="_subject" value="📚 Nova mensagem do site Loxias Apollo">
                         <input type="hidden" name="_template" value="table">
                         <input type="hidden" name="_captcha" value="false">
-                        <!-- URL CORRETA para redirecionamento -->
                         <input type="hidden" name="_next" value="https://loxiasapollo.com.br/contato.html?enviado=sucesso">
+                        <input type="hidden" name="_autoresponse" value="Obrigado pelo seu contato! Recebemos sua mensagem e responderemos em até 48 horas. - Equipe Loxias Apollo">
                         <input type="hidden" name="_replyto" value="" id="replyto-email">
+                        
+                        <!-- Campo honeypot para bots (deve ficar vazio) -->
+                        <input type="text" name="website" class="hp-field" autocomplete="off" tabindex="-1">
                         
                         <div class="form-group">
                             <label for="nome">Seu Nome *</label>
@@ -776,7 +888,18 @@
                         <div class="form-group">
                             <label for="mensagem">Sua Mensagem *</label>
                             <textarea id="mensagem" name="message" required 
-                                      placeholder="Digite sua mensagem aqui..."></textarea>
+                                      placeholder="Digite sua mensagem aqui..." rows="6"></textarea>
+                        </div>
+                        
+                        <!-- CAPTCHA Simples -->
+                        <div class="captcha-container">
+                            <div class="captcha-checkbox">
+                                <input type="checkbox" id="robot-check" name="robot-check" required>
+                                <label for="robot-check">Confirmo que não sou um robô</label>
+                            </div>
+                            <p class="captcha-note">
+                                <i class="fas fa-shield-alt"></i> Esta verificação ajuda a prevenir spam
+                            </p>
                         </div>
                         
                         <div class="form-buttons">
@@ -791,9 +914,6 @@
                         <p style="text-align: center; margin-top: 1rem; color: var(--marrom-claro); font-size: 0.9rem;">
                             * Campos obrigatórios
                         </p>
-                        
-                        <!-- Campo honeypot para spam -->
-                        <input type="text" name="_honey" style="display:none">
                     </form>
                 </div>
                 
@@ -947,6 +1067,11 @@
             // Mostra a aba selecionada e ativa o botão correspondente
             document.getElementById(tabName + '-tab').style.display = 'block';
             event.currentTarget.classList.add('active');
+            
+            // Se for a aba do mural, verifica se está vazia
+            if (tabName === 'mural') {
+                checkEmptyMural();
+            }
         }
         
         // Mostra a aba do formulário por padrão
@@ -956,29 +1081,44 @@
             // Verifica se há parâmetro de sucesso na URL
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('enviado') === 'sucesso') {
-                const successMessage = document.getElementById('success-message');
-                const contactForm = document.getElementById('contact-form');
-                
-                successMessage.style.display = 'block';
-                contactForm.style.display = 'none';
-                
-                // Rola até a mensagem de sucesso
-                successMessage.scrollIntoView({ behavior: 'smooth' });
+                showSuccessMessage();
             }
             
-            // Configura o formulário para FormSubmit
+            // Configura o formulário
+            setupForm();
+        });
+        
+        // Configura o formulário
+        function setupForm() {
             const form = document.getElementById('contact-form');
             const emailField = document.getElementById('email');
             const replytoField = document.getElementById('replyto-email');
             const submitBtn = document.getElementById('submit-btn');
+            const robotCheck = document.getElementById('robot-check');
             
             // Atualiza o campo _replyto com o e-mail do usuário
             emailField.addEventListener('input', function() {
                 replytoField.value = this.value;
             });
             
+            // Habilita/desabilita botão de envio baseado no captcha
+            robotCheck.addEventListener('change', function() {
+                submitBtn.disabled = !this.checked;
+            });
+            
+            // Inicialmente desabilita o botão
+            submitBtn.disabled = true;
+            
             // Adiciona comportamento personalizado ao envio
             form.addEventListener('submit', function(e) {
+                // Verifica se o campo honeypot foi preenchido (bot)
+                const honeypot = document.querySelector('input[name="website"]');
+                if (honeypot.value !== '') {
+                    e.preventDefault();
+                    showError('Detectamos atividade suspeita. Por favor, recarregue a página e tente novamente.');
+                    return false;
+                }
+                
                 // Validação adicional
                 if (!validarFormulario()) {
                     e.preventDefault();
@@ -992,17 +1132,19 @@
                 submitBtn.disabled = true;
                 
                 // O FormSubmit abrirá em nova aba (target="_blank")
-                // Aguarda 2 segundos e mostra mensagem de sucesso
+                // Aguarda 1 segundo e mostra mensagem de sucesso
                 setTimeout(() => {
                     showSuccessMessage();
                     submitBtn.innerHTML = originalText;
                     submitBtn.disabled = false;
-                }, 2000);
+                    robotCheck.checked = false;
+                    submitBtn.disabled = true;
+                }, 1000);
             });
             
             // Preenche inicialmente o campo _replyto
             replytoField.value = emailField.value;
-        });
+        }
         
         // Função para validar o formulário
         function validarFormulario() {
@@ -1010,6 +1152,7 @@
             const email = document.getElementById('email').value.trim();
             const assunto = document.getElementById('assunto').value;
             const mensagem = document.getElementById('mensagem').value.trim();
+            const robotCheck = document.getElementById('robot-check').checked;
             
             let erros = [];
             
@@ -1029,6 +1172,10 @@
                 erros.push("A mensagem deve ter pelo menos 10 caracteres");
             }
             
+            if (!robotCheck) {
+                erros.push("Confirme que não é um robô");
+            }
+            
             if (erros.length > 0) {
                 alert("Por favor, corrija os seguintes erros:\n\n• " + erros.join("\n• "));
                 return false;
@@ -1046,19 +1193,40 @@
         // Função para mostrar mensagem de sucesso
         function showSuccessMessage() {
             const successMessage = document.getElementById('success-message');
+            const errorMessage = document.getElementById('error-message');
             const contactForm = document.getElementById('contact-form');
             
             successMessage.style.display = 'block';
+            errorMessage.style.display = 'none';
             contactForm.style.display = 'none';
             
             // Rola até a mensagem de sucesso
             successMessage.scrollIntoView({ behavior: 'smooth' });
         }
         
+        // Função para mostrar mensagem de erro
+        function showError(message) {
+            const errorMessage = document.getElementById('error-message');
+            const errorText = document.getElementById('error-text');
+            
+            errorText.textContent = message;
+            errorMessage.style.display = 'block';
+            
+            // Rola até a mensagem de erro
+            errorMessage.scrollIntoView({ behavior: 'smooth' });
+        }
+        
         // Função para limpar o formulário
         function clearForm() {
             document.getElementById('contact-form').reset();
             document.getElementById('replyto-email').value = '';
+            document.getElementById('submit-btn').disabled = true;
+            document.getElementById('robot-check').checked = false;
+            
+            // Esconde mensagens de erro/sucesso
+            document.getElementById('error-message').style.display = 'none';
+            document.getElementById('success-message').style.display = 'none';
+            document.getElementById('contact-form').style.display = 'block';
         }
         
         // Função para atualizar o mural
@@ -1104,8 +1272,10 @@
             
             if (messagesGrid.children.length === 0) {
                 emptyState.style.display = 'block';
+                messagesGrid.style.display = 'none';
             } else {
                 emptyState.style.display = 'none';
+                messagesGrid.style.display = 'grid';
             }
         }
     </script>
