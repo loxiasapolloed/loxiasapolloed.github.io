@@ -6,7 +6,7 @@
   <title>Loxias Apollo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@200&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@200;300;400&display=swap" rel="stylesheet">
   <style>
     :root {
       --preto: #000000;
@@ -14,6 +14,7 @@
       --branco: #FFFFFF;
       --verde-terroso: #5A6B4F;
       --marrom-claro: #A68A64;
+      --cinza-claro: #f5f5f5;
     }
 
     * {
@@ -99,17 +100,89 @@
 
     /* ===== CONTEÚDO PRINCIPAL ===== */
     main {
-      padding: 4rem 5% 3rem;
+      padding: 3rem 5% 4rem;
       max-width: 800px;
       margin: 0 auto;
+    }
+
+    .intro-text {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-bottom: 3rem;
+      color: var(--verde-terroso);
+      line-height: 1.8;
+    }
+
+    /* ===== MANIFESTO ===== */
+    .manifesto {
+      background-color: var(--cinza-claro);
+      padding: 2.5rem;
+      border-radius: 4px;
+      border-left: 4px solid var(--amarelo);
+      margin-bottom: 3rem;
+      text-align: left;
+    }
+
+    .manifesto h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--preto);
+      font-weight: 400;
       text-align: center;
     }
 
-    main p {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
+    .manifesto h3 {
+      font-size: 1.3rem;
+      margin: 2rem 0 1rem;
+      color: var(--verde-terroso);
+      font-weight: 400;
     }
 
+    .manifesto p {
+      font-size: 1.1rem;
+      margin-bottom: 1.2rem;
+      text-align: justify;
+    }
+
+    .manifesto .destaque {
+      font-size: 1.3rem;
+      font-weight: 300;
+      text-align: center;
+      margin: 2rem 0;
+      color: var(--verde-terroso);
+      font-style: italic;
+    }
+
+    .manifesto .quote {
+      background-color: white;
+      padding: 1.5rem;
+      border-radius: 4px;
+      margin: 2rem 0;
+      border-left: 3px solid var(--marrom-claro);
+      font-size: 1.1rem;
+    }
+
+    .manifesto ul {
+      padding-left: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .manifesto li {
+      margin-bottom: 0.8rem;
+      font-size: 1.1rem;
+    }
+
+    .manifesto .assinatura {
+      text-align: right;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--marrom-claro);
+      font-size: 1.2rem;
+      color: var(--preto);
+      font-weight: 300;
+    }
+
+    /* ===== LINKS ===== */
     .links {
       display: flex;
       justify-content: center;
@@ -120,8 +193,17 @@
 
     .links a {
       color: var(--preto);
-      text-decoration: underline;
+      text-decoration: none;
       font-size: 1.1rem;
+      padding: 0.8rem 1.5rem;
+      border: 1px solid var(--preto);
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    .links a:hover {
+      background-color: var(--preto);
+      color: var(--branco);
     }
 
     /* ===== RODAPÉ ===== */
@@ -159,9 +241,24 @@
         font-size: 1.1rem;
       }
       
+      .manifesto {
+        padding: 1.5rem;
+      }
+      
+      .manifesto h2 {
+        font-size: 1.5rem;
+      }
+      
       .links {
         flex-direction: column;
+        align-items: center;
         gap: 1rem;
+      }
+      
+      .links a {
+        width: 100%;
+        max-width: 250px;
+        text-align: center;
       }
     }
   </style>
@@ -171,7 +268,6 @@
   <!-- CABEÇALHO COM LOGO -->
   <header class="header-with-logo">
     <div class="logo-container">
-      <!-- CORREÇÃO: Caminho correto para a logo -->
       <img src="logo.png" 
            alt="Logo Loxias Apollo" 
            class="site-logo">
@@ -194,11 +290,72 @@
   
   <!-- CONTEÚDO PRINCIPAL -->
   <main>
-    <p>
+    <p class="intro-text">
       A Loxias Apollo publica obras que desafiam narrativas oficiais:<br>
       Obras autorais em: Mitologia, filosofia, ficção histórica, traduções cuidadosas 
       de verdadeiros achados da literatura mundial e literatura infantil com rigor crítico.
     </p>
+    
+    <section class="manifesto">
+      <h2>Loxias Apollo Edições</h2>
+      
+      <p class="destaque">"A verdade não é luz sem sombra."</p>
+      
+      <p>Não esperamos permissão para existir.</p>
+      
+      <p>Escrevemos porque há verdades que não cabem em silêncio — e livros que não nascem para agradar mercados, mas para desafiar esquecimentos.</p>
+      
+      <p>Nós, da Loxias Apollo Edições, recusamos a ideia de que criar é um privilégio a ser regulado por burocracias que nada devolvem à cultura.</p>
+      
+      <p>Recusamos a naturalização da escassez: como se fosse normal que o conhecimento seja caro, distante, reservado a poucos. E recusamos, sobretudo, a ilusão de que o abandono do livro no Brasil seja fruto da indiferença do povo.</p>
+      
+      <div class="quote">
+        <p>É fruto do abandono estatal.</p>
+        <p>É o resultado de décadas sem políticas reais de formação de leitores — trocadas por campanhas efêmeras; de bibliotecas esquecidas, escolas sem acervos, editais inacessíveis; e de um sistema que cobra pelo direito de existir como autor, exigindo que se pague por um número — o ISBN — que, em quase todo o mundo civilizado, é gratuito, pois reconhece-se que identificar uma obra não é um favor burocrático, mas um direito daquele que cria.</p>
+      </div>
+      
+      <p>Essa taxa não financia a leitura. Não alimenta bibliotecas. Não forma professores.</p>
+      
+      <p>Ela apenas sustenta a ilusão de que a cultura precisa de guardiões — quando, na verdade, precisa de portas abertas.</p>
+      
+      <h3>Os números confirmam o que já sentimos</h3>
+      
+      <p>Segundo a Pesquisa Retratos da Leitura no Brasil (2023):</p>
+      
+      <ul>
+        <li>Apenas 57% da população com 5 anos ou mais leu um livro inteiro no último ano;</li>
+        <li>O leitor ativo lê, em média, 2,4 obras por ano;</li>
+        <li>63% dos lares brasileiros não têm nenhum livro de lazer — apenas materiais escolares, quando há.</li>
+      </ul>
+      
+      <p>Mas esses dados não revelam falta de desejo.</p>
+      <p>Revelam ausência de acesso.</p>
+      <p>Revelam que transformamos a criação em luxo — e o conhecimento, em artigo de elite.</p>
+      
+      <p>Mas, como nos ensinam os existencialistas, não basta denunciar a má-fé do sistema. É na consciência da injustiça e na ação concreta contra ela que se constrói liberdade. E, como lembra Aristóteles, a virtude não é teoria — é hábito, prática constante, vigilância sobre nossas escolhas e domínio sobre nossas criações.</p>
+      
+      <h3>Por isso, agimos:</h3>
+      
+      <ul>
+        <li>Publicamos obras com preços acessíveis, calculados para sustentar o selo — nunca para enriquecer intermediários;</li>
+        <li>Oferecemos formatos múltiplos (impresso, digital, conteúdos complementares) para alcançar desde o estudante até o pesquisador;</li>
+        <li>Traduzimos clássicos esquecidos com fidelidade ao espírito original, não à conveniência comercial;</li>
+        <li>Mantemos controle total sobre nossa produção, recusando modelos que tratam a palavra como mercadoria descartável.</li>
+      </ul>
+      
+      <p class="destaque">Existimos porque escrevemos.</p>
+      
+      <p>E convidamos você — leitor, tradutor, pensador — a participar dessa resistência ativa:</p>
+      
+      <p>ler com rigor,<br>
+      comprar com consciência,<br>
+      e exigir que o conhecimento não seja negado a quem o busca com boa vontade.</p>
+      
+      <div class="assinatura">
+        <p>— Loxias Apollo Edições —</p>
+        <p>Publicamos o que o mundo precisa ler — não o que o mercado permite vender.</p>
+      </div>
+    </section>
     
     <div class="links">
       <a href="sobre.html">Conheça quem está por trás</a>
@@ -210,6 +367,5 @@
   <footer>
     <p>© 2026 Loxias Apollo. Todos os direitos reservados.</p>
   </footer>
-
 </body>
 </html>
