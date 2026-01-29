@@ -23,19 +23,34 @@
       box-sizing: border-box;
     }
 
+    /* ===== FUNDO ANIMADO (GIF) ===== */
     body {
+      min-height: 100vh;
+      background: 
+        url('obrigado-bg.webp') center/cover no-repeat fixed,
+        var(--branco);
+      background-size: cover;
+      color: var(--preto);
       font-family: 'League Spartan', sans-serif;
       font-weight: 200;
-      color: var(--preto);
-      background-color: var(--branco);
       line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* ===== SOBREPOR CONTEÚDO AO FUNDO ===== */
+    .overlay {
+      position: relative;
+      z-index: 1;
     }
 
     /* ===== CABEÇALHO COM LOGO ===== */
     .header-with-logo {
       padding: 2rem 5%;
-      background-color: var(--branco);
+      background-color: rgba(255, 255, 255, 0.94);
       border-bottom: 1px solid var(--preto);
+      position: relative;
+      z-index: 2;
     }
 
     .logo-container {
@@ -83,6 +98,8 @@
       text-align: center;
       line-height: 1.8;
       margin-bottom: 2rem;
+      position: relative;
+      z-index: 2;
     }
 
     nav a {
@@ -98,12 +115,17 @@
       opacity: 0.7;
     }
 
-    /* ===== CONTEÚDO PRINCIPAL ===== */
+    /* ===== CONTEÚDO PRINCIPAL (CENTRALIZADO, COM FONDO TRANSLÚCIDO) ===== */
     main {
       padding: 3rem 5% 4rem;
       max-width: 800px;
       margin: 0 auto;
+      background-color: rgba(255, 255, 255, 0.92);
+      border-radius: 4px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
       text-align: center;
+      position: relative;
+      z-index: 2;
     }
 
     .mensagem-obrigado {
@@ -118,6 +140,7 @@
       color: var(--preto);
     }
 
+    /* ===== LINKS ===== */
     .links {
       display: flex;
       justify-content: center;
@@ -148,6 +171,8 @@
       background-color: var(--preto);
       color: var(--branco);
       font-size: 0.95rem;
+      position: relative;
+      z-index: 2;
     }
 
     /* ===== RESPONSIVIDADE ===== */
@@ -216,7 +241,7 @@
   </nav>
   
   <!-- CONTEÚDO PRINCIPAL -->
-  <main>
+  <main class="overlay">
     <p class="mensagem-obrigado">
       Sua mensagem foi enviada com sucesso.<br>
       <strong>Agradecemos por entrar em contato com a Loxias Apollo.</strong>
