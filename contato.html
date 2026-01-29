@@ -3,1293 +3,330 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contato & Mural - Loxias Apollo</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Contato - Loxias Apollo</title>
     <style>
-        :root {
-            --preto: #000000;
-            --amarelo: #FFD700;
-            --branco: #FFFFFF;
-            --verde-terroso: #5A6B4F;
-            --marrom-claro: #A68A64;
-            --cinza-claro: #f5f5f5;
-            --cinza-medio: #e0e0e0;
-            --verde-suave: rgba(90, 107, 79, 0.1);
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #f5f5f5; color: #333; line-height: 1.6; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        
+        header { 
+            text-align: center; 
+            padding: 30px 0; 
+            background: white;
+            border-bottom: 3px solid #000;
+            margin-bottom: 30px;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        h1 { color: #000; font-size: 2.5em; margin-bottom: 10px; }
+        .subtitle { color: #5A6B4F; font-size: 1.1em; }
+        
+        .form-box {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-
-        body {
-            font-family: 'League Spartan', sans-serif;
-            font-weight: 300;
-            color: var(--preto);
-            background-color: var(--branco);
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+        
+        .form-group { margin-bottom: 25px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: #333; }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border 0.3s;
         }
-
-        /* Header */
-        header {
-            padding: 1.5rem 5%;
-            background-color: var(--branco);
-            border-bottom: 1px solid var(--preto);
+        input:focus, select:focus, textarea:focus {
+            border-color: #5A6B4F;
+            outline: none;
         }
-
-        .header-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            max-width: 900px;
-            margin: 0 auto;
+        textarea { min-height: 150px; resize: vertical; }
+        
+        .btn-enviar {
+            background: #000;
+            color: #FFD700;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            transition: background 0.3s;
         }
-
-        .logo-img {
-            height: 120px;
-            width: auto;
-            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));
-        }
-
-        .header-text {
-            text-align: left;
-            border-left: 2px solid var(--amarelo);
-            padding-left: 1.5rem;
-            flex: 1;
-            min-width: 250px;
-        }
-
-        .site-title {
-            font-size: 2.5rem;
-            letter-spacing: 1px;
-            color: var(--preto);
-            margin-bottom: 0.3rem;
-            font-weight: 400;
-        }
-
-        .site-subtitle {
-            color: var(--verde-terroso);
-            font-size: 1.1rem;
-            letter-spacing: 0.5px;
-        }
-
-        /* Navigation */
-        nav {
-            padding: 1rem 5%;
-            background-color: var(--preto);
+        .btn-enviar:hover { background: #333; }
+        .btn-enviar:disabled { background: #ccc; cursor: not-allowed; }
+        
+        .loading {
+            display: none;
             text-align: center;
+            padding: 15px;
+            color: #5A6B4F;
+            font-style: italic;
         }
-
+        
+        .mensagem {
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: center;
+            display: none;
+            font-size: 16px;
+        }
+        .sucesso {
+            background: #d4ffd4;
+            color: #006600;
+            border: 2px solid #00cc00;
+        }
+        .erro {
+            background: #ffd4d4;
+            color: #cc0000;
+            border: 2px solid #ff3333;
+        }
+        
+        .required { color: red; }
+        
+        .contato-info {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 40px;
+            border-left: 5px solid #5A6B4F;
+        }
+        .info-item { margin-bottom: 15px; }
+        
+        nav {
+            background: #000;
+            padding: 15px;
+            margin-bottom: 30px;
+        }
         .nav-links {
             display: flex;
             justify-content: center;
-            flex-wrap: wrap;
-            gap: 1.5rem;
+            gap: 30px;
+            list-style: none;
         }
-
-        .nav-link {
-            color: var(--amarelo);
+        .nav-links a {
+            color: #FFD700;
             text-decoration: none;
-            font-size: 1.1rem;
-            transition: opacity 0.3s, transform 0.2s;
-            white-space: nowrap;
-        }
-
-        .nav-link:hover {
-            opacity: 0.7;
-            transform: translateY(-2px);
-        }
-
-        /* Main Content */
-        main {
-            flex: 1;
-            padding: 3rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        /* Page Intro */
-        .page-intro {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .page-intro h2 {
-            font-size: 2.2rem;
-            color: var(--preto);
-            margin-bottom: 1rem;
-            font-weight: 400;
-        }
-
-        .page-intro p {
-            font-size: 1.2rem;
-            color: var(--verde-terroso);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* Tabs */
-        .tabs {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .tab-btn {
-            background-color: var(--branco);
-            color: var(--preto);
-            border: 1px solid var(--preto);
-            padding: 1rem 2rem;
-            font-family: 'League Spartan', sans-serif;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            border-radius: 2px;
-            min-width: 200px;
-        }
-
-        .tab-btn:hover {
-            background-color: var(--cinza-claro);
-        }
-
-        .tab-btn.active {
-            background-color: var(--preto);
-            color: var(--amarelo);
-        }
-
-        /* Contact Form */
-        .contact-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .contact-form {
-            background-color: var(--cinza-claro);
-            padding: 2.5rem;
-            border-radius: 4px;
-            border: 1px solid var(--cinza-medio);
-            margin-bottom: 3rem;
-        }
-
-        .contact-form h3 {
-            color: var(--verde-terroso);
-            margin-bottom: 1.5rem;
-            font-size: 1.6rem;
-            font-weight: 400;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--preto);
-            font-weight: 400;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid var(--cinza-medio);
-            border-radius: 2px;
-            font-family: 'League Spartan', sans-serif;
-            font-size: 1rem;
-            background-color: var(--branco);
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--verde-terroso);
-        }
-
-        .form-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        /* Message Type */
-        .message-type {
-            display: flex;
-            gap: 2rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .type-option {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .type-radio {
-            display: none;
-        }
-
-        .type-label {
-            display: block;
-            padding: 1.5rem;
-            border: 2px solid var(--cinza-medio);
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-align: center;
-        }
-
-        .type-label:hover {
-            border-color: var(--verde-terroso);
-        }
-
-        .type-radio:checked + .type-label {
-            border-color: var(--verde-terroso);
-            background-color: var(--verde-suave);
-        }
-
-        .type-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            color: var(--verde-terroso);
-        }
-
-        /* CAPTCHA Styles */
-        .captcha-container {
-            background-color: var(--branco);
-            border: 1px solid var(--cinza-medio);
-            border-radius: 4px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            text-align: center;
-        }
-
-        .captcha-checkbox {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .captcha-checkbox input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-        }
-
-        .captcha-checkbox label {
-            font-size: 1rem;
-            color: var(--preto);
-            cursor: pointer;
-            margin: 0;
-        }
-
-        .captcha-note {
-            font-size: 0.85rem;
-            color: var(--marrom-claro);
-            font-style: italic;
-        }
-
-        /* Form Buttons */
-        .form-buttons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .btn-form {
-            flex: 1;
-            padding: 1rem;
-            border: none;
-            font-family: 'League Spartan', sans-serif;
-            font-size: 1.1rem;
-            cursor: pointer;
-            border-radius: 2px;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .btn-submit {
-            background-color: var(--preto);
-            color: var(--amarelo);
-        }
-
-        .btn-submit:hover {
-            background-color: #333;
-        }
-
-        .btn-submit:disabled {
-            background-color: var(--cinza-medio);
-            color: var(--marrom-claro);
-            cursor: not-allowed;
-        }
-
-        .btn-clear {
-            background-color: var(--cinza-medio);
-            color: var(--preto);
-        }
-
-        .btn-clear:hover {
-            background-color: #d0d0d0;
-        }
-
-        /* Success Message */
-        .success-message {
-            display: none;
-            background-color: var(--verde-suave);
-            border-left: 4px solid var(--verde-terroso);
-            padding: 2rem;
-            border-radius: 4px;
-            margin-bottom: 2rem;
-            text-align: center;
-            animation: fadeIn 0.5s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .success-message h4 {
-            color: var(--verde-terroso);
-            margin-bottom: 0.8rem;
-            font-weight: 400;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            font-size: 1.4rem;
-        }
-
-        .success-message p {
-            color: var(--verde-terroso);
-            margin-bottom: 0.5rem;
-        }
-
-        .success-message .email-link {
-            display: block;
-            margin: 1rem 0;
-            padding: 0.8rem;
-            background-color: var(--branco);
-            border: 1px solid var(--verde-terroso);
-            border-radius: 4px;
-            text-decoration: none;
-            color: var(--verde-terroso);
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-
-        .success-message .email-link:hover {
-            background-color: var(--verde-terroso);
-            color: var(--branco);
-        }
-
-        .success-message button {
-            margin-top: 1.5rem;
-            padding: 0.8rem 2rem;
-            background-color: var(--preto);
-            color: var(--amarelo);
-            border: none;
-            border-radius: 2px;
-            cursor: pointer;
-            font-family: 'League Spartan', sans-serif;
-            font-size: 1rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s;
-        }
-
-        .success-message button:hover {
-            background-color: #333;
-            transform: translateY(-2px);
-        }
-
-        /* Error Message */
-        .error-message {
-            display: none;
-            background-color: #ffe6e6;
-            border-left: 4px solid #ff3333;
-            padding: 1.5rem;
-            border-radius: 4px;
-            margin-bottom: 1.5rem;
-            text-align: center;
-            color: #cc0000;
-        }
-
-        /* Mural Tab */
-        #mural-tab {
-            display: none;
-        }
-
-        /* Mural */
-        .mural-container {
-            margin-top: 3rem;
-        }
-
-        .mural-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .mural-header h3 {
-            color: var(--verde-terroso);
-            font-size: 1.6rem;
-            font-weight: 400;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .mural-controls {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn-refresh {
-            background-color: var(--preto);
-            color: var(--amarelo);
-            border: none;
-            padding: 0.7rem 1.5rem;
-            font-family: 'League Spartan', sans-serif;
-            font-size: 1rem;
-            cursor: pointer;
-            border-radius: 2px;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-refresh:hover {
-            background-color: #333;
-        }
-
-        /* Messages Grid */
-        .messages-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .message-card {
-            background: var(--branco);
-            border: 1px solid var(--cinza-medio);
-            border-radius: 4px;
-            padding: 1.5rem;
-            position: relative;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .message-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .message-private {
-            background-color: var(--verde-suave);
-            border-left: 4px solid var(--verde-terroso);
-        }
-
-        .message-public {
-            border-left: 4px solid var(--amarelo);
-        }
-
-        .message-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .message-author {
-            font-weight: 400;
-            color: var(--verde-terroso);
-        }
-
-        .message-date {
-            font-size: 0.9rem;
-            color: var(--marrom-claro);
-        }
-
-        .message-type-badge {
-            font-size: 0.8rem;
-            padding: 0.3rem 0.7rem;
-            border-radius: 2px;
-            margin-left: 0.5rem;
-        }
-
-        .badge-public {
-            background-color: var(--amarelo);
-            color: var(--preto);
-        }
-
-        .badge-private {
-            background-color: var(--verde-terroso);
-            color: var(--branco);
-        }
-
-        .message-content {
-            color: var(--preto);
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        .message-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 1rem;
-            border-top: 1px solid var(--cinza-claro);
-            font-size: 0.9rem;
-            color: var(--marrom-claro);
-        }
-
-        .message-actions {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn-like, .btn-reply {
-            background: none;
-            border: none;
-            color: var(--marrom-claro);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            transition: color 0.3s;
-        }
-
-        .btn-like:hover, .btn-reply:hover {
-            color: var(--verde-terroso);
-        }
-
-        .liked {
-            color: var(--verde-terroso);
-        }
-
-        /* Contact Info */
-        .contact-info {
-            background-color: var(--cinza-claro);
-            padding: 2rem;
-            border-radius: 4px;
-            margin-top: 3rem;
-        }
-
-        .contact-info h4 {
-            color: var(--verde-terroso);
-            margin-bottom: 1.5rem;
-            font-weight: 400;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .info-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-        }
-
-        .info-icon {
-            background-color: var(--verde-terroso);
-            color: var(--branco);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .info-content h5 {
-            color: var(--preto);
-            margin-bottom: 0.3rem;
-            font-weight: 400;
-        }
-
-        .info-content p {
-            color: var(--verde-terroso);
-            line-height: 1.5;
-        }
-
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 3rem;
-            color: var(--marrom-claro);
-        }
-
-        .empty-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--cinza-medio);
-        }
-
-        /* Footer */
+            font-size: 16px;
+            padding: 10px 15px;
+            border-radius: 3px;
+            transition: background 0.3s;
+        }
+        .nav-links a:hover {
+            background: rgba(255, 215, 0, 0.1);
+        }
+        
         footer {
-            padding: 2.5rem 5%;
             text-align: center;
-            background-color: var(--preto);
-            color: var(--branco);
-            font-size: 0.95rem;
-            margin-top: auto;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-top {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-section h5 {
-            color: var(--amarelo);
-            margin-bottom: 0.8rem;
-            font-size: 1.1rem;
-            font-weight: 400;
-        }
-
-        .footer-section p, .footer-section a {
-            color: var(--branco);
-            opacity: 0.8;
-            margin-bottom: 0.3rem;
-            display: block;
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
-
-        .footer-section a:hover {
-            opacity: 1;
-            color: var(--amarelo);
-        }
-
-        .footer-divider {
-            border-color: var(--amarelo);
-            opacity: 0.3;
-            margin: 1.5rem 0;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .header-text {
-                border-left: none;
-                border-top: 2px solid var(--amarelo);
-                padding-left: 0;
-                padding-top: 1rem;
-                min-width: auto;
-            }
-            
-            .site-title {
-                font-size: 2rem;
-            }
-            
-            .nav-links {
-                flex-direction: column;
-                gap: 0.8rem;
-            }
-            
-            .nav-link {
-                display: block;
-                padding: 0.5rem 0;
-            }
-            
-            .tabs {
-                flex-direction: column;
-            }
-            
-            .tab-btn {
-                min-width: auto;
-            }
-            
-            .message-type {
-                flex-direction: column;
-            }
-            
-            .type-option {
-                min-width: auto;
-            }
-            
-            .form-buttons {
-                flex-direction: column;
-            }
-            
-            .messages-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-top {
-                flex-direction: column;
-                text-align: center;
-            }
+            padding: 30px;
+            margin-top: 50px;
+            color: #666;
+            border-top: 1px solid #ddd;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <img src="logo.png" alt="Logo Loxias Apollo" class="logo-img">
-            <div class="header-text">
-                <h1 class="site-title">LOXIAS APOLLO</h1>
-                <p class="site-subtitle">Editora Independente de Literatura Local e Mundial</p>
-            </div>
-        </div>
-    </header>
-
+    <!-- Menu simples -->
     <nav>
-        <div class="nav-links">
-            <a href="index.html" class="nav-link">Início</a>
-            <a href="sobre.html" class="nav-link">Sobre</a>
-            <a href="livros.html" class="nav-link">Livros</a>
-            <a href="blog.html" class="nav-link">Blog</a>
-            <a href="contato.html" class="nav-link">Contato</a>
-        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="contato.html">Contato</a></li>
+        </ul>
     </nav>
-
-    <main>
-        <div class="page-intro">
-            <h2>Contato & Mural de Mensagens</h2>
-            <p>
-                Envie sua mensagem de forma privada ou compartilhe com a comunidade.
-                Todas as mensagens públicas aparecerão no mural abaixo.
-            </p>
-        </div>
-
-        <!-- Tabs -->
-        <div class="tabs">
-            <button class="tab-btn active" onclick="showTab('form')">
-                <i class="fas fa-envelope"></i> Enviar Mensagem
-            </button>
-            <button class="tab-btn" onclick="showTab('mural')">
-                <i class="fas fa-comments"></i> Mural Público
-            </button>
-        </div>
-
-        <!-- Form Tab -->
-        <div id="form-tab" class="tab-content">
-            <div class="contact-container">
-                <div class="contact-form">
-                    <h3><i class="fas fa-pen"></i> Escreva sua mensagem</h3>
-                    
-                    <!-- Mensagem de sucesso -->
-                    <div id="success-message" class="success-message" style="display: none;">
-                        <h4><i class="fas fa-check-circle"></i> Mensagem pronta para envio!</h4>
-                        <p>Sua mensagem foi preparada. Clique no link abaixo para enviar diretamente do seu email.</p>
-                        
-                        <a href="#" id="email-link" class="email-link" target="_blank">
-                            <i class="fas fa-envelope"></i> 
-                            <span id="email-link-text">Abrir cliente de email para envio</span>
-                        </a>
-                        
-                        <p><small>O cliente de email do seu computador será aberto com todos os dados preenchidos.</small></p>
-                        
-                        <button onclick="window.location.href='contato.html'">
-                            <i class="fas fa-plus"></i> Enviar outra mensagem
-                        </button>
-                    </div>
-
-                    <!-- Mensagem de erro -->
-                    <div id="error-message" class="error-message" style="display: none;">
-                        <h4><i class="fas fa-exclamation-circle"></i> Erro ao preparar mensagem</h4>
-                        <p id="error-text">Por favor, tente novamente.</p>
-                    </div>
-                    
-                    <!-- Formulário de contato SIMPLES (sem FormSubmit) -->
-                    <form id="contact-form">
-                        <div class="form-group">
-                            <label for="nome">Seu Nome *</label>
-                            <input type="text" id="nome" name="nome" required 
-                                   placeholder="Digite seu nome completo">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email">Seu E-mail *</label>
-                            <input type="email" id="email" name="email" required 
-                                   placeholder="seu.email@exemplo.com">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="assunto">Assunto *</label>
-                            <select id="assunto" name="assunto" required>
-                                <option value="" disabled selected>Selecione um assunto</option>
-                                <option value="Elogio">Elogio</option>
-                                <option value="Sugestão">Sugestão</option>
-                                <option value="Dúvida">Dúvida</option>
-                                <option value="Problema técnico">Problema técnico</option>
-                                <option value="Proposta comercial">Proposta comercial</option>
-                                <option value="Outro">Outro</option>
-                            </select>
-                        </div>
-                        
-                        <!-- Tipo de Mensagem (Público/Privado) -->
-                        <div class="message-type">
-                            <div class="type-option">
-                                <input type="radio" id="publico" name="visibilidade" value="publico" checked class="type-radio">
-                                <label for="publico" class="type-label">
-                                    <div class="type-icon"><i class="fas fa-users"></i></div>
-                                    <div class="type-text">
-                                        <strong>Público</strong>
-                                        <small>Sua mensagem aparecerá no mural</small>
-                                    </div>
-                                </label>
-                            </div>
-                            <div class="type-option">
-                                <input type="radio" id="privado" name="visibilidade" value="privado" class="type-radio">
-                                <label for="privado" class="type-label">
-                                    <div class="type-icon"><i class="fas fa-lock"></i></div>
-                                    <div class="type-text">
-                                        <strong>Privado</strong>
-                                        <small>Apenas administradores verão</small>
-                                    </div>
-                                </label>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="mensagem">Sua Mensagem *</label>
-                            <textarea id="mensagem" name="mensagem" required 
-                                      placeholder="Digite sua mensagem aqui..." rows="6"></textarea>
-                        </div>
-                        
-                        <!-- CAPTCHA Simples -->
-                        <div class="captcha-container">
-                            <div class="captcha-checkbox">
-                                <input type="checkbox" id="robot-check" name="robot-check" required>
-                                <label for="robot-check">Confirmo que não sou um robô</label>
-                            </div>
-                            <p class="captcha-note">
-                                <i class="fas fa-shield-alt"></i> Esta verificação ajuda a prevenir spam
-                            </p>
-                        </div>
-                        
-                        <div class="form-buttons">
-                            <button type="submit" class="btn-form btn-submit" id="submit-btn">
-                                <i class="fas fa-paper-plane"></i> Preparar Mensagem
-                            </button>
-                            <button type="button" onclick="clearForm()" class="btn-form btn-clear">
-                                <i class="fas fa-eraser"></i> Limpar
-                            </button>
-                        </div>
-                        
-                        <p style="text-align: center; margin-top: 1rem; color: var(--marrom-claro); font-size: 0.9rem;">
-                            * Campos obrigatórios
-                        </p>
-                    </form>
-                </div>
-                
-                <!-- Contact Information -->
-                <div class="contact-info">
-                    <h4><i class="fas fa-info-circle"></i> Outras formas de contato</h4>
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <div class="info-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="info-content">
-                                <h5>Email direto</h5>
-                                <p>loxias.apollo.ed@gmail.com</p>
-                                <p><small>Respondemos em até 48h</small></p>
-                            </div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-icon">
-                                <i class="fas fa-user-edit"></i>
-                            </div>
-                            <div class="info-content">
-                                <h5>Para autores</h5>
-                                <p>Recebemos propostas de publicação</p>
-                                <p><small>Envie seu manuscrito</small></p>
-                            </div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-icon">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <div class="info-content">
-                                <h5>Horário de atendimento</h5>
-                                <p>Segunda a sexta: 9h às 18h</p>
-                                <p>Sábado: 9h às 13h</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mural Tab -->
-        <div id="mural-tab" class="tab-content">
-            <div class="mural-container">
-                <div class="mural-header">
-                    <h3><i class="fas fa-comments"></i> Mural de Mensagens Públicas</h3>
-                    <div class="mural-controls">
-                        <button class="btn-refresh" onclick="refreshMural()">
-                            <i class="fas fa-sync-alt"></i> Atualizar
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Messages Grid -->
-                <div class="messages-grid" id="messages-grid">
-                    <!-- Mensagens públicas serão carregadas aqui -->
-                    <div class="message-card message-public">
-                        <div class="message-header">
-                            <div>
-                                <span class="message-author">Ana Silva</span>
-                                <span class="message-type-badge badge-public">Público</span>
-                            </div>
-                            <span class="message-date">Hoje às 08:33</span>
-                        </div>
-                        <div class="message-content">
-                            <p>Adorei a trilogia Afelandra! Quando sai o próximo livro?</p>
-                        </div>
-                        <div class="message-footer">
-                            <span>Assunto: Elogio</span>
-                            <div class="message-actions">
-                                <button class="btn-like" onclick="toggleLike(this)">
-                                    <i class="far fa-heart"></i> <span>12</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="message-card message-public">
-                        <div class="message-header">
-                            <div>
-                                <span class="message-author">Carlos Mendes</span>
-                                <span class="message-type-badge badge-public">Público</span>
-                            </div>
-                            <span class="message-date">Ontem às 10:33</span>
-                        </div>
-                        <div class="message-content">
-                            <p>Seria ótimo ver mais traduções de autores lituanos como Balis Sruoga.</p>
-                        </div>
-                        <div class="message-footer">
-                            <span>Assunto: Sugestão</span>
-                            <div class="message-actions">
-                                <button class="btn-like" onclick="toggleLike(this)">
-                                    <i class="far fa-heart"></i> <span>8</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Empty State (escondido por padrão) -->
-                <div id="empty-state" class="empty-state" style="display: none;">
-                    <div class="empty-icon">
-                        <i class="far fa-comment-dots"></i>
-                    </div>
-                    <h4>Nenhuma mensagem pública ainda</h4>
-                    <p>Seja o primeiro a compartilhar uma mensagem no mural!</p>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <footer>
-        <div class="footer-container">
-            <div class="footer-top">
-                <div class="footer-section">
-                    <h5>Loxias Apollo</h5>
-                    <p>Editora Independente</p>
-                    <p>Literatura Local e Mundial</p>
-                </div>
-                <div class="footer-section">
-                    <h5>Contato</h5>
-                    <p>loxias.apollo.ed@gmail.com</p>
-                    <p>Segunda a sexta: 9h às 18h</p>
-                </div>
-                <div class="footer-section">
-                    <h5>Links Rápidos</h5>
-                    <a href="index.html">Início</a>
-                    <a href="livros.html">Livros</a>
-                    <a href="contato.html">Contato</a>
-                </div>
-            </div>
+    
+    <div class="container">
+        <!-- Cabeçalho -->
+        <header>
+            <h1>LOXIAS APOLLO</h1>
+            <p class="subtitle">Editora Independente de Literatura Local e Mundial</p>
+        </header>
+        
+        <!-- Formulário de contato -->
+        <div class="form-box">
+            <h2 style="margin-bottom: 20px; color: #5A6B4F;">📩 Envie sua mensagem</h2>
+            <p style="margin-bottom: 30px; color: #666;">Preencha o formulário abaixo. Responderemos em até 48 horas.</p>
             
-            <hr class="footer-divider">
+            <!-- Área para mensagens -->
+            <div id="mensagem" class="mensagem"></div>
+            <div id="loading" class="loading">🔄 Enviando sua mensagem...</div>
             
+            <!-- FORMULÁRIO QUE ENVIA PARA FORMSPREE -->
+            <form id="contact-form">
+                <!-- 1. Nome -->
+                <div class="form-group">
+                    <label for="nome">Seu Nome <span class="required">*</span></label>
+                    <input type="text" id="nome" name="nome" required 
+                           placeholder="Ex: Maria Silva">
+                </div>
+                
+                <!-- 2. Email -->
+                <div class="form-group">
+                    <label for="email">Seu Email <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required 
+                           placeholder="Ex: maria@email.com">
+                </div>
+                
+                <!-- 3. Assunto -->
+                <div class="form-group">
+                    <label for="assunto">Assunto <span class="required">*</span></label>
+                    <select id="assunto" name="assunto" required>
+                        <option value="">Escolha um assunto...</option>
+                        <option value="Elogio">📚 Elogio sobre livro</option>
+                        <option value="Dúvida">❓ Dúvida sobre publicação</option>
+                        <option value="Sugestão">💡 Sugestão de autor/tema</option>
+                        <option value="Proposta">🤝 Proposta comercial</option>
+                        <option value="Outro">🔸 Outro assunto</option>
+                    </select>
+                </div>
+                
+                <!-- 4. Mensagem -->
+                <div class="form-group">
+                    <label for="mensagem">Mensagem <span class="required">*</span></label>
+                    <textarea id="mensagem-texto" name="mensagem" required 
+                              placeholder="Escreva sua mensagem aqui..."></textarea>
+                </div>
+                
+                <!-- Botão de enviar -->
+                <button type="submit" class="btn-enviar" id="btn-enviar">
+                    📨 Enviar Mensagem
+                </button>
+                
+                <p style="text-align: center; margin-top: 15px; color: #666; font-size: 14px;">
+                    <span class="required">*</span> Campos obrigatórios
+                </p>
+            </form>
+        </div>
+        
+        <!-- Informações de contato -->
+        <div class="contato-info">
+            <h3 style="color: #5A6B4F; margin-bottom: 20px;">📞 Outras formas de contato</h3>
+            <div class="info-item">
+                <strong>📧 Email direto:</strong> loxias.apollo.ed@gmail.com
+            </div>
+            <div class="info-item">
+                <strong>⏰ Horário:</strong> Segunda a sexta, 9h às 18h
+            </div>
+            <div class="info-item">
+                <strong>⏱️ Resposta:</strong> Em até 48 horas úteis
+            </div>
+        </div>
+        
+        <footer>
             <p>© 2023 Loxias Apollo. Todos os direitos reservados.</p>
-        </div>
-    </footer>
+            <p style="margin-top: 10px; font-size: 14px;">loxiasapollo.com.br</p>
+        </footer>
+    </div>
 
     <script>
-        // Função para alternar entre as abas
-        function showTab(tabName) {
-            // Esconde todas as abas
-            document.getElementById('form-tab').style.display = 'none';
-            document.getElementById('mural-tab').style.display = 'none';
-            
-            // Remove a classe active de todos os botões
-            const tabButtons = document.querySelectorAll('.tab-btn');
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            
-            // Mostra a aba selecionada e ativa o botão correspondente
-            document.getElementById(tabName + '-tab').style.display = 'block';
-            event.currentTarget.classList.add('active');
-            
-            // Se for a aba do mural, verifica se está vazia
-            if (tabName === 'mural') {
-                checkEmptyMural();
-            }
-        }
+        // CONFIGURAÇÃO ÚNICA QUE VOCÊ PRECISA:
+        // Substitua 'mgoyopyo' pelo SEU Form ID do Formspree
+        const FORMSPREE_URL = 'https://formspree.io/f/mgoyopyo';
         
-        // Mostra a aba do formulário por padrão
+        // Quando a página carrega
         document.addEventListener('DOMContentLoaded', function() {
-            showTab('form');
-            
-            // Configura o formulário
-            setupForm();
-        });
-        
-        // Configura o formulário
-        function setupForm() {
             const form = document.getElementById('contact-form');
-            const submitBtn = document.getElementById('submit-btn');
-            const robotCheck = document.getElementById('robot-check');
+            const btnEnviar = document.getElementById('btn-enviar');
+            const loading = document.getElementById('loading');
+            const mensagemDiv = document.getElementById('mensagem');
             
-            // Habilita/desabilita botão de envio baseado no captcha
-            robotCheck.addEventListener('change', function() {
-                submitBtn.disabled = !this.checked;
-            });
-            
-            // Inicialmente desabilita o botão
-            submitBtn.disabled = true;
-            
-            // Adiciona comportamento personalizado ao envio
-            form.addEventListener('submit', function(e) {
-                e.preventDefault(); // Impede envio normal
+            // Quando o formulário é enviado
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault(); // Impede o envio normal
                 
-                // Validação adicional
+                // Validação básica
                 if (!validarFormulario()) {
-                    return false;
+                    return;
                 }
                 
-                const originalText = submitBtn.innerHTML;
+                // Mostra "carregando" e desabilita botão
+                loading.style.display = 'block';
+                btnEnviar.disabled = true;
+                btnEnviar.textContent = '🔄 Enviando...';
+                mensagemDiv.style.display = 'none';
                 
-                // Mostra estado de carregamento
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparando...';
-                submitBtn.disabled = true;
-                
-                // Prepara e mostra o link de email
-                setTimeout(() => {
-                    prepararEmail();
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
-                    robotCheck.checked = false;
-                    submitBtn.disabled = true;
-                }, 1000);
+                try {
+                    // Prepara os dados para enviar
+                    const dados = {
+                        nome: document.getElementById('nome').value,
+                        email: document.getElementById('email').value,
+                        assunto: document.getElementById('assunto').value,
+                        mensagem: document.getElementById('mensagem-texto').value,
+                        _subject: 'Nova mensagem do site Loxias Apollo',
+                        _replyto: document.getElementById('email').value
+                    };
+                    
+                    // ENVIA para o Formspree
+                    const resposta = await fetch(FORMSPREE_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(dados)
+                    });
+                    
+                    // Verifica se deu certo
+                    if (resposta.ok) {
+                        // SUCESSO!
+                        mostrarMensagem('sucesso', '✅ Mensagem enviada com sucesso!<br>Responderemos em até 48 horas.');
+                        form.reset(); // Limpa o formulário
+                    } else {
+                        // ERRO do Formspree
+                        mostrarMensagem('erro', '❌ Erro ao enviar. Tente novamente.');
+                    }
+                } catch (erro) {
+                    // ERRO de conexão
+                    mostrarMensagem('erro', '❌ Problema de conexão. Verifique sua internet.');
+                } finally {
+                    // Volta ao normal
+                    loading.style.display = 'none';
+                    btnEnviar.disabled = false;
+                    btnEnviar.textContent = '📨 Enviar Mensagem';
+                }
             });
-        }
+        });
         
-        // Função para validar o formulário
+        // Função para validar
         function validarFormulario() {
             const nome = document.getElementById('nome').value.trim();
             const email = document.getElementById('email').value.trim();
             const assunto = document.getElementById('assunto').value;
-            const mensagem = document.getElementById('mensagem').value.trim();
-            const robotCheck = document.getElementById('robot-check').checked;
-            
-            let erros = [];
+            const mensagem = document.getElementById('mensagem-texto').value.trim();
             
             if (nome.length < 2) {
-                erros.push("Nome muito curto (mínimo 2 caracteres)");
+                mostrarMensagem('erro', '⚠️ Digite seu nome completo.');
+                return false;
             }
             
-            if (!validarEmail(email)) {
-                erros.push("Por favor, insira um e-mail válido");
+            if (!email.includes('@') || !email.includes('.')) {
+                mostrarMensagem('erro', '⚠️ Digite um email válido.');
+                return false;
             }
             
             if (!assunto) {
-                erros.push("Selecione um assunto");
+                mostrarMensagem('erro', '⚠️ Selecione um assunto.');
+                return false;
             }
             
             if (mensagem.length < 10) {
-                erros.push("A mensagem deve ter pelo menos 10 caracteres");
-            }
-            
-            if (!robotCheck) {
-                erros.push("Confirme que não é um robô");
-            }
-            
-            if (erros.length > 0) {
-                alert("Por favor, corrija os seguintes erros:\n\n• " + erros.join("\n• "));
+                mostrarMensagem('erro', '⚠️ Escreva uma mensagem mais detalhada.');
                 return false;
             }
             
             return true;
         }
         
-        // Função para validar e-mail
-        function validarEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
-        }
-        
-        // Função para preparar o email
-        function prepararEmail() {
-            const nome = document.getElementById('nome').value;
-            const email = document.getElementById('email').value;
-            const assunto = document.getElementById('assunto').value;
-            const mensagem = document.getElementById('mensagem').value;
-            const visibilidade = document.querySelector('input[name="visibilidade"]:checked').value;
+        // Mostra mensagens na tela
+        function mostrarMensagem(tipo, texto) {
+            const mensagemDiv = document.getElementById('mensagem');
+            mensagemDiv.innerHTML = texto;
+            mensagemDiv.className = `mensagem ${tipo}`;
+            mensagemDiv.style.display = 'block';
             
-            // Constroi o corpo do email
-            const corpoEmail = 
-                `Nome: ${nome}%0D%0A` +
-                `E-mail: ${email}%0D%0A` +
-                `Assunto: ${assunto}%0D%0A` +
-                `Visibilidade: ${visibilidade === 'publico' ? 'Público' : 'Privado'}%0D%0A` +
-                `%0D%0A` +
-                `Mensagem:%0D%0A` +
-                `${mensagem}%0D%0A%0D%0A` +
-                `---%0D%0A` +
-                `Enviado através do formulário de contato do site Loxias Apollo%0D%0A` +
-                `https://loxiasapollo.com.br`;
-            
-            // Cria o link mailto
-            const mailtoLink = `mailto:loxias.apollo.ed@gmail.com?subject=Site Loxias Apollo: ${encodeURIComponent(assunto)}&body=${corpoEmail}&cc=${encodeURIComponent(email)}`;
-            
-            // Atualiza o link na mensagem de sucesso
-            const emailLink = document.getElementById('email-link');
-            const emailLinkText = document.getElementById('email-link-text');
-            
-            emailLink.href = mailtoLink;
-            emailLinkText.textContent = `Enviar mensagem para loxias.apollo.ed@gmail.com`;
-            
-            // Mostra mensagem de sucesso
-            showSuccessMessage();
-        }
-        
-        // Função para mostrar mensagem de sucesso
-        function showSuccessMessage() {
-            const successMessage = document.getElementById('success-message');
-            const errorMessage = document.getElementById('error-message');
-            const contactForm = document.getElementById('contact-form');
-            
-            successMessage.style.display = 'block';
-            errorMessage.style.display = 'none';
-            contactForm.style.display = 'none';
-            
-            // Rola até a mensagem de sucesso
-            successMessage.scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        // Função para mostrar mensagem de erro
-        function showError(message) {
-            const errorMessage = document.getElementById('error-message');
-            const errorText = document.getElementById('error-text');
-            
-            errorText.textContent = message;
-            errorMessage.style.display = 'block';
-            
-            // Rola até a mensagem de erro
-            errorMessage.scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        // Função para limpar o formulário
-        function clearForm() {
-            document.getElementById('contact-form').reset();
-            document.getElementById('submit-btn').disabled = true;
-            document.getElementById('robot-check').checked = false;
-            
-            // Esconde mensagens de erro/sucesso
-            document.getElementById('error-message').style.display = 'none';
-            document.getElementById('success-message').style.display = 'none';
-            document.getElementById('contact-form').style.display = 'block';
-        }
-        
-        // Função para atualizar o mural
-        function refreshMural() {
-            const refreshBtn = event.currentTarget;
-            const originalText = refreshBtn.innerHTML;
-            
-            // Mostra estado de carregamento
-            refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Atualizando...';
-            refreshBtn.disabled = true;
-            
-            // Simula uma atualização
-            setTimeout(() => {
-                refreshBtn.innerHTML = originalText;
-                refreshBtn.disabled = false;
-                alert('Mural atualizado! (Funcionalidade completa requer backend)');
-            }, 1000);
-        }
-        
-        // Função para curtir mensagens
-        function toggleLike(button) {
-            const icon = button.querySelector('i');
-            const countSpan = button.querySelector('span');
-            let count = parseInt(countSpan.textContent);
-            
-            if (button.classList.contains('liked')) {
-                // Remove curtida
-                icon.className = 'far fa-heart';
-                countSpan.textContent = count - 1;
-                button.classList.remove('liked');
-            } else {
-                // Adiciona curtida
-                icon.className = 'fas fa-heart';
-                countSpan.textContent = count + 1;
-                button.classList.add('liked');
-            }
-        }
-        
-        // Verifica se há mensagens no mural
-        function checkEmptyMural() {
-            const messagesGrid = document.getElementById('messages-grid');
-            const emptyState = document.getElementById('empty-state');
-            
-            if (messagesGrid.children.length === 0) {
-                emptyState.style.display = 'block';
-                messagesGrid.style.display = 'none';
-            } else {
-                emptyState.style.display = 'none';
-                messagesGrid.style.display = 'grid';
-            }
+            // Rola até a mensagem
+            mensagemDiv.scrollIntoView({ behavior: 'smooth' });
         }
     </script>
 </body>
