@@ -308,17 +308,6 @@
             font-style: italic;
         }
 
-        /* Honeypot field (hidden trap for bots) */
-        .hp-field {
-            display: none !important;
-            visibility: hidden !important;
-            opacity: 0 !important;
-            height: 0 !important;
-            width: 0 !important;
-            position: absolute !important;
-            left: -9999px !important;
-        }
-
         /* Form Buttons */
         .form-buttons {
             display: flex;
@@ -396,6 +385,24 @@
         .success-message p {
             color: var(--verde-terroso);
             margin-bottom: 0.5rem;
+        }
+
+        .success-message .email-link {
+            display: block;
+            margin: 1rem 0;
+            padding: 0.8rem;
+            background-color: var(--branco);
+            border: 1px solid var(--verde-terroso);
+            border-radius: 4px;
+            text-decoration: none;
+            color: var(--verde-terroso);
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .success-message .email-link:hover {
+            background-color: var(--verde-terroso);
+            color: var(--branco);
         }
 
         .success-message button {
@@ -809,9 +816,16 @@
                     
                     <!-- Mensagem de sucesso -->
                     <div id="success-message" class="success-message" style="display: none;">
-                        <h4><i class="fas fa-check-circle"></i> Mensagem enviada com sucesso!</h4>
-                        <p>Obrigado pelo seu contato. Responderemos em até 48 horas.</p>
-                        <p><small>Você receberá uma cópia desta mensagem em seu e-mail.</small></p>
+                        <h4><i class="fas fa-check-circle"></i> Mensagem pronta para envio!</h4>
+                        <p>Sua mensagem foi preparada. Clique no link abaixo para enviar diretamente do seu email.</p>
+                        
+                        <a href="#" id="email-link" class="email-link" target="_blank">
+                            <i class="fas fa-envelope"></i> 
+                            <span id="email-link-text">Abrir cliente de email para envio</span>
+                        </a>
+                        
+                        <p><small>O cliente de email do seu computador será aberto com todos os dados preenchidos.</small></p>
+                        
                         <button onclick="window.location.href='contato.html'">
                             <i class="fas fa-plus"></i> Enviar outra mensagem
                         </button>
@@ -819,26 +833,15 @@
 
                     <!-- Mensagem de erro -->
                     <div id="error-message" class="error-message" style="display: none;">
-                        <h4><i class="fas fa-exclamation-circle"></i> Erro ao enviar mensagem</h4>
-                        <p id="error-text">Por favor, tente novamente mais tarde.</p>
+                        <h4><i class="fas fa-exclamation-circle"></i> Erro ao preparar mensagem</h4>
+                        <p id="error-text">Por favor, tente novamente.</p>
                     </div>
                     
-                    <!-- Formulário de contato com CAPTCHA simples -->
-                    <form id="contact-form" method="POST" action="https://formsubmit.co/el/heraro" target="_blank">
-                        <!-- Campos escondidos do FormSubmit -->
-                        <input type="hidden" name="_subject" value="📚 Nova mensagem do site Loxias Apollo">
-                        <input type="hidden" name="_template" value="table">
-                        <input type="hidden" name="_captcha" value="false">
-                        <input type="hidden" name="_next" value="https://loxiasapollo.com.br/contato.html?enviado=sucesso">
-                        <input type="hidden" name="_autoresponse" value="Obrigado pelo seu contato! Recebemos sua mensagem e responderemos em até 48 horas. - Equipe Loxias Apollo">
-                        <input type="hidden" name="_replyto" value="" id="replyto-email">
-                        
-                        <!-- Campo honeypot para bots (deve ficar vazio) -->
-                        <input type="text" name="website" class="hp-field" autocomplete="off" tabindex="-1">
-                        
+                    <!-- Formulário de contato SIMPLES (sem FormSubmit) -->
+                    <form id="contact-form">
                         <div class="form-group">
                             <label for="nome">Seu Nome *</label>
-                            <input type="text" id="nome" name="name" required 
+                            <input type="text" id="nome" name="nome" required 
                                    placeholder="Digite seu nome completo">
                         </div>
                         
@@ -887,7 +890,7 @@
                         
                         <div class="form-group">
                             <label for="mensagem">Sua Mensagem *</label>
-                            <textarea id="mensagem" name="message" required 
+                            <textarea id="mensagem" name="mensagem" required 
                                       placeholder="Digite sua mensagem aqui..." rows="6"></textarea>
                         </div>
                         
@@ -904,7 +907,7 @@
                         
                         <div class="form-buttons">
                             <button type="submit" class="btn-form btn-submit" id="submit-btn">
-                                <i class="fas fa-paper-plane"></i> Enviar Mensagem
+                                <i class="fas fa-paper-plane"></i> Preparar Mensagem
                             </button>
                             <button type="button" onclick="clearForm()" class="btn-form btn-clear">
                                 <i class="fas fa-eraser"></i> Limpar
@@ -1078,12 +1081,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             showTab('form');
             
-            // Verifica se há parâmetro de sucesso na URL
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('enviado') === 'sucesso') {
-                showSuccessMessage();
-            }
-            
             // Configura o formulário
             setupForm();
         });
@@ -1091,15 +1088,8 @@
         // Configura o formulário
         function setupForm() {
             const form = document.getElementById('contact-form');
-            const emailField = document.getElementById('email');
-            const replytoField = document.getElementById('replyto-email');
             const submitBtn = document.getElementById('submit-btn');
             const robotCheck = document.getElementById('robot-check');
-            
-            // Atualiza o campo _replyto com o e-mail do usuário
-            emailField.addEventListener('input', function() {
-                replytoField.value = this.value;
-            });
             
             // Habilita/desabilita botão de envio baseado no captcha
             robotCheck.addEventListener('change', function() {
@@ -1111,39 +1101,28 @@
             
             // Adiciona comportamento personalizado ao envio
             form.addEventListener('submit', function(e) {
-                // Verifica se o campo honeypot foi preenchido (bot)
-                const honeypot = document.querySelector('input[name="website"]');
-                if (honeypot.value !== '') {
-                    e.preventDefault();
-                    showError('Detectamos atividade suspeita. Por favor, recarregue a página e tente novamente.');
-                    return false;
-                }
+                e.preventDefault(); // Impede envio normal
                 
                 // Validação adicional
                 if (!validarFormulario()) {
-                    e.preventDefault();
                     return false;
                 }
                 
                 const originalText = submitBtn.innerHTML;
                 
                 // Mostra estado de carregamento
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparando...';
                 submitBtn.disabled = true;
                 
-                // O FormSubmit abrirá em nova aba (target="_blank")
-                // Aguarda 1 segundo e mostra mensagem de sucesso
+                // Prepara e mostra o link de email
                 setTimeout(() => {
-                    showSuccessMessage();
+                    prepararEmail();
                     submitBtn.innerHTML = originalText;
                     submitBtn.disabled = false;
                     robotCheck.checked = false;
                     submitBtn.disabled = true;
                 }, 1000);
             });
-            
-            // Preenche inicialmente o campo _replyto
-            replytoField.value = emailField.value;
         }
         
         // Função para validar o formulário
@@ -1190,6 +1169,41 @@
             return re.test(email);
         }
         
+        // Função para preparar o email
+        function prepararEmail() {
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const assunto = document.getElementById('assunto').value;
+            const mensagem = document.getElementById('mensagem').value;
+            const visibilidade = document.querySelector('input[name="visibilidade"]:checked').value;
+            
+            // Constroi o corpo do email
+            const corpoEmail = 
+                `Nome: ${nome}%0D%0A` +
+                `E-mail: ${email}%0D%0A` +
+                `Assunto: ${assunto}%0D%0A` +
+                `Visibilidade: ${visibilidade === 'publico' ? 'Público' : 'Privado'}%0D%0A` +
+                `%0D%0A` +
+                `Mensagem:%0D%0A` +
+                `${mensagem}%0D%0A%0D%0A` +
+                `---%0D%0A` +
+                `Enviado através do formulário de contato do site Loxias Apollo%0D%0A` +
+                `https://loxiasapollo.com.br`;
+            
+            // Cria o link mailto
+            const mailtoLink = `mailto:loxias.apollo.ed@gmail.com?subject=Site Loxias Apollo: ${encodeURIComponent(assunto)}&body=${corpoEmail}&cc=${encodeURIComponent(email)}`;
+            
+            // Atualiza o link na mensagem de sucesso
+            const emailLink = document.getElementById('email-link');
+            const emailLinkText = document.getElementById('email-link-text');
+            
+            emailLink.href = mailtoLink;
+            emailLinkText.textContent = `Enviar mensagem para loxias.apollo.ed@gmail.com`;
+            
+            // Mostra mensagem de sucesso
+            showSuccessMessage();
+        }
+        
         // Função para mostrar mensagem de sucesso
         function showSuccessMessage() {
             const successMessage = document.getElementById('success-message');
@@ -1219,7 +1233,6 @@
         // Função para limpar o formulário
         function clearForm() {
             document.getElementById('contact-form').reset();
-            document.getElementById('replyto-email').value = '';
             document.getElementById('submit-btn').disabled = true;
             document.getElementById('robot-check').checked = false;
             
