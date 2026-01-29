@@ -375,187 +375,174 @@
             display: none;
         }
 
-        /* Mural */
-        .mural-container {
-            margin-top: 3rem;
+        /* Estilos do Fórum */
+        .forum-intro {
+            background: linear-gradient(135deg, #f9f9f9 0%, #f5f5f5 100%);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--verde-terroso);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
-        .mural-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .mural-header h3 {
+        .forum-intro h3 {
             color: var(--verde-terroso);
-            font-size: 1.6rem;
-            font-weight: 400;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
         }
 
-        .mural-controls {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
+        .forum-intro p {
+            color: var(--preto);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
         }
 
-        .btn-refresh {
-            background-color: var(--preto);
+        .hashtags-guide {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid var(--cinza-medio);
+        }
+
+        .hashtags-guide p {
+            margin-bottom: 10px !important;
+            font-size: 1rem !important;
+        }
+
+        .hashtags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .hashtag {
+            background: var(--verde-suave);
+            color: var(--verde-terroso);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid var(--verde-terroso);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .hashtag:hover {
+            background: var(--verde-terroso);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .forum-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 25px 0 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-forum {
+            background: var(--preto);
             color: var(--amarelo);
             border: none;
-            padding: 0.7rem 1.5rem;
+            padding: 12px 25px;
+            border-radius: 5px;
             font-family: 'League Spartan', sans-serif;
             font-size: 1rem;
             cursor: pointer;
-            border-radius: 2px;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 10px;
+            transition: all 0.3s;
+            min-width: 200px;
+            justify-content: center;
         }
 
-        .btn-refresh:hover {
-            background-color: #333;
+        .btn-forum:hover {
+            background: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
-        .btn-refresh:disabled {
-            background-color: #666;
-            cursor: not-allowed;
-        }
-
-        .mural-stats {
-            font-size: 0.9rem;
-            color: var(--marrom-claro);
-            background: var(--cinza-claro);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-        }
-
-        /* Messages Grid */
-        .messages-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .message-card {
-            background: var(--branco);
-            border: 1px solid var(--cinza-medio);
-            border-radius: 4px;
-            padding: 1.5rem;
-            position: relative;
-            transition: transform 0.3s, box-shadow 0.3s;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .message-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .message-private {
-            background-color: var(--verde-suave);
-            border-left: 4px solid var(--verde-terroso);
-        }
-
-        .message-public {
-            border-left: 4px solid var(--amarelo);
-        }
-
-        .message-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .message-author {
-            font-weight: 400;
-            color: var(--verde-terroso);
-        }
-
-        .message-date {
-            font-size: 0.9rem;
-            color: var(--marrom-claro);
-        }
-
-        .message-type-badge {
-            font-size: 0.8rem;
-            padding: 0.3rem 0.7rem;
-            border-radius: 2px;
-            margin-left: 0.5rem;
-        }
-
-        .badge-public {
-            background-color: var(--amarelo);
-            color: var(--preto);
-        }
-
-        .badge-private {
-            background-color: var(--verde-terroso);
+        .btn-forum.primary {
+            background: var(--verde-terroso);
             color: var(--branco);
         }
 
-        .message-content {
-            color: var(--preto);
-            line-height: 1.6;
-            margin-bottom: 1rem;
-            white-space: pre-wrap;
-            word-wrap: break-word;
+        .btn-forum.primary:hover {
+            background: #4a5840;
         }
 
-        .message-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 1rem;
-            border-top: 1px solid var(--cinza-claro);
-            font-size: 0.9rem;
+        .forum-info {
+            background: rgba(90, 107, 79, 0.05);
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 15px;
+            border-left: 3px solid var(--amarelo);
+        }
+
+        .forum-info small {
             color: var(--marrom-claro);
-        }
-
-        .message-actions {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn-like, .btn-reply {
-            background: none;
-            border: none;
-            color: var(--marrom-claro);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            transition: color 0.3s;
-            font-family: 'League Spartan', sans-serif;
             font-size: 0.9rem;
         }
 
-        .btn-like:hover, .btn-reply:hover {
-            color: var(--verde-terroso);
+        /* Container do Giscus */
+        .giscus-container {
+            background: var(--branco);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid var(--cinza-medio);
+            margin-top: 20px;
+            min-height: 400px;
+            position: relative;
         }
 
-        .liked {
+        .giscus-loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--marrom-claro);
+            font-size: 1.1rem;
+        }
+
+        .giscus-loading i {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* Fallback do Giscus */
+        .giscus-fallback {
+            background: #fff9e6;
+            border: 2px dashed #FFD700;
+            border-radius: 10px;
+            padding: 40px 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .fallback-content i {
+            font-size: 3rem;
+            color: #FFD700;
+            margin-bottom: 20px;
+        }
+
+        .fallback-content h4 {
             color: var(--verde-terroso);
+            margin-bottom: 15px;
+        }
+
+        .fallback-content p {
+            color: var(--marrom-claro);
+            margin-bottom: 25px;
+        }
+
+        .fallback-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         /* Contact Info */
@@ -605,19 +592,6 @@
         .info-content p {
             color: var(--verde-terroso);
             line-height: 1.5;
-        }
-
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 3rem;
-            color: var(--marrom-claro);
-        }
-
-        .empty-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--cinza-medio);
         }
 
         /* Admin Controls (oculto por padrão) */
@@ -766,8 +740,23 @@
                 flex-direction: column;
             }
             
-            .messages-grid {
-                grid-template-columns: 1fr;
+            .forum-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-forum {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .hashtags {
+                gap: 8px;
+            }
+            
+            .hashtag {
+                padding: 6px 12px;
+                font-size: 0.85rem;
             }
             
             .footer-top {
@@ -802,8 +791,8 @@
         <div class="page-intro">
             <h2>Contato & Mural de Mensagens</h2>
             <p>
-                Envie sua mensagem de forma privada ou compartilhe com a comunidade.
-                Todas as mensagens públicas aparecerão no mural abaixo.
+                Envie sua mensagem de forma privada ou participe das discussões públicas.
+                Todas as discussões são sincronizadas com nossa comunidade no GitHub.
             </p>
         </div>
 
@@ -813,7 +802,7 @@
                 <i class="fas fa-envelope"></i> Enviar Mensagem
             </button>
             <button class="tab-btn" onclick="showTab('mural')">
-                <i class="fas fa-comments"></i> Mural Público
+                <i class="fas fa-comments"></i> Fórum da Comunidade
             </button>
         </div>
 
@@ -877,7 +866,7 @@
                                     <div class="type-icon"><i class="fas fa-users"></i></div>
                                     <div class="type-text">
                                         <strong>Público</strong>
-                                        <small>Sua mensagem aparecerá no mural</small>
+                                        <small>Sua mensagem aparecerá no fórum</small>
                                     </div>
                                 </label>
                             </div>
@@ -911,7 +900,7 @@
                         </div>
                         
                         <p style="text-align: center; margin-top: 1rem; color: var(--marrom-claro); font-size: 0.9rem;">
-                            * Campos obrigatórios | Sistema integrado com envio de email
+                            * Campos obrigatórios | Mensagens privadas respondidas por email
                         </p>
                     </form>
                 </div>
@@ -958,49 +947,78 @@
         <!-- Mural Tab -->
         <div id="mural-tab" class="tab-content">
             <div class="mural-container">
-                <!-- Controles do Admin (opcional) -->
-                <div class="admin-controls" id="admin-controls" style="display: none;">
-                    <h4><i class="fas fa-user-shield"></i> Controles do Administrador</h4>
-                    <div class="admin-buttons">
-                        <button class="btn-admin" onclick="exportMessages()">
-                            <i class="fas fa-download"></i> Exportar Mensagens
-                        </button>
-                        <button class="btn-admin" onclick="clearAllMessages()">
-                            <i class="fas fa-trash"></i> Limpar Todas as Mensagens
-                        </button>
-                        <button class="btn-admin danger" onclick="resetSystem()">
-                            <i class="fas fa-redo"></i> Resetar Sistema
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="mural-header">
-                    <h3><i class="fas fa-comments"></i> Mural de Mensagens Públicas</h3>
-                    <div class="mural-controls">
-                        <div class="mural-stats" id="mural-stats">
-                            Carregando...
+                <!-- Introdução do Fórum -->
+                <div class="forum-intro">
+                    <h3><i class="fas fa-comments"></i> 💬 Comunidade Loxias Apollo</h3>
+                    <p>Este é seu espaço para conversar diretamente com a editora. Participe das discussões com leitores, autores e nossa equipe.</p>
+                    
+                    <div class="hashtags-guide">
+                        <p><strong>Use hashtags para organizar:</strong></p>
+                        <div class="hashtags">
+                            <span class="hashtag" onclick="copyHashtag('#leitor')">#leitor</span>
+                            <span class="hashtag" onclick="copyHashtag('#escritor')">#escritor</span>
+                            <span class="hashtag" onclick="copyHashtag('#sugestão')">#sugestão</span>
+                            <span class="hashtag" onclick="copyHashtag('#dúvida')">#dúvida</span>
+                            <span class="hashtag" onclick="copyHashtag('#elogio')">#elogio</span>
+                            <span class="hashtag" onclick="copyHashtag('#crítica')">#crítica</span>
                         </div>
-                        <button class="btn-refresh" onclick="refreshMural()" id="refresh-btn">
-                            <i class="fas fa-sync-alt"></i> Atualizar
+                    </div>
+                    
+                    <div class="forum-actions">
+                        <button onclick="window.open('https://github.com/loxiasapolloed/loxiasapolloed.github.io/discussions', '_blank')" 
+                                class="btn-forum">
+                            <i class="fab fa-github"></i> Ver todas as discussões
+                        </button>
+                        <button onclick="window.open('https://github.com/loxiasapolloed/loxiasapolloed.github.io/discussions/new', '_blank')" 
+                                class="btn-forum primary">
+                            <i class="fas fa-plus"></i> Criar nova discussão
                         </button>
                     </div>
-                </div>
-                
-                <!-- Messages Grid -->
-                <div class="messages-grid" id="messages-grid">
-                    <!-- Mensagens serão carregadas dinamicamente aqui -->
-                </div>
-                
-                <!-- Empty State -->
-                <div id="empty-state" class="empty-state">
-                    <div class="empty-icon">
-                        <i class="far fa-comment-dots"></i>
+                    
+                    <div class="forum-info">
+                        <p><small><i class="fas fa-info-circle"></i> Necessário conta no GitHub para comentar. As discussões são públicas e permanentes.</small></p>
                     </div>
-                    <h4>Nenhuma mensagem pública ainda</h4>
-                    <p>Seja o primeiro a compartilhar uma mensagem no mural!</p>
-                    <button class="tab-btn" onclick="showTab('form')" style="margin-top: 1rem;">
-                        <i class="fas fa-envelope"></i> Enviar Primeira Mensagem
-                    </button>
+                </div>
+                
+                <!-- Container do Giscus -->
+                <div class="giscus-container">
+                    <div class="giscus-loading" id="giscus-loading">
+                        <i class="fas fa-spinner fa-spin"></i> Carregando discussões...
+                    </div>
+                    <script src="https://giscus.app/client.js"
+                            data-repo="loxiasapolloed/loxiasapolloed.github.io"
+                            data-repo-id="R_kgDOQ97bQg"
+                            data-category="General"
+                            data-category-id="DIC_kwDOQ97bQs4C1lRA"
+                            data-mapping="pathname"
+                            data-strict="0"
+                            data-reactions-enabled="1"
+                            data-emit-metadata="0"
+                            data-input-position="top"
+                            data-theme="gruvbox_light"
+                            data-lang="pt"
+                            data-loading="lazy"
+                            crossorigin="anonymous"
+                            async>
+                    </script>
+                </div>
+                
+                <!-- Fallback se Giscus não carregar -->
+                <div id="giscus-fallback" class="giscus-fallback" style="display: none;">
+                    <div class="fallback-content">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h4>Discussões temporariamente indisponíveis</h4>
+                        <p>As discussões não puderam ser carregadas. Você pode:</p>
+                        <div class="fallback-actions">
+                            <button onclick="window.open('https://github.com/loxiasapolloed/loxiasapolloed.github.io/discussions', '_blank')" 
+                                    class="btn-forum">
+                                <i class="fab fa-github"></i> Acessar no GitHub
+                            </button>
+                            <button onclick="loadGiscus()" class="btn-forum primary">
+                                <i class="fas fa-redo"></i> Tentar novamente
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1023,7 +1041,7 @@
                     <h5>Links Rápidos</h5>
                     <a href="index.html">Início</a>
                     <a href="livros.html">Livros</a>
-                    <a href="contato.html">Contato</a>
+                    <a href="contato.html">Contato & Fórum</a>
                 </div>
             </div>
             
@@ -1031,7 +1049,7 @@
             
             <p>© 2023 Loxias Apollo. Todos os direitos reservados.</p>
             <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.5rem;">
-                Sistema completo de contato com envio de email em tempo real
+                Fórum integrado com GitHub Discussions | Participe da nossa comunidade
             </p>
         </div>
     </footer>
@@ -1047,19 +1065,15 @@
         // Inicializar o sistema
         function initSystem() {
             loadMessages();
-            checkEmptyMural();
-            updateMuralStats();
             
             // Verificar se é admin (modo de desenvolvimento)
             const isAdmin = localStorage.getItem('loxias_admin') === 'true' || 
                            window.location.hash === '#admin';
             if (isAdmin) {
-                document.getElementById('admin-controls').style.display = 'block';
+                // Se quiser manter controles admin, descomente:
+                // document.getElementById('admin-controls').style.display = 'block';
                 localStorage.setItem('loxias_admin', 'true');
             }
-            
-            // Carregar mural inicialmente
-            refreshMural();
         }
 
         // Carregar mensagens do localStorage
@@ -1203,14 +1217,10 @@
             document.getElementById('contact-form').style.display = 'block';
         }
 
-        // ==============================================
-        // FUNÇÕES DE ENVIO DE EMAIL (REAL)
-        // ==============================================
-
-        // Função para enviar mensagem via PHP (SMTP do Gmail)
+        // Função para enviar mensagem via PHP
         async function enviarMensagemComEmail(formData) {
             try {
-                console.log('📤 Enviando para o servidor...', formData);
+                console.log('📤 Enviando mensagem...', formData);
                 
                 const response = await fetch('enviar_email.php', {
                     method: 'POST',
@@ -1221,15 +1231,15 @@
                 });
                 
                 const resultado = await response.json();
-                console.log('📨 Resposta do servidor:', resultado);
+                console.log('📨 Resposta:', resultado);
                 
                 return resultado;
                 
             } catch (erro) {
-                console.error('❌ Erro na conexão:', erro);
+                console.error('❌ Erro:', erro);
                 return {
                     status: 'error',
-                    message: 'Erro de conexão com o servidor'
+                    message: 'Erro de conexão'
                 };
             }
         }
@@ -1271,7 +1281,7 @@
             }
         }
 
-        // Função principal de envio (ATUALIZADA E FUNCIONAL)
+        // Função principal de envio
         async function handleSubmit(event) {
             event.preventDefault();
             
@@ -1295,26 +1305,25 @@
             btn.disabled = true;
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
 
-            // 1. PRIMEIRO TENTAR ENVIAR EMAIL VIA SMTP
+            // 1. TENTAR ENVIAR EMAIL VIA PHP
             const resultado = await enviarMensagemComEmail(formData);
             
-            // 2. SALVAR LOCALMENTE DE QUALQUER JEITO (backup)
+            // 2. SALVAR LOCALMENTE (backup)
             salvarMensagemLocalmente(formData);
             
             // 3. PROCESSAR RESULTADO
             if (resultado.status === 'success') {
-                // SUCESSO TOTAL - EMAIL ENVIADO
+                // SUCESSO TOTAL
                 showSuccess('✅ ' + resultado.message);
                 
-                // Se for mensagem pública, mostrar no mural
+                // Se for mensagem pública, sugerir fórum
                 if (formData.visibilidade === 'publico') {
                     setTimeout(() => {
                         showTab('mural');
-                        refreshMural();
                     }, 1500);
                 }
                 
-                // Limpar formulário após 2 segundos
+                // Limpar formulário
                 setTimeout(() => {
                     clearForm();
                     btn.disabled = false;
@@ -1323,163 +1332,94 @@
                 
             } else {
                 // EMAIL FALHOU, MAS SALVOU LOCALMENTE
-                showSuccess('💾 Mensagem salva localmente (email temporariamente indisponível).');
+                showSuccess('💾 Mensagem salva localmente. Para discussões públicas, use nosso fórum.');
                 
                 btn.disabled = false;
                 btn.innerHTML = originalText;
-                
-                // Mostrar mural se for público
-                if (formData.visibilidade === 'publico') {
-                    setTimeout(() => {
-                        showTab('mural');
-                        refreshMural();
-                    }, 1000);
-                }
             }
             
             return false;
         }
 
         // ==============================================
-        // FUNÇÕES DO MURAL
+        // FUNÇÕES PARA O FÓRUM/GISCUS
         // ==============================================
 
-        // Atualizar estatísticas do mural
-        function updateMuralStats() {
-            const publicMessages = messages.filter(m => m.visibilidade === 'publico' && m.aprovada);
-            const totalMessages = publicMessages.length;
-            const todayMessages = publicMessages.filter(m => {
-                const msgDate = new Date(m.data);
-                const today = new Date();
-                return msgDate.toDateString() === today.toDateString();
-            }).length;
-
-            document.getElementById('mural-stats').innerHTML = 
-                `<i class="fas fa-chart-bar"></i> ${totalMessages} mensagens | ${todayMessages} hoje`;
-        }
-
-        // Atualizar mural
-        function refreshMural() {
-            const refreshBtn = document.getElementById('refresh-btn');
-            const originalText = refreshBtn.innerHTML;
-            
-            // Mostrar estado de carregamento
-            refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Atualizando...';
-            refreshBtn.disabled = true;
-
-            // Carregar e renderizar mensagens
-            setTimeout(() => {
-                loadMessages();
-                renderMessages();
-                updateMuralStats();
-                checkEmptyMural();
+        // Copiar hashtag ao clicar
+        function copyHashtag(hashtag) {
+            navigator.clipboard.writeText(hashtag + ' ').then(() => {
+                const original = event.target.innerHTML;
+                event.target.innerHTML = '✓ Copiado!';
+                event.target.style.background = '#388e3c';
+                event.target.style.color = 'white';
                 
-                // Restaurar botão
-                refreshBtn.innerHTML = originalText;
-                refreshBtn.disabled = false;
-            }, 800);
-        }
-
-        // Renderizar mensagens no mural
-        function renderMessages() {
-            const container = document.getElementById('messages-grid');
-            const publicMessages = messages.filter(m => m.visibilidade === 'publico' && m.aprovada);
-            
-            // Ordenar por data (mais recentes primeiro)
-            publicMessages.sort((a, b) => new Date(b.data) - new Date(a.data));
-            
-            // Limitar a 20 mensagens
-            const displayMessages = publicMessages.slice(0, 20);
-            
-            // Gerar HTML das mensagens
-            container.innerHTML = '';
-            
-            displayMessages.forEach(msg => {
-                const messageElement = createMessageElement(msg);
-                container.appendChild(messageElement);
+                setTimeout(() => {
+                    event.target.innerHTML = original;
+                    event.target.style.background = '';
+                    event.target.style.color = '';
+                }, 1500);
+            }).catch(err => {
+                console.log('Erro ao copiar:', err);
             });
         }
 
-        // Criar elemento HTML para uma mensagem
-        function createMessageElement(message) {
-            const div = document.createElement('div');
-            div.className = `message-card message-${message.visibilidade}`;
-            
-            // Formatar data
-            const messageDate = new Date(message.data);
-            const now = new Date();
-            const diffTime = Math.abs(now - messageDate);
-            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-            
-            let dateText;
-            if (diffDays === 0) {
-                // Hoje
-                const diffHours = Math.floor(diffTime / (1000 * 60 * 60));
-                if (diffHours === 0) {
-                    const diffMinutes = Math.floor(diffTime / (1000 * 60));
-                    dateText = `Há ${diffMinutes} min${diffMinutes !== 1 ? 's' : ''}`;
+        // Verificar se Giscus carregou
+        function checkGiscusLoaded() {
+            setTimeout(() => {
+                const giscusFrame = document.querySelector('iframe.giscus-frame');
+                const loading = document.getElementById('giscus-loading');
+                const fallback = document.getElementById('giscus-fallback');
+                
+                if (giscusFrame && giscusFrame.style.display !== 'none') {
+                    // Giscus carregou com sucesso
+                    if (loading) loading.style.display = 'none';
+                    if (fallback) fallback.style.display = 'none';
                 } else {
-                    dateText = `Hoje às ${messageDate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}`;
+                    // Giscus não carregou
+                    if (loading) loading.style.display = 'none';
+                    if (fallback) fallback.style.display = 'block';
                 }
-            } else if (diffDays === 1) {
-                dateText = 'Ontem';
-            } else if (diffDays < 7) {
-                dateText = `Há ${diffDays} dia${diffDays !== 1 ? 's' : ''}`;
-            } else {
-                dateText = messageDate.toLocaleDateString('pt-BR');
-            }
-            
-            div.innerHTML = `
-                <div class="message-header">
-                    <div>
-                        <span class="message-author">${escapeHtml(message.nome)}</span>
-                        <span class="message-type-badge badge-${message.visibilidade}">
-                            ${message.visibilidade === 'publico' ? 'Público' : 'Privado'}
-                        </span>
-                    </div>
-                    <span class="message-date">${dateText}</span>
-                </div>
-                <div class="message-content">
-                    <p><strong>${escapeHtml(message.assunto)}</strong></p>
-                    <p>${escapeHtml(message.mensagem)}</p>
-                </div>
-                <div class="message-footer">
-                    <span>Assunto: ${escapeHtml(message.assunto)}</span>
-                    <div class="message-actions">
-                        <button class="btn-like" onclick="toggleLike('${message.id}')" data-liked="false">
-                            <i class="${message.liked ? 'fas' : 'far'} fa-heart"></i>
-                            <span>${message.curtidas || 0}</span>
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            return div;
+            }, 5000); // Espera 5 segundos
         }
 
-        // Curtir/Descurtir mensagem
-        function toggleLike(messageId) {
-            const message = messages.find(m => m.id === messageId);
-            if (!message) return;
+        // Recarregar Giscus
+        function loadGiscus() {
+            const container = document.querySelector('.giscus-container');
+            const fallback = document.getElementById('giscus-fallback');
+            const loading = document.getElementById('giscus-loading');
             
-            // Verificar se já curtiu
-            const hasLiked = localStorage.getItem(`liked_${messageId}`) === 'true';
-            
-            if (hasLiked) {
-                // Remover curtida
-                message.curtidas = Math.max(0, (message.curtidas || 0) - 1);
-                localStorage.removeItem(`liked_${messageId}`);
-            } else {
-                // Adicionar curtida
-                message.curtidas = (message.curtidas || 0) + 1;
-                localStorage.setItem(`liked_${messageId}`, 'true');
+            if (fallback) fallback.style.display = 'none';
+            if (loading) {
+                loading.style.display = 'block';
+                loading.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Recarregando discussões...';
             }
             
-            // Salvar alterações
-            saveMessages();
+            // Remover script antigo
+            const oldScript = document.querySelector('script[src="https://giscus.app/client.js"]');
+            if (oldScript) oldScript.remove();
             
-            // Atualizar visualização
-            refreshMural();
+            // Recriar script
+            const script = document.createElement('script');
+            script.src = 'https://giscus.app/client.js';
+            script.setAttribute('data-repo', 'loxiasapolloed/loxiasapolloed.github.io');
+            script.setAttribute('data-repo-id', 'R_kgDOQ97bQg');
+            script.setAttribute('data-category', 'General');
+            script.setAttribute('data-category-id', 'DIC_kwDOQ97bQs4C1lRA');
+            script.setAttribute('data-mapping', 'pathname');
+            script.setAttribute('data-strict', '0');
+            script.setAttribute('data-reactions-enabled', '1');
+            script.setAttribute('data-emit-metadata', '0');
+            script.setAttribute('data-input-position', 'top');
+            script.setAttribute('data-theme', 'gruvbox_light');
+            script.setAttribute('data-lang', 'pt');
+            script.setAttribute('data-loading', 'lazy');
+            script.setAttribute('crossorigin', 'anonymous');
+            script.async = true;
+            
+            container.appendChild(script);
+            
+            // Verificar novamente após recarregar
+            setTimeout(checkGiscusLoaded, 5000);
         }
 
         // ==============================================
@@ -1524,26 +1464,6 @@
             }, 5000);
         }
 
-        // Verificar se o mural está vazio
-        function checkEmptyMural() {
-            const container = document.getElementById('messages-grid');
-            const emptyState = document.getElementById('empty-state');
-            const publicMessages = messages.filter(m => m.visibilidade === 'publico' && m.aprovada);
-            
-            if (publicMessages.length === 0) {
-                emptyState.style.display = 'block';
-            } else {
-                emptyState.style.display = 'none';
-            }
-        }
-
-        // Escape HTML para segurança
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
         // ==============================================
         // FUNÇÕES DE ADMINISTRAÇÃO
         // ==============================================
@@ -1568,7 +1488,6 @@
             if (confirm('Tem certeza que deseja limpar TODAS as mensagens?\nEsta ação não pode ser desfeita.')) {
                 messages = [];
                 saveMessages();
-                refreshMural();
                 showSuccess('Todas as mensagens foram removidas.');
             }
         }
@@ -1601,9 +1520,9 @@
             document.getElementById(tabName + '-tab').style.display = 'block';
             event.currentTarget.classList.add('active');
             
-            // Se for a aba do mural, atualizar
+            // Se for a aba do mural, verificar Giscus
             if (tabName === 'mural') {
-                refreshMural();
+                setTimeout(checkGiscusLoaded, 1000);
             }
         }
 
@@ -1628,17 +1547,6 @@
                         visibilidade: "publico",
                         data: new Date(Date.now() - 2*60*60*1000).toISOString(),
                         curtidas: 12,
-                        aprovada: true
-                    },
-                    {
-                        id: generateId(),
-                        nome: "Carlos Mendes",
-                        email: "carlos@exemplo.com",
-                        assunto: "Sugestão",
-                        mensagem: "Seria ótimo ver mais traduções de autores lituanos como Balis Sruoga.",
-                        visibilidade: "publico",
-                        data: new Date(Date.now() - 26*60*60*1000).toISOString(),
-                        curtidas: 8,
                         aprovada: true
                     }
                 ];
