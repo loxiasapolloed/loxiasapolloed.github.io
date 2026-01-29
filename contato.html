@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contato - Loxias Apollo</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Contato • Loxias Apollo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Estilos personalizados da Loxias Apollo */
         :root {
             --preto: #000000;
             --amarelo: #FFD700;
@@ -18,8 +17,6 @@
             --verde-terroso: #5A6B4F;
             --marrom-claro: #A68A64;
             --cinza-claro: #f5f5f5;
-            --cinza-medio: #e0e0e0;
-            --verde-suave: rgba(90, 107, 79, 0.1);
             --error-color: #f23a3c;
             --success-color: #28a745;
         }
@@ -32,45 +29,105 @@
 
         body {
             font-family: 'League Spartan', sans-serif;
-            background: var(--branco);
+            font-weight: 200;
             color: var(--preto);
+            background-color: var(--branco);
             line-height: 1.6;
             min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+        }
+
+        /* ===== CABEÇALHO COM LOGO ===== */
+        .header-with-logo {
+            padding: 2rem 5%;
+            background-color: var(--branco);
+            border-bottom: 1px solid var(--preto);
+        }
+
+        .logo-container {
+            display: flex;
             align-items: center;
-            background-image: radial-gradient(circle at 10% 20%, rgba(239, 232, 212, 0.1) 0%, transparent 20%),
-                              radial-gradient(circle at 90% 80%, rgba(239, 232, 212, 0.1) 0%, transparent 20%);
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-        .container {
+        .site-logo {
+            height: 120px;
+            width: auto;
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));
+        }
+
+        .site-title-container {
+            text-align: left;
+            border-left: 2px solid var(--amarelo);
+            padding-left: 1.5rem;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .site-title {
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+            color: var(--preto);
+            margin-bottom: 0.3rem;
+            font-weight: 300;
+        }
+
+        .site-subtitle {
+            color: var(--verde-terroso);
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== NAVEGAÇÃO ===== */
+        nav {
+            padding: 1.3rem 5%;
+            background-color: var(--preto);
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        nav a {
+            color: var(--amarelo);
+            text-decoration: none;
+            margin: 0 1.2rem;
+            font-size: 1.15rem;
+            transition: opacity 0.3s;
+            white-space: nowrap;
+            font-weight: 400;
+        }
+
+        nav a:hover {
+            opacity: 0.7;
+        }
+
+        /* ===== CONTEÚDO PRINCIPAL ===== */
+        main {
+            flex: 1;
+            padding: 3rem 5% 4rem;
+            max-width: 900px;
+            margin: 0 auto;
             width: 100%;
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            animation: fadeIn 0.5s ease-out;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Header simplificado */
-        .custom-header {
+        .page-header {
             text-align: center;
             margin-bottom: 40px;
-            padding: 20px;
+            padding: 20px 0;
         }
 
-        .custom-header h1 {
+        .page-header h1 {
             color: var(--preto);
             margin-bottom: 10px;
             font-size: 2.5rem;
-            font-weight: 600;
+            font-weight: 300;
         }
 
-        .custom-subtitle {
+        .page-subtitle {
             color: var(--verde-terroso);
             font-size: 1.2rem;
             margin-bottom: 10px;
@@ -80,7 +137,7 @@
             text-align: center;
             margin-top: 20px;
             padding: 15px;
-            background: var(--verde-suave);
+            background: rgba(90, 107, 79, 0.1);
             border-radius: 8px;
             border-left: 4px solid var(--verde-terroso);
         }
@@ -101,8 +158,9 @@
             background: var(--cinza-claro);
             padding: 40px;
             border-radius: 15px;
-            border: 1px solid var(--cinza-medio);
+            border: 1px solid rgba(0, 0, 0, 0.1);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            margin-top: 20px;
         }
 
         .form-group {
@@ -115,6 +173,7 @@
             font-weight: 500;
             color: var(--preto);
             font-size: 1.05rem;
+            font-family: 'League Spartan', sans-serif;
         }
 
         .required::after {
@@ -180,35 +239,6 @@
             flex: 1;
         }
 
-        @media (max-width: 768px) {
-            .name-group {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .contact-form {
-                padding: 25px;
-            }
-            
-            .custom-header h1 {
-                font-size: 2rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 10px;
-            }
-            
-            .contact-form {
-                padding: 20px;
-            }
-            
-            .custom-header h1 {
-                font-size: 1.8rem;
-            }
-        }
-
         .error-message {
             color: var(--error-color);
             font-size: 0.85em;
@@ -249,6 +279,7 @@
             min-width: 200px;
             width: 100%;
             max-width: 300px;
+            font-family: 'League Spartan', sans-serif;
         }
 
         .submit-btn:hover {
@@ -302,6 +333,7 @@
         .success-message-content h3 {
             margin-bottom: 8px;
             font-size: 1.2rem;
+            font-weight: 500;
         }
 
         .success-message-content p {
@@ -350,19 +382,117 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+
+        /* Status corrigido */
+        .status-corrigido {
+            text-align: center;
+            margin-top: 25px;
+            padding: 15px;
+            background: rgba(40, 167, 69, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(40, 167, 69, 0.3);
+        }
+
+        /* ===== RODAPÉ ===== */
+        footer {
+            padding: 2rem 5%;
+            text-align: center;
+            background-color: var(--preto);
+            color: var(--branco);
+            font-size: 0.95rem;
+        }
+
+        /* ===== RESPONSIVIDADE ===== */
+        @media (max-width: 768px) {
+            .logo-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .site-title-container {
+                border-left: none;
+                padding-left: 0;
+                border-top: 2px solid var(--amarelo);
+                padding-top: 1rem;
+                margin-top: 1rem;
+                text-align: center;
+            }
+            
+            .site-title {
+                font-size: 2rem;
+            }
+            
+            nav a {
+                display: block;
+                margin: 0.7rem 0;
+                font-size: 1.1rem;
+            }
+            
+            .name-group {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .contact-form {
+                padding: 25px;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contact-form {
+                padding: 20px;
+            }
+            
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .submit-btn {
+                width: 100% !important;
+                max-width: 300px !important;
+            }
+        }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <!-- Header simplificado -->
-        <header class="custom-header">
+    <!-- CABEÇALHO COM LOGO -->
+    <header class="header-with-logo">
+        <div class="logo-container">
+            <img src="logo.png" 
+                alt="Logo Loxias Apollo" 
+                class="site-logo">
+            
+            <div class="site-title-container">
+                <h1 class="site-title">LOXIAS APOLLO</h1>
+                <p class="site-subtitle">Editora Independente de Literatura Local e Mundial</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVEGAÇÃO -->
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="livros.html">Livros</a>
+        <a href="blog.html">Blog</a>
+        <a href="contato.html">Contato</a>
+    </nav>
+    
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main>
+        <div class="page-header">
             <h1>✉️ Contato Loxias Apollo</h1>
-            <p class="custom-subtitle">Entre em contato diretamente com nossa equipe</p>
+            <p class="page-subtitle">Entre em contato diretamente com nossa equipe</p>
             <div class="contact-info">
                 <p><i class="fas fa-envelope"></i> Responderemos por email em até 48 horas</p>
                 <p><i class="fas fa-shield-alt"></i> Suas informações são mantidas em sigilo</p>
             </div>
-        </header>
+        </div>
 
         <!-- Mensagem de erro global -->
         <div id="globalError" class="error-message-global">
@@ -453,14 +583,19 @@
             <div class="form-required-note">Campos marcados com * são obrigatórios</div>
         </form>
         
-        <!-- Nota sobre funcionamento corrigido -->
-        <div style="text-align: center; margin-top: 25px; padding: 15px; background: rgba(40, 167, 69, 0.1); border-radius: 8px; border: 1px solid rgba(40, 167, 69, 0.3);">
+        <!-- Status corrigido -->
+        <div class="status-corrigido">
             <p style="color: var(--verde-terroso); font-size: 0.9rem;">
                 <i class="fas fa-check-circle" style="color: var(--success-color); margin-right: 8px;"></i>
                 <strong>Sistema de email corrigido!</strong> Agora você receberá todas as mensagens diretamente no seu email.
             </p>
         </div>
-    </div>
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer>
+        <p>© 2026 Loxias Apollo. Todos os direitos reservados.</p>
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -602,7 +737,6 @@
                     console.log('Enviando formulário da forma tradicional...');
                     
                     // Mostrar mensagem de sucesso mesmo com erro de fetch
-                    // (o JotForm ainda processará o formulário)
                     successMessage.style.display = 'flex';
                     successMessage.scrollIntoView({ behavior: 'smooth' });
                     
