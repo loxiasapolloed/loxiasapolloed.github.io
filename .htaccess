@@ -1,0 +1,19 @@
+# Protege o arquivo de configuração de e-mail
+<Files "enviar_email.php">
+    Order Allow,Deny
+    Allow from all
+</Files>
+
+# Protege contra acesso a arquivos sensíveis
+<FilesMatch "\.(log|sql|ini)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Redireciona erros 404 para a página principal
+ErrorDocument 404 /index.html
+
+# Habilita compressão GZIP para melhor performance
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
+</IfModule>

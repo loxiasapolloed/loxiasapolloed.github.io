@@ -6,7 +6,7 @@
     <title>Contato & Mural - Loxias Apollo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -311,6 +311,32 @@
             background-color: #d0d0d0;
         }
 
+        /* Success Message */
+        .success-message {
+            display: none;
+            background-color: var(--verde-suave);
+            border-left: 4px solid var(--verde-terroso);
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .success-message h4 {
+            color: var(--verde-terroso);
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        /* Mural Tab */
+        #mural-tab {
+            display: none;
+        }
+
         /* Mural */
         .mural-container {
             margin-top: 3rem;
@@ -513,23 +539,6 @@
             line-height: 1.5;
         }
 
-        /* Success Message */
-        .success-message {
-            display: none;
-            background-color: var(--verde-suave);
-            border-left: 4px solid var(--verde-terroso);
-            padding: 1.5rem;
-            border-radius: 4px;
-            margin-top: 2rem;
-            text-align: center;
-        }
-
-        .success-message h4 {
-            color: var(--verde-terroso);
-            margin-bottom: 0.5rem;
-            font-weight: 400;
-        }
-
         /* Empty State */
         .empty-state {
             text-align: center;
@@ -630,6 +639,14 @@
                 min-width: auto;
             }
             
+            .message-type {
+                flex-direction: column;
+            }
+            
+            .type-option {
+                min-width: auto;
+            }
+            
             .form-buttons {
                 flex-direction: column;
             }
@@ -691,142 +708,188 @@
                 <div class="contact-form">
                     <h3><i class="fas fa-pen"></i> Escreva sua mensagem</h3>
                     
-                    <form id="messageForm">
+                    <!-- Mensagem de sucesso (inicialmente escondida) -->
+                    <div id="success-message" class="success-message" style="display: none;">
+                        <h4><i class="fas fa-check-circle"></i> Mensagem enviada com sucesso!</h4>
+                        <p>Obrigado pelo seu contato. Responderemos em até 48 horas.</p>
+                    </div>
+                    
+                    <!-- Formulário de contato funcional -->
+                    <form id="contact-form" method="POST" action="enviar_email.php">
                         <div class="form-group">
-                            <label for="name">Seu nome *</label>
-                            <input type="text" id="name" name="name" required>
+                            <label for="nome">Seu Nome *</label>
+                            <input type="text" id="nome" name="nome" required 
+                                   placeholder="Digite seu nome completo">
                         </div>
                         
                         <div class="form-group">
-                            <label for="email">Seu email (não será publicado) *</label>
-                            <input type="email" id="email" name="email" required>
+                            <label for="email">Seu E-mail *</label>
+                            <input type="email" id="email" name="email" required 
+                                   placeholder="seu.email@exemplo.com">
                         </div>
                         
                         <div class="form-group">
-                            <label for="subject">Assunto</label>
-                            <select id="subject" name="subject">
-                                <option value="">Selecione um assunto</option>
-                                <option value="duvida">Dúvida sobre livros</option>
-                                <option value="sugestao">Sugestão</option>
-                                <option value="parceria">Proposta de parceria</option>
-                                <option value="elogio">Elogio</option>
-                                <option value="outro">Outro</option>
+                            <label for="assunto">Assunto *</label>
+                            <select id="assunto" name="assunto" required>
+                                <option value="" disabled selected>Selecione um assunto</option>
+                                <option value="Elogio">Elogio</option>
+                                <option value="Sugestão">Sugestão</option>
+                                <option value="Dúvida">Dúvida</option>
+                                <option value="Problema técnico">Problema técnico</option>
+                                <option value="Proposta comercial">Proposta comercial</option>
+                                <option value="Outro">Outro</option>
                             </select>
                         </div>
                         
-                        <!-- Message Type -->
+                        <!-- Tipo de Mensagem (Público/Privado) -->
                         <div class="message-type">
                             <div class="type-option">
-                                <input type="radio" id="type-private" name="messageType" value="private" class="type-radio" checked>
-                                <label for="type-private" class="type-label">
-                                    <div class="type-icon">
-                                        <i class="fas fa-lock"></i>
+                                <input type="radio" id="publico" name="visibilidade" value="publico" checked class="type-radio">
+                                <label for="publico" class="type-label">
+                                    <div class="type-icon"><i class="fas fa-users"></i></div>
+                                    <div class="type-text">
+                                        <strong>Público</strong>
+                                        <small>Sua mensagem aparecerá no mural</small>
                                     </div>
-                                    <strong>Mensagem Privada</strong>
-                                    <p style="font-size: 0.9rem; margin-top: 0.5rem; color: #666;">
-                                        Só a equipe da editora verá
-                                    </p>
                                 </label>
                             </div>
-                            
                             <div class="type-option">
-                                <input type="radio" id="type-public" name="messageType" value="public" class="type-radio">
-                                <label for="type-public" class="type-label">
-                                    <div class="type-icon">
-                                        <i class="fas fa-users"></i>
+                                <input type="radio" id="privado" name="visibilidade" value="privado" class="type-radio">
+                                <label for="privado" class="type-label">
+                                    <div class="type-icon"><i class="fas fa-lock"></i></div>
+                                    <div class="type-text">
+                                        <strong>Privado</strong>
+                                        <small>Apenas administradores verão</small>
                                     </div>
-                                    <strong>Mensagem Pública</strong>
-                                    <p style="font-size: 0.9rem; margin-top: 0.5rem; color: #666;">
-                                        Aparecerá no mural abaixo
-                                    </p>
                                 </label>
                             </div>
                         </div>
                         
                         <div class="form-group">
-                            <label for="message">Sua mensagem *</label>
-                            <textarea id="message" name="message" required></textarea>
+                            <label for="mensagem">Sua Mensagem *</label>
+                            <textarea id="mensagem" name="mensagem" required 
+                                      placeholder="Digite sua mensagem aqui..."></textarea>
                         </div>
                         
                         <div class="form-buttons">
-                            <button type="button" class="btn-form btn-clear" onclick="clearForm()">
-                                <i class="fas fa-eraser"></i> Limpar
-                            </button>
                             <button type="submit" class="btn-form btn-submit">
                                 <i class="fas fa-paper-plane"></i> Enviar Mensagem
                             </button>
+                            <button type="button" onclick="clearForm()" class="btn-form btn-clear">
+                                <i class="fas fa-eraser"></i> Limpar
+                            </button>
                         </div>
+                        
+                        <p style="text-align: center; margin-top: 1rem; color: var(--marrom-claro); font-size: 0.9rem;">
+                            * Campos obrigatórios
+                        </p>
                     </form>
-                    
-                    <div id="successMessage" class="success-message">
-                        <i class="fas fa-check-circle"></i>
-                        <h4>Mensagem enviada com sucesso!</h4>
-                        <p id="successText"></p>
+                </div>
+                
+                <!-- Contact Information -->
+                <div class="contact-info">
+                    <h4><i class="fas fa-info-circle"></i> Outras formas de contato</h4>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="info-content">
+                                <h5>Email direto</h5>
+                                <p>loxias.apollo.ed@gmail.com</p>
+                                <p><small>Respondemos em até 48h</small></p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-user-edit"></i>
+                            </div>
+                            <div class="info-content">
+                                <h5>Para autores</h5>
+                                <p>Recebemos propostas de publicação</p>
+                                <p><small>Envie seu manuscrito</small></p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="info-content">
+                                <h5>Horário de atendimento</h5>
+                                <p>Segunda a sexta: 9h às 18h</p>
+                                <p>Sábado: 9h às 13h</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Mural Tab -->
-        <div id="mural-tab" class="tab-content" style="display: none;">
+        <div id="mural-tab" class="tab-content">
             <div class="mural-container">
                 <div class="mural-header">
-                    <h3><i class="fas fa-comments"></i> Mural de Mensagens</h3>
+                    <h3><i class="fas fa-comments"></i> Mural de Mensagens Públicas</h3>
                     <div class="mural-controls">
-                        <button class="btn-refresh" onclick="loadMessages()">
+                        <button class="btn-refresh" onclick="refreshMural()">
                             <i class="fas fa-sync-alt"></i> Atualizar
                         </button>
                     </div>
                 </div>
                 
-                <div id="messages-container" class="messages-grid">
-                    <!-- Mensagens serão carregadas aqui -->
-                    <div class="empty-state">
-                        <div class="empty-icon">
-                            <i class="fas fa-comment-slash"></i>
+                <!-- Messages Grid -->
+                <div class="messages-grid" id="messages-grid">
+                    <!-- Mensagens públicas serão carregadas aqui -->
+                    <div class="message-card message-public">
+                        <div class="message-header">
+                            <div>
+                                <span class="message-author">Ana Silva</span>
+                                <span class="message-type-badge badge-public">Público</span>
+                            </div>
+                            <span class="message-date">Hoje às 08:33</span>
                         </div>
-                        <h4>Nenhuma mensagem pública ainda</h4>
-                        <p>Seja o primeiro a compartilhar uma mensagem!</p>
+                        <div class="message-content">
+                            <p>Adorei a trilogia Afelandra! Quando sai o próximo livro?</p>
+                        </div>
+                        <div class="message-footer">
+                            <span>Assunto: Elogio</span>
+                            <div class="message-actions">
+                                <button class="btn-like" onclick="toggleLike(this)">
+                                    <i class="far fa-heart"></i> <span>12</span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Contact Info -->
-        <div class="contact-info">
-            <h4><i class="fas fa-info-circle"></i> Outras formas de contato</h4>
-            <div class="info-grid">
-                <div class="info-item">
-                    <div class="info-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <div class="info-content">
-                        <h5>Email direto</h5>
-                        <p>loxias.apollo.ed@gmail.com</p>
-                        <p style="font-size: 0.9rem; color: #888;">Respondemos em até 48h</p>
+                    
+                    <div class="message-card message-public">
+                        <div class="message-header">
+                            <div>
+                                <span class="message-author">Carlos Mendes</span>
+                                <span class="message-type-badge badge-public">Público</span>
+                            </div>
+                            <span class="message-date">Ontem às 10:33</span>
+                        </div>
+                        <div class="message-content">
+                            <p>Seria ótimo ver mais traduções de autores lituanos como Balis Sruoga.</p>
+                        </div>
+                        <div class="message-footer">
+                            <span>Assunto: Sugestão</span>
+                            <div class="message-actions">
+                                <button class="btn-like" onclick="toggleLike(this)">
+                                    <i class="far fa-heart"></i> <span>8</span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="info-item">
-                    <div class="info-icon">
-                        <i class="fas fa-book"></i>
+                <!-- Empty State (escondido por padrão) -->
+                <div id="empty-state" class="empty-state" style="display: none;">
+                    <div class="empty-icon">
+                        <i class="far fa-comment-dots"></i>
                     </div>
-                    <div class="info-content">
-                        <h5>Para autores</h5>
-                        <p>Recebemos propostas de publicação</p>
-                        <p style="font-size: 0.9rem; color: #888;">Envie seu manuscrito</p>
-                    </div>
-                </div>
-                
-                <div class="info-item">
-                    <div class="info-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <div class="info-content">
-                        <h5>Horário de atendimento</h5>
-                        <p>Segunda a sexta: 9h às 18h</p>
-                        <p style="font-size: 0.9rem; color: #888;">Sábado: 9h às 13h</p>
-                    </div>
+                    <h4>Nenhuma mensagem pública ainda</h4>
+                    <p>Seja o primeiro a compartilhar uma mensagem no mural!</p>
                 </div>
             </div>
         </div>
@@ -837,276 +900,133 @@
             <div class="footer-top">
                 <div class="footer-section">
                     <h5>Loxias Apollo</h5>
-                    <p>Editora Independente de literatura Local e Mundial</p>
+                    <p>Editora Independente</p>
+                    <p>Literatura Local e Mundial</p>
+                </div>
+                <div class="footer-section">
+                    <h5>Contato</h5>
+                    <p>loxias.apollo.ed@gmail.com</p>
+                    <p>Segunda a sexta: 9h às 18h</p>
                 </div>
                 <div class="footer-section">
                     <h5>Links Rápidos</h5>
-                    <a href="blog.html">Blog Iota Subscrito</a>
-                    <a href="contato.html">Contato & Mural</a>
+                    <a href="index.html">Início</a>
+                    <a href="livros.html">Livros</a>
+                    <a href="contato.html">Contato</a>
                 </div>
             </div>
+            
             <hr class="footer-divider">
-            <div>
-                <p>&copy; <span id="current-year"></span> Loxias Apollo. Todos os direitos reservados.</p>
-            </div>
+            
+            <p>© 2023 Loxias Apollo. Todos os direitos reservados.</p>
         </div>
     </footer>
 
     <script>
-        // Dados simulados (em produção, use um backend)
-        let publicMessages = JSON.parse(localStorage.getItem('loxiasPublicMessages')) || [];
-        let messageLikes = JSON.parse(localStorage.getItem('loxiasMessageLikes')) || {};
-
-        document.addEventListener('DOMContentLoaded', function() {
-            // Ano atual no footer
-            document.getElementById('current-year').textContent = new Date().getFullYear();
-            
-            // Carregar mensagens públicas
-            loadMessages();
-            
-            // Formulário
-            const messageForm = document.getElementById('messageForm');
-            messageForm.addEventListener('submit', handleSubmit);
-        });
-
+        // Função para alternar entre as abas
         function showTab(tabName) {
-            // Atualizar botões
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
+            // Esconde todas as abas
+            document.getElementById('form-tab').style.display = 'none';
+            document.getElementById('mural-tab').style.display = 'none';
+            
+            // Remove a classe active de todos os botões
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Mostra a aba selecionada e ativa o botão correspondente
+            document.getElementById(tabName + '-tab').style.display = 'block';
+            event.currentTarget.classList.add('active');
+        }
+        
+        // Mostra a aba do formulário por padrão
+        document.addEventListener('DOMContentLoaded', function() {
+            showTab('form');
+            
+            // Verifica se há parâmetro de sucesso na URL
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('enviado') === 'sucesso') {
+                const successMessage = document.getElementById('success-message');
+                const contactForm = document.getElementById('contact-form');
+                
+                successMessage.style.display = 'block';
+                contactForm.style.display = 'none';
+                
+                // Rola até a mensagem de sucesso
+                successMessage.scrollIntoView({ behavior: 'smooth' });
+            }
+            
+            // Adiciona comportamento de envio ao formulário
+            const form = document.getElementById('contact-form');
+            form.addEventListener('submit', function(e) {
+                const submitBtn = this.querySelector('.btn-submit');
+                const originalText = submitBtn.innerHTML;
+                
+                // Altera o texto do botão durante o envio
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+                submitBtn.disabled = true;
+                
+                // O envio real acontece via action do formulário (enviar_email.php)
             });
-            
-            if (tabName === 'form') {
-                document.querySelector('.tab-btn:nth-child(1)').classList.add('active');
-                document.getElementById('form-tab').style.display = 'block';
-                document.getElementById('mural-tab').style.display = 'none';
-            } else {
-                document.querySelector('.tab-btn:nth-child(2)').classList.add('active');
-                document.getElementById('form-tab').style.display = 'none';
-                document.getElementById('mural-tab').style.display = 'block';
-                loadMessages();
-            }
-        }
-
-        function handleSubmit(e) {
-            e.preventDefault();
-            
-            const formData = {
-                id: Date.now(),
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                subject: document.getElementById('subject').value,
-                message: document.getElementById('message').value,
-                type: document.querySelector('input[name="messageType"]:checked').value,
-                date: new Date().toISOString(),
-                likes: 0,
-                likedBy: []
-            };
-            
-            // Salvar no localStorage
-            if (formData.type === 'public') {
-                publicMessages.unshift(formData); // Adicionar no início
-                localStorage.setItem('loxiasPublicMessages', JSON.stringify(publicMessages));
-                
-                // Mostrar sucesso
-                document.getElementById('successText').textContent = 
-                    'Sua mensagem foi publicada no mural!';
-                showSuccess();
-                
-                // Recarregar mural
-                loadMessages();
-                
-                // Mudar para o mural
-                setTimeout(() => showTab('mural'), 2000);
-            } else {
-                // Para mensagens privadas, só salvar no "inbox" simulado
-                const privateMessages = JSON.parse(localStorage.getItem('loxiasPrivateMessages')) || [];
-                privateMessages.push(formData);
-                localStorage.setItem('loxiasPrivateMessages', JSON.stringify(privateMessages));
-                
-                // Mostrar sucesso
-                document.getElementById('successText').textContent = 
-                    'Sua mensagem privada foi enviada com sucesso!';
-                showSuccess();
-            }
-            
-            // Limpar formulário
-            clearForm();
-        }
-
+        });
+        
+        // Função para limpar o formulário
         function clearForm() {
-            document.getElementById('messageForm').reset();
-            document.getElementById('type-private').checked = true;
+            document.getElementById('contact-form').reset();
         }
-
-        function showSuccess() {
-            const successMessage = document.getElementById('successMessage');
-            successMessage.style.display = 'block';
+        
+        // Função para atualizar o mural
+        function refreshMural() {
+            const refreshBtn = event.currentTarget;
+            const originalText = refreshBtn.innerHTML;
             
-            // Rolar até a mensagem
-            successMessage.scrollIntoView({ behavior: 'smooth' });
+            // Mostra estado de carregamento
+            refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Atualizando...';
+            refreshBtn.disabled = true;
             
-            // Esconder após 5 segundos
+            // Simula uma atualização (em uma implementação real, buscaria dados do servidor)
             setTimeout(() => {
-                successMessage.style.display = 'none';
-            }, 5000);
-        }
-
-        function loadMessages() {
-            const container = document.getElementById('messages-container');
-            
-            if (publicMessages.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-icon">
-                            <i class="fas fa-comment-slash"></i>
-                        </div>
-                        <h4>Nenhuma mensagem pública ainda</h4>
-                        <p>Seja o primeiro a compartilhar uma mensagem!</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            let messagesHTML = '';
-            
-            publicMessages.forEach(message => {
-                const dateFormatted = formatDate(message.date);
-                const likes = messageLikes[message.id] || 0;
-                const subjectText = getSubjectText(message.subject);
+                refreshBtn.innerHTML = originalText;
+                refreshBtn.disabled = false;
                 
-                messagesHTML += `
-                    <div class="message-card ${message.type === 'private' ? 'message-private' : 'message-public'}">
-                        <div class="message-header">
-                            <div>
-                                <span class="message-author">${message.name}</span>
-                                <span class="message-type-badge ${message.type === 'public' ? 'badge-public' : 'badge-private'}">
-                                    ${message.type === 'public' ? 'Público' : 'Privado'}
-                                </span>
-                            </div>
-                            <span class="message-date">${dateFormatted}</span>
-                        </div>
-                        
-                        ${subjectText ? `<p style="color: var(--verde-terroso); margin-bottom: 0.5rem; font-size: 0.9rem;"><strong>Assunto:</strong> ${subjectText}</p>` : ''}
-                        
-                        <div class="message-content">
-                            ${escapeHtml(message.message).replace(/\n/g, '<br>')}
-                        </div>
-                        
-                        <div class="message-footer">
-                            <div class="message-actions">
-                                <button class="btn-like ${isMessageLiked(message.id) ? 'liked' : ''}" onclick="likeMessage(${message.id})">
-                                    <i class="fas fa-heart"></i>
-                                    <span class="like-count">${likes}</span>
-                                </button>
-                            </div>
-                            <div>
-                                ${message.subject ? `<span style="color: var(--marrom-claro);">${subjectText}</span>` : ''}
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            container.innerHTML = messagesHTML;
+                // Aqui você faria uma requisição AJAX para buscar novas mensagens
+                // Exemplo:
+                // fetch('buscar_mensagens.php')
+                //   .then(response => response.json())
+                //   .then(data => atualizarMural(data));
+                
+                alert('Mural atualizado! (Funcionalidade completa requer backend)');
+            }, 1000);
         }
-
-        function likeMessage(messageId) {
-            const userLikes = JSON.parse(localStorage.getItem('loxiasUserLikes')) || [];
+        
+        // Função para curtir mensagens
+        function toggleLike(button) {
+            const icon = button.querySelector('i');
+            const countSpan = button.querySelector('span');
+            let count = parseInt(countSpan.textContent);
             
-            if (userLikes.includes(messageId)) {
-                // Já curtiu, remover like
-                const index = userLikes.indexOf(messageId);
-                userLikes.splice(index, 1);
-                messageLikes[messageId] = (messageLikes[messageId] || 1) - 1;
+            if (button.classList.contains('liked')) {
+                // Remove curtida
+                icon.className = 'far fa-heart';
+                countSpan.textContent = count - 1;
+                button.classList.remove('liked');
             } else {
-                // Dar like
-                userLikes.push(messageId);
-                messageLikes[messageId] = (messageLikes[messageId] || 0) + 1;
-            }
-            
-            localStorage.setItem('loxiasUserLikes', JSON.stringify(userLikes));
-            localStorage.setItem('loxiasMessageLikes', JSON.stringify(messageLikes));
-            
-            loadMessages();
-        }
-
-        function isMessageLiked(messageId) {
-            const userLikes = JSON.parse(localStorage.getItem('loxiasUserLikes')) || [];
-            return userLikes.includes(messageId);
-        }
-
-        function getSubjectText(subject) {
-            const subjects = {
-                'duvida': 'Dúvida sobre livros',
-                'sugestao': 'Sugestão',
-                'parceria': 'Proposta de parceria',
-                'elogio': 'Elogio',
-                'outro': 'Outro'
-            };
-            return subjects[subject] || '';
-        }
-
-        function formatDate(dateString) {
-            try {
-                const date = new Date(dateString);
-                const now = new Date();
-                const diffMs = now - date;
-                const diffHours = diffMs / (1000 * 60 * 60);
-                
-                if (diffHours < 24) {
-                    return 'Hoje às ' + date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-                } else if (diffHours < 48) {
-                    return 'Ontem às ' + date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-                } else {
-                    return date.toLocaleDateString('pt-BR', {
-                        day: '2-digit',
-                        month: 'short',
-                        year: 'numeric'
-                    });
-                }
-            } catch (e) {
-                return '';
+                // Adiciona curtida
+                icon.className = 'fas fa-heart';
+                countSpan.textContent = count + 1;
+                button.classList.add('liked');
             }
         }
-
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
-        // Inicializar com algumas mensagens de exemplo
-        if (publicMessages.length === 0) {
-            // Adicionar mensagens de exemplo
-            const exampleMessages = [
-                {
-                    id: 1,
-                    name: 'Ana Silva',
-                    email: 'ana@exemplo.com',
-                    subject: 'elogio',
-                    message: 'Adorei a trilogia Afelandra! Quando sai o próximo livro?',
-                    type: 'public',
-                    date: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), // 2 horas atrás
-                    likes: 5
-                },
-                {
-                    id: 2,
-                    name: 'Carlos Mendes',
-                    email: 'carlos@exemplo.com',
-                    subject: 'sugestao',
-                    message: 'Seria ótimo ver mais traduções de autores lituanos como Balis Sruoga.',
-                    type: 'public',
-                    date: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(), // 1 dia atrás
-                    likes: 3
-                }
-            ];
+        
+        // Verifica se há mensagens no mural (para mostrar estado vazio)
+        function checkEmptyMural() {
+            const messagesGrid = document.getElementById('messages-grid');
+            const emptyState = document.getElementById('empty-state');
             
-            publicMessages = exampleMessages;
-            localStorage.setItem('loxiasPublicMessages', JSON.stringify(publicMessages));
-            
-            // Inicializar likes
-            messageLikes = { 1: 5, 2: 3 };
-            localStorage.setItem('loxiasMessageLikes', JSON.stringify(messageLikes));
+            if (messagesGrid.children.length === 0) {
+                emptyState.style.display = 'block';
+            } else {
+                emptyState.style.display = 'none';
+            }
         }
     </script>
 </body>
