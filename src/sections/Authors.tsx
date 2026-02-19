@@ -1,4 +1,5 @@
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
 export function Authors() {
@@ -9,18 +10,21 @@ export function Authors() {
   const authors = [
     {
       name: 'Mira Andor',
-      role: 'Fantasia Épica',
+      role: 'Mistery',
       works: 'Trilogia Afelandra',
+      slug: 'mira-andor',
     },
     {
       name: 'Samantha Tovo',
-      role: 'Tradução & Poesia',
-      works: 'O Poeta e o Tigre',
+      role: 'Filosofia e Mitopoética',
+      works: 'Diário de Cassandra',
+      slug: 'samantha-tovo',
     },
     {
       name: 'Gustavo Tovo',
       role: 'Ficção Histórica',
       works: 'Série Brasil Colônia',
+      slug: 'gustavo-tovo',
     },
   ];
 
@@ -34,7 +38,7 @@ export function Authors() {
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[#0B0B0D]/60 z-10" />
         <img
-          src="site/public/images/bg/2.jpeg"
+          src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1920&q=80"
           alt="Escritor trabalhando"
           className={`w-full h-full object-cover img-monochrome transition-all duration-[1.5s] ${
             isVisible ? 'scale-100' : 'scale-110'
@@ -77,9 +81,10 @@ export function Authors() {
           {/* Author List */}
           <div className="space-y-4 mb-10">
             {authors.map((author, index) => (
-              <div
+              <Link
                 key={author.name}
-                className={`flex items-center gap-4 p-4 border border-[#C9A04C]/20 hover:border-[#C9A04C]/50 transition-all duration-500 cursor-pointer group ${
+                to={`/autores/${author.slug}`}
+                className={`flex items-center gap-4 p-4 border border-[#C9A04C]/20 hover:border-[#C9A04C]/50 hover:bg-[#C9A04C]/5 transition-all duration-500 group ${
                   isVisible
                     ? 'opacity-100 translate-x-0'
                     : 'opacity-0 -translate-x-8'
@@ -101,24 +106,25 @@ export function Authors() {
                   size={16}
                   className="text-[#C9A04C] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all"
                 />
-              </div>
+              </Link>
             ))}
           </div>
 
           {/* CTA */}
-          <button
+          <Link
+            to="/autores/traduzidos"
             className={`inline-flex items-center gap-2 text-[#C9A04C] hover:text-[#D4AA5A] transition-all duration-700 delay-700 group ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
           >
             <span className="font-sans text-sm tracking-wider uppercase">
-              Ver todos os autores
+              Ver autores traduzidos
             </span>
             <ArrowRight
               size={16}
               className="group-hover:translate-x-1 transition-transform"
             />
-          </button>
+          </Link>
         </div>
       </div>
     </section>

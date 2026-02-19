@@ -1,101 +1,87 @@
-import { Toaster } from 'sonner';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
-import { Hero } from '@/sections/Hero';
-import { Manifesto } from '@/sections/Manifesto';
-import { FeaturedBook } from '@/sections/FeaturedBook';
-import { Authors } from '@/sections/Authors';
-import { ReadingExperience } from '@/sections/ReadingExperience';
-import { Newsletter } from '@/sections/Newsletter';
-import { Catalog } from '@/sections/Catalog';
-import { Testimonials } from '@/sections/Testimonials';
-import { Stats } from '@/sections/Stats';
-import { Process } from '@/sections/Process';
-import { Partners } from '@/sections/Partners';
-import { FAQ } from '@/sections/FAQ';
-import { ContactForm } from '@/sections/ContactForm';
-import { books } from '@/data/books';
+import { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { Header } from './components/layout/Header';
+import { Footer } from './components/layout/Footer';
+import { BookPage } from './pages/BookPage';
+import { BlogPage } from './pages/BlogPage';
+import { ManifestoPage } from './pages/ManifestoPage';
+import { GustavoTovoPage } from './pages/authors/GustavoTovoPage';
+import { SamanthaTovoPage } from './pages/authors/SamanthaTovoPage';
+import { MiraAndorPage } from './pages/authors/MiraAndorPage';
+import { TranslatedAuthorsPage } from './pages/TranslatedAuthorsPage';
+import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
+import { AcervoPage } from './pages/AcervoPage';
+
+import { Hero } from './sections/Hero';
+import { Manifesto } from './sections/Manifesto';
+import { Catalog } from './sections/Catalog';
+import { VisualizadorLivros } from './sections/VisualizadorLivros'; 
+import { ReadingExperienceWithAuthors } from './sections/ReadingExperienceWithAuthors';
+import { Testimonials } from './sections/Testimonials';
+import { Newsletter } from './sections/Newsletter';
+
+// ScrollToTop component
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  
+  return null;
+}
 
 function App() {
-  // Get featured books
-  const afelandra = books.find((b) => b.id === 'afelandra-2') || books[0];
-  const poetaTigre = books.find((b) => b.id === 'poeta-tigre') || books[1];
-  const peonia = books.find((b) => b.id === 'peonia') || books[2];
-  const tantoMar = books.find((b) => b.id === 'tanto-mar') || books[3];
-
   return (
-    <div className="relative min-h-screen bg-[#0B0B0D]">
-      {/* Grain Overlay */}
-      <div className="grain-overlay" />
+    <BrowserRouter basename="/">
+      <ScrollToTop />
+      <div className="min-h-screen bg-dark text-cream flex flex-col">
+        <Header />
+        
+        <main className="flex-grow">
+          <Routes>
+            <Route 
+              path="/" 
+              element={
+                <>
+                  <div id="top" />
+                  <Hero />
+                  <Manifesto />
+                  <div id="catalogo" />
+                  <Catalog />
+                  <VisualizadorLivros />
+                  <div id="acervo" />
+                  <div id="autores" />
+                  <ReadingExperienceWithAuthors />
+                  <Testimonials />
+                  <Newsletter />
+                </>
+              } 
+            />
+            <Route path="/livro/:id" element={<BookPage />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/manifesto" element={<ManifestoPage />} />
+            <Route path="/autores/gustavo-tovo" element={<GustavoTovoPage />} />
+            <Route path="/autores/samantha-tovo" element={<SamanthaTovoPage />} />
+            <Route path="/autores/mira-andor" element={<MiraAndorPage />} />
+            <Route path="/autores/traduzidos" element={<TranslatedAuthorsPage />} />
+            <Route path="/acervo" element={<AcervoPage />} />
+            <Route path="/privacidade" element={<PrivacyPolicyPage />} />
+            <Route 
+              path="*" 
+              element={
+                <div className="text-center py-32">
+                  <h1 className="font-serif text-4xl text-gold mb-4">Página não encontrada</h1>
+                  <a href="/teste/" className="text-stone hover:text-gold">Voltar para a home</a>
+                </div>
+              } 
+            />
+          </Routes>
+        </main>
 
-      {/* Vignette */}
-      <div className="vignette" />
-
-      {/* Toast notifications */}
-      <Toaster 
-        position="top-right" 
-        toastOptions={{
-          style: {
-            background: '#0B0B0D',
-            border: '1px solid rgba(201, 160, 76, 0.4)',
-            color: '#F4F1EA',
-          },
-        }}
-      />
-
-      {/* Main Content */}
-      <Header />
-      <main className="relative">
-        {/* Section 1: Hero */}
-        <Hero />
-
-        {/* Section 2: Manifesto */}
-        <Manifesto />
-
-        {/* Section 3: Stats */}
-        <Stats />
-
-        {/* Section 4: Featured Book - Afelandra */}
-        <FeaturedBook book={afelandra} microLabel="Destaque" layout="left" />
-
-        {/* Section 5: Featured Book - O Poeta e o Tigre */}
-        <FeaturedBook book={poetaTigre} microLabel="Tradução" layout="right" />
-
-        {/* Section 6: Featured Book - A Peônia */}
-        <FeaturedBook book={peonia} microLabel="Clássico" layout="left" />
-
-        {/* Section 7: Featured Book - Tanto Mar */}
-        <FeaturedBook book={tantoMar} microLabel="Ficção Histórica" layout="right" />
-
-        {/* Section 8: Authors */}
-        <Authors />
-
-        {/* Section 9: Process */}
-        <Process />
-
-        {/* Section 10: Reading Experience */}
-        <ReadingExperience />
-
-        {/* Section 11: Partners */}
-        <Partners />
-
-        {/* Section 12: Newsletter */}
-        <Newsletter />
-
-        {/* Section 13: Catalog */}
-        <Catalog />
-
-        {/* Section 14: Testimonials */}
-        <Testimonials />
-
-        {/* Section 15: FAQ */}
-        <FAQ />
-
-        {/* Section 16: Contact Form */}
-        <ContactForm />
-      </main>
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 

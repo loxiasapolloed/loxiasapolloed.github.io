@@ -1,4 +1,6 @@
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 
 export function ReadingExperience() {
   const { ref: sectionRef, isVisible } = useScrollReveal<HTMLElement>({
@@ -11,7 +13,7 @@ export function ReadingExperience() {
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-[#0B0B0D]/50 z-10" />
         <img
-          src="/site/public/images/bg/4.jpeg"
+          src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=1920&q=80"
           alt="Mãos segurando um livro"
           className={`w-full h-full object-cover img-monochrome transition-transform duration-[2s] ${
             isVisible ? 'scale-100' : 'scale-110'
@@ -50,6 +52,21 @@ export function ReadingExperience() {
           <div className="w-16 h-px bg-[#C9A04C]/40" />
           <div className="w-2 h-2 border border-[#C9A04C] rotate-45" />
           <div className="w-16 h-px bg-[#C9A04C]/40" />
+        </div>
+
+        {/* Link para autores traduzidos - SEPARADO do decorative element */}
+        <div
+          className={`mt-8 transition-all duration-1000 delay-500 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+          }`}
+        >
+          <Link 
+            to="/autores/traduzidos"
+            className="inline-flex items-center gap-2 text-[#C9A04C] hover:text-[#F4F1EA] transition-colors group"
+          >
+            <span className="hover:underline">Conhecer autores traduzidos</span>
+            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+          </Link>
         </div>
       </div>
     </section>

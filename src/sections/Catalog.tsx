@@ -1,166 +1,245 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
-import { books, categoryLabels } from '@/data/books';
-import type { Book } from '@/types';
-import { ArrowRight, BookOpen } from 'lucide-react';
+import { books } from '@/data/books';
+import { ChevronLeft, ChevronRight, BookOpen, Clock } from 'lucide-react';
 
-type Category = 'todos' | Book['category'];
+const DESTAQUES_IDS = [
+  'ovelha-pink',
+  'diario-cassandra',
+  'musadanoite',
+  'forest',
+  'poeta-tigre',
+  'Peonias',
+];
 
 export function Catalog() {
   const { ref: sectionRef, isVisible } = useScrollReveal<HTMLElement>({
     threshold: 0.1,
   });
-  const [activeCategory, setActiveCategory] = useState<Category>('todos');
+  
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
+  const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
 
-  const categories: Category[] = [
-    'todos',
-    'obras-autorais',
-    'traducoes',
-    'ficcao-historica',
-    'jovem',
-    'jovem-18',
-  ];
+  const destaques = books.filter(book => DESTAQUES_IDS.includes(book.id));
+  const vitrineBooks = destaques.length > 0 ? destaques : books.slice(0, 6);
+  const currentBook = vitrineBooks[currentIndex];
 
-  const filteredBooks =
-    activeCategory === 'todos'
-      ? books
-      : books.filter((book) => book.category === activeCategory);
+  const nextSlide = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % vitrineBooks.length);
+  }, [vitrineBooks.length]);
 
-  const handleBookClick = (bookId: string) => {
-    // Por enquanto, apenas mostra um alerta. 
-    // Quando implementar React Router, redireciona para /livro/:id
-    alert(`Página de detalhes do livro ${bookId} - Em breve!`);
-  };
+  const prevSlide = useCallback(() => {
+    setCurrentIndex((prev) => (prev - 1 + vitrineBooks.length) % vitrineBooks.length);
+  }, [vitrineBooks.length]);
+
+  const canGoNext = currentIndex < vitrineBooks.length - 1;
+  const canGoPrev = currentIndex > 0;
 
   return (
     <section
-      id="catalogo"
+      id="destaques"
       ref={sectionRef}
-      className="relative py-24 bg-[#0B0B0D]"
+      className="relative py-24 bg-[#0B0B0D] overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-6">
+      {/* Background Image Local */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-[#0B0B0D]/80 z-10" />
+        <img
+          src={`${import.meta.env.BASE_URL}images/bg/6.webp`}
+          alt="Fundo vitrine"
+          className={`w-full h-full object-cover object-center transition-transform duration-[2s] ${
+            isVisible ? 'scale-100' : 'scale-110'
+          }`}
+        />
+        <div className="absolute inset-0 bg-[#C9A04C]/5 mix-blend-overlay" />
+      </div>
+
+      <div className="max-w-6xl mx-auto px-6 relative z-20">
         {/* Header */}
         <div
-          className={`flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12 transition-all duration-1000 ${
+          className={`text-center mb-12 transition-all duration-1000 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
           }`}
         >
-          <div>
-            <span className="micro-label block mb-4">Catálogo</span>
-            <h2 className="font-serif text-[clamp(32px,4vw,48px)] text-[#F4F1EA]">
-              Explore nossos livros
-            </h2>
-          </div>
-
-          {/* Filters */}
-          <div className="flex flex-wrap gap-2">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setActiveCategory(category)}
-                className={`px-4 py-2 text-xs font-sans tracking-wider uppercase transition-all ${
-                  activeCategory === category
-                    ? 'bg-[#C9A04C] text-[#0B0B0D]'
-                    : 'border border-[#C9A04C]/40 text-[#B8B2A6] hover:border-[#C9A04C] hover:text-[#C9A04C]'
-                }`}
-              >
-                {category === 'todos'
-                  ? 'Todos'
-                  : categoryLabels[category] || category}
-              </button>
-            ))}
-          </div>
+          <span className="micro-label block mb-4">Destaques da Editora</span>
+          <h2 className="font-serif text-[clamp(32px,4vw,48px)] text-[#F4F1EA]">
+            Vitrine de Lançamentos
+          </h2>
+          <p className="text-[#B8B2A6] mt-4 max-w-xl mx-auto">
+            Navegue pelos nossos títulos em destaque. Use as setas para explorar.
+          </p>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredBooks.map((book, index) => (
-            <div
-              key={book.id}
-              onClick={() => handleBookClick(book.id)}
-              className={`book-card group cursor-pointer transition-all duration-700 ${
-                isVisible
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-8'
-              }`}
-              style={{ transitionDelay: `${200 + index * 50}ms` }}
-            >
-              {/* Cover */}
-              <div className="book-cover relative aspect-[3/4] mb-4 overflow-hidden bg-[#1a1a1a]">
-                <img
-                  src={book.coverImage}
-                  alt={book.title}
-                  className="w-full h-full object-cover img-monochrome group-hover:scale-105 transition-transform duration-700"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    const keywords = encodeURIComponent(
-                      `${book.genre[0]} book cover literature`
-                    );
-                    target.src = `https://source.unsplash.com/400x600/?${keywords}`;
-                  }}
-                />
-                <div className="absolute inset-0 bg-[#C9A04C]/10 mix-blend-overlay" />
+        {/* Card Principal */}
+        <div 
+          className={`relative transition-all duration-1000 delay-200 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          <div className="bg-[#1a1a1a]/90 backdrop-blur-sm rounded-2xl overflow-hidden border border-[#2a2a35] shadow-2xl">
+            <div className="grid lg:grid-cols-5 gap-0">
+              
+              {/* Imagem do Livro */}
+              <div className="lg:col-span-3 relative aspect-[4/3] lg:aspect-auto lg:min-h-[500px]">
+                <div 
+                  className={`absolute inset-0 flex items-center justify-center text-6xl bg-gradient-to-br from-[#2a2a35] to-[#1a1a20] transition-opacity duration-500 ${
+                    loadedImages[currentBook.id] ? 'opacity-0' : 'opacity-100'
+                  }`}
+                >
+                  {imageErrors[currentBook.id] ? '❌' : '📖'}
+                </div>
 
-                {/* Badges */}
-                <div className="absolute top-3 left-3 flex flex-col gap-2">
-                  {book.isNew && (
-                    <span className="px-2 py-1 bg-[#C9A04C] text-[#0B0B0D] text-[10px] font-sans font-medium tracking-wider uppercase">
-                      Novo
+                {!imageErrors[currentBook.id] && (
+                  <img
+                    src={currentBook.coverImage}
+                    alt={currentBook.title}
+                    className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
+                      loadedImages[currentBook.id] ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
+                    }`}
+                    onLoad={() => setLoadedImages(prev => ({ ...prev, [currentBook.id]: true }))}
+                    onError={() => setImageErrors(prev => ({ ...prev, [currentBook.id]: true }))}
+                  />
+                )}
+
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0D] via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-[#1a1a1a]/80" />
+                
+                <div className="absolute top-6 left-6 flex flex-wrap gap-2">
+                  {currentBook.isNew && (
+                    <span className="px-3 py-1.5 bg-[#C9A04C] text-[#0B0B0D] text-xs font-bold tracking-wider uppercase rounded-full shadow-lg">
+                      ✨ Lançamento
                     </span>
                   )}
-                  {book.isTranslation && (
-                    <span className="px-2 py-1 bg-[#0B0B0D]/80 text-[#C9A04C] text-[10px] font-sans font-medium tracking-wider uppercase border border-[#C9A04C]/40">
+                  {currentBook.isTranslation && (
+                    <span className="px-3 py-1.5 bg-[#0B0B0D]/80 backdrop-blur text-[#C9A04C] text-xs font-bold tracking-wider uppercase border border-[#C9A04C] rounded-full">
                       Tradução
                     </span>
                   )}
                 </div>
-
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-[#0B0B0D]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                  <button className="btn-primary text-xs flex items-center gap-2">
-                    <BookOpen size={14} />
-                    Ver detalhes
-                  </button>
-                </div>
               </div>
 
-              {/* Info */}
-              <div>
-                <h3 className="font-serif text-lg text-[#F4F1EA] group-hover:text-[#C9A04C] transition-colors leading-tight mb-1">
-                  {book.title}
+              {/* Informações */}
+              <div className="lg:col-span-2 p-8 lg:p-12 flex flex-col justify-center">
+                <div className="mb-2">
+                  <span className="text-[#C9A04C] text-sm tracking-wider uppercase">
+                    {currentBook.genre[0]}
+                  </span>
+                </div>
+
+                <h3 className="font-serif text-3xl lg:text-4xl text-[#F4F1EA] mb-3 leading-tight">
+                  {currentBook.title}
                 </h3>
-                <p className="text-[#B8B2A6] text-sm mb-2">{book.author}</p>
-                <div className="flex flex-wrap gap-1">
-                  {book.genre.slice(0, 2).map((g) => (
-                    <span
-                      key={g}
-                      className="text-[10px] text-[#B8B2A6]/70 tracking-wider uppercase"
+
+                <p className="text-[#B8B2A6] text-lg mb-6 italic">
+                  por {currentBook.author}
+                </p>
+
+                <p className="text-[#B8B2A6]/80 leading-relaxed mb-8 line-clamp-4 lg:line-clamp-6">
+                  {currentBook.synopsis || 'Sinopse em breve.'}
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-3 mt-auto">
+                  <Link
+                    to={`/livro/${currentBook.id}`}
+                    className="btn-primary flex items-center justify-center gap-2 py-3 px-6"
+                  >
+                    <BookOpen size={18} />
+                    Ver detalhes
+                  </Link>
+                  
+                  {currentBook.sampleUrl && (
+                    <Link
+                      to={`/livro/${currentBook.id}#amostra`}
+                      className="flex items-center justify-center gap-2 py-3 px-6 border border-[#C9A04C]/40 text-[#C9A04C] hover:bg-[#C9A04C]/10 transition-colors rounded"
                     >
-                      {g}
-                    </span>
-                  ))}
+                      <Clock size={18} />
+                      Ler amostra
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
-          ))}
+          </div>
+
+          {/* Controles */}
+          <div className="flex items-center justify-between mt-8">
+            <button
+              onClick={prevSlide}
+              disabled={!canGoPrev}
+              className={`flex items-center gap-2 px-4 py-3 rounded-lg transition-all ${
+                canGoPrev 
+                  ? 'text-[#C9A04C] hover:bg-[#C9A04C]/10 cursor-pointer' 
+                  : 'text-[#B8B2A6]/30 cursor-not-allowed'
+              }`}
+            >
+              <ChevronLeft size={24} />
+              <span className="hidden sm:inline text-sm tracking-wider uppercase">Anterior</span>
+            </button>
+
+            <div className="flex flex-col items-center gap-2">
+              <div className="flex items-center gap-3">
+                {vitrineBooks.map((book, idx) => (
+                  <button
+                    key={book.id}
+                    onClick={() => setCurrentIndex(idx)}
+                    className={`transition-all duration-300 ${
+                      idx === currentIndex 
+                        ? 'w-3 h-3 bg-[#C9A04C] rounded-full' 
+                        : 'w-2 h-2 bg-[#C9A04C]/30 hover:bg-[#C9A04C]/50 rounded-full'
+                    }`}
+                    title={book.title}
+                  />
+                ))}
+              </div>
+              <span className="text-[#B8B2A6]/60 text-sm">
+                {currentIndex + 1} de {vitrineBooks.length}
+              </span>
+            </div>
+
+            <button
+              onClick={nextSlide}
+              disabled={!canGoNext}
+              className={`flex items-center gap-2 px-4 py-3 rounded-lg transition-all ${
+                canGoNext 
+                  ? 'text-[#C9A04C] hover:bg-[#C9A04C]/10 cursor-pointer' 
+                  : 'text-[#B8B2A6]/30 cursor-not-allowed'
+              }`}
+            >
+              <span className="hidden sm:inline text-sm tracking-wider uppercase">Próximo</span>
+              <ChevronRight size={24} />
+            </button>
+          </div>
+
+          {!canGoNext && (
+            <div className="text-center mt-4">
+              <button
+                onClick={() => setCurrentIndex(0)}
+                className="text-[#C9A04C]/60 hover:text-[#C9A04C] text-sm transition-colors"
+              >
+                ↻ Voltar ao primeiro
+              </button>
+            </div>
+          )}
         </div>
 
-        {/* View All CTA */}
+        {/* Link para acervo */}
         <div
-          className={`mt-16 text-center transition-all duration-1000 delay-500 ${
+          className={`mt-12 text-center transition-all duration-1000 delay-500 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
           }`}
         >
-          <button className="inline-flex items-center gap-2 text-[#C9A04C] hover:text-[#D4AA5A] transition-colors group">
-            <span className="font-sans text-sm tracking-wider uppercase">
-              Ver catálogo completo
+          <Link
+            to="/acervo"
+            className="inline-flex items-center gap-2 text-[#C9A04C] hover:text-[#F4F1EA] transition-colors group"
+          >
+            <span className="text-sm tracking-wider uppercase border-b border-[#C9A04C]/30 group-hover:border-[#C9A04C] transition-colors">
+              Ver todos os {books.length} títulos no acervo
             </span>
-            <ArrowRight
-              size={16}
-              className="group-hover:translate-x-1 transition-transform"
-            />
-          </button>
+            <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
+          </Link>
         </div>
+
       </div>
     </section>
   );
